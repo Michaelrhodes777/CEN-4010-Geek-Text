@@ -51,7 +51,8 @@ paste the contents into the .env file:
 An .env file is where environment variables are stored. Environment variables contain sensitive information that should not be disclosed to anyone; these will include master keys to database or keys to third party apis. They should never be pushed to github. In later steps, you will create .gitignore file and place .env as contents in said .gitignore file.
 
 ***Understanding what these variables represent:***
-In later steps, you will setup pgAdmin. PgAdmin is a client or interface for accessing and maintaining your locally hosted PostgreSQL databases. When creating resources for your postgresql servers and database, it will ask you to define various fields such as "user", "password", "database", "host", and "port". The contents of the .env file are will be injected into the build file at runtime. These environment variables will be comsumed by one of our dependencies called "node-postgres". node-postgres uses these variables to connect to the PostgreSQL server. If your environment variables to do not match the ones PgAdmin asks you to input, then you will most likely not be able to connect to the database.
+
+In later steps, you will setup pgAdmin. PgAdmin is a client or interface for accessing and maintaining your locally hosted PostgreSQL databases. When creating resources for your postgresql servers and database, it will ask you to define various fields such as "user", "password", "database", "host", and "port". The contents of the .env file are will be injected into the backend build file at runtime. These environment variables will be comsumed by one of our dependencies called "node-postgres". node-postgres uses these variables to connect to the PostgreSQL server. If your environment variables do not match the ones PgAdmin asks you to input, then you will most likely not be able to connect to the database.
 
 #### 12. Install PostgreSQL Software - https://www.postgresql.org/download/
 
@@ -70,7 +71,15 @@ Critically, during the installation, the software will ask you what port you wan
     PGPORT=5433
     
 #### 13. Install PgAdmin - https://www.pgadmin.org/download/
+
+Installation Guide:
+https://www.youtube.com/watch?v=WxBfnGH3FsU
+
 #### 14. Open PgAdmin
+
+Usage Guide:
+https://www.youtube.com/watch?v=WFT5MaZN6g4&t=235s
+
 #### 15. Create New server if one does not exist
 
 You will know this if in the directory on the left does have a "PostgreSQL 18" or whatever current version PostgreSQL that you installed. Furthermore, the "Servers" directory is the server group that contains the PostgreSQL server called "PostgreSQL 18". This server is where you will execute the initialization script.
@@ -134,6 +143,10 @@ preexisting routes. However, your are more than welcome to create new routes.
 
 ## Learning Resources For Our Project's Stack <a name="learning_resources"></a>
 
+### PgAdmin Installation Guide && PgAdmin Tutorial
+
+https://www.youtube.com/watch?v=WFT5MaZN6g4&t=235s
+
 ### JavaScript/NodeJS Tutorials
 
 Here's a JavaScript tutorial from Dave Gray. It goes over basic JavaScript
@@ -146,12 +159,19 @@ https://www.youtube.com/watch?v=f2EqECiTBL8&t=18984s
 
 Additionally, he goes the MVC architectural pattern used in structuring his database. Although the current design isn't exactly in this format, I use something very similar; I declare the models and define props that are then consumed in the controllers.
 
-### SQL/PostgreSQL
+### SQL/PostgreSQL/PgAdmin
+
 Here's an introduction to SQL:
 https://www.youtube.com/watch?v=HXV3zeQKqGY&t=10475s
 
- Here's a tutorial on PostgreSQL:
- https://www.youtube.com/watch?v=qw--VYLpxG4&t=2930s
+Here's a tutorial on PostgreSQL:
+https://www.youtube.com/watch?v=qw--VYLpxG4&t=2930s
+
+PostgreSQL Installation Guide:
+https://www.youtube.com/watch?v=WxBfnGH3FsU
+
+PgAdmin Usage Guide:
+https://www.youtube.com/watch?v=WFT5MaZN6g4&t=235s
  
 ### MVC Design Pattern
 
