@@ -153,4 +153,4 @@ Fabiola Rivera-Noriega
 21. Use anyone of the routes in the Postman workspace to verify that everything is functional
 
     NOTICE: As of now, everyone in the postman workspace has administative privileges. Please do not modify any
-    preexisting routes. However, your are more than welcome to create new routes.
+    preexisting routes. However, your are more than welcome to create new routes.`
