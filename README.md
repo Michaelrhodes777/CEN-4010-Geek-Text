@@ -1,7 +1,5 @@
 # Geek Text Group 8
 
-Hi! I'm your first Markdown file in **StackEdit**. If you want to learn about StackEdit, you can read me. If you want to play with Markdown, you can edit me. Once you have finished with me, you can create new files by opening the **file explorer** on the left corner of the navigation bar.
-
 ## Table of Contents
 ### I. [Contributors](#contributors)
 ### II. [Getting Started](#getting_started)
@@ -14,12 +12,12 @@ Hi! I'm your first Markdown file in **StackEdit**. If you want to learn about St
  6. Extensive HTTP Networking Tutorial
 
 ## Contributors <a name="contributors"></a>
-Michael Rhodes
-Jasmine Perez
-Lizbeth Perez
-Lugenie Raymond
-David Reyes Romero
-Fabiola Rivera-Noriega
+- Michael Rhodes
+- Jasmine Perez
+- Lizbeth Perez
+- Lugenie Raymond
+- David Reyes Romero
+- Fabiola Rivera-Noriega
 
 ## Getting Started <a name="getting_started"></a>
 
@@ -49,8 +47,6 @@ paste the contents into the .env file:
     PGPASSWORD=amazingPassword777!
     PGPORT=5432
 #### 11. .env file notice
-
-  
 
 An .env file is where environment variables are stored. Environment variables contain sensitive information that should not be disclosed to anyone; these will include master keys to database or keys to third party apis. They should never be pushed to github. In later steps, you will create .gitignore file and place .env as contents in said .gitignore file.
 
@@ -138,7 +134,7 @@ preexisting routes. However, your are more than welcome to create new routes.
 
 ## Learning Resources For Our Project's Stack <a name="learning_resources"></a>
 
-### JavaScript/NodeJS Tutorial
+### JavaScript/NodeJS Tutorials
 
 Here's a JavaScript tutorial from Dave Gray. It goes over basic JavaScript
 
@@ -174,3 +170,11 @@ https://www.youtube.com/watch?v=iiADhChRriM
 This tutorial is pretty extensive and really goes in depth on how networking functions and what are some the standards with regards to HTTP.
 
 https://www.youtube.com/watch?v=2JYT5f2isg4&t=1441s
+
+### How to use Git/Github and Version Control
+
+https://www.youtube.com/watch?v=RGOj5yH7evk&t=1174s
+
+### Postman Tutorial
+
+https://www.youtube.com/watch?v=VywxIQ2ZXw4&t=697s
