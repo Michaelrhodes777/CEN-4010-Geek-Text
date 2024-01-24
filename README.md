@@ -2,7 +2,18 @@
 
 Hi! I'm your first Markdown file in **StackEdit**. If you want to learn about StackEdit, you can read me. If you want to play with Markdown, you can edit me. Once you have finished with me, you can create new files by opening the **file explorer** on the left corner of the navigation bar.
 
-## Contributors
+## Table of Contents
+### I. [Contributors](#contributors)
+### II. [Getting Started](#getting_started)
+### III. [Learning Resources](#learning_resources)
+
+ 1. JavaScript/NodeJS
+ 3. SQL/PostgreSQL
+ 4. MVC Design Pattern
+ 5. What is JSON?
+ 6. Extensive HTTP Networking Tutorial
+
+## Contributors <a name="contributors"></a>
 Michael Rhodes
 Jasmine Perez
 Lizbeth Perez
@@ -10,7 +21,7 @@ Lugenie Raymond
 David Reyes Romero
 Fabiola Rivera-Noriega
 
-## Getting Started
+## Getting Started <a name="getting_started"></a>
 
 #### 1. Install Visual Studio Code - https://code.visualstudio.com/download
 #### 2. Install NodeJS (LTS) - https://nodejs.org/en/download/
@@ -124,3 +135,42 @@ the account under.
 
 ***NOTICE:*** As of now, everyone in the postman workspace has administative privileges. Please do not modify any
 preexisting routes. However, your are more than welcome to create new routes.
+
+## Learning Resources For Our Project's Stack <a name="learning_resources"></a>
+
+### JavaScript/NodeJS Tutorial
+
+Here's a JavaScript tutorial from Dave Gray. It goes over basic JavaScript
+
+https://www.youtube.com/watch?v=EfAl9bwzVZk&t=15666s
+
+Here's a NodeJS tutorial. This is the tutorial I used to learn Node and Express. He goes over various npm dependencies that we will be using like dot-env, jwt, bcrypt, etc.
+
+https://www.youtube.com/watch?v=f2EqECiTBL8&t=18984s
+
+Additionally, he goes the MVC architectural pattern used in structuring his database. Although the current design isn't exactly in this format, I use something very similar; I declare the models and define props that are then consumed in the controllers.
+
+### SQL/PostgreSQL
+Here's an introduction to SQL:
+https://www.youtube.com/watch?v=HXV3zeQKqGY&t=10475s
+
+ Here's a tutorial on PostgreSQL:
+ https://www.youtube.com/watch?v=qw--VYLpxG4&t=2930s
+ 
+### MVC Design Pattern
+
+Here's a link giving a brief overview of the Model, View, Controller Design Pattern. The current backend server and database make extensive use of this pattern. Currently, in the database I have multiple tables representing data constructs. However, I have implemented various views that constrict access to users and "package" the data into JSON for convenience in the backend. 
+
+https://www.geeksforgeeks.org/mvc-design-pattern/#
+
+https://www.youtube.com/watch?v=DUg2SWWK18I
+
+### What is JSON? 
+
+https://www.youtube.com/watch?v=iiADhChRriM
+
+### Extensive HTTP Networking Tutorial 
+
+This tutorial is pretty extensive and really goes in depth on how networking functions and what are some the standards with regards to HTTP.
+
+https://www.youtube.com/watch?v=2JYT5f2isg4&t=1441s
