@@ -6,21 +6,21 @@ Geek Text is a REST API made with a NodeJS / ExpressJS backend and a PostgreSQL 
 
 Routes with full CRUD Access:
 
->**/books
-/authors
-/publishers
-/users
-/reviews
-/genres
-/wishlists**
+>- **/books**
+>- **/authors**
+>- **/publishers**
+>- **/users**
+>- **/reviews**
+>- **/genres**
+>- **/wishlists**
 
 Routes with Read only Access:
 
->**/books_by_genres
-/books_by_authors
-/average_book_ratings (has /:book_id GET route and /:average_rating GET route)
-/top_sellers
-/shopping_carts**
+>- **/books_by_genres**
+>- **/books_by_authors**
+>- **/average_book_ratings (has /:book_id GET route and /:average_rating GET route)**
+>- **/top_sellers**
+>- **/shopping_carts**
 
 Additionally, for the purpose of creating composable http routes with querystring extensions, a SqlQueryFactory (uses Factory Pattern to call component classes) was implemented to easily call query object construction. This allows the backend server to reduce boiler plate controller functions by creating a higly composable controller constructor. Furthermore, there is an implicitly defined “interface” for query object; this project employs node-postgres for PostgreSQL client connection, querying, and transaction control. node-postgres uses the following pattern to create queries :
 
