@@ -1,5 +1,4 @@
 class InsertSql {
-
     constructor(tableName, columnNamesArray, dataObject) {
         const valuesArray = [];
         const minColumnNamesArray = [];
@@ -99,7 +98,6 @@ const CONDITIONS = {
 };
 
 class SqlQueryFactory {
-
     constructor(Model, data, condition) {
         let sql;
         let idName = Model.idName;

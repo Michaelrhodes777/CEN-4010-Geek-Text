@@ -18,21 +18,21 @@ DROP TABLE IF EXISTS genres;
 DROP TABLE IF EXISTS authors;
 
 CREATE TABLE users (
-			user_id					INT					PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-			username				VARCHAR(32)			UNIQUE NOT NULL,
-			password				VARCHAR(256)		NOT NULL,
-			first_name				VARCHAR(32),
+			user_id                 INT                 PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+			username                VARCHAR(32)         UNIQUE NOT NULL,
+			password                VARCHAR(256)        NOT NULL,
+			first_name              VARCHAR(32),
 			last_name				VARCHAR(32),
-			email_address			VARCHAR(128)		UNIQUE,
+			email_address			VARCHAR(128)        UNIQUE,
 			address					VARCHAR(128)
 );
 
 CREATE TABLE credit_cards (
-			card_id					INT 				PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-			credit_card_number		VARCHAR(256)		NOT NULL,
-			expiration_date			VARCHAR(256)		NOT NULL,
-			ccv						VARCHAR(256)		NOT NULL,
-			user_id_fkey			INT					REFERENCES users(user_id) ON DELETE CASCADE
+			card_id                 INT 				PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+			credit_card_number      VARCHAR(256)        NOT NULL,
+			expiration_date         VARCHAR(256)        NOT NULL,
+			ccv                     VARCHAR(256)        NOT NULL,
+			user_id_fkey            INT                 REFERENCES users(user_id) ON DELETE CASCADE
 );
 
 CREATE TABLE authors (
@@ -90,6 +90,7 @@ CREATE TABLE reviews (
 CREATE TABLE shopping_carts_lt (
 			user_id_fkey			INT					REFERENCES users(user_id) ON DELETE CASCADE,
 			book_id_fkey			INT					REFERENCES books(book_id) ON DELETE CASCADE,
+			quantity				INT					DEFAULT 0 NOT NULL,
 			PRIMARY KEY				(user_id_fkey, book_id_fkey)
 );
 
