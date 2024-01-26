@@ -196,7 +196,7 @@ https://www.youtube.com/watch?v=RGOj5yH7evk&t=1174s
 
 https://www.youtube.com/watch?v=VywxIQ2ZXw4&t=697s
 
-## Features <a src="features"></a>
+## Features <a name="features"></a>
 ### I. Book Browsing and Sorting - *Lugenie Raymond*
 
 - [ ] **Retrieve List of Books by Genre**
