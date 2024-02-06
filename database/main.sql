@@ -55,8 +55,8 @@ CREATE TABLE genres (
 
 CREATE TABLE books (
 			book_id					INT					PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-			book_name				VARCHAR(128)		UNIQUE NOT NULL,
-			isbn					VARCHAR(32)			UNIQUE NOT NULL,
+			book_name				VARCHAR(128)		NOT NULL,
+			isbn					VARCHAR(16)			UNIQUE NOT NULL,
 			book_description		VARCHAR(4096),
 			book_price				INT					NOT NULL,
 			author_id_fkey			INT					REFERENCES authors(author_id) ON DELETE SET NULL,

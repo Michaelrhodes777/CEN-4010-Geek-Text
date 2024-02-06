@@ -4,14 +4,14 @@ const PublisherModel = require('./PublisherModel.js');
 const {
     createController,
     readController,
-    putController,
+    updateController,
     deleteController
 } = require('../controllers.js');
 
 router.route("/")
     .post(createController(PublisherModel))
     .get(readController(PublisherModel))
-    .put(putController(PublisherModel))
+    .put(updateController(PublisherModel))
     .delete(deleteController(PublisherModel));
 
 module.exports = router;
