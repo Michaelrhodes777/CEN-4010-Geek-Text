@@ -7,8 +7,13 @@ const {
     updateControllerSynchronousValidation,
     deleteControllerSynchronousValidation
 } = SyncCompositions;
-const AsynchronousErrorHandling = require('./AsynchronousErrorHandling.js');
-const { validateAsynchronousRequestData } = AsynchronousErrorHandling;
+const { AsyncCompositions } = require('./AsynchronousErrorHandling.js');
+const {
+    createControllerAsynchronousValidation,
+    readControllerAsynchronousValidation,
+    updateControllerAsynchronousValidation,
+    deleteControllerAsynchronousValidation
+} = AsyncCompositions;
 
 function reqMapper(req) {
     return JSON.parse(JSON.stringify({
@@ -34,12 +39,6 @@ function reqMapper(req) {
     }));
 }
 
-async function createControllerAsynchronousValidation(req, Model, client) {
-    for (let bodyObject of req.body) {
-        await validateAsynchronousRequestData(Model, bodyObject, client);
-    }
-}
-
 function createController(Model) {
     return async function(req, res) {
         const client = clientFactory();
@@ -49,8 +48,7 @@ function createController(Model) {
             createControllerSynchronousValidation(Model, req);
 
             await client.connect();
-            await client.query("BEGIN");
-            //await createControllerAsynchronousValidation(req, bodyObject, client);
+            await createControllerAsynchronousValidation(Model, null, req.body, client);
             transactionHasBegun = true;
 
             const dataArray = req.body;
@@ -88,13 +86,10 @@ function readController(Model) {
 
             await client.connect();
             await client.query("BEGIN");
-            const parsedIdArray = JSON.parse(req.query.id);
-            if (parsedIdArray[0] !== 0) {
-                for (let id of parsedIdArray) {
-                    await validateAsynchronousRequestData(Model, { [Model.idName]: id }, client);
-                }
-            }
             transactionHasBegun = true;
+
+            const parsedIdArray = JSON.parse(req.query.id);
+            await readControllerAsynchronousValidation(Model, parsedIdArray, null, client);
 
             if (parsedIdArray[0] === 0) {
                 const queryFactory = new SqlQueryFactory(Model, parsedIdArray[0], "read_all");    
@@ -116,7 +111,7 @@ function readController(Model) {
         }
         catch (error) {
             if (transactionHasBegun) await client.query("ROLLBACK");
-            error.req = reqMapper(req);
+            //error.req = reqMapper(req);
             console.error(error);
             res.status(500).json({ "response": error });
         }
@@ -136,11 +131,12 @@ function updateController(Model) {
 
             await client.connect();
             await client.query("BEGIN");
-            //await validateAsynchronousRequestData(Model, reqBody, client);
             transactionHasBegun = true;
 
-            const dataArray = req.body;
             const parsedIdArray = JSON.parse(req.query.id);
+            await updateControllerAsynchronousValidation(Model, parsedIdArray, req.body, client);
+
+            const dataArray = req.body;
             results = new Array(req.body.length);
             for (let i = 0; i < results.length; i++) {
                 const dataObject = dataArray[i];
@@ -176,13 +172,11 @@ function deleteController(Model) {
 
             await client.connect();
             await client.query("BEGIN");
-            const requestDataPackaging = {
-                [Model.idName]: parseInt(req.query.id)
-            };
-            //await validateAsynchronousRequestData(Model, requestDataPackaging, client);
             transactionHasBegun = true;
 
             const parsedIdArray = JSON.parse(req.query.id);
+            await deleteControllerAsynchronousValidation(Model, parsedIdArray, null, client);
+
             results = new Array(parsedIdArray.length);
             for (let i = 0; i < results.length; i++) {
                 const id = parsedIdArray[i];

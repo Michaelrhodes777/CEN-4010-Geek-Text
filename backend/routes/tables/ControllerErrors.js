@@ -73,25 +73,37 @@ class ErrorPayload {
     constructor() {
         this.mainArgs = null;
         this.auxiliaryArgs = {
-            index: null
+            indexOfIteration: null
         };
-        this.currentIndexOfReqBody = null;
     }
 
     appendMainArgs(runtimeObject) {
         this.mainArgs = runtimeObject;
     }
 
-    appendAuxiliaryArgs(runtimeObject) {
-        ErrorPayload._append(runtimeObject, "auxiliaryArgs");
-    }
-
-    appendCurrentIndexOfReqBody(index) {
-        ErrorPayload._append(index, "currentIndexOfReqBody");
-    }
 }
 
 // ASYNC Errors
+
+class IdArrayHasZeroLengthError extends ControllerError {
+    static runtimeProps = [];
+
+    constructor(errorPayload) {
+        super("ASYNC: dataIterator() recieved idArray of zero length", errorPayload);
+        this.name = "IdArrayHasZeroLengthError";
+        this.responseMessage = "Malformed Data / runtime error";
+    }
+}
+
+class AllQueryAndBodyError extends ControllerError {
+    static runtimeProps = [ "idArray", "body" ];
+
+    constructor(errorPayload) {
+        super("ASYNC: dataIterator() recieved an id=[0] all query and a non-null body", errorPayload);
+        this.name = "AllQueryAndBodyError";
+        this.responseMessage = "Malformed Data / runtime error";
+    }
+}
 
 class InvalidPrimaryKeyError extends ControllerError {
 
@@ -107,7 +119,7 @@ class InvalidPrimaryKeyError extends ControllerError {
 
 class UniquenessError extends ControllerError {
 
-    static runtimeDataProps = [ "columnName", "queryString", "valuesArray", "data", "responseRows" ];
+    static runtimeDataProps = [ "columnName", "queryString", "valuesArray", "responseRows" ];
 
     constructor(errorPayload) {
         super("ASYNC: Database failed to validate field uniqueness", errorPayload);
@@ -176,9 +188,19 @@ class ReqQueryArrayElementIsNotIntegerError extends ControllerError {
     constructor(errorPayload) {
         super("SYNC: req.query.id has element that is not an integer", errorPayload);
         this.name = "ReqQueryArrayElementsNaNError";
-        this.response = "MalformedData";
+        this.response = "Malformed data";
     }
 
+}
+
+class MultipleAllQueriesError extends ControllerError {
+    static runtimeDataProps = [ "id" ];
+    
+    constructor(errorPayload) {
+        super("SYNC: id has multiple zeros", errorPayload);
+        this.name = "MultipleAllQueriesError";
+        this.response = "Malformed data";
+    }
 }
 
 class ReqBodyDoesNotExistError extends ControllerError {
@@ -201,6 +223,26 @@ class ReqBodyIsNotArrayError extends ControllerError {
         this.response = "Malformed data";
     }
 
+}
+
+class NoIterationArrayInDataIteratorError extends ControllerError {
+    static runtimeDataProps = [];
+
+    constructor(errorPayload) {
+        super("SYNC: req.body DNE and idArray === null. dataIterator() needs an array to iterate over", errorPayload);
+        this.name = "NoIterationArrayInDataIteratorError";
+        this.response = "Malformed data || runtime error"
+    }
+}
+
+class IterationArraysHaveUnequalLengthError extends ControllerError {
+    static runtimeDataProps = [ "idArray", "body" ];
+
+    constructor(errorPayload) {
+        super("SYNC: idArray.length !== body.length in dataIterator()", errorPayload);
+        this.name = "IterationArraysHaveUnequalLengthError";
+        this.response = "Malformed data || runtime error";
+    }
 }
 
 class MissingQueryStringPropError extends ControllerError {
@@ -308,8 +350,11 @@ module.exports = {
     ReqQueryIdIsNotArrayError,
     ReqQueryArrayElementNaNError,
     ReqQueryArrayElementIsNotIntegerError,
+    MultipleAllQueriesError,
     ReqBodyDoesNotExistError,
     ReqBodyIsNotArrayError,
+    NoIterationArrayInDataIteratorError,
+    IterationArraysHaveUnequalLengthError,
     MissingQueryStringPropError,
     MissingRequiredFieldError,
     InvalidRequiredFieldError,
@@ -318,6 +363,8 @@ module.exports = {
     InvalidVarcharLengthError,
     BlacklistError,
     WhitelistError,
+    IdArrayHasZeroLengthError,
+    AllQueryAndBodyError,
     InvalidPrimaryKeyError,
     UniquenessError,
     SwitchFallThroughRuntimeError

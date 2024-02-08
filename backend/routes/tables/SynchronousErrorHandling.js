@@ -7,8 +7,11 @@ const {
     ReqQueryIdIsNotArrayStringFormatError,
     ReqQueryArrayElementNaNError,
     ReqQueryArrayElementIsNotIntegerError,
+    MultipleAllQueriesError,
     ReqBodyDoesNotExistError,
     ReqBodyIsNotArrayError,
+    NoIterationArrayInDataIteratorError,
+    IterationArraysHaveUnequalLengthError,
     MissingQueryStringPropError,
     MissingRequiredFieldError,
     InvalidRequiredFieldError,
@@ -70,6 +73,7 @@ class BaseValidations {
         }
 
         const parsedArray = JSON.parse(req.query.id);
+        let zeroCount = 0;
         for (let entity of parsedArray) {
             const parsed = parseInt(entity);
             if (parsed === NaN) {
@@ -87,6 +91,17 @@ class BaseValidations {
                 });
                 throw new ReqQueryArrayElementIsNotIntegerError(errorPayload);
             }
+            if (entity === 0) {
+                zeroCount++;
+            }
+        }
+
+        if (zeroCount > 1 || (zeroCount === 1 && parsedArray.length > 1)) {
+            const errorPayload = new ErrorPayload();
+            errorPayload.appendMainArgs({
+                "id": req.query.id
+            });
+            throw new MultipleAllQueriesError(errorPayload);
         }
     }
 
@@ -301,18 +316,28 @@ class Logic {
 
     // if idArray passed, assumes req.query.id conversion to typeof array
     static dataIterator(Model, req, idArray = null, validateRequiredFields) {
-        if (idArray !== null && req.body.length !== idArray.length) {}
+        const hasBody = req.hasOwnProperty("body");
+        if (idArray === null && !hasBody) {
+            throw new NoIterationArrayInDataIteratorError(new ErrorPayload());
+        }
+        if (idArray !== null && hasBody && idArray.length !== req.body.length) {
+            const errorPayload = new ErrorPayload();
+            errorPayload.appendMainArgs({
+                "idArray": JSON.stringify(idArray),
+                "body": JSON.stringify(req.body)
+            });
+            throw new IterationArraysHaveUnequalLengthError(errorPayload);
+        }
+
+        const iterationLength = hasBody ? req.body.length : idArray.length;
 
         let errorPayload = new ErrorPayload();
-        for (let i = 0; i < req.body.length; i++) {
-            let dataObject = req.body[i]
+        for (let i = 0; i < iterationLength; i++) {
+            let dataObject = hasBody ? req.body[i] : {};
             if (idArray !== null) {
-                dataObject = {
-                    ...dataObject,
-                    [Model.idName]: idArray[i]
-                };
+                dataObject[Model.idName] = idArray[i]
             }
-            errorPayload.auxiliaryArgs.index = i;
+            errorPayload.auxiliaryArgs.indexOfIteration = i;
             if (validateRequiredFields) {
                 BaseValidations.validateRequiredReqBodyFields(Model.notNullArray, dataObject, errorPayload);
             }
