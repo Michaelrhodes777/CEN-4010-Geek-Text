@@ -1,5 +1,14 @@
 const ControllerErrors = require('./ControllerErrors.js');
-const { 
+const {
+    ErrorPayload,
+    ReqDoesNotHaveQueryPropError,
+    ReqQueryDoesNotHaveIdPropError,
+    ReqQueryIdIsNotArrayError,
+    ReqQueryIdIsNotArrayStringFormatError,
+    ReqQueryArrayElementNaNError,
+    ReqQueryArrayElementIsNotIntegerError,
+    ReqBodyDoesNotExistError,
+    ReqBodyIsNotArrayError,
     MissingQueryStringPropError,
     MissingRequiredFieldError,
     InvalidRequiredFieldError,
@@ -32,198 +41,368 @@ const dbTypesMap = {
     "varchar": "varchar"
 };
 
-function jsTypeValidation(currentConstraint, data) {
-    if (!(typeof data === currentConstraint)) {
-        throw new InvalidJsTypeError(currentConstraint, String(data));
-    }
-}
+class BaseValidations {
 
-function dbTypeValidation(currentConstraint, data) {
-    console.log('\n');
-    console.log(data);
-    const type = currentConstraint.type;
-    switch (type) {
-        case dbTypesMap.int:
-            validateIntDbType(currentConstraint.bounds, data);
-            break;
-        case dbTypesMap.varchar:
-            validateVarcharDbType(currentConstraint.bounds, data);
-            break;
-        default:
-            throw new SwitchFallThroughRuntimeError("dbTypeValidation", { switchArg: type, auxiliaryArgs: [ currentConstraint, data ]});
-    }
-}
-
-function validateIntDbType(bounds, data) {
-    let buildBoolean = true;
-
-    const lowerBoundType = bounds[0];
-    const lowerBound = bounds[1];
-    if (lowerBoundType != "-") {
-        if (lowerBoundType === "(") {
-            buildBoolean = buildBoolean && data > lowerBound;
+    static validateIdQueryString(req, errorPayload) {
+        if (!req.hasOwnProperty("query")) {
+            throw new ReqDoesNotHaveQueryPropError(errorPayload);
         }
-        if (lowerBoundType === "[") {
-            buildBoolean = buildBoolean && data >= lowerBound;
-            console.log(lowerBound);
-            console.log(buildBoolean);
+        if (!req.query.hasOwnProperty("id")) {
+            errorPayload.appendMainArgs({ "query": JSON.stringify(req.query) });
+            throw new ReqQueryDoesNotHaveIdPropError(errorPayload);
         }
-    }
-
-    const upperBoundType = bounds[3];
-    const upperBound = bounds[2];
-    if (buildBoolean && upperBoundType !== "-") {
-        if (upperBoundType === ")") {
-            buildBoolean = buildBoolean && data < upperBound;
+        const len = req.query.id.length;
+        if (len < 3 || req.query.id[0] !== "[" || req.query.id[len - 1] !== "]") {
+            errorPayload.appendMainArgs({ "id": req.query.id });
+            console.log(errorPayload.mainArgs);
+            throw new ReqQueryIdIsNotArrayStringFormatError(errorPayload);
         }
-        if (upperBoundType === "]") {
-            buildBoolean = buildBoolean && data <= upperBound;
+
+        try {
+            const parsed = JSON.parse(req.query.id)
+            if (!Array.isArray(parsed)) {
+                throw new Error();
+            }
         }
-    }
-
-    if (!buildBoolean) {
-        throw new IntNumberBoundsError(JSON.stringify(bounds), String(data));
-    }
-}
-
-function validateVarcharDbType(bounds, data) {
-    let buildBoolean = true;
-
-    const lowerBoundType = bounds[0];
-    const lowerBound = bounds[1];
-    if (lowerBoundType != "-") {
-        if (lowerBoundType === "(") {
-            buildBoolean = buildBoolean && data.length > lowerBound;
+        catch (error) {
+            errorPayload.appendMainArgs({ "id": JSON.stringify(req.query.id) });
+            throw new ReqQueryIdIsNotArrayError(errorPayload);
         }
-        if (lowerBoundType === "[") {
-            buildBoolean = buildBoolean && data.length >= lowerBound;
-        }
-    }
 
-    const upperBoundType = bounds[3];
-    const upperBound = bounds[2];
-    if (buildBoolean && upperBoundType !== "-") {
-        if (upperBoundType === ")") {
-            buildBoolean = buildBoolean && data.length < upperBound;
-        }
-        if (upperBoundType === "]") {
-            buildBoolean = buildBoolean && data.length <= upperBound;
-        }
-    }
-
-    if (!buildBoolean) {
-        throw new InvalidVarcharLengthError(JSON.stringify(bounds), String(data));
-    }
-}
-
-function blacklistValidation(currentConstraint, data) {
-    const hasBlacklistedElement = currentConstraint.join("").includes(data);
-    if (hasBlacklistedElement) {
-        throw new BlacklistError(JSON.stringify(currentConstraint), String(data));
-    }
-}
-
-function whitelistValidation(currentConstraint, data) {
-    let hasIllegalElements = true;
-    for (let i = 0; i < currentConstraint.length && hasIllegalElements; i++) {
-        if (data == currentConstraint) {
-            hasIllegalElements = false;
-        }
-    }
-    if (hasIllegalElements) {
-        throw new WhitelistError(JSON.stringify(currentConstraint), String(data));
-    }
-}
-
-function synchronousConstraintErrorHandling(synchronousConstraints, data) {
-    for (let SCI of SCIA) {
-        let currentConstraint = synchronousConstraints[SCI];
-        if (currentConstraint != null) {
-            switch (SCI) {
-                case SCIM.jsType:
-                    jsTypeValidation(currentConstraint, data);
-                    break;
-                case SCIM.dbType:
-                    dbTypeValidation(currentConstraint, data);
-                    break;
-                case SCIM.blacklist:
-                    blacklistValidation(currentConstraint, data);
-                    break;
-                case SCIM.whitelist:
-                    whitelistValidation(currentConstraint, data);
-                    break;
-                default:
-                    throw new SwitchFallThroughRuntimeError("synchronousConstraintErrorHandling", { switchArg: SCI, auxiliaryArgs: [data] });
+        const parsedArray = JSON.parse(req.query.id);
+        for (let entity of parsedArray) {
+            const parsed = parseInt(entity);
+            if (parsed === NaN) {
+                errorPayload.appendMainArgs({
+                    "query": JSON.stringify(req.query),
+                    "id": req.query.id
+                });
+                throw new ReqQueryArrayElementNaNError(errorPayload);
+            }
+            if (!Number.isInteger(parsed)) {
+                errorPayload.appendMainArgs({
+                    "query": JSON.stringify(req.query),
+                    "id": req.query.id,
+                    "parsed": parsed
+                });
+                throw new ReqQueryArrayElementIsNotIntegerError(errorPayload);
             }
         }
     }
-}
 
-function validateQueryString(queryStringRequirements, queryStringObject) {
-    for (let requiredProp of queryStringRequirements) {
-        if (!queryStringObject.hasOwnProperty(requiredProp)) {
-            throw new MissingQueryStringPropError(requiredProp, JSON.stringify(queryStringObject));
+    static validateReqBodyStructure(req, errorPayload) {
+        if (!req.hasOwnProperty("body")) {
+            errorPayload.appendMainArgs({});
+            req = null;
+            throw new ReqBodyDoesNotExistError(errorPayload);
         }
+        if (!Array.isArray(req.body)) {
+            errorPayload.appendMainArgs({ 
+                "req": JSON.stringify(req), 
+                "body": JSON.stringify(req.body)
+            });
+            req = null;
+            throw new ReqBodyIsNotArrayError(errorPayload);
+        }
+
+        req = null;
+        errorPayload = null;
     }
-}
 
-function validateRequiredReqBodyFields(notNullArray, requestData) {
-    for (let requiredField of notNullArray) {
-        if (!requestData.hasOwnProperty(requiredField)) {
-            throw new MissingRequiredFieldError(
-                JSON.stringify(notNullArray),
-                JSON.stringify(requestData),
-                requiredField
-            );
-        }
-        else {
-            let current = requestData[requiredField];
-            if (current === null || current === "") {
-                throw new InvalidRequiredFieldError(
-                JSON.stringify(notNullArray),
-                JSON.stringify(requestData),
-                requiredField,
-                JSON.stringify(current)
-                );
+    static validateRequiredReqBodyFields(notNullArray, dataObject, errorPayload) {
+        for (let requiredField of notNullArray) {
+            if (!dataObject.hasOwnProperty(requiredField)) {
+                errorPayload.appendMainArgs({
+                    "notNullArray": JSON.stringify(notNullArray),
+                    "dataObject": JSON.stringify(dataObject),
+                    requiredField
+                });
+                notNullArray = null;
+                dataObject = null;
+                throw new MissingRequiredFieldError(errorPayload);
+            }
+            else {
+                let current = dataObject[requiredField];
+                if (current === null || current === "") {
+                    errorPayload.appendMainArgs({
+                        "notNullArray": JSON.stringify(notNullArray),
+                        "dataObject": JSON.stringify(dataObject),
+                        requiredField,
+                        current
+                    });
+                    notNullArray = null;
+                    dataObject = null;
+                    throw new InvalidRequiredFieldError(errorPayload);
+                }
             }
         }
-    }
-}
 
-function validateSynchronousRequestData(Model, requestData) {
-    for (let columnName of Model.columnNamesArray) {
-        if (requestData.hasOwnProperty(columnName)) {
-            synchronousConstraintErrorHandling(Model.synchronousConstraintSchema[columnName], requestData[columnName]);
+        notNullArray = null;
+        dataObject = null;
+        errorPayload = null;
+    }
+
+    static jsTypeValidation(currentConstraint, data, errorPayload) {
+        if (!(typeof data === currentConstraint)) {
+            errorPayload.appendMainArgs({
+                "expectedType": currentConstraint,
+                "actualType": typeof data
+            });
+            currentConstraint = null;
+            data = null;
+            throw new InvalidJsTypeError(errorPayload);
         }
+
+        currentConstraint = null;
+        data = null;
+        errorPayload = null;
+    }
+
+    static validateIntDbType(bounds, data, errorPayload) {
+        let buildBoolean = true;
+
+        const lowerBoundType = bounds[0];
+        const lowerBound = bounds[1];
+        if (lowerBoundType != "-") {
+            if (lowerBoundType === "(") {
+                buildBoolean = buildBoolean && data > lowerBound;
+            }
+            if (lowerBoundType === "[") {
+                buildBoolean = buildBoolean && data >= lowerBound;
+            }
+        }
+
+        const upperBoundType = bounds[3];
+        const upperBound = bounds[2];
+        if (buildBoolean && upperBoundType !== "-") {
+            if (upperBoundType === ")") {
+                buildBoolean = buildBoolean && data < upperBound;
+            }
+            if (upperBoundType === "]") {
+                buildBoolean = buildBoolean && data <= upperBound;
+            }
+        }
+
+        if (!buildBoolean) {
+            errorPayload.appendMainArgs({
+                "bounds": JSON.stringify(bounds), 
+                "data": String(data)
+            });
+            bounds = null;
+            data = null;
+            throw new IntNumberBoundsError(errorPayload);
+        }
+
+        bounds = null
+        data = null;
+        errorPayload = null;
+    }
+
+    static validateVarcharDbType(bounds, data, errorPayload) {
+        let buildBoolean = true;
+
+        const lowerBoundType = bounds[0];
+        const lowerBound = bounds[1];
+        if (lowerBoundType != "-") {
+            if (lowerBoundType === "(") {
+                buildBoolean = buildBoolean && data.length > lowerBound;
+            }
+            if (lowerBoundType === "[") {
+                buildBoolean = buildBoolean && data.length >= lowerBound;
+            }
+        }
+
+        const upperBoundType = bounds[3];
+        const upperBound = bounds[2];
+        if (buildBoolean && upperBoundType !== "-") {
+            if (upperBoundType === ")") {
+                buildBoolean = buildBoolean && data.length < upperBound;
+            }
+            if (upperBoundType === "]") {
+                buildBoolean = buildBoolean && data.length <= upperBound;
+            }
+        }
+
+        if (!buildBoolean) {
+            errorPayload.appendMainArgs({
+                "bounds": JSON.stringify(bounds),
+                "data": String(data)
+            });
+            bounds = null;
+            data = null;
+            throw new InvalidVarcharLengthError(errorPayload);
+        }
+
+        bounds = null;
+        data = null;
+        errorPayload = null;
+    }
+
+    static blacklistValidation(currentConstraint, data, errorPayload) {
+        const hasBlacklistedElement = currentConstraint.join("").includes(data);
+        if (hasBlacklistedElement) {
+            errorPayload.appendMainArgs({
+                "blacklist": JSON.stringify(currentConstraint),
+                "data": String(data)
+            });
+            currentConstraint = null;
+            data = null;
+            throw new BlacklistError(errorPayload);
+        }
+
+        currentConstraint = null;
+        data = null;
+        errorPayload = null;
+    }
+
+    static whitelistValidation(currentConstraint, data, errorPayload) {
+        let hasIllegalElements = true;
+        for (let i = 0; i < currentConstraint.length && hasIllegalElements; i++) {
+            if (data == currentConstraint) {
+                hasIllegalElements = false;
+            }
+        }
+        if (hasIllegalElements) {
+            errorPayload.appendMainArgs({
+                "whitelist": JSON.stringify(currentConstraint),
+                "data": String(data)
+            });
+            currentConstraint = null;
+            data = null;
+            throw new WhitelistError(errorPayload);
+        }
+
+        currentConstraint = null;
+        data = null;
+        errorPayload = null;
+    }
+
+    static validateQueryString(queryStringRequirements, queryStringObject, errorPayload) {
+        for (let requiredProp of queryStringRequirements) {
+            if (!queryStringObject.hasOwnProperty(requiredProp)) {
+                errorPayload({
+                    "queryStringRequirements": JSON.stringify(queryStringRequirements),
+                    "queryStringObject": JSON.stringify(queryStringObject) 
+                });
+                queryStringRequirements = null;
+                queryStringObject = null;
+                throw new MissingQueryStringPropError(errorPayload);
+            }
+        }
+
+        queryStringRequirements = null;
+        queryStringObject = null;
+        errorPayload = null;
+    }
+
+}
+
+class Logic {
+
+    // if idArray passed, assumes req.query.id conversion to typeof array
+    static dataIterator(Model, req, idArray = null, validateRequiredFields) {
+        if (idArray !== null && req.body.length !== idArray.length) {}
+
+        let errorPayload = new ErrorPayload();
+        for (let i = 0; i < req.body.length; i++) {
+            let dataObject = req.body[i]
+            if (idArray !== null) {
+                dataObject = {
+                    ...dataObject,
+                    [Model.idName]: idArray[i]
+                };
+            }
+            errorPayload.auxiliaryArgs.index = i;
+            if (validateRequiredFields) {
+                BaseValidations.validateRequiredReqBodyFields(Model.notNullArray, dataObject, errorPayload);
+            }
+            Logic.propValidation(Model, dataObject, errorPayload);
+        }
+
+        Model = null;
+        req = null;
+        idArray = null;
+        errorPayload = null;
+    }
+
+    static propValidation(Model, dataObject, errorPayload) {
+        for (let columnName of Model.columnNamesArray) {
+            if (dataObject.hasOwnProperty(columnName)) {
+                Logic.validationSwitches(Model.synchronousConstraintSchema[columnName], dataObject[columnName], errorPayload);
+            }
+        }
+        Model = null;
+        dataObject = null;
+        errorPayload = null;
+    }
+
+    static validationSwitches(synchronousConstraints, data, errorPayload) {
+        const { jsTypeValidation, validateIntDbType, validateVarcharDbType, blacklistValidation, whitelistValidation } = BaseValidations;
+        for (let SCI of SCIA) {
+            let currentConstraint = synchronousConstraints[SCI];
+            if (currentConstraint != null) {
+                switch (SCI) {
+                    case SCIM.jsType:
+                        jsTypeValidation(currentConstraint, data, errorPayload);
+                        break;
+                    case SCIM.dbType:
+                        const type = currentConstraint.type;
+                        switch (type) {
+                            case dbTypesMap.int:
+                                validateIntDbType(currentConstraint.bounds, data, errorPayload);
+                                break;
+                            case dbTypesMap.varchar:
+                                validateVarcharDbType(currentConstraint.bounds, data, errorPayload);
+                                break;
+                            default:
+                                throw new SwitchFallThroughRuntimeError("dbTypeValidation", { switchArg: type, auxiliaryArgs: [ currentConstraint, data ]});
+                        }
+                        break;
+                    case SCIM.blacklist:
+                        blacklistValidation(currentConstraint, data, errorPayload);
+                        break;
+                    case SCIM.whitelist:
+                        whitelistValidation(currentConstraint, data, errorPayload);
+                        break;
+                    default:
+                        throw new SwitchFallThroughRuntimeError("synchronousConstraintErrorHandling", { switchArg: SCI, auxiliaryArgs: [data] });
+                }
+            }
+        }
+
+        synchronousConstraints = null;
+        data = null;
+        errorPayload = null;
     }
 }
 
-class SynchronousErrorHandling {
-    static SCIM = SCIM;
+class SyncCompositions {
+    static createControllerSynchronousValidation(Model, req) {
+        BaseValidations.validateReqBodyStructure(req, new ErrorPayload());
+        Logic.dataIterator(Model, req, null, true);
+    }
 
-    static SCIA = SCIA;
+    static readControllerSynchronousValidation(Model, req) {
+        BaseValidations.validateIdQueryString(req, new ErrorPayload());
+        Logic.dataIterator(Model, {}, JSON.parse(req.query.id), false);
+    }
 
-    static dbTypesMap = dbTypesMap;
+    static updateControllerSynchronousValidation(Model, req) {
+        BaseValidations.validateIdQueryString(req, new ErrorPayload());
+        BaseValidations.validateReqBodyStructure(req, new ErrorPayload());
+        Logic.dataIterator(Model, req, JSON.parse(req.query.id), false);
+    }
 
-    static jsTypeValidation = jsTypeValidation;
-
-    static dbTypeValidation = dbTypeValidation;
-
-    static validateIntDbType = validateIntDbType;
-
-    static validateVarcharDbType = validateVarcharDbType;
-
-    static blacklistValidation = blacklistValidation;
-
-    static whitelistValidation = whitelistValidation;
-
-    static synchronousConstraintErrorHandling = synchronousConstraintErrorHandling;
-
-    static validateQueryString = validateQueryString;
-
-    static validateRequiredReqBodyFields = validateRequiredReqBodyFields;
-
-    static validateSynchronousRequestData = validateSynchronousRequestData;
+    static deleteControllerSynchronousValidation(Model, req) {
+        BaseValidations.validateIdQueryString(req, new ErrorPayload());
+        Logic.dataIterator(Model, {}, JSON.parse(req.query.id), false);
+    }
 }
 
-module.exports = SynchronousErrorHandling;
+module.exports = {
+    SCIA,
+    SCIM,
+    BaseValidations,
+    Logic,
+    SyncCompositions,
+};

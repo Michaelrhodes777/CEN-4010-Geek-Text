@@ -1,13 +1,27 @@
 class ControllerError extends Error {
-    constructor(message) {
+
+    static thisMapper(build, thisInstantiation) {
+        for (let key of Object.keys(build)) {
+            thisInstantiation[key] = build[key];
+        }
+    }
+
+    constructor(message, errorPayload) {
         super(message);
-        this.isCustomError = true;
-        this.name = null; // needs to be implemented by child classes
-        this.statusCode = 400;
-        this.userResponse = "Bad request";
-        this.runtimeDataPropsRef = null; // needs to be implemented by child classes
-        this.controllerType = null;
-        this.loggingPayload = null;
+
+        const build = {
+            ...errorPayload.mainArgs,
+            auxiliaryArgs: errorPayload.auxiliaryArgs,
+            currentIndexOfReqBody: errorPayload.currentIndexOfReqBody,
+            isCustomError: true,
+            name: null,// needs to be implemented by child classes
+            statusCode: 400,
+            userResponse: "Bad request",
+            controllerType: null,
+            loggingPayload: null
+        };
+
+        ControllerError.thisMapper(build, this);
     }
 
     addControllerType(type) {
@@ -50,23 +64,44 @@ class ControllerError extends Error {
     }
 }
 
+class ErrorPayload {
+
+    static _append(runtimeObject, propName) {
+        runtimeObject[propName] = runtimeObject;
+    }
+
+    constructor() {
+        this.mainArgs = null;
+        this.auxiliaryArgs = {
+            index: null
+        };
+        this.currentIndexOfReqBody = null;
+    }
+
+    appendMainArgs(runtimeObject) {
+        this.mainArgs = runtimeObject;
+    }
+
+    appendAuxiliaryArgs(runtimeObject) {
+        ErrorPayload._append(runtimeObject, "auxiliaryArgs");
+    }
+
+    appendCurrentIndexOfReqBody(index) {
+        ErrorPayload._append(index, "currentIndexOfReqBody");
+    }
+}
+
 // ASYNC Errors
 
 class InvalidPrimaryKeyError extends ControllerError {
 
     static runtimeDataProps = [ "primaryKey", "queryText", "queryValues", "responseRows" ];
 
-    constructor(primaryKey, queryText, queryValues, responseRows) {
-        super("ASYNC: Database failed to validate primary key");
+    constructor(errorPayload) {
+        super("ASYNC: Database failed to validate primary key", errorPayload);
         this.name = "InvalidPrimaryKeyError";
         this.statusCode = 404;
         this.responseMessage = "Resource not found";
-
-        this.primaryKey = primaryKey;
-        this.queryText = queryText;
-        this.queryValues = queryValues
-        this.responseRows = responseRows;
-        this.runtimeDataPropsRef = InvalidPrimaryKeyError.runtimeDataProps;
     }
 }
 
@@ -74,143 +109,186 @@ class UniquenessError extends ControllerError {
 
     static runtimeDataProps = [ "columnName", "queryString", "valuesArray", "data", "responseRows" ];
 
-    constructor(columnName, queryString, valuesArray, data, responseRows) {
-        super("ASYNC: Database failed to validate field uniqueness");
+    constructor(errorPayload) {
+        super("ASYNC: Database failed to validate field uniqueness", errorPayload);
         this.name = "UniquenessError";
         this.statusCode = 409;
         this.responseMessage = "Conflicting resources";
-
-        this.columnName = columnName;
-        this.queryString = queryString;
-        this.valuesArray = valuesArray;
-        this.data = data;
-        this.responseRows = responseRows;
-        this.runtimeDataPropsRef = UniquenessError.runtimeDataProps;
     }
 }
 
 // SYNC Errors
 
+class ReqDoesNotHaveQueryPropError extends ControllerError {
+    static runtimeDataProps = [ "req" ];
+
+    constructor(errorPayload) {
+        super("SYNC: req does not have query property", errorPayload);
+        this.name = "ReqDoesNotHaveQueryPropError";
+        this.response = "Malformed data";
+    }
+}
+
+class ReqQueryDoesNotHaveIdPropError extends ControllerError {
+    static runtimeDataProps = [ "req" ];
+
+    constructor(errorPayload) {
+        super("SYNC: req.query does not have id property", errorPayload);
+        this.name = "ReqQueryDoesNotHaveIdPropError";
+        this.response = "Malformed data";
+    }
+}
+
+class ReqQueryIdIsNotArrayStringFormatError extends ControllerError {
+    static runtimeDataProps = [ "id" ];
+    
+    constructor(errorPayload) {
+        super("SYNC: req.query.id does not start and close with brackets or has no ids", errorPayload);
+        this.name = "ReqQueryIdIsNotArayStringFormatError";
+        this.response = "Malformed data";
+    }
+}
+
+class ReqQueryIdIsNotArrayError extends ControllerError {
+    static runtimeDataProps = [ "req" ];
+
+    constructor(errorPayload) {
+        super("SYNC: req.query.id is not an array", errorPayload);
+        this.name = "ReqQueryIdIsNotArrayError";
+        this.response = "Malformed data";
+    }
+}
+
+class ReqQueryArrayElementNaNError extends ControllerError {
+    static runtimeDataProps = [ "query", "id" ];
+
+    constructor(errorPayload) {
+        super("SYNC: req.query.id has elements === NaN", errorPayload);
+        this.name = "ReqQueryArrayElementsNaNError";
+        this.response = "MalformedData";
+    }
+
+}
+
+class ReqQueryArrayElementIsNotIntegerError extends ControllerError {
+    static runtimeDataProps = [ "query", "id", "parsed" ];
+
+    constructor(errorPayload) {
+        super("SYNC: req.query.id has element that is not an integer", errorPayload);
+        this.name = "ReqQueryArrayElementsNaNError";
+        this.response = "MalformedData";
+    }
+
+}
+
+class ReqBodyDoesNotExistError extends ControllerError {
+    static runtimeDataProps = [ "req" ];
+
+    constructor(errorPayload) {
+        super("SYNC: req does not have the property body", errorPayload);
+        this.name = "ReqBodyDoesNotExistError";
+        this.response = "Malformed data";
+    }
+}
+
+class ReqBodyIsNotArrayError extends ControllerError {
+
+    static runtimeDataProps = [ "body" ];
+
+    constructor(errorPayload) {
+        super("SYNC: req.body is not an array and therefore cannot be iterated over to generate queries in the controller", errorPayload);
+        this.name = "ReqBodyIsNotArrayError";
+        this.response = "Malformed data";
+    }
+
+}
+
 class MissingQueryStringPropError extends ControllerError {
 
     static runtimeDataProps = [ "requiredProp", "queryStringObject" ];
 
-    constructor(requiredProp, queryStringObject) {
-        super("SYNC: req.query is missing required property");
+    constructor(errorPayload) {
+        super("SYNC: req.query is missing required property", errorPayload);
         this.name = "MissingQueryStringPropError";
-
-        this.requiredProp = requiredProp;
-        this.queryStringObject = queryStringObject;
-        this.runtimeDataPropsRef = MissingQueryStringPropError.runtimeDataProps;
     }
 
 }
 
-class MissingRequiredFieldError extends Error {
+class MissingRequiredFieldError extends ControllerError {
 
     static runtimeDataProps = [ "notNullArray", "requestData", "requiredField" ];
 
-    constructor(notNullArray, requestData, requiredField) {
-        super("SYNC: requestData does not have the required fields");
+    constructor(errorPayload) {
+        super("SYNC: requestData does not have the required fields", errorPayload);
         this.name = "MissingRequiredFieldError";
         this.responseMessage = "Malformed data";
-
-        this.notNullArray = notNullArray;
-        this.requestData = requestData;
-        this.requiredField = requiredField;
-        this.runtimeDataPropsRef = MissingRequiredFieldError.runtimeDataProps;
     }
 }
 
-class InvalidRequiredFieldError extends Error {
+class InvalidRequiredFieldError extends ControllerError {
 
     static runtimeDataProps = [ "notNullArray", "requestData", "requiredField", "current" ];
 
-    constructor(notNullArray, requestData, requiredField, current) {
-        super("SYNC: request data field is malformed");
+    constructor(errorPayload) {
+        super("SYNC: request data field is malformed", errorPayload);
         this.name = "InvalidRequiredFieldError";
         this.responseMessage = "Malformed data";
-
-        this.notNullArray = notNullArray;
-        this.requestData = requestData;
-        this.requiredField = requiredField;
-        this.current = current;
-        this.runtimeDataPropsRef = InvalidRequiredFieldError.runtimeDataProps;
     }
 }
 
-class InvalidJsTypeError extends Error {
+class InvalidJsTypeError extends ControllerError {
 
     static runtimeDataProps = [ "expectedType", "actualType" ];
 
-    constructor(expectedType, actualType) {
-        super("SYNC: request data field is malformed");
+    constructor(errorPayload) {
+        super("SYNC: request data field is malformed", errorPayload);
         this.name = "InvalidJsTypeError";
         this.responseMessage = "Malformed data";
-
-        this.expectedType = expectedType;
-        this.actualType = actualType;
-        this.runtimeDataPropsRef = InvalidJsTypeError.runtimeDataProps;
+        ControllerError.nullifyInternalProps(InvalidJsTypeError, this);
     }
 }
 
-class IntNumberBoundsError extends Error {
+class IntNumberBoundsError extends ControllerError {
 
     static runtimeDataProps = [ "bounds", "data" ];
 
-    constructor(bounds, data) {
-        super("SYNC: integer database data type is not within proper constraints");
+    constructor(errorPayload) {
+        super("SYNC: integer database data type is not within proper constraints", errorPayload);
         this.name = "IntNumberBoundError";
         this.responseMessage = "Malformed data";
-
-        this.bounds = bounds;
-        this.data = data;
-        this.runtimeDataPropsRef = IntNumberBoundsError.runtimeDataProps;
     }
 }
 
-class InvalidVarcharLengthError extends Error {
+class InvalidVarcharLengthError extends ControllerError {
 
     static runtimeDataProps = [ "bounds", "data" ];
 
-    constructor(bounds, data) {
-        super("SYNC: varchar database data type is not within proper constraints");
+    constructor(errorPayload) {
+        super("SYNC: varchar database data type is not within proper constraints", errorPayload);
         this.name = "InvalidVarcharLengthError";
         this.responseMessage = "Malformed data";
-
-        this.bounds = bounds;
-        this.data = data;
-        this.runtimeDataPropsRef = InvalidVarcharLengthError.runtimeDataProps;
     }
 }
 
-class BlacklistError extends Error {
+class BlacklistError extends ControllerError {
 
     static runtimeDataProps = [ "blacklist", "data" ];
 
-    constructor(blacklist, data) {
-        super("SYNC: data includes blacklisted elements");
+    constructor(errorPayload) {
+        super("SYNC: data includes blacklisted elements", errorPayload);
         this.name = "BlackListError";
         this.responseMessage = "Malformed data";
-
-        this.blacklist = blacklist;
-        this.data = data;
-        this.runtimeDataPropsRef = BlacklistError.runtimeDataProps;
     }
 }
 
-class WhitelistError extends Error {
+class WhitelistError extends ControllerError {
 
     static runtimeDataProps = [ "blacklist", "data" ];
 
-    constructor(whitelist, data) {
-        super("SYNC: data includes blacklisted elements");
+    constructor(errorPayload) {
+        super("SYNC: data includes blacklisted elements", errorPayload);
         this.name = "WhitelistError";
         this.responseMessage = "Malformed data";
-
-        this.whitelist = whitelist;
-        this.data = data;
-        this.runtimeDataPropsRef = WhitelistError.runtimeDataProps;
     }
 }
 
@@ -223,6 +301,15 @@ class SwitchFallThroughRuntimeError extends Error {
 }
 
 module.exports = {
+    ErrorPayload,
+    ReqDoesNotHaveQueryPropError,
+    ReqQueryDoesNotHaveIdPropError,
+    ReqQueryIdIsNotArrayStringFormatError,
+    ReqQueryIdIsNotArrayError,
+    ReqQueryArrayElementNaNError,
+    ReqQueryArrayElementIsNotIntegerError,
+    ReqBodyDoesNotExistError,
+    ReqBodyIsNotArrayError,
     MissingQueryStringPropError,
     MissingRequiredFieldError,
     InvalidRequiredFieldError,
