@@ -113,7 +113,6 @@ class BaseValidations {
         }
         if (!Array.isArray(req.body)) {
             errorPayload.appendMainArgs({ 
-                "req": JSON.stringify(req), 
                 "body": JSON.stringify(req.body)
             });
             req = null;

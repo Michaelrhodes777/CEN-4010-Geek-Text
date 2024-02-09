@@ -32,7 +32,7 @@ const synchronousConstraintSchema = {
             bounds: [ "[", 10, 13, "]" ],
         },
         blacklist: null,
-        whitelist: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9" ]
+        whitelist: null
     },
     [columnNames.book_name]: {
         jsType: "string",
@@ -172,7 +172,7 @@ class BookModel extends ModelInterface {
 
     static idName = columnNames.book_id;
 
-    static notNullFields = [ columnNames.book_name, columnNames.isbn ];
+    static notNullArray = [ columnNames.book_name, columnNames.isbn ];
 
     static updateableColumns = BookModel.columnNamesArray.slice(1);
 

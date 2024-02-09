@@ -89,7 +89,6 @@ function readController(Model) {
             transactionHasBegun = true;
 
             const parsedIdArray = JSON.parse(req.query.id);
-            await readControllerAsynchronousValidation(Model, parsedIdArray, null, client);
 
             if (parsedIdArray[0] === 0) {
                 const queryFactory = new SqlQueryFactory(Model, parsedIdArray[0], "read_all");    
@@ -97,6 +96,7 @@ function readController(Model) {
                 results = (await client.query(queryObject)).rows;
             }
             else {
+                await readControllerAsynchronousValidation(Model, parsedIdArray, null, client);
                 results = new Array(parsedIdArray.length);
                 for (let i = 0; i < parsedIdArray.length; i++) {
                     const id = parsedIdArray[i];
@@ -152,7 +152,7 @@ function updateController(Model) {
         }
         catch (error) {
             if (transactionHasBegun) await client.query("ROLLBACK");
-            error.req = reqMapper(req);
+            //error.req = reqMapper(req);
             console.error(error);
             res.status(500).json({ "response": error });
         }
@@ -191,7 +191,7 @@ function deleteController(Model) {
         }
         catch (error) {
             if (transactionHasBegun) await client.query("ROLLBACK");
-            error.req = reqMapper(req);
+            //error.req = reqMapper(req);
             console.error(error);
             res.status(500).json({ "response": error });
         }

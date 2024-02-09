@@ -47,7 +47,6 @@ class BaseValidations {
         };
         const response = await client.query(query);
         const resultLength = response.rows.length;
-        console.log("hit");
         if (resultLength != 0) {
             errorPayload.appendMainArgs({
                 "columnName": columnName,
@@ -142,7 +141,6 @@ class Logic {
                             await BaseValidations.validatePrimaryKey(data, Model, client, errorPayload)
                         break;
                     case ACIM.unique:
-                            console.log("hit")
                             await BaseValidations.validateUniqueness(columnName, data, Model, client, errorPayload);
                         break;
                     default:

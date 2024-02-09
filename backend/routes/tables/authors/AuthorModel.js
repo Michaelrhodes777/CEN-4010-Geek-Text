@@ -82,7 +82,7 @@ class AuthorModel extends ModelInterface {
 
     static idName = columnNames.author_id
 
-    static notNullFields = [ columnNames.first_name, columnNames.last_name ];
+    static notNullArray = [ columnNames.first_name, columnNames.last_name ];
 
     static updateableColumns = AuthorModel.columnNamesArray.slice(1);
 

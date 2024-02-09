@@ -286,7 +286,6 @@ class InvalidJsTypeError extends ControllerError {
         super("SYNC: request data field is malformed", errorPayload);
         this.name = "InvalidJsTypeError";
         this.responseMessage = "Malformed data";
-        ControllerError.nullifyInternalProps(InvalidJsTypeError, this);
     }
 }
 
