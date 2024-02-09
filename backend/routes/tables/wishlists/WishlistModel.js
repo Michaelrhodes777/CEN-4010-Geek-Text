@@ -1,10 +1,59 @@
+const ModelInterface = require('../ModelInterface.js');
+
 const columnNames = {
     "wishlist_id": "wishlist_id",
     "wishlist_name": "wishlist_name",
     "user_id_fkey": "user_id_fkey",
 };
 
-class WishlistModel {
+const STD_BLACKLIST = [ "\"", "'", "\\", "/" ];
+
+const synchronousConstraintSchema = {
+    [columnNames.wishlist_id]: {
+        jsType: "number",
+        dbType: {
+            type: "int",
+            bounds: [ "[", 0, "i", "-" ],
+        },
+        blacklist: null,
+        whitelist: null
+    },
+    [columnNames.wishlist_name]: {
+        jsType: "string",
+        dbType: {
+            type: "varchar",
+            bounds: [ "[", 1, 64, "]" ]
+        },
+        blacklist: STD_BLACKLIST,
+        whitelist: null
+    },
+    [columnNames.user_id_fkey]: {
+        jsType: "number",
+        dbType: {
+            type: "int",
+            bounds: [ "[", 1, "i", "-" ],
+        },
+        blacklist: null,
+        whitelist: null
+    },
+};
+
+const asynchronousConstraintSchema = {
+    [columnNames.wishlist_id]: {
+        primaryKey: true,
+        unique: false
+    },
+    [columnNames.wishlist_name]: {
+        primaryKey: false,
+        unique: false
+    },
+    [columnNames.user_id_fkey]: {
+        primaryKey: false,
+        unique: false
+    }
+};
+
+class WishlistModel extends ModelInterface {
     static tableName = "wishlists";
 
     static columnNamesMap = columnNames;
@@ -18,6 +67,13 @@ class WishlistModel {
     static idName = columnNames.wishlist_id;
 
     static updateableColumns = WishlistModel.columnNamesArray.slice(1);
+
+    static notNullArray = [ columnNames.wishlist_name, columnNames.user_id_fkey ];
+
+    static synchronousConstraintSchema = synchronousConstraintSchema;
+
+    static asynchronousConstraintSchema = asynchronousConstraintSchema;
+
 }
 
 module.exports = WishlistModel;

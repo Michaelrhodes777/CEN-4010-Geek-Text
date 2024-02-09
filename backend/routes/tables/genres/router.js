@@ -4,14 +4,14 @@ const GenreModel = require('./GenreModel.js');
 const {
     createController,
     readController,
-    putController,
+    updateController,
     deleteController
 } = require('../controllers.js');
 
 router.route("/")
     .post(createController(GenreModel))
     .get(readController(GenreModel))
-    .put(putController(GenreModel))
+    .put(updateController(GenreModel))
     .delete(deleteController(GenreModel));
 
 module.exports = router;

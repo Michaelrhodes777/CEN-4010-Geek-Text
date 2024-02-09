@@ -110,7 +110,6 @@ class SqlQueryFactory {
                 );
                 break;
             case CONDITIONS.read_by_id:
-                console.log("hit");
                 sql = new ReadSqlById(
                     Model.tableName,
                     idName,

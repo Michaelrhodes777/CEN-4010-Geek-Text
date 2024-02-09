@@ -1,0 +1,42 @@
+[
+  {
+    "publisher_name": "Philadelphia : J.B. Lippincott",
+    "discount_percent": 3
+  },
+  {
+    "publisher_name": "Tours : A. Mame",
+    "discount_percent": 6
+  },
+  {
+    "publisher_name": "Oakland, City art printing company",
+    "discount_percent": 9
+  },
+  {
+    "publisher_name": "Dorset : The Author",
+    "discount_percent": 12
+  },
+  {
+    "publisher_name": "London : Chapman & Hall",
+    "discount_percent": 15
+  },
+  {
+    "publisher_name": "New York, London : M. Kennerley",
+    "discount_percent": 18
+  },
+  {
+    "publisher_name": "New York : J. Lane Co.,1916",
+    "discount_percent": 21
+  },
+  {
+    "publisher_name": "New York : Harper",
+    "discount_percent": 24
+  },
+  {
+    "publisher_name": "New York : Grosset & Dunlap",
+    "discount_percent": 27
+  },
+  {
+    "publisher_name": "New York : A. D. F. Randolph & company",
+    "discount_percent": 30
+  }
+]

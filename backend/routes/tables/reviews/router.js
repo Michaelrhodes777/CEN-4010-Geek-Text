@@ -4,14 +4,14 @@ const ReviewModel = require('./ReviewModel.js');
 const {
     createController,
     readController,
-    putController,
+    updateController,
     deleteController
 } = require('../controllers.js');
 
 router.route("/")
     .post(createController(ReviewModel))
     .get(readController(ReviewModel))
-    .put(putController(ReviewModel))
+    .put(updateController(ReviewModel))
     .delete(deleteController(ReviewModel));
 
 module.exports = router;
