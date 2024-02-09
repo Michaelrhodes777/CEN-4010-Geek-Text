@@ -22,7 +22,7 @@ const synchronousConstraintSchema = {
         jsType: "string",
         dbType: {
             type: "varchar",
-            bounds: [ "[", 1, 32, "]" ]
+            bounds: [ "[", 1, 64, "]" ]
         },
         blacklist: STD_BLACKLIST,
         whitelist: null
