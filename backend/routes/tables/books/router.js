@@ -4,14 +4,14 @@ const BookModel = require('./BookModel.js');
 const {
     createController,
     readController,
-    putController,
+    updateController,
     deleteController
 } = require('../controllers.js');
 
 router.route("/")
     .post(createController(BookModel))
     .get(readController(BookModel))
-    .put(putController(BookModel))
+    .put(updateController(BookModel))
     .delete(deleteController(BookModel));
 
 module.exports = router;

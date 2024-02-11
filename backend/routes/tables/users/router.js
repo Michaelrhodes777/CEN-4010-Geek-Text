@@ -4,14 +4,14 @@ const UserModel = require('./UserModel.js');
 const {
     createController,
     readController,
-    putController,
+    updateController,
     deleteController
 } = require('../controllers.js');
 
 router.route("/")
     .post(createController(UserModel))
     .get(readController(UserModel))
-    .put(putController(UserModel))
+    .put(updateController(UserModel))
     .delete(deleteController(UserModel));
 
 module.exports = router;

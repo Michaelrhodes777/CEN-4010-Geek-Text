@@ -4,14 +4,14 @@ const WishlistModel = require('./WishlistModel.js');
 const {
     createController,
     readController,
-    putController,
+    updateController,
     deleteController
 } = require('../controllers.js');
 
 router.route("/")
     .post(createController(WishlistModel))
     .get(readController(WishlistModel))
-    .put(putController(WishlistModel))
+    .put(updateController(WishlistModel))
     .delete(deleteController(WishlistModel));
 
 module.exports = router;

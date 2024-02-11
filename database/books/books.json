@@ -1,0 +1,452 @@
+[
+  {
+    "description": "249 p. : 19 cm",
+    "copies_sold": 552,
+    "isbn": "1048335068",
+    "publisher_id_fkey": 1,
+    "book_name": "Life of Philip Doddridge, D. D. : with notices of some of his contemporaries, and specimens of his style",
+    "year": 1869,
+    "book_price": 1104
+  },
+  {
+    "description": "239 p",
+    "copies_sold": 479,
+    "isbn": "1048209812",
+    "publisher_id_fkey": 2,
+    "book_name": "Le Dahomé, souvenirs de voyage et de mission",
+    "year": 1880,
+    "book_price": 958
+  },
+  {
+    "description": "2 p. l., [9]-105 p., 3 l. 18 cm",
+    "copies_sold": 337,
+    "isbn": "1048316853",
+    "publisher_id_fkey": 3,
+    "book_name": "The liberator ..",
+    "year": 1915,
+    "book_price": 674
+  },
+  {
+    "description": "19 p Reproduced from handwritten copy",
+    "copies_sold": 361,
+    "isbn": "1048299273",
+    "publisher_id_fkey": 4,
+    "book_name": "Liberty; a study in comparative philology",
+    "year": 1911,
+    "book_price": 722
+  },
+  {
+    "description": "viii p., 2 l., 311 p. 21 cm",
+    "copies_sold": 800,
+    "isbn": "1157905345",
+    "publisher_id_fkey": 5,
+    "book_name": "Travels, sport, and politics in the east of Europe",
+    "year": 1887,
+    "book_price": 1600
+  },
+  {
+    "description": "182 p. 20 cm",
+    "copies_sold": 468,
+    "isbn": "1085980142",
+    "publisher_id_fkey": 6,
+    "book_name": "The true adventures of a play",
+    "year": 1914,
+    "book_price": 936
+  },
+  {
+    "description": "338 p",
+    "copies_sold": 348,
+    "isbn": "1047522719",
+    "publisher_id_fkey": 7,
+    "book_name": "In spacious times",
+    "year": 1916,
+    "book_price": 696
+  },
+  {
+    "description": "Includes index",
+    "copies_sold": 321,
+    "isbn": "9695157500",
+    "publisher_id_fkey": 8,
+    "book_name": "The institutes of medicine",
+    "year": 1870,
+    "book_price": 642
+  },
+  {
+    "description": "380 p., [4] leaves of plates : 20 cm",
+    "copies_sold": 594,
+    "isbn": "1047428651",
+    "publisher_id_fkey": 9,
+    "book_name": "Infatuation",
+    "year": 1909,
+    "book_price": 1188
+  },
+  {
+    "description": [
+      "186 p. 19 cm",
+      "Preface signed: Wm. Wilberforce Newton",
+      "Translations of ancient Christian hymns: p. [121]-186"
+    ],
+    "copies_sold": 479,
+    "isbn": "1102114055",
+    "publisher_id_fkey": 10,
+    "book_name": "Voices from a busy life; or, Selections from the poetical works of the late Edward A. Washburn",
+    "year": 1883,
+    "book_price": 958
+  },
+  {
+    "description": "iv, 121 p. 24 cm",
+    "copies_sold": 389,
+    "isbn": "1158277616",
+    "publisher_id_fkey": 1,
+    "book_name": "Vom Bismarck der 70er jahre",
+    "year": 1920,
+    "book_price": 778
+  },
+  {
+    "description": "112 p. 25 cm",
+    "copies_sold": 432,
+    "isbn": "7617751830",
+    "publisher_id_fkey": 2,
+    "book_name": "The Wabash trade route in the development of the old Northwest",
+    "year": 1903,
+    "book_price": 864
+  },
+  {
+    "description": "9 p. ; 24 cmOn cover: Department of StateIncludes index",
+    "copies_sold": 963,
+    "isbn": "1102238531",
+    "publisher_id_fkey": 3,
+    "book_name": "Vienna International Exhibition, 1873. Report on deaf-mute instruction",
+    "year": 1875,
+    "book_price": 1926
+  },
+  {
+    "description": "ix, 126 p. 22 cm Original book_name: The tragi comoedi of the vertuous Octauia. Done by Samvel Brandon. 1598.. Followed by two letters (in verse) between Octavia and Antony, dedicated to Mistresse Mary Thinne. Prepared by Ronald B. McKerrow and ... the general editor W. W. Greg.",
+    "copies_sold": 468,
+    "isbn": "1158273407",
+    "publisher_id_fkey": 4,
+    "book_name": "The virtuous Octavia, 1598",
+    "year": 1909,
+    "book_price": 936
+  },
+  {
+    "description": "vii, 447 p",
+    "copies_sold": 573,
+    "isbn": "1158272741",
+    "publisher_id_fkey": 5,
+    "book_name": "The way of the strong;",
+    "year": 1914,
+    "book_price": 1146
+  },
+  {
+    "description": "312 p. ; 19 cm",
+    "copies_sold": 482,
+    "isbn": "1158274408",
+    "publisher_id_fkey": 6,
+    "book_name": "Wanted, a tortoise-shell",
+    "year": 1917,
+    "book_price": 964
+  },
+  {
+    "description": "59 p. 18 cm",
+    "copies_sold": 481,
+    "isbn": "1158278730",
+    "publisher_id_fkey": 7,
+    "book_name": "War poems",
+    "year": 1867,
+    "book_price": 962
+  },
+  {
+    "description": "1 p. l., 28 p. O On cover: illus",
+    "copies_sold": 343,
+    "isbn": "1102189976",
+    "publisher_id_fkey": 8,
+    "book_name": "The voice of Kegon Fall and other words in verse and song. Dedicated to the students of Japan",
+    "year": 2023,
+    "book_price": 686
+  },
+  {
+    "description": "viii, 505 p. 24 cm",
+    "copies_sold": 1495,
+    "isbn": "1157930700",
+    "publisher_id_fkey": 9,
+    "book_name": "A text-book of organic chemistry;",
+    "year": 1911,
+    "book_price": 2990
+  },
+  {
+    "description": "Flake",
+    "copies_sold": 491,
+    "isbn": "1157459251",
+    "publisher_id_fkey": 10,
+    "book_name": "A String of pearls : designed for the instruction and encouragement of young Latter-day Saints",
+    "year": 1882,
+    "book_price": 982
+  },
+  {
+    "description": "2 v. 23 cm",
+    "copies_sold": 994,
+    "isbn": "1157796010",
+    "publisher_id_fkey": 1,
+    "book_name": "Some official correspondence of George Canning [1821-1827];",
+    "year": 1887,
+    "book_price": 1988
+  },
+  {
+    "description": "72 p. 24 cm",
+    "copies_sold": 1924,
+    "isbn": "1157672342",
+    "publisher_id_fkey": 2,
+    "book_name": "Some parallel formations in English",
+    "year": 1913,
+    "book_price": 3848
+  },
+  {
+    "description": "vii, 9-241 p. 21 cm",
+    "copies_sold": 539,
+    "isbn": "4995733180",
+    "publisher_id_fkey": 3,
+    "book_name": "Songs of the lowly, and other poems",
+    "year": 1892,
+    "book_price": 1078
+  },
+  {
+    "description": "285 p",
+    "copies_sold": 1807,
+    "isbn": "1157734060",
+    "publisher_id_fkey": 4,
+    "book_name": "Songs of the day and night; or, Original hymns for public and private praise and reading. The life-story of Jesus Christ--a cantata; with other sacred poems",
+    "year": 1891,
+    "book_price": 3614
+  },
+  {
+    "description": "Vol. 4",
+    "copies_sold": 430,
+    "isbn": "1085612630",
+    "publisher_id_fkey": 5,
+    "book_name": "Stories and tales",
+    "year": 1910,
+    "book_price": 860
+  },
+  {
+    "description": "vii, 125 p. ; 17 cm",
+    "copies_sold": 327,
+    "isbn": "1158189686",
+    "publisher_id_fkey": 6,
+    "book_name": "Verses",
+    "year": 1890,
+    "book_price": 654
+  },
+  {
+    "description": "8 p. 25 cm Caption book_name Electronic reproduction",
+    "copies_sold": 364,
+    "isbn": "1158034304",
+    "publisher_id_fkey": 7,
+    "book_name": "Union and peace! How they shall be restored : Speech of Hon. Charles Sumner, before the Republican state convention, at Worcester, October 1, 1861",
+    "year": 1861,
+    "book_price": 728
+  },
+  {
+    "description": "viii, 147 p., 18 leaves of plates : 32 cm",
+    "copies_sold": 558,
+    "isbn": "9999999999",
+    "publisher_id_fkey": 8,
+    "book_name": "A treatise on the common sole (Solea vulgaris), considered both as an organism and as a commodity",
+    "year": 1890,
+    "book_price": 1116
+  },
+  {
+    "description": "250 p. 20 cm",
+    "copies_sold": 296,
+    "isbn": "1084569027",
+    "publisher_id_fkey": 9,
+    "book_name": "Rural organization",
+    "year": 1921,
+    "book_price": 592
+  },
+  {
+    "description": "1 p. L., [xi]-xii, [13]-379 p. 21 cm Also issued under book_name: The English in America",
+    "copies_sold": 782,
+    "isbn": "1084591975",
+    "publisher_id_fkey": 10,
+    "book_name": "Rule and misrule of the English in America; by the author of \"Sam Slick the clock-maker\"",
+    "year": 1851,
+    "book_price": 1564
+  },
+  {
+    "description": "143 p. ; 23 cm",
+    "copies_sold": 492,
+    "isbn": "1157817890",
+    "publisher_id_fkey": 1,
+    "book_name": "Studies in citizenship for recruits",
+    "year": 1922,
+    "book_price": 984
+  },
+  {
+    "description": "43 p. 8vo",
+    "copies_sold": 927,
+    "isbn": "1157566517",
+    "publisher_id_fkey": 2,
+    "book_name": "Studies in the construction of dams: earthen and masonry. Arr. on the principle of question and answer for engineering students and others",
+    "year": 1919,
+    "book_price": 1854
+  },
+  {
+    "description": "24 p. ; 21 cm",
+    "copies_sold": 620,
+    "isbn": "1085625427",
+    "publisher_id_fkey": 3,
+    "book_name": "Tariff and tax commission",
+    "year": 1882,
+    "book_price": 1240
+  },
+  {
+    "description": "237 p",
+    "copies_sold": 472,
+    "isbn": "1085669501",
+    "publisher_id_fkey": 4,
+    "book_name": "The three venerable ladies of England on church politics: Madam Britannia, Mother Church, and the Old Lady in Threadneedle Street",
+    "year": 1874,
+    "book_price": 944
+  },
+  {
+    "copies_sold": 504,
+    "isbn": "1049690716",
+    "publisher_id_fkey": 5,
+    "book_name": "Main-travelled roads; being six stories of the Mississippi Valley",
+    "year": 1893,
+    "book_price": 1008
+  },
+  {
+    "description": "2 v. ; 19 cm",
+    "copies_sold": 494,
+    "isbn": "1049656828",
+    "publisher_id_fkey": 6,
+    "book_name": "Maurice Dering, or, The quadrilateral : a novel",
+    "year": 1864,
+    "book_price": 988
+  },
+  {
+    "description": "viii p., 2 l., 242 p. 20 cm Plates printed on both sides",
+    "copies_sold": 404,
+    "isbn": "1048793049",
+    "publisher_id_fkey": 7,
+    "book_name": "Mary in California",
+    "year": 1922,
+    "book_price": 808
+  },
+  {
+    "description": "327 p. 20 cm",
+    "copies_sold": 514,
+    "isbn": "1049678497",
+    "publisher_id_fkey": 8,
+    "book_name": "The masquerader; a novel",
+    "year": 1904,
+    "book_price": 1028
+  },
+  {
+    "description": "3 v. 20 cm",
+    "copies_sold": 309,
+    "isbn": "1049650320",
+    "publisher_id_fkey": 9,
+    "book_name": "Masollam :",
+    "year": 1886,
+    "book_price": 618
+  },
+  {
+    "description": "[1] L., 5-487, [4] p. 20 cm Wright II, 1956 Pub. advts. (4 p.) at end",
+    "copies_sold": 586,
+    "isbn": "1049650808",
+    "publisher_id_fkey": 10,
+    "book_name": "The mustee; or, Love and liberty",
+    "year": 1859,
+    "book_price": 1172
+  },
+  {
+    "description": "xlviii, [49]-559 p. 23 cm",
+    "copies_sold": 567,
+    "isbn": "1050788164",
+    "publisher_id_fkey": 1,
+    "book_name": "The philosophy of the human voice: embracing its physiological history",
+    "year": 1855,
+    "book_price": 1134
+  },
+  {
+    "description": "George W. Skinner, secretary of the Executive committee of the Commission, editor and compiler",
+    "copies_sold": 1228,
+    "isbn": "1050761342",
+    "publisher_id_fkey": 2,
+    "book_name": "Pennsylvania at Chickamauga and Chattanooga",
+    "year": 1900,
+    "book_price": 2456
+  },
+  {
+    "copies_sold": 319,
+    "isbn": "1050232421",
+    "publisher_id_fkey": 3,
+    "book_name": "The opened shutters : a novel",
+    "year": 1906,
+    "book_price": 638
+  },
+  {
+    "description": "696 p",
+    "copies_sold": 1287,
+    "isbn": "1049673249",
+    "publisher_id_fkey": 4,
+    "book_name": "Motor vehicle transportation",
+    "year": 1922,
+    "book_price": 2574
+  },
+  {
+    "description": "12 p 19 cm",
+    "copies_sold": 729,
+    "isbn": "2597888810",
+    "publisher_id_fkey": 5,
+    "book_name": "The wholesale grocery business in January, 1921",
+    "year": 1921,
+    "book_price": 1458
+  },
+  {
+    "description": "32 p",
+    "copies_sold": 527,
+    "isbn": "1049681028",
+    "publisher_id_fkey": 6,
+    "book_name": "The magic shadow show",
+    "year": 1913,
+    "book_price": 1054
+  },
+  {
+    "description": "Thesis (Ph.D.)--University of Pennsylvania, 1910",
+    "copies_sold": 758,
+    "isbn": "6977145820",
+    "publisher_id_fkey": 7,
+    "book_name": "Decay of rationalism",
+    "year": 1910,
+    "book_price": 1516
+  },
+  {
+    "copies_sold": 1022,
+    "isbn": "1042944485",
+    "publisher_id_fkey": 8,
+    "book_name": "Descriptive astronomy; an elementary exposition of the facts, principles, and theories of astronomical science",
+    "year": 1912,
+    "book_price": 2044
+  },
+  {
+    "description": "xv, 552 p",
+    "copies_sold": 942,
+    "isbn": "1048794371",
+    "publisher_id_fkey": 9,
+    "book_name": "Mental physiology, especially in its relations to mental disorders",
+    "year": 1895,
+    "book_price": 1884
+  },
+  {
+    "copies_sold": 637,
+    "isbn": "1040007067",
+    "publisher_id_fkey": 10,
+    "book_name": "A ragged register (of people, places and opinions).",
+    "year": 1879,
+    "book_price": 1274
+  }
+]
