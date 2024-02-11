@@ -264,7 +264,7 @@ https://www.youtube.com/watch?v=VywxIQ2ZXw4&t=697s
 - [ ] **Documentation**
 - [ ] **UML Diagrams**
 
-### III. Shopping Cart - *Jasmine Perez*
+### III. Shopping Cart - *Lizbeth Perez*
 
 - [ ] **Retrieve the subtotal price of all items in the user’s shopping cart.**
 > - [ ] Logic: Give a user Id,return the subtotal of the books in the cart.
@@ -297,7 +297,7 @@ https://www.youtube.com/watch?v=VywxIQ2ZXw4&t=697s
 - [ ] **Documentation**
 - [ ] **UML Diagrams**
 
-### IV. Book Details - Lizbeth Perez
+### IV. Book Details - *Jasmine Perez*
 
 - [ ] **An administrator must be able to create a book with the book ISBN, book name, book description, price, author, genre, publisher , year published and copies sold.**
 > - [ ] Logic: Given a Book’s info, add it to the system.
