@@ -20,6 +20,7 @@ const {
     InvalidVarcharLengthError,
     BlacklistError,
     WhitelistError,
+    RequiredListError,
     SwitchFallThroughRuntimeError
 } = ControllerErrors;
 
@@ -28,7 +29,9 @@ const SCIM = {
     "jsType":"jsType",
     "dbType": "dbType",
     "blacklist": "blacklist",
-    "whitelist": "whitelist"
+    "whitelist": "whitelist",
+    "requiredList": "requiredList",
+    "custom": "custom"
 };
 
 // synchronousConstraintIdentifiersArray
@@ -36,7 +39,9 @@ const SCIA = [
     SCIM.jsType,
     SCIM.dbType,
     SCIM.blacklist,
-    SCIM.whitelist
+    SCIM.whitelist,
+    SCIM.requiredList,
+    SCIM.custom
 ];
 
 const dbTypesMap = {
@@ -57,13 +62,14 @@ class BaseValidations {
         const len = req.query.id.length;
         if (len < 3 || req.query.id[0] !== "[" || req.query.id[len - 1] !== "]") {
             errorPayload.appendMainArgs({ "id": req.query.id });
-            console.log(errorPayload.mainArgs);
             throw new ReqQueryIdIsNotArrayStringFormatError(errorPayload);
         }
 
+        let parsedArray;
+
         try {
-            const parsed = JSON.parse(req.query.id)
-            if (!Array.isArray(parsed)) {
+            parsedArray = req.query.id.substring(1, req.query.id.length - 1).split(",");
+            if (!Array.isArray(parsedArray)) {
                 throw new Error();
             }
         }
@@ -72,26 +78,25 @@ class BaseValidations {
             throw new ReqQueryIdIsNotArrayError(errorPayload);
         }
 
-        const parsedArray = JSON.parse(req.query.id);
         let zeroCount = 0;
         for (let entity of parsedArray) {
-            const parsed = parseInt(entity);
-            if (parsed === NaN) {
+            const parsed = +entity;
+            if (Number.isNaN(parsed)) {
                 errorPayload.appendMainArgs({
                     "query": JSON.stringify(req.query),
-                    "id": req.query.id
+                    "id": JSON.stringify(req.query.id)
                 });
                 throw new ReqQueryArrayElementNaNError(errorPayload);
             }
             if (!Number.isInteger(parsed)) {
                 errorPayload.appendMainArgs({
                     "query": JSON.stringify(req.query),
-                    "id": req.query.id,
-                    "parsed": parsed
+                    "id": JSON.stringify(req.query.id),
+                    "parsed": JSON.stringify(parsed)
                 });
                 throw new ReqQueryArrayElementIsNotIntegerError(errorPayload);
             }
-            if (entity === 0) {
+            if (parsed === 0) {
                 zeroCount++;
             }
         }
@@ -270,16 +275,18 @@ class BaseValidations {
     }
 
     static whitelistValidation(currentConstraint, data, errorPayload) {
-        let hasIllegalElements = true;
-        for (let i = 0; i < currentConstraint.length && hasIllegalElements; i++) {
-            if (data == currentConstraint) {
-                hasIllegalElements = false;
+        let hasIllegalElements = false;
+        let i;
+        for (i = 0; i < data.length && !hasIllegalElements; i++) {
+            if (!currentConstraint.includes(data[i])) {
+                hasIllegalElements = true;
             }
         }
         if (hasIllegalElements) {
             errorPayload.appendMainArgs({
-                "whitelist": JSON.stringify(currentConstraint),
-                "data": String(data)
+                "whitelist": String(currentConstraint),
+                "data": data,
+                "constraintFailure": data[i]
             });
             currentConstraint = null;
             data = null;
@@ -289,6 +296,26 @@ class BaseValidations {
         currentConstraint = null;
         data = null;
         errorPayload = null;
+    }
+
+    static requiredListValidation(currentConstraint, data, errorPayload) {
+        for (let array of currentConstraint) {
+            let hasAtleastOne = false;
+            let i;
+            for (i = 0; i < data.length && !hasAtleastOne; i++) {
+                if (array.includes(data[i])) {
+                    hasAtleastOne = true;
+                }
+            }
+            if (!hasAtleastOne) {
+                errorPayload.appendMainArgs({
+                    "lists": currentConstraint.map((array) => (`[ ${String(array)} ]`)).join(", "),
+                    "index": String(i),
+                    "data": data
+                });
+                throw new RequiredListError(errorPayload);
+            }
+        }
     }
 
     static validateQueryString(queryStringRequirements, queryStringObject, errorPayload) {
@@ -361,7 +388,7 @@ class Logic {
     }
 
     static validationSwitches(synchronousConstraints, data, errorPayload) {
-        const { jsTypeValidation, validateIntDbType, validateVarcharDbType, blacklistValidation, whitelistValidation } = BaseValidations;
+        const { jsTypeValidation, validateIntDbType, validateVarcharDbType, blacklistValidation, whitelistValidation, requiredListValidation } = BaseValidations;
         for (let SCI of SCIA) {
             let currentConstraint = synchronousConstraints[SCI];
             if (currentConstraint != null) {
@@ -388,6 +415,9 @@ class Logic {
                     case SCIM.whitelist:
                         whitelistValidation(currentConstraint, data, errorPayload);
                         break;
+                    case SCIM.requiredList:
+                        requiredListValidation(currentConstraint, data, errorPayload);
+                        break;
                     default:
                         throw new SwitchFallThroughRuntimeError("synchronousConstraintErrorHandling", { switchArg: SCI, auxiliaryArgs: [data] });
                 }
@@ -398,28 +428,49 @@ class Logic {
         data = null;
         errorPayload = null;
     }
+
+    static customValidations(Model, req) {
+        const errorPayload = new ErrorPayload();
+        for (let i = 0; i < req.body.length; i++) {
+            errorPayload.auxiliaryArgs.indexOfIteration = i;
+            for (let columnName of Model.columnNamesArray) {
+                const customValidation = Model.synchronousConstraintSchema[columnName].custom;
+                if (customValidation === null) {
+                    continue;
+                }
+                if (req.body[i].hasOwnProperty(columnName)) {
+                    const { validationLogic } = customValidation;
+                    validationLogic(req.body[i][columnName], { "columnName": columnName }, errorPayload);
+                }
+            }
+        }
+    }
 }
 
 class SyncCompositions {
     static createControllerSynchronousValidation(Model, req) {
         BaseValidations.validateReqBodyStructure(req, new ErrorPayload());
         Logic.dataIterator(Model, req, null, true);
+        Logic.customValidations(Model, req);
     }
 
     static readControllerSynchronousValidation(Model, req) {
         BaseValidations.validateIdQueryString(req, new ErrorPayload());
         Logic.dataIterator(Model, {}, JSON.parse(req.query.id), false);
+        Logic.customValidations(Model, req);
     }
 
     static updateControllerSynchronousValidation(Model, req) {
         BaseValidations.validateIdQueryString(req, new ErrorPayload());
         BaseValidations.validateReqBodyStructure(req, new ErrorPayload());
         Logic.dataIterator(Model, req, JSON.parse(req.query.id), false);
+        Logic.customValidations(Model, req);
     }
 
     static deleteControllerSynchronousValidation(Model, req) {
         BaseValidations.validateIdQueryString(req, new ErrorPayload());
         Logic.dataIterator(Model, {}, JSON.parse(req.query.id), false);
+        Logic.customValidations(Model, req);
     }
 }
 

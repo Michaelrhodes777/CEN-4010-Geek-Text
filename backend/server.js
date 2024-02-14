@@ -24,3 +24,5 @@ app.use("/top_sellers", require('./routes/read_only_views/top_sellers/router.js'
 app.use("/shopping_carts", require('./routes/read_only_views/shopping_carts/router.js'));
 
 app.listen(PORT, () => console.log("app listening"));
+
+module.exports = app;

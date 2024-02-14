@@ -1,11 +1,12 @@
 const ModelInterface = require('../ModelInterface.js');
+const StandardLists = require('../StandardLists.js');
+const { stdBlacklist } = StandardLists;
 
 const columnNames = {
     "genre_id": "genre_id",
     "genre_name": "genre_name"
 };
 
-const STD_BLACKLIST = [ "\"", "'", "\\", "/" ];
 
 const synchronousConstraintSchema = {
     [columnNames.genre_id]: {
@@ -15,7 +16,9 @@ const synchronousConstraintSchema = {
             bounds: [ "[", 0, "i", "-" ],
         },
         blacklist: null,
-        whitelist: null
+        whitelist: null,
+        requiredList: null,
+        custom: null
     },
     [columnNames.genre_name]: {
         jsType: "string",
@@ -23,18 +26,22 @@ const synchronousConstraintSchema = {
             type: "varchar",
             bounds: [ "[", 1, 32, "]" ]
         },
-        blacklist: STD_BLACKLIST,
-        whitelist: null
+        blacklist: stdBlacklist,
+        whitelist: null,
+        requiredList: null,
+        custom: null
     },
 };
 
 const asynchronousConstraintSchema = {
     [columnNames.genre_id]: {
         primaryKey: true,
+        foreignKey: null,
         unique: false
     },
     [columnNames.genre_name]: {
         primaryKey: false,
+        foreignKey: null,
         unique: true
     },
 };

@@ -1,4 +1,6 @@
 const ModelInterface = require('../ModelInterface.js');
+const StandardLists = require('../StandardLists.js');
+const { alphabetical, stdBlacklist } = StandardLists;
 
 const columnNames = {
     "author_id": "author_id",
@@ -6,8 +8,6 @@ const columnNames = {
     "last_name": "last_name",
     "biography": "biography"
 };
-
-const STD_BLACKLIST = [ "\"", "'", "\\", "/" ];
 
 const synchronousConstraintSchema = {
     [columnNames.author_id]: {
@@ -17,7 +17,9 @@ const synchronousConstraintSchema = {
             bounds: [ "[", 0, "i", "-" ],
         },
         blacklist: null,
-        whitelist: null
+        whitelist: null,
+        requiredList: null,
+        custom: null
     },
     [columnNames.first_name]: {
         jsType: "string",
@@ -25,8 +27,10 @@ const synchronousConstraintSchema = {
             type: "varchar",
             bounds: [ "[", 1, 32, "]" ]
         },
-        blacklist: STD_BLACKLIST,
-        whitelist: null
+        blacklist: null,
+        whitelist: alphabetical,
+        requiredList: null,
+        custom: null
     },
     [columnNames.last_name]: {
         jsType: "string",
@@ -34,8 +38,10 @@ const synchronousConstraintSchema = {
             type: "varchar",
             bounds: [ "[", 1, 32, "]" ]
         },
-        blacklist: STD_BLACKLIST,
-        whitelist: null
+        blacklist: null,
+        whitelist: alphabetical,
+        requiredList: null,
+        custom: null
     },
     [columnNames.biography]: {
         jsType: "string",
@@ -43,26 +49,32 @@ const synchronousConstraintSchema = {
             type: "varchar",
             bounds: [ "[", 8, 4096, "]" ]
         },
-        blacklist: STD_BLACKLIST,
-        whitelist: null
+        blacklist: stdBlacklist,
+        whitelist: null,
+        requiredList: null,
+        custom: null
     }
 };
 
 const asynchronousConstraintSchema = {
     [columnNames.author_id]: {
         primaryKey: true,
+        foreignKey: null,
         unique: false
     },
     [columnNames.first_name]: {
         primaryKey: false,
+        foreignKey: null,
         unique: false
     },
     [columnNames.last_name]: {
         primaryKey: false,
+        foreignKey: null,
         unique: false
     },
     [columnNames.biography]: {
         primaryKey: false,
+        foreignKey: null,
         unique: false
     }
 };

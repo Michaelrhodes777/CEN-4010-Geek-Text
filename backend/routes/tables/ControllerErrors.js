@@ -117,6 +117,18 @@ class InvalidPrimaryKeyError extends ControllerError {
     }
 }
 
+class InvalidForeignKeyError extends ControllerError {
+
+    static runtimeDataProps = [ "foreignKey", "queryText", "queryValues", "responseRows" ];
+
+    constructor(errorPayload) {
+        super("ASYNC: Database failed to validate foreign key existence", errorPayload);
+        this.name = "InvalidForeignKeyError";
+        this.statusCode = 404;
+        this.responseMessage = "Resource not found";
+    }
+}
+
 class UniquenessError extends ControllerError {
 
     static runtimeDataProps = [ "columnName", "queryString", "valuesArray", "responseRows" ];
@@ -156,7 +168,7 @@ class ReqQueryIdIsNotArrayStringFormatError extends ControllerError {
     
     constructor(errorPayload) {
         super("SYNC: req.query.id does not start and close with brackets or has no ids", errorPayload);
-        this.name = "ReqQueryIdIsNotArayStringFormatError";
+        this.name = "ReqQueryIdIsNotArrayStringFormatError";
         this.response = "Malformed data";
     }
 }
@@ -176,7 +188,7 @@ class ReqQueryArrayElementNaNError extends ControllerError {
 
     constructor(errorPayload) {
         super("SYNC: req.query.id has elements === NaN", errorPayload);
-        this.name = "ReqQueryArrayElementsNaNError";
+        this.name = "ReqQueryArrayElementNaNError";
         this.response = "MalformedData";
     }
 
@@ -187,7 +199,7 @@ class ReqQueryArrayElementIsNotIntegerError extends ControllerError {
 
     constructor(errorPayload) {
         super("SYNC: req.query.id has element that is not an integer", errorPayload);
-        this.name = "ReqQueryArrayElementsNaNError";
+        this.name = "ReqQueryArrayElementIsNotIntegerError";
         this.response = "Malformed data";
     }
 
@@ -295,7 +307,7 @@ class IntNumberBoundsError extends ControllerError {
 
     constructor(errorPayload) {
         super("SYNC: integer database data type is not within proper constraints", errorPayload);
-        this.name = "IntNumberBoundError";
+        this.name = "IntNumberBoundsError";
         this.responseMessage = "Malformed data";
     }
 }
@@ -324,11 +336,22 @@ class BlacklistError extends ControllerError {
 
 class WhitelistError extends ControllerError {
 
-    static runtimeDataProps = [ "blacklist", "data" ];
+    static runtimeDataProps = [ "blacklist", "data", "constraintFailures" ];
 
     constructor(errorPayload) {
         super("SYNC: data includes blacklisted elements", errorPayload);
         this.name = "WhitelistError";
+        this.responseMessage = "Malformed data";
+    }
+}
+
+class RequiredListError extends ControllerError {
+
+    static runTimeDataProps = [ "lists", "index", "data" ];
+    
+    constructor(errorPayload) {
+        super("SYNC: data does not contain atleast one element from each list", errorPayload);
+        this.name = "RequiredListError";
         this.responseMessage = "Malformed data";
     }
 }
@@ -365,6 +388,8 @@ module.exports = {
     IdArrayHasZeroLengthError,
     AllQueryAndBodyError,
     InvalidPrimaryKeyError,
+    InvalidForeignKeyError,
+    RequiredListError,
     UniquenessError,
     SwitchFallThroughRuntimeError
 };

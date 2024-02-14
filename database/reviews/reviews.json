@@ -1,805 +1,566 @@
 [
   {
-    "isbn": "1048335068",
-    "book_name": "Life of Philip Doddridge, D. D. : with notices of some of his contemporaries, and specimens of his style",
-    "rating": 4.5,
-    "reviews": [
-      {
-        "user": "BookLover123",
-        "rating": 5,
-        "comment": "A fascinating insight into the life of Philip Doddridge."
-      },
-      {
-        "user": "HistoryBuff22",
-        "rating": 4,
-        "comment": "Well-written biography with great historical context."
-      }
-    ]
+    "rating": 5,
+    "comment": "A fascinating insight into the life of Philip Doddridge.",
+    "book_id_fkey": 1,
+    "user_id_fkey": 1
   },
   {
-    "isbn": "1048209812",
-    "book_name": "Le Dahomé, souvenirs de voyage et de mission",
-    "rating": 3.8,
-    "reviews": [
-      {
-        "user": "Traveler99",
-        "rating": 4,
-        "comment": "Interesting travel memoir."
-      },
-      {
-        "user": "CulturalExplorer",
-        "rating": 3.5,
-        "comment": "Provides a unique perspective on Dahomey."
-      }
-    ]
+    "rating": 4,
+    "comment": "Well-written biography with great historical context.",
+    "book_id_fkey": 1,
+    "user_id_fkey": 2
   },
   {
-    "isbn": "1048316853",
-    "book_name": "The liberator ..",
-    "rating": 4.2,
-    "reviews": [
-      {
-        "user": "FreedomFighter1776",
-        "rating": 5,
-        "comment": "An inspiring read about the fight for liberty."
-      },
-      {
-        "user": "HistoryEnthusiast",
-        "rating": 4,
-        "comment": "Detailed account of a pivotal historical figure."
-      }
-    ]
+    "rating": 4,
+    "comment": "Interesting travel memoir.",
+    "book_id_fkey": 2,
+    "user_id_fkey": 2
   },
   {
-    "isbn": "1048299273",
-    "book_name": "Liberty; a study in comparative philology",
-    "rating": 4.0,
-    "reviews": [
-      {
-        "user": "LanguageScholar",
-        "rating": 4,
-        "comment": "Fascinating exploration of linguistic connections."
-      },
-      {
-        "user": "PhilologyEnthusiast",
-        "rating": 4,
-        "comment": "Insightful analysis of language and culture."
-      }
-    ]
+    "rating": 4,
+    "comment": "Provides a unique perspective on Dahomey.",
+    "book_id_fkey": 2,
+    "user_id_fkey": 3
   },
   {
-    "isbn": "1157905345",
-    "book_name": "Travels, sport, and politics in the east of Europe",
-    "rating": 4.7,
-    "reviews": [
-      {
-        "user": "Traveler123",
-        "rating": 5,
-        "comment": "Captivating journey through Eastern Europe."
-      },
-      {
-        "user": "SportsFanatic",
-        "rating": 4.5,
-        "comment": "Interesting blend of travel and sports anecdotes."
-      }
-    ]
+    "rating": 5,
+    "comment": "An inspiring read about the fight for liberty.",
+    "book_id_fkey": 3,
+    "user_id_fkey": 3
   },
   {
-    "isbn": "1085980142",
-    "book_name": "The true adventures of a play",
-    "rating": 4.2,
-    "reviews": [
-      {
-        "user": "TheaterBuff",
-        "rating": 4,
-        "comment": "Engaging account of the theatrical world."
-      },
-      {
-        "user": "DramaEnthusiast",
-        "rating": 4.5,
-        "comment": "A must-read for theater lovers."
-      }
-    ]
+    "rating": 4,
+    "comment": "Detailed account of a pivotal historical figure.",
+    "book_id_fkey": 3,
+    "user_id_fkey": 4
   },
   {
-    "isbn": "1047522719",
-    "book_name": "In spacious times",
-    "rating": 4.1,
-    "reviews": [
-      {
-        "user": "HistoryBuff88",
-        "rating": 4,
-        "comment": "Insightful reflections on historical periods."
-      },
-      {
-        "user": "TimeTraveler",
-        "rating": 4.2,
-        "comment": "A thought-provoking journey through time."
-      }
-    ]
+    "rating": 4,
+    "comment": "Fascinating exploration of linguistic connections.",
+    "book_id_fkey": 4,
+    "user_id_fkey": 4
   },
   {
-    "isbn": "9695157500",
-    "book_name": "The institutes of medicine",
-    "rating": 3.9,
-    "reviews": [
-      {
-        "user": "MedStudent23",
-        "rating": 4,
-        "comment": "Informative overview of medical principles."
-      },
-      {
-        "user": "HealthEnthusiast",
-        "rating": 3.8,
-        "comment": "Useful reference for understanding medicine."
-      }
-    ]
+    "rating": 4,
+    "comment": "Insightful analysis of language and culture.",
+    "book_id_fkey": 4,
+    "user_id_fkey": 5
   },
   {
-    "isbn": "1047428651",
-    "book_name": "Infatuation",
-    "rating": 4.3,
-    "reviews": [
-      {
-        "user": "RomanceReader",
-        "rating": 4.5,
-        "comment": "A captivating love story that keeps you hooked."
-      },
-      {
-        "user": "LoveStoryFan",
-        "rating": 4.1,
-        "comment": "Heartwarming tale of romance and passion."
-      }
-    ]
-  },
-
-  {
-    "isbn": "1102114055",
-    "book_name": "Voices from a busy life; or, Selections from the poetical works of the late Edward A. Washburn",
-    "rating": 4.2,
-    "reviews": [
-      {
-        "user": "PoetryLover",
-        "rating": 4.5,
-        "comment": "Beautiful poetry collection with profound themes."
-      },
-      {
-        "user": "LiteratureEnthusiast",
-        "rating": 4,
-        "comment": "A delightful read for poetry enthusiasts."
-      }
-    ]
+    "rating": 5,
+    "comment": "Captivating journey through Eastern Europe.",
+    "book_id_fkey": 5,
+    "user_id_fkey": 5
   },
   {
-    "isbn": "1158277616",
-    "book_name": "Vom Bismarck der 70er jahre",
-    "rating": 4.0,
-    "reviews": [
-      {
-        "user": "HistoryScholar",
-        "rating": 4,
-        "comment": "Insightful examination of Bismarck's era."
-      },
-      {
-        "user": "PoliticalAnalyst",
-        "rating": 4,
-        "comment": "A comprehensive analysis of historical events."
-      }
-    ]
+    "rating": 5,
+    "comment": "Interesting blend of travel and sports anecdotes.",
+    "book_id_fkey": 5,
+    "user_id_fkey": 6
   },
   {
-    "isbn": "7617751830",
-    "book_name": "The Wabash trade route in the development of the old Northwest",
-    "rating": 4.3,
-    "reviews": [
-      {
-        "user": "HistoryBuff33",
-        "rating": 4.5,
-        "comment": "In-depth exploration of trade routes and their impact."
-      },
-      {
-        "user": "TradeHistoryEnthusiast",
-        "rating": 4.1,
-        "comment": "Fascinating insights into the economic history of the region."
-      }
-    ]
+    "rating": 4,
+    "comment": "Engaging account of the theatrical world.",
+    "book_id_fkey": 6,
+    "user_id_fkey": 6
   },
   {
-    "isbn": "1102238531",
-    "book_name": "Vienna International Exhibition, 1873. Report on deaf-mute instruction",
-    "rating": 4.6,
-    "reviews": [
-      {
-        "user": "ExhibitionVisitor",
-        "rating": 5,
-        "comment": "Insightful report on deaf-mute instruction at the Vienna Exhibition."
-      },
-      {
-        "user": "EducationEnthusiast",
-        "rating": 4.2,
-        "comment": "Important documentation of educational practices."
-      }
-    ]
-  },
-{
-    "isbn": "1158273407",
-    "book_name": "The virtuous Octavia, 1598",
-    "rating": 4.0,
-    "reviews": [
-      {
-        "user": "ShakespeareFan",
-        "rating": 4,
-        "comment": "Interesting insights into the character of Octavia."
-      },
-      {
-        "user": "LiteratureScholar",
-        "rating": 4,
-        "comment": "A valuable addition to Shakespearean studies."
-      }
-    ]
-  },
-
-  {
-    "isbn": "1158272741",
-    "book_name": "The way of the strong;",
-    "rating": 4.8,
-    "reviews": [
-      {
-        "user": "StrengthEnthusiast",
-        "rating": 5,
-        "comment": "Empowering and motivating read."
-      },
-      {
-        "user": "SelfImprovementJunkie",
-        "rating": 4.6,
-        "comment": "Practical advice for personal growth and development."
-      }
-    ]
+    "rating": 5,
+    "comment": "A must-read for theater lovers.",
+    "book_id_fkey": 6,
+    "user_id_fkey": 7
   },
   {
-    "isbn": "1158274408",
-    "book_name": "Wanted, a tortoise-shell",
-    "rating": 4.3,
-    "reviews": [
-      {
-        "user": "AnimalLover",
-        "rating": 4.5,
-        "comment": "Charming tale with a heartwarming message."
-      },
-      {
-        "user": "FableFanatic",
-        "rating": 4.1,
-        "comment": "A delightful story about the quest for a tortoise-shell."
-      }
-    ]
+    "rating": 4,
+    "comment": "Insightful reflections on historical periods.",
+    "book_id_fkey": 7,
+    "user_id_fkey": 7
   },
   {
-    "isbn": "1158278730",
-    "book_name": "War poems",
-    "rating": 4.1,
-    "reviews": [
-      {
-        "user": "PoetryEnthusiast",
-        "rating": 4.2,
-        "comment": "Moving collection of poems about war."
-      },
-      {
-        "user": "HistoryStudent",
-        "rating": 4,
-        "comment": "Evocative and thought-provoking poetry."
-      }
-    ]
+    "rating": 5,
+    "comment": "A thought-provoking journey through time.",
+    "book_id_fkey": 7,
+    "user_id_fkey": 8
   },
   {
-    "isbn": "1102189976",
-    "book_name": "The voice of Kegon Fall and other words in verse and song. Dedicated to the students of Japan",
-    "rating": 4.7,
-    "reviews": [
-      {
-        "user": "JapaneseCultureEnthusiast",
-        "rating": 4.8,
-        "comment": "Beautiful tribute to Japanese culture."
-      },
-      {
-        "user": "PoetryLover",
-        "rating": 4.6,
-        "comment": "Wonderful collection of verse and song."
-      }
-    ]
+    "rating": 4,
+    "comment": "Informative overview of medical principles.",
+    "book_id_fkey": 8,
+    "user_id_fkey": 8
   },
   {
-    "isbn": "1157930700",
-    "book_name": "A text-book of organic chemistry;",
-    "rating": 4.9,
-    "reviews": [
-      {
-        "user": "ChemistryMajor",
-        "rating": 5,
-        "comment": "Comprehensive and well-explained textbook."
-      },
-      {
-        "user": "ScienceEnthusiast",
-        "rating": 4.8,
-        "comment": "An essential resource for students of organic chemistry."
-      }
-    ]
+    "rating": 4,
+    "comment": "Useful reference for understanding medicine.",
+    "book_id_fkey": 8,
+    "user_id_fkey": 9
   },
   {
-    "isbn": "1157459251",
-    "book_name": "A String of pearls : designed for the instruction and encouragement of young Latter-day Saints",
-    "rating": 4.2,
-    "reviews": [
-      {
-        "user": "ReligiousReader",
-        "rating": 4,
-        "comment": "Uplifting and inspirational read."
-      },
-      {
-        "user": "LatterDaySaint",
-        "rating": 4.4,
-        "comment": "Encouraging messages for young believers."
-      }
-    ]
+    "rating": 5,
+    "comment": "A captivating love story that keeps you hooked.",
+    "book_id_fkey": 9,
+    "user_id_fkey": 9
   },
   {
-    "isbn": "1157796010",
-    "book_name": "Some official correspondence of George Canning [1821-1827];",
-    "rating": 4.5,
-    "reviews": [
-      {
-        "user": "HistoryBuff99",
-        "rating": 4.6,
-        "comment": "Insightful glimpse into historical correspondence."
-      },
-      {
-        "user": "PoliticalHistoryEnthusiast",
-        "rating": 4.4,
-        "comment": "Fascinating read for those interested in political history."
-      }
-    ]
+    "rating": 5,
+    "comment": "Heartwarming tale of romance and passion.",
+    "book_id_fkey": 9,
+    "user_id_fkey": 10
   },
   {
-    "isbn": "1157672342",
-    "book_name": "Some parallel formations in English",
-    "rating": 4.9,
-    "reviews": [
-      {
-        "user": "LanguageGeek",
-        "rating": 5,
-        "comment": "In-depth analysis of English language formations."
-      },
-      {
-        "user": "EnglishTeacher",
-        "rating": 4.8,
-        "comment": "A valuable resource for understanding linguistic structures."
-      }
-    ]
+    "rating": 5,
+    "comment": "Beautiful poetry collection with profound themes.",
+    "book_id_fkey": 10,
+    "user_id_fkey": 10
   },
   {
-    "isbn": "4995733180",
-    "book_name": "Songs of the lowly, and other poems",
-    "rating": 4.2,
-    "reviews": [
-      {
-        "user": "PoetryLover",
-        "rating": 4.3,
-        "comment": "Heartfelt poetry that resonates with the soul."
-      },
-      {
-        "user": "LiteratureEnthusiast",
-        "rating": 4.1,
-        "comment": "Powerful collection of poems reflecting on social issues."
-      }
-    ]
+    "rating": 4,
+    "comment": "A delightful read for poetry enthusiasts.",
+    "book_id_fkey": 10,
+    "user_id_fkey": 11
   },
   {
-    "isbn": "1157734060",
-    "book_name": "Songs of the day and night; or, Original hymns for public and private praise and reading. The life-story of Jesus Christ--a cantata; with other sacred poems",
-    "rating": 4.7,
-    "reviews": [
-      {
-        "user": "HymnLover",
-        "rating": 4.8,
-        "comment": "Beautiful hymns that inspire worship and reflection."
-      },
-      {
-        "user": "ReligiousReader",
-        "rating": 4.6,
-        "comment": "Sacred poetry that touches the heart."
-      }
-    ]
+    "rating": 4,
+    "comment": "Insightful examination of Bismarck's era.",
+    "book_id_fkey": 11,
+    "user_id_fkey": 11
   },
   {
-    "isbn": "1085612630",
-    "book_name": "Stories and tales",
-    "rating": 4.3,
-    "reviews": [
-      {
-        "user": "Storyteller",
-        "rating": 4.5,
-        "comment": "Engaging and imaginative tales for all ages."
-      },
-      {
-        "user": "FictionFanatic",
-        "rating": 4.1,
-        "comment": "Entertaining collection of stories with intriguing plots."
-      }
-    ]
+    "rating": 4,
+    "comment": "A comprehensive analysis of historical events.",
+    "book_id_fkey": 11,
+    "user_id_fkey": 12
   },
   {
-    "isbn": "1158189686",
-    "book_name": "Verses",
-    "rating": 4.0,
-    "reviews": [
-      {
-        "user": "PoetryReviewer",
-        "rating": 4.2,
-        "comment": "Thought-provoking verses that stir the imagination."
-      },
-      {
-        "user": "LiteratureLover",
-        "rating": 3.8,
-        "comment": "A poetic journey through emotions and experiences."
-      }
-    ]
+    "rating": 5,
+    "comment": "In-depth exploration of trade routes and their impact.",
+    "book_id_fkey": 12,
+    "user_id_fkey": 12
   },
   {
-    "isbn": "1158034304",
-    "book_name": "Union and peace! How they shall be restored : Speech of Hon. Charles Sumner, before the Republican state convention, at Worcester, October 1, 1861",
-    "rating": 3.9,
-    "reviews": [
-      {
-        "user": "HistoryEnthusiast",
-        "rating": 4,
-        "comment": "Insightful speech advocating for unity and peace."
-      },
-      {
-        "user": "PoliticalCommentator",
-        "rating": 3.8,
-        "comment": "A historical perspective on the restoration of union and peace."
-      }
-    ]
+    "rating": 5,
+    "comment": "Fascinating insights into the economic history of the region.",
+    "book_id_fkey": 12,
+    "user_id_fkey": 13
   },
   {
-    "isbn": "9999999999",
-    "book_name": "A treatise on the common sole (Solea vulgaris), considered both as an organism and as a commodity",
-    "rating": 4.4,
-    "reviews": [
-      {
-        "user": "MarineBiologyEnthusiast",
-        "rating": 4.5,
-        "comment": "Comprehensive study of the common sole and its significance."
-      },
-      {
-        "user": "FisheriesStudent",
-        "rating": 4.3,
-        "comment": "Informative treatise on the biology and economic importance of the common sole."
-      }
-    ]
+    "rating": 5,
+    "comment": "Insightful report on deaf-mute instruction at the Vienna Exhibition.",
+    "book_id_fkey": 13,
+    "user_id_fkey": 13
   },
   {
-    "isbn": "1084569027",
-    "book_name": "Rural organization",
-    "rating": 4.1,
-    "reviews": [
-      {
-        "user": "AgricultureEnthusiast",
-        "rating": 4.3,
-        "comment": "Insightful exploration of rural development."
-      },
-      {
-        "user": "CommunityActivist",
-        "rating": 4,
-        "comment": "A valuable resource for rural community planning."
-      }
-    ]
+    "rating": 5,
+    "comment": "Important documentation of educational practices.",
+    "book_id_fkey": 13,
+    "user_id_fkey": 14
   },
   {
-    "isbn": "1084591975",
-    "book_name": "Rule and misrule of the English in America; by the author of \"Sam Slick the clock-maker\"",
-    "rating": 4.2,
-    "reviews": [
-      {
-        "user": "HistoryScholar",
-        "rating": 4.4,
-        "comment": "Critical examination of English influence in America."
-      },
-      {
-        "user": "AmericanHistoryEnthusiast",
-        "rating": 4,
-        "comment": "Insightful analysis of colonial history."
-      }
-    ]
+    "rating": 4,
+    "comment": "Interesting insights into the character of Octavia.",
+    "book_id_fkey": 14,
+    "user_id_fkey": 14
   },
   {
-    "isbn": "1157817890",
-    "book_name": "Studies in citizenship for recruits",
-    "rating": 4.0,
-    "reviews": [
-      {
-        "user": "CitizenshipEducator",
-        "rating": 4.2,
-        "comment": "Informative guide for understanding citizenship responsibilities."
-      },
-      {
-        "user": "CivicEngagementEnthusiast",
-        "rating": 3.8,
-        "comment": "A useful resource for promoting civic participation."
-      }
-    ]
+    "rating": 4,
+    "comment": "A valuable addition to Shakespearean studies.",
+    "book_id_fkey": 14,
+    "user_id_fkey": 15
   },
   {
-    "isbn": "1157566517",
-    "book_name": "Studies in the construction of dams: earthen and masonry. Arr. on the principle of question and answer for engineering students and others",
-    "rating": 4.3,
-    "reviews": [
-      {
-        "user": "EngineeringStudent",
-        "rating": 4.5,
-        "comment": "Comprehensive study guide for dam construction."
-      },
-      {
-        "user": "DamEnthusiast",
-        "rating": 4.1,
-        "comment": "A practical approach to understanding dam engineering."
-      }
-    ]
+    "rating": 5,
+    "comment": "Empowering and motivating read.",
+    "book_id_fkey": 15,
+    "user_id_fkey": 15
   },
   {
-    "isbn": "1085625427",
-    "book_name": "Tariff and tax commission",
-    "rating": 4.2,
-    "reviews": [
-      {
-        "user": "EconomicsStudent",
-        "rating": 4.4,
-        "comment": "Insightful analysis of tariff and tax policies."
-      },
-      {
-        "user": "TaxPolicyAnalyst",
-        "rating": 4,
-        "comment": "A valuable resource for understanding economic regulations."
-      }
-    ]
+    "rating": 5,
+    "comment": "Practical advice for personal growth and development.",
+    "book_id_fkey": 15,
+    "user_id_fkey": 16
   },
   {
-    "isbn": "1085669501",
-    "book_name": "The three venerable ladies of England on church politics: Madam Britannia, Mother Church, and the Old Lady in Threadneedle Street",
-    "rating": 4.1,
-    "reviews": [
-      {
-        "user": "HistoryScholar",
-        "rating": 4.3,
-        "comment": "Insightful examination of the intersection of politics and religion."
-      },
-      {
-        "user": "ReligiousHistoryEnthusiast",
-        "rating": 4,
-        "comment": "A thought-provoking study of church politics in England."
-      }
-    ]
+    "rating": 5,
+    "comment": "Charming tale with a heartwarming message.",
+    "book_id_fkey": 16,
+    "user_id_fkey": 16
   },
   {
-    "isbn": "1049690716",
-    "book_name": "Main-travelled roads; being six stories of the Mississippi Valley",
-    "rating": 4.2,
-    "reviews": [
-      {
-        "user": "LiteratureLover",
-        "rating": 4.4,
-        "comment": "Compelling stories that capture the essence of the Mississippi Valley."
-      },
-      {
-        "user": "RegionalHistoryEnthusiast",
-        "rating": 4,
-        "comment": "An authentic portrayal of life in the Midwest."
-      }
-    ]
+    "rating": 5,
+    "comment": "A delightful story about the quest for a tortoise-shell.",
+    "book_id_fkey": 16,
+    "user_id_fkey": 17
   },
   {
-    "isbn": "1049656828",
-    "book_name": "Maurice Dering, or, The quadrilateral : a novel",
-    "rating": 4.0,
-    "reviews": [
-      {
-        "user": "FictionReader",
-        "rating": 4.2,
-        "comment": "Engaging novel with well-developed characters."
-      },
-      {
-        "user": "LiteratureEnthusiast",
-        "rating": 3.8,
-        "comment": "A captivating story set against the backdrop of political intrigue."
-      }
-    ]
+    "rating": 5,
+    "comment": "Moving collection of poems about war.",
+    "book_id_fkey": 17,
+    "user_id_fkey": 17
   },
   {
-    "isbn": "1048793049",
-    "book_name": "Mary in California",
-    "rating": 4.2,
-    "reviews": [
-      {
-        "user": "AdventureReader",
-        "rating": 4.5,
-        "comment": "Mary's journey through California was both exciting and enlightening."
-      },
-      {
-        "user": "Traveler",
-        "rating": 4.0,
-        "comment": "A delightful blend of adventure and romance. California comes alive in this book!"
-      }
-    ]
+    "rating": 4,
+    "comment": "Evocative and thought-provoking poetry.",
+    "book_id_fkey": 17,
+    "user_id_fkey": 18
   },
   {
-    "isbn": "1049678497",
-    "book_name": "The masquerader; a novel",
-    "rating": 4.6,
-    "reviews": [
-      {
-        "user": "MysteryFan",
-        "rating": 4.8,
-        "comment": "The masquerade of identities kept me guessing until the very end. Brilliant!"
-      },
-      {
-        "user": "Bookworm",
-        "rating": 4.4,
-        "comment": "An enthralling read with twists and turns at every corner. Highly recommend!"
-      }
-    ]
+    "rating": 5,
+    "comment": "Beautiful tribute to Japanese culture.",
+    "book_id_fkey": 18,
+    "user_id_fkey": 18
   },
   {
-    "isbn": "1049650320",
-    "book_name": "Masollam :",
-    "rating": 3.9,
-    "reviews": [
-      {
-        "user": "LiteratureLover",
-        "rating": 4.0,
-        "comment": "While lengthy, Masollam offers a rich tapestry of characters and settings."
-      },
-      {
-        "user": "HistoryBuff",
-        "rating": 3.8,
-        "comment": "A classic work with deep philosophical undertones. Not for the faint-hearted."
-      }
-    ]
+    "rating": 5,
+    "comment": "Wonderful collection of verse and song.",
+    "book_id_fkey": 18,
+    "user_id_fkey": 19
   },
   {
-    "isbn": "1049650808",
-    "book_name": "The mustee; or, Love and liberty",
-    "rating": 4.1,
-    "reviews": [
-      {
-        "user": "RomanceReader",
-        "rating": 4.3,
-        "comment": "A poignant tale of love and freedom. The characters stayed with me long after I finished."
-      },
-      {
-        "user": "FreedomEnthusiast",
-        "rating": 4.0,
-        "comment": "An inspiring story that highlights the resilience of the human spirit. Loved it!"
-      }
-    ]
+    "rating": 5,
+    "comment": "Comprehensive and well-explained textbook.",
+    "book_id_fkey": 19,
+    "user_id_fkey": 19
   },
   {
-    "isbn": "1050788164",
-    "book_name": "The philosophy of the human voice: embracing its physiological history",
-    "rating": 4.3,
-    "reviews": [
-      {
-        "user": "Vocalist",
-        "rating": 4.6,
-        "comment": "A fascinating exploration of the human voice. Insightful and engaging!"
-      },
-      {
-        "user": "PhilosophyStudent",
-        "rating": 4.0,
-        "comment": "An essential read for anyone interested in understanding the voice's significance in human communication."
-      }
-    ]
+    "rating": 5,
+    "comment": "An essential resource for students of organic chemistry.",
+    "book_id_fkey": 19,
+    "user_id_fkey": 20
   },
   {
-    "isbn": "1050761342",
-    "book_name": "Pennsylvania at Chickamauga and Chattanooga",
-    "rating": 4.8,
-    "reviews": [
-      {
-        "user": "HistoryScholar",
-        "rating": 4.9,
-        "comment": "An invaluable account of Pennsylvania's contributions to these pivotal battles. A masterpiece of historical scholarship!"
-      },
-      {
-        "user": "CivilWarEnthusiast",
-        "rating": 4.7,
-        "comment": "Skinner's thorough research and compelling narrative make this a must-read for Civil War aficionados."
-      }
-    ]
+    "rating": 4,
+    "comment": "Uplifting and inspirational read.",
+    "book_id_fkey": 20,
+    "user_id_fkey": 20
   },
   {
-    "isbn": "1050232421",
-    "book_name": "The opened shutters : a novel",
-    "rating": 3.7,
-    "reviews": [
-      {
-        "user": "SociologyStudent",
-        "rating": 4.0,
-        "comment": "An insightful exploration of societal norms and individual identity. Thought-provoking!"
-      },
-      {
-        "user": "BookClubMember",
-        "rating": 3.4,
-        "comment": "While the premise was promising, the execution fell short for me. Still worth a read for its themes."
-      }
-    ]
+    "rating": 5,
+    "comment": "Encouraging messages for young believers.",
+    "book_id_fkey": 20,
+    "user_id_fkey": 21
   },
   {
-    "isbn": "1049673249",
-    "book_name": "Motor vehicle transportation",
-    "rating": 4.9,
-    "reviews": [
-      {
-        "user": "AutomotiveEnthusiast",
-        "rating": 5.0,
-        "comment": "An exhaustive study of motor vehicle transportation. Comprehensive and enlightening!"
-      },
-      {
-        "user": "TransportationExpert",
-        "rating": 4.8,
-        "comment": "This book is a treasure trove of information for anyone interested in the evolution of transportation systems."
-      }
-    ]
+    "rating": 5,
+    "comment": "Insightful glimpse into historical correspondence.",
+    "book_id_fkey": 21,
+    "user_id_fkey": 21
   },
   {
-    "isbn": "2597888810",
-    "book_name": "The wholesale grocery business in January, 1921",
-    "rating": 4.7,
-    "reviews": [
-      {
-        "user": "BusinessOwner",
-        "rating": 4.8,
-        "comment": "Insightful and informative. A must-read for anyone in the wholesale grocery industry!"
-      },
-      {
-        "user": "EconomicsStudent",
-        "rating": 4.6,
-        "comment": "Provides valuable insights into the dynamics of the wholesale grocery business. Well-researched and engaging."
-      }
-    ]
+    "rating": 5,
+    "comment": "Fascinating read for those interested in political history.",
+    "book_id_fkey": 21,
+    "user_id_fkey": 22
   },
   {
-    "isbn": "1049681028",
-    "book_name": "The magic shadow show",
-    "rating": 4.4,
-    "reviews": [
-      {
-        "user": "FantasyFan",
-        "rating": 4.5,
-        "comment": "A whimsical journey into the world of magic. Enchanting and delightful!"
-      },
-      {
-        "user": "ChildrensLibrarian",
-        "rating": 4.3,
-        "comment": "Captivating storytelling with vivid imagery. Children will love this magical adventure!"
-      }
-    ]
+    "rating": 5,
+    "comment": "In-depth analysis of English language formations.",
+    "book_id_fkey": 22,
+    "user_id_fkey": 22
   },
   {
-    "isbn": "6977145820",
-    "book_name": "Decay of rationalism",
-    "rating": 4.2,
-    "reviews": [
-      {
-        "user": "PhilosophyProfessor",
-        "rating": 4.5,
-        "comment": "An insightful examination of the decline of rationalist thought. Thought-provoking and meticulously argued!"
-      },
-      {
-        "user": "Rationalist",
-        "rating": 4.0,
-        "comment": "Raises important questions about the limits of rationalism. A stimulating read for those interested in philosophy."
-      }
-    ]
+    "rating": 5,
+    "comment": "A valuable resource for understanding linguistic structures.",
+    "book_id_fkey": 22,
+    "user_id_fkey": 23
+  },
+  {
+    "rating": 5,
+    "comment": "Heartfelt poetry that resonates with the soul.",
+    "book_id_fkey": 23,
+    "user_id_fkey": 23
+  },
+  {
+    "rating": 5,
+    "comment": "Powerful collection of poems reflecting on social issues.",
+    "book_id_fkey": 23,
+    "user_id_fkey": 24
+  },
+  {
+    "rating": 5,
+    "comment": "Beautiful hymns that inspire worship and reflection.",
+    "book_id_fkey": 24,
+    "user_id_fkey": 24
+  },
+  {
+    "rating": 5,
+    "comment": "Sacred poetry that touches the heart.",
+    "book_id_fkey": 24,
+    "user_id_fkey": 25
+  },
+  {
+    "rating": 5,
+    "comment": "Engaging and imaginative tales for all ages.",
+    "book_id_fkey": 25,
+    "user_id_fkey": 25
+  },
+  {
+    "rating": 5,
+    "comment": "Entertaining collection of stories with intriguing plots.",
+    "book_id_fkey": 25,
+    "user_id_fkey": 26
+  },
+  {
+    "rating": 5,
+    "comment": "Thought-provoking verses that stir the imagination.",
+    "book_id_fkey": 26,
+    "user_id_fkey": 26
+  },
+  {
+    "rating": 4,
+    "comment": "A poetic journey through emotions and experiences.",
+    "book_id_fkey": 26,
+    "user_id_fkey": 27
+  },
+  {
+    "rating": 4,
+    "comment": "Insightful speech advocating for unity and peace.",
+    "book_id_fkey": 27,
+    "user_id_fkey": 27
+  },
+  {
+    "rating": 4,
+    "comment": "A historical perspective on the restoration of union and peace.",
+    "book_id_fkey": 27,
+    "user_id_fkey": 28
+  },
+  {
+    "rating": 5,
+    "comment": "Comprehensive study of the common sole and its significance.",
+    "book_id_fkey": 28,
+    "user_id_fkey": 28
+  },
+  {
+    "rating": 5,
+    "comment": "Informative treatise on the biology and economic importance of the common sole.",
+    "book_id_fkey": 28,
+    "user_id_fkey": 29
+  },
+  {
+    "rating": 5,
+    "comment": "Insightful exploration of rural development.",
+    "book_id_fkey": 29,
+    "user_id_fkey": 29
+  },
+  {
+    "rating": 4,
+    "comment": "A valuable resource for rural community planning.",
+    "book_id_fkey": 29,
+    "user_id_fkey": 30
+  },
+  {
+    "rating": 5,
+    "comment": "Critical examination of English influence in America.",
+    "book_id_fkey": 30,
+    "user_id_fkey": 30
+  },
+  {
+    "rating": 4,
+    "comment": "Insightful analysis of colonial history.",
+    "book_id_fkey": 30,
+    "user_id_fkey": 31
+  },
+  {
+    "rating": 5,
+    "comment": "Informative guide for understanding citizenship responsibilities.",
+    "book_id_fkey": 31,
+    "user_id_fkey": 31
+  },
+  {
+    "rating": 4,
+    "comment": "A useful resource for promoting civic participation.",
+    "book_id_fkey": 31,
+    "user_id_fkey": 32
+  },
+  {
+    "rating": 5,
+    "comment": "Comprehensive study guide for dam construction.",
+    "book_id_fkey": 32,
+    "user_id_fkey": 32
+  },
+  {
+    "rating": 5,
+    "comment": "A practical approach to understanding dam engineering.",
+    "book_id_fkey": 32,
+    "user_id_fkey": 33
+  },
+  {
+    "rating": 5,
+    "comment": "Insightful analysis of tariff and tax policies.",
+    "book_id_fkey": 33,
+    "user_id_fkey": 33
+  },
+  {
+    "rating": 4,
+    "comment": "A valuable resource for understanding economic regulations.",
+    "book_id_fkey": 33,
+    "user_id_fkey": 34
+  },
+  {
+    "rating": 5,
+    "comment": "Insightful examination of the intersection of politics and religion.",
+    "book_id_fkey": 34,
+    "user_id_fkey": 34
+  },
+  {
+    "rating": 4,
+    "comment": "A thought-provoking study of church politics in England.",
+    "book_id_fkey": 34,
+    "user_id_fkey": 35
+  },
+  {
+    "rating": 5,
+    "comment": "Compelling stories that capture the essence of the Mississippi Valley.",
+    "book_id_fkey": 35,
+    "user_id_fkey": 35
+  },
+  {
+    "rating": 4,
+    "comment": "An authentic portrayal of life in the Midwest.",
+    "book_id_fkey": 35,
+    "user_id_fkey": 36
+  },
+  {
+    "rating": 5,
+    "comment": "Engaging novel with well-developed characters.",
+    "book_id_fkey": 36,
+    "user_id_fkey": 36
+  },
+  {
+    "rating": 4,
+    "comment": "A captivating story set against the backdrop of political intrigue.",
+    "book_id_fkey": 36,
+    "user_id_fkey": 37
+  },
+  {
+    "rating": 5,
+    "comment": "Mary's journey through California was both exciting and enlightening.",
+    "book_id_fkey": 37,
+    "user_id_fkey": 37
+  },
+  {
+    "rating": 4,
+    "comment": "A delightful blend of adventure and romance. California comes alive in this book!",
+    "book_id_fkey": 37,
+    "user_id_fkey": 38
+  },
+  {
+    "rating": 5,
+    "comment": "The masquerade of identities kept me guessing until the very end. Brilliant!",
+    "book_id_fkey": 38,
+    "user_id_fkey": 38
+  },
+  {
+    "rating": 5,
+    "comment": "An enthralling read with twists and turns at every corner. Highly recommend!",
+    "book_id_fkey": 38,
+    "user_id_fkey": 39
+  },
+  {
+    "rating": 4,
+    "comment": "While lengthy, Masollam offers a rich tapestry of characters and settings.",
+    "book_id_fkey": 39,
+    "user_id_fkey": 39
+  },
+  {
+    "rating": 4,
+    "comment": "A classic work with deep philosophical undertones. Not for the faint-hearted.",
+    "book_id_fkey": 39,
+    "user_id_fkey": 40
+  },
+  {
+    "rating": 5,
+    "comment": "A poignant tale of love and freedom. The characters stayed with me long after I finished.",
+    "book_id_fkey": 40,
+    "user_id_fkey": 40
+  },
+  {
+    "rating": 4,
+    "comment": "An inspiring story that highlights the resilience of the human spirit. Loved it!",
+    "book_id_fkey": 40,
+    "user_id_fkey": 41
+  },
+  {
+    "rating": 5,
+    "comment": "A fascinating exploration of the human voice. Insightful and engaging!",
+    "book_id_fkey": 41,
+    "user_id_fkey": 41
+  },
+  {
+    "rating": 4,
+    "comment": "An essential read for anyone interested in understanding the voice's significance in human communication.",
+    "book_id_fkey": 41,
+    "user_id_fkey": 42
+  },
+  {
+    "rating": 5,
+    "comment": "An invaluable account of Pennsylvania's contributions to these pivotal battles. A masterpiece of historical scholarship!",
+    "book_id_fkey": 42,
+    "user_id_fkey": 42
+  },
+  {
+    "rating": 5,
+    "comment": "Skinner's thorough research and compelling narrative make this a must-read for Civil Waraficionados.",
+    "book_id_fkey": 42,
+    "user_id_fkey": 43
+  },
+  {
+    "rating": 4,
+    "comment": "An insightful exploration of societal norms and individual identity. Thought-provoking!",
+    "book_id_fkey": 43,
+    "user_id_fkey": 43
+  },
+  {
+    "rating": 4,
+    "comment": "While the premise was promising, the execution fell short for me. Still worth a read for its themes.",
+    "book_id_fkey": 43,
+    "user_id_fkey": 44
+  },
+  {
+    "rating": 5,
+    "comment": "An exhaustive study of motor vehicle transportation. Comprehensive and enlightening!",
+    "book_id_fkey": 44,
+    "user_id_fkey": 44
+  },
+  {
+    "rating": 5,
+    "comment": "This book is a treasure trove of information for anyone interested in the evolution of transportation systems.",
+    "book_id_fkey": 44,
+    "user_id_fkey": 45
+  },
+  {
+    "rating": 5,
+    "comment": "Insightful and informative. A must-read for anyone in the wholesale grocery industry!",
+    "book_id_fkey": 45,
+    "user_id_fkey": 45
+  },
+  {
+    "rating": 5,
+    "comment": "Provides valuable insights into the dynamics of the wholesale grocery business. Well-researched and engaging.",
+    "book_id_fkey": 45,
+    "user_id_fkey": 46
+  },
+  {
+    "rating": 5,
+    "comment": "A whimsical journey into the world of magic. Enchanting and delightful!",
+    "book_id_fkey": 46,
+    "user_id_fkey": 46
+  },
+  {
+    "rating": 5,
+    "comment": "Captivating storytelling with vivid imagery. Children will love this magical adventure!",
+    "book_id_fkey": 46,
+    "user_id_fkey": 47
+  },
+  {
+    "rating": 5,
+    "comment": "An insightful examination of the decline of rationalist thought. Thought-provoking and meticulously argued!",
+    "book_id_fkey": 47,
+    "user_id_fkey": 47
+  },
+  {
+    "rating": 4,
+    "comment": "Raises important questions about the limits of rationalism. A stimulating read for those interested in philosophy.",
+    "book_id_fkey": 47,
+    "user_id_fkey": 48
   }
-
-  
-] 
+]

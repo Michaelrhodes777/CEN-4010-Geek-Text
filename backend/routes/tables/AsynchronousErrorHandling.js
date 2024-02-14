@@ -5,6 +5,7 @@ const {
     IdArrayHasZeroLengthError,
     AllQueryAndBodyError,
     InvalidPrimaryKeyError,
+    InvalidForeignKeyError,
     UniquenessError,
     SwitchFallThroughRuntimeError
 } = ControllerErrors;
@@ -12,17 +13,20 @@ const {
 // asynchronousConstraintIdentifiersMap
 const ACIM = {
     "primaryKey": "primaryKey",
+    "foreignKey": "foreignKey",
     "unique": "unique"
 };
 
 // asynchronousConstraintIdentifiersArray
 const ACIA = [
     ACIM.primaryKey,
+    ACIM.foreignKey,
     ACIM.unique
 ];
 
 class BaseValidations {
     static async validatePrimaryKey(data, Model, client, errorPayload) {
+        console.log(Model);
         const query = {
             text: Model.verifyPrimaryKeyString(Model),
             values: [ data ]
@@ -37,6 +41,25 @@ class BaseValidations {
                 "responseRows": JSON.stringify(response.rows)
             });
             throw new InvalidPrimaryKeyError(errorPayload);
+        }
+    }
+
+    static async validateForeignKey(data, queryStringConstructor, client, errorPayload) {
+        const query = {
+            text: queryStringConstructor(),
+            values: [ data ]
+        };
+        queryStringConstructor = null;
+        const response = await client.query(query);
+        const resultLength = response.rows.length;
+        if (resultLength !== 1) {
+            errorPayload.appendMainArgs({
+                "foreignKey": data,
+                "queryText": query.text,
+                "queryValues": JSON.stringify(query.values),
+                "responseRows": JSON.stringify(response.rows)
+            });
+            throw new InvalidForeignKeyError(errorPayload);
         }
     }
 
@@ -138,10 +161,15 @@ class Logic {
             if (currentConstraint) {
                 switch (ACI) {
                     case ACIM.primaryKey:
-                            await BaseValidations.validatePrimaryKey(data, Model, client, errorPayload)
+                        await BaseValidations.validatePrimaryKey(data, Model, client, errorPayload)
                         break;
                     case ACIM.unique:
-                            await BaseValidations.validateUniqueness(columnName, data, Model, client, errorPayload);
+                        await BaseValidations.validateUniqueness(columnName, data, Model, client, errorPayload);
+                        break;
+                    case ACIM.foreignKey:
+                        let queryStringConstructor = () => Model.verifyForeignKeyString(currentConstraint.idName, currentConstraint.tableName);
+                        await BaseValidations.validateForeignKey(data, queryStringConstructor, client, errorPayload);
+                        queryStringConstructor = null;
                         break;
                     default:
                         throw new SwitchFallThroughRuntimeError("asynchronousConstraintErrorHandling", { switchArg: ACI, auxiliaryArgs: [currentConstraint, data] });
