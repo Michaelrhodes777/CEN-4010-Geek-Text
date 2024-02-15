@@ -1,17 +1,14 @@
-const ControllerErrors = require('./ControllerErrors.js');
 const {
     ErrorPayload,
     ReqDoesNotHaveQueryPropError,
     ReqQueryDoesNotHaveIdPropError,
-    ReqQueryIdIsNotArrayError,
     ReqQueryIdIsNotArrayStringFormatError,
+    ReqQueryIdIsNotArrayError,
     ReqQueryArrayElementNaNError,
     ReqQueryArrayElementIsNotIntegerError,
     MultipleAllQueriesError,
     ReqBodyDoesNotExistError,
     ReqBodyIsNotArrayError,
-    NoIterationArrayInDataIteratorError,
-    IterationArraysHaveUnequalLengthError,
     MissingQueryStringPropError,
     MissingRequiredFieldError,
     InvalidRequiredFieldError,
@@ -21,36 +18,9 @@ const {
     BlacklistError,
     WhitelistError,
     RequiredListError,
-    SwitchFallThroughRuntimeError
-} = ControllerErrors;
+} = require('./ValidationErrors.js');
 
-// synchronousConstraintIdentifiersMap
-const SCIM = {
-    "jsType":"jsType",
-    "dbType": "dbType",
-    "blacklist": "blacklist",
-    "whitelist": "whitelist",
-    "requiredList": "requiredList",
-    "custom": "custom"
-};
-
-// synchronousConstraintIdentifiersArray
-const SCIA = [
-    SCIM.jsType,
-    SCIM.dbType,
-    SCIM.blacklist,
-    SCIM.whitelist,
-    SCIM.requiredList,
-    SCIM.custom
-];
-
-const dbTypesMap = {
-    "int": "int",
-    "varchar": "varchar"
-};
-
-class BaseValidations {
-
+class SyncBaseValidations {
     static validateIdQueryString(req, errorPayload) {
         if (!req.hasOwnProperty("query")) {
             throw new ReqDoesNotHaveQueryPropError(errorPayload);
@@ -127,6 +97,8 @@ class BaseValidations {
         req = null;
         errorPayload = null;
     }
+
+    static validateLinkingTableQueryString(req, errorPayload) {}
 
     static validateRequiredReqBodyFields(notNullArray, dataObject, errorPayload) {
         for (let requiredField of notNullArray) {
@@ -335,149 +307,6 @@ class BaseValidations {
         queryStringObject = null;
         errorPayload = null;
     }
-
 }
 
-class Logic {
-
-    // if idArray passed, assumes req.query.id conversion to typeof array
-    static dataIterator(Model, req, idArray = null, validateRequiredFields) {
-        const hasBody = req.hasOwnProperty("body");
-        if (idArray === null && !hasBody) {
-            throw new NoIterationArrayInDataIteratorError(new ErrorPayload());
-        }
-        if (idArray !== null && hasBody && idArray.length !== req.body.length) {
-            const errorPayload = new ErrorPayload();
-            errorPayload.appendMainArgs({
-                "idArray": JSON.stringify(idArray),
-                "body": JSON.stringify(req.body)
-            });
-            throw new IterationArraysHaveUnequalLengthError(errorPayload);
-        }
-
-        const iterationLength = hasBody ? req.body.length : idArray.length;
-
-        let errorPayload = new ErrorPayload();
-        for (let i = 0; i < iterationLength; i++) {
-            let dataObject = hasBody ? req.body[i] : {};
-            if (idArray !== null) {
-                dataObject[Model.idName] = idArray[i]
-            }
-            errorPayload.auxiliaryArgs.indexOfIteration = i;
-            if (validateRequiredFields) {
-                BaseValidations.validateRequiredReqBodyFields(Model.notNullArray, dataObject, errorPayload);
-            }
-            Logic.propValidation(Model, dataObject, errorPayload);
-        }
-
-        Model = null;
-        req = null;
-        idArray = null;
-        errorPayload = null;
-    }
-
-    static propValidation(Model, dataObject, errorPayload) {
-        for (let columnName of Model.columnNamesArray) {
-            if (dataObject.hasOwnProperty(columnName)) {
-                Logic.validationSwitches(Model.synchronousConstraintSchema[columnName], dataObject[columnName], errorPayload);
-            }
-        }
-        Model = null;
-        dataObject = null;
-        errorPayload = null;
-    }
-
-    static validationSwitches(synchronousConstraints, data, errorPayload) {
-        const { jsTypeValidation, validateIntDbType, validateVarcharDbType, blacklistValidation, whitelistValidation, requiredListValidation } = BaseValidations;
-        for (let SCI of SCIA) {
-            let currentConstraint = synchronousConstraints[SCI];
-            if (currentConstraint != null) {
-                switch (SCI) {
-                    case SCIM.jsType:
-                        jsTypeValidation(currentConstraint, data, errorPayload);
-                        break;
-                    case SCIM.dbType:
-                        const type = currentConstraint.type;
-                        switch (type) {
-                            case dbTypesMap.int:
-                                validateIntDbType(currentConstraint.bounds, data, errorPayload);
-                                break;
-                            case dbTypesMap.varchar:
-                                validateVarcharDbType(currentConstraint.bounds, data, errorPayload);
-                                break;
-                            default:
-                                throw new SwitchFallThroughRuntimeError("dbTypeValidation", { switchArg: type, auxiliaryArgs: [ currentConstraint, data ]});
-                        }
-                        break;
-                    case SCIM.blacklist:
-                        blacklistValidation(currentConstraint, data, errorPayload);
-                        break;
-                    case SCIM.whitelist:
-                        whitelistValidation(currentConstraint, data, errorPayload);
-                        break;
-                    case SCIM.requiredList:
-                        requiredListValidation(currentConstraint, data, errorPayload);
-                        break;
-                    default:
-                        throw new SwitchFallThroughRuntimeError("synchronousConstraintErrorHandling", { switchArg: SCI, auxiliaryArgs: [data] });
-                }
-            }
-        }
-
-        synchronousConstraints = null;
-        data = null;
-        errorPayload = null;
-    }
-
-    static customValidations(Model, req) {
-        const errorPayload = new ErrorPayload();
-        for (let i = 0; i < req.body.length; i++) {
-            errorPayload.auxiliaryArgs.indexOfIteration = i;
-            for (let columnName of Model.columnNamesArray) {
-                const customValidation = Model.synchronousConstraintSchema[columnName].custom;
-                if (customValidation === null) {
-                    continue;
-                }
-                if (req.body[i].hasOwnProperty(columnName)) {
-                    const { validationLogic } = customValidation;
-                    validationLogic(req.body[i][columnName], { "columnName": columnName }, errorPayload);
-                }
-            }
-        }
-    }
-}
-
-class SyncCompositions {
-    static createControllerSynchronousValidation(Model, req) {
-        BaseValidations.validateReqBodyStructure(req, new ErrorPayload());
-        Logic.dataIterator(Model, req, null, true);
-        Logic.customValidations(Model, req);
-    }
-
-    static readControllerSynchronousValidation(Model, req) {
-        BaseValidations.validateIdQueryString(req, new ErrorPayload());
-        Logic.dataIterator(Model, {}, JSON.parse(req.query.id), false);
-        Logic.customValidations(Model, req);
-    }
-
-    static updateControllerSynchronousValidation(Model, req) {
-        BaseValidations.validateIdQueryString(req, new ErrorPayload());
-        BaseValidations.validateReqBodyStructure(req, new ErrorPayload());
-        Logic.dataIterator(Model, req, JSON.parse(req.query.id), false);
-        Logic.customValidations(Model, req);
-    }
-
-    static deleteControllerSynchronousValidation(Model, req) {
-        BaseValidations.validateIdQueryString(req, new ErrorPayload());
-        Logic.dataIterator(Model, {}, JSON.parse(req.query.id), false);
-        Logic.customValidations(Model, req);
-    }
-}
-
-module.exports = {
-    SCIA,
-    SCIM,
-    BaseValidations,
-    Logic,
-    SyncCompositions,
-};
+module.exports = SyncBaseValidations;

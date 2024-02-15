@@ -1,17 +1,19 @@
 const { clientFactory } = require('../../database/setupFxns.js');
 const { SqlQueryFactory } = require('./SqlQueryFactory.js');
-const {
+const { SyncCompositions } = require('./SynchronousErrorHandling.js');
+const { 
     createControllerSynchronousValidation,
     readControllerSynchronousValidation,
     updateControllerSynchronousValidation,
-    deleteControllerSynchronousValidation 
-} = require('./SyncErrorHandling.js');
+    deleteControllerSynchronousValidation
+} = SyncCompositions;
+const { AsyncCompositions } = require('./AsynchronousErrorHandling.js');
 const {
     createControllerAsynchronousValidation,
     readControllerAsynchronousValidation,
     updateControllerAsynchronousValidation,
     deleteControllerAsynchronousValidation
-} = require('./AsyncErrorHandling.js');;
+} = AsyncCompositions;
 
 function reqMapper(req) {
     return JSON.parse(JSON.stringify({
@@ -43,9 +45,11 @@ function createController(Model) {
         let results;
         let transactionHasBegun = false;
         try {
+            // Might Change
             createControllerSynchronousValidation(Model, req);
 
             await client.connect();
+            // Might Change
             await createControllerAsynchronousValidation(Model, null, req.body, client);
             transactionHasBegun = true;
 
@@ -53,6 +57,7 @@ function createController(Model) {
             results = new Array(req.body.length);
             for (let i = 0; i < results.length; i++) {
                 const dataObject = dataArray[i];
+                // Will Change
                 const queryFactory = new SqlQueryFactory(Model, dataObject, "create");
                 const queryObject = queryFactory.getSqlObject();
                 const response = await client.query(queryObject);
@@ -80,6 +85,7 @@ function readController(Model) {
         let results;
         let transactionHasBegun = false;
         try {
+            // Might Change
             readControllerSynchronousValidation(Model, req);
 
             await client.connect();
@@ -89,6 +95,7 @@ function readController(Model) {
             const parsedIdArray = JSON.parse(req.query.id);
 
             if (parsedIdArray[0] === 0) {
+                // Will Change
                 const queryFactory = new SqlQueryFactory(Model, parsedIdArray[0], "read_all");    
                 const queryObject = queryFactory.getSqlObject();
                 results = (await client.query(queryObject)).rows;
@@ -130,6 +137,7 @@ function updateController(Model) {
         let results;
         let transactionHasBegun = false;
         try {
+            // Might Change
             updateControllerSynchronousValidation(Model, req);
 
             await client.connect();
@@ -137,6 +145,7 @@ function updateController(Model) {
             transactionHasBegun = true;
 
             const parsedIdArray = JSON.parse(req.query.id);
+            // Might Change
             await updateControllerAsynchronousValidation(Model, parsedIdArray, req.body, client);
 
             const dataArray = req.body;
@@ -144,6 +153,7 @@ function updateController(Model) {
             for (let i = 0; i < results.length; i++) {
                 const dataObject = dataArray[i];
                 dataObject[Model.idName] = parsedIdArray[i];
+                // Will Change
                 const queryFactory = new SqlQueryFactory(Model, dataObject, "put");
                 const queryObject = queryFactory.getSqlObject();
                 const response = await client.query(queryObject);
@@ -171,6 +181,7 @@ function deleteController(Model) {
         let results;
         let transactionHasBegun = false;
         try {
+            // Might Change
             deleteControllerSynchronousValidation(Model, req);
 
             await client.connect();
@@ -178,11 +189,13 @@ function deleteController(Model) {
             transactionHasBegun = true;
 
             const parsedIdArray = JSON.parse(req.query.id);
+            // Might Change
             await deleteControllerAsynchronousValidation(Model, parsedIdArray, null, client);
 
             results = new Array(parsedIdArray.length);
             for (let i = 0; i < results.length; i++) {
                 const id = parsedIdArray[i];
+                // Will Change
                 const queryFactory = new SqlQueryFactory(Model, {[Model.idName]: id}, "delete");
                 const queryObject = queryFactory.getSqlObject();
                 const response = await client.query(queryObject);

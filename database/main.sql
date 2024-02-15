@@ -20,7 +20,7 @@ DROP TABLE IF EXISTS authors;
 CREATE TABLE users (
 			user_id                 INT                 PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
 			username                VARCHAR(32)         UNIQUE NOT NULL,
-			password                VARCHAR(256)        NOT NULL,
+			password                VARCHAR(512)        NOT NULL,
 			first_name              VARCHAR(32),
 			last_name				VARCHAR(32),
 			email_address			VARCHAR(128)        UNIQUE,
@@ -29,9 +29,9 @@ CREATE TABLE users (
 
 CREATE TABLE credit_cards (
 			card_id                 INT 				PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-			credit_card_number      VARCHAR(256)        NOT NULL,
-			expiration_date         VARCHAR(256)        NOT NULL,
-			ccv                     VARCHAR(256)        NOT NULL,
+			credit_card_number      VARCHAR(512)        NOT NULL,
+			expiration         		VARCHAR(512)        NOT NULL,
+			ccv                     VARCHAR(512)        NOT NULL,
 			user_id_fkey            INT                 REFERENCES users(user_id) ON DELETE CASCADE
 );
 
@@ -206,3 +206,4 @@ SELECT * FROM average_book_ratings;
 --SELECT * FROM books_by_authors;
 
 SELECT * FROM books;
+SELECT * FROM books_wishlists_lt;

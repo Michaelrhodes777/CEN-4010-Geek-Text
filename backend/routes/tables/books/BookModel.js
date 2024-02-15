@@ -1,5 +1,5 @@
 const ModelInterface = require('../ModelInterface.js');
-const StandardLists = require('../StandardLists.js');
+const StandardLists = require('../../StandardLists.js');
 const { numeric, stdBlacklist } = StandardLists;
 
 const columnNames = {

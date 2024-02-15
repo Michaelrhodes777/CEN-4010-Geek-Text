@@ -16,6 +16,9 @@ app.use("/users", require('./routes/tables/users/router.js'));
 app.use("/reviews", require('./routes/tables/reviews/router.js'));
 app.use("/genres", require('./routes/tables/genres/router.js'));
 app.use("/wishlists", require('./routes/tables/wishlists/router.js'));
+app.use("/credit_cards", require('./routes/tables/credit_cards/router.js'));
+
+//app.use("/shopping_carts_lt", require('./routes/linking_tables/shopping_carts_lt/router.js'));
 
 app.use("/books_by_genres", require('./routes/read_only_views/books_by_genres/router.js'));
 app.use("/books_by_authors", require('./routes/read_only_views/books_by_authors/router.js'));

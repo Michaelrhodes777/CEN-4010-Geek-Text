@@ -1,6 +1,6 @@
 const ModelInterface = require('../ModelInterface.js');
-const StandardLists = require('../StandardLists.js');
-const { alphabetical } = StandardLists;
+const StandardLists = require('../../StandardLists.js');
+const { alphanumeric } = StandardLists;
 
 const columnNames = {
     "wishlist_id": "wishlist_id",
@@ -27,7 +27,7 @@ const synchronousConstraintSchema = {
             bounds: [ "[", 1, 64, "]" ]
         },
         blacklist: null,
-        whitelist: alphabetical,
+        whitelist: [...alphanumeric, " ", "-" ],
         requiredList: null,
         custom: null
     },

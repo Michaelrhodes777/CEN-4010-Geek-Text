@@ -1,14 +1,12 @@
-const ControllerErrors = require('./ControllerErrors.js');
+const ValidationErrors = require('./ValidationErrors.js');
+const AsyncBaseValidations = require('./AsyncBaseValidations.js');
 const {
     ErrorPayload,
     NoIterationArrayInDataIteratorError,
     IdArrayHasZeroLengthError,
     AllQueryAndBodyError,
-    InvalidPrimaryKeyError,
-    InvalidForeignKeyError,
-    UniquenessError,
     SwitchFallThroughRuntimeError
-} = ControllerErrors;
+} = ValidationErrors;
 
 // asynchronousConstraintIdentifiersMap
 const ACIM = {
@@ -24,67 +22,35 @@ const ACIA = [
     ACIM.unique
 ];
 
-class BaseValidations {
-    static async validatePrimaryKey(data, Model, client, errorPayload) {
-        console.log(Model);
-        const query = {
-            text: Model.verifyPrimaryKeyString(Model),
-            values: [ data ]
-        };
-        const response = await client.query(query);
-        const resultLength = response.rows.length;
-        if (resultLength !== 1) {
+class AsyncValidationLogic {
+
+    static async tablesQueryStringValidator() {}
+
+    static async linkingTablesQueryStringValidator(Model, req, client, errorPayload) {
+        const queryProps = Object.keys(req.query);
+
+        if (queryProps.length !== 1) {
             errorPayload.appendMainArgs({
-                "primaryKey": data,
-                "queryText": query.text,
-                "queryValues": JSON.stringify(query.values),
-                "responseRows": JSON.stringify(response.rows)
+                queryPropsLength: queryProps.length,
+                "reqQuery": JSON.stringify(req.query)
             });
-            throw new InvalidPrimaryKeyError(errorPayload);
+            throw new InvalidLininkingTableReqQueryError(errorPayload);
+        }
+
+        const queryProp = queryProps[0];
+        switch (queryProp) {
+            case "cid":
+                await validateCompositeKey(req.query.cid, Model, client, errorPayload);
+                break;
+            case "qid":
+                await validateQueryableKey(req.query.qid, Model, client, errorPayload);
+                break;
+            default:
+                throw new SwitchFallThroughRuntimeError("linkingTablesQueryStringValidator", { switchArg: queryProp, auxiliaryArgs: [ {"reqQuery": JSON.parse(JSON.stringify(req.query))} ] });
         }
     }
 
-    static async validateForeignKey(data, queryStringConstructor, client, errorPayload) {
-        const query = {
-            text: queryStringConstructor(),
-            values: [ data ]
-        };
-        queryStringConstructor = null;
-        const response = await client.query(query);
-        const resultLength = response.rows.length;
-        if (resultLength !== 1) {
-            errorPayload.appendMainArgs({
-                "foreignKey": data,
-                "queryText": query.text,
-                "queryValues": JSON.stringify(query.values),
-                "responseRows": JSON.stringify(response.rows)
-            });
-            throw new InvalidForeignKeyError(errorPayload);
-        }
-    }
-
-    static async validateUniqueness(columnName, data, Model, client, errorPayload) {
-        const query = {
-            text: Model.uniquenessStringConstructor(Model,columnName),
-            values: [ data ]
-        };
-        const response = await client.query(query);
-        const resultLength = response.rows.length;
-        if (resultLength != 0) {
-            errorPayload.appendMainArgs({
-                "columnName": columnName,
-                "queryString": query.text,
-                "valuesArray": JSON.stringify(query.values), 
-                "responseRows": JSON.stringify(response.rows)
-            });
-            throw new UniquenessError(errorPayload);
-        }
-    }
-}
-
-class Logic {
-
-    static async dataIterator(Model, idArray = null, body = null, client) {
+    static async tablesDataIterator(Model, idArray = null, body = null, client) {
         const hasBody = body !== null;
         const hasIdArray = idArray !== null;
         const queriesAll = hasIdArray && idArray.length === 0 && idArray[0] === 0;
@@ -136,7 +102,7 @@ class Logic {
             if (hasBody) {
                 dataObject = { ...body[i] };
             }
-            await Logic.propValidation(Model, dataObject, client, errorPayload);
+            await AsyncValidationLogic.propValidation(Model, dataObject, client, errorPayload);
         }
 
         Model = null;
@@ -144,10 +110,12 @@ class Logic {
         client = null;
     }
 
+    static async linkingTablesDataIterator(Model, reqQuery, body, client) {}
+
     static async propValidation(Model, dataObject, client, errorPayload) {
         for (let columnName of Model.columnNamesArray) {
             if (dataObject.hasOwnProperty(columnName)) {
-                await Logic.validationSwitches(columnName, Model.asynchronousConstraintSchema[columnName], dataObject[columnName], Model, client, errorPayload);
+                await AsyncValidationLogic.validationSwitches(columnName, Model.asynchronousConstraintSchema[columnName], dataObject[columnName], Model, client, errorPayload);
             }
         }
         Model = null;
@@ -161,14 +129,14 @@ class Logic {
             if (currentConstraint) {
                 switch (ACI) {
                     case ACIM.primaryKey:
-                        await BaseValidations.validatePrimaryKey(data, Model, client, errorPayload)
+                        await AsyncBaseValidations.validatePrimaryKey(data, Model, client, errorPayload)
                         break;
                     case ACIM.unique:
-                        await BaseValidations.validateUniqueness(columnName, data, Model, client, errorPayload);
+                        await AsyncBaseValidations.validateUniqueness(columnName, data, Model, client, errorPayload);
                         break;
                     case ACIM.foreignKey:
                         let queryStringConstructor = () => Model.verifyForeignKeyString(currentConstraint.idName, currentConstraint.tableName);
-                        await BaseValidations.validateForeignKey(data, queryStringConstructor, client, errorPayload);
+                        await AsyncBaseValidations.validateForeignKey(data, queryStringConstructor, client, errorPayload);
                         queryStringConstructor = null;
                         break;
                     default:
@@ -184,29 +152,4 @@ class Logic {
     }
 }
 
-class AsyncCompositions {
-    static async createControllerAsynchronousValidation(Model, idArray, body = null, client) {
-        await Logic.dataIterator(Model, idArray, body, client);
-    }
-
-    static async readControllerAsynchronousValidation(Model, idArray, body = null, client) {
-        await Logic.dataIterator(Model, idArray, body, client);
-    }
-
-    static async updateControllerAsynchronousValidation(Model, idArray, body = null, client) {
-        await Logic.dataIterator(Model, idArray, body, client);
-    }
-
-    static async deleteControllerAsynchronousValidation(Model, idArray, body = null, client) {
-        await Logic.dataIterator(Model, idArray, body, client);
-    }
-}
-
-
-module.exports = {
-    ACIM,
-    ACIA,
-    BaseValidations,
-    Logic,
-    AsyncCompositions
-};
+module.exports = AsyncValidationLogic;

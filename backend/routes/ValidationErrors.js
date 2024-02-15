@@ -117,6 +117,30 @@ class InvalidPrimaryKeyError extends ControllerError {
     }
 }
 
+class InvalidCompositeKeyError extends ControllerError {
+
+    static runtimeDataProps = [ "compositeKeys", "currenIndex", "currentKeys", "queryText", "queryValues", "responseRows" ];
+
+    constructor(errorPayload) {
+        super("ASYNC: Database failed to validate composite key existence", errorPayload);
+        this.name = "InvalidCompositeKeyError";
+        this.statusCode = 404;
+        this.responseMessage = "Resource not found";
+    }
+}
+
+class InvalidQueryableKeyError extends ControllerError {
+
+    static runtimeDataProps = [ "queryablePkey", "currentIndex", "key", "queryText", "queryValues", "responseRows" ];
+
+    constructor(errorPayload) {
+        super("ASYNC: Database failed to validate queryable key existence", errorPayload);
+        this.name = "InvalidQueryableKeyError";
+        this.statusCode = 404;
+        this.responseMessage = "Resource not found";
+    }
+}
+
 class InvalidForeignKeyError extends ControllerError {
 
     static runtimeDataProps = [ "foreignKey", "queryText", "queryValues", "responseRows" ];
@@ -388,6 +412,8 @@ module.exports = {
     IdArrayHasZeroLengthError,
     AllQueryAndBodyError,
     InvalidPrimaryKeyError,
+    InvalidCompositeKeyError,
+    InvalidQueryableKeyError,
     InvalidForeignKeyError,
     RequiredListError,
     UniquenessError,
