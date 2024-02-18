@@ -1,13 +1,5 @@
 const { clientFactory } = require('../../database/setupFxns.js');
 const { SqlQueryFactory } = require('./SqlQueryFactory.js');
-const {
-    createControllerAsynchronousValidation,
-    readCidControllerAsynchronousValidation,
-    readQidControllerAsynchronousValidation,
-    updateControllerAsynchronousValidation,
-    deleteCidControllerAsynchronousValidation,
-    deleteQidControllerAsynchronousValidation
-} = require('./AsyncErrorHandling.js');
 
 async function createControllerLogic(Model, req) {
     const client = clientFactory();
@@ -16,7 +8,6 @@ async function createControllerLogic(Model, req) {
     try {
         await client.connect();
         const { body } = req;
-        await createControllerAsynchronousValidation(Model, { body, "keyArrays": null }, client);
         transactionHasBegun = true;
 
         results = new Array(body.length);
@@ -48,7 +39,6 @@ async function readCidControllerLogic(Model, req) {
     try {
         await client.connect();
         const { keyArrays } = req;
-        await readCidControllerAsynchronousValidation(Model, { "body": null, keyArrays }, client);
         transactionHasBegun = true;
 
         results = new Array(keyArrays.length);
@@ -80,7 +70,6 @@ async function readQidControllerLogic(Model, req) {
     try {
         await client.connect();
         const { keyArrays } = req;
-        await readQidControllerAsynchronousValidation(Model, { "body": null, keyArrays }, client);
         transactionHasBegun = true;
 
         results = new Array(keyArrays.length);
@@ -112,7 +101,6 @@ async function updateControllerLogic(Model, req) {
     try {
         await client.connect();
         const { body, keyArrays } = req;
-        await updateControllerAsynchronousValidation(Model, { body, keyArrays }, client);
         transactionHasBegun = true;
 
         results = new Array(body.length);
@@ -145,7 +133,6 @@ async function deleteCidControllerLogic(Model, req) {
     try {
         await client.connect();
         const { keyArrays } = req;
-        await deleteCidControllerAsynchronousValidation(Model, { "body": null, keyArrays }, client);
         transactionHasBegun = true;
 
         results = new Array(keyArrays.length);
@@ -177,7 +164,6 @@ async function deleteQidControllerLogic(Model, req) {
     try {
         await client.connect();
         const { keyArrays } = req;
-        await deleteQidControllerAsynchronousValidation(Model, { "body": null, keyArrays }, client);
         transactionHasBegun = true;
 
         results = new Array(keyArrays.length);

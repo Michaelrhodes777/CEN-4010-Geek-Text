@@ -13,6 +13,7 @@ class Logic {
     static jsTypeValidation(currentConstraint, data, errorPayload) {
         if (!(typeof data === currentConstraint)) {
             errorPayload.appendMainArgs({
+                "data": String(data),
                 "expectedType": currentConstraint,
                 "actualType": typeof data
             });

@@ -1,14 +1,14 @@
 const { ErrorPayload } = require('./Errors.js');
-const { bodyIterator, idArrayIterator } = require('./copmosition.js');
+const { bodyIterator, idArrayIterator } = require('./composition.js');
 
 function schemaValidationMiddleware(Model) {
     return function (req, res, next) {
         const errorPayload = new ErrorPayload();
         const { body, keyArrays, queryCondition } = req;
-        if (dataArray !== null) {
+        if (body !== undefined) {
             bodyIterator(Model, body, errorPayload);
         }
-        if (keyArrays !== null) {
+        if (keyArrays !== undefined) {
             idArrayIterator(Model, keyArrays, queryCondition, errorPayload);
         }
         next();

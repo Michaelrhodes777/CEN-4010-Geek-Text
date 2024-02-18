@@ -7,11 +7,28 @@ const {
     updateController,
     deleteController
 } = require('../controllers.js');
+const bodyFormatValidationMiddleware = require('../../../validation/body_format_validation/bodyFormatValidationMiddleware.js');
+const { tablesQueryStringValidationMiddleware } = require('../../../validation/query_string_validation/queryStringValidationMiddleware.js');
+const schemaValidationMiddleware = require('../../../validation/schema_validation/schemaValidationMiddleware.js');
 
 router.route("/")
-    .post(createController(UserModel))
-    .get(readController(UserModel))
-    .put(updateController(UserModel))
-    .delete(deleteController(UserModel));
-
+    .post(
+        bodyFormatValidationMiddleware, 
+        schemaValidationMiddleware(UserModel), 
+        createController(UserModel)
+    )
+    .get(
+        tablesQueryStringValidationMiddleware("GET"), 
+        readController(UserModel)
+    )
+    .put(
+        bodyFormatValidationMiddleware,
+        tablesQueryStringValidationMiddleware(),
+        schemaValidationMiddleware(UserModel),
+        updateController(UserModel)
+    )
+    .delete(
+        tablesQueryStringValidationMiddleware("DELETE"),
+        deleteController(UserModel)
+    );
 module.exports = router;

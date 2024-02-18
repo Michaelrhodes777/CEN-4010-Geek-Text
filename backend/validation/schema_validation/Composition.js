@@ -33,7 +33,7 @@ class Composition {
             errorPayload.iterationIndex = i;
             for (let columnName of Model.columnNamesArray) {
                 if (dataObject.hasOwnProperty(columnName)) {
-                    Composition.validationSwitches(Model.synchronousConstraintSchema[columnName], dataObject, errorPayload);
+                    Composition.validationSwitches(Model.synchronousConstraintSchema[columnName], dataObject[columnName], errorPayload);
                 }
             }
         }
@@ -44,6 +44,7 @@ class Composition {
             let currentKeyArray = keyArrays[i];
             let dataObject = {};
             for (let j = 0; j < currentKeyArray.length; j++) {
+                errorPayload.iterationIndex = i;
                 if (condition === "id") {
                     dataObject[Model.idName] = currentKeyArray[j];
                 }
@@ -61,7 +62,7 @@ class Composition {
                 }
                 for (let columnName of Model.columnNamesArray) {
                     if (dataObject.hasOwnProperty(columnName)) {
-                        Composition.validationSwitches(Model.synchronousConstraintSchema[columnName], dataObject, errorPayload);
+                        Composition.validationSwitches(Model.synchronousConstraintSchema[columnName], dataObject[columnName], errorPayload);
                     }
                 }
             }

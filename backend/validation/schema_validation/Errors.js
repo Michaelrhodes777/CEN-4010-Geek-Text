@@ -63,7 +63,7 @@ class InvalidRequiredFieldError extends SchemaValidationError {
 
 class InvalidJsTypeError extends SchemaValidationError {
 
-    static runtimeDataProps = [ "expectedType", "actualType" ];
+    static runtimeDataProps = [ "data", "expectedType", "actualType" ];
 
     constructor(errorPayload) {
         super("request data field is malformed", errorPayload);

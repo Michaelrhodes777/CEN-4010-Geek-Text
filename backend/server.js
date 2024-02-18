@@ -26,6 +26,17 @@ app.use("/average_book_ratings", require('./routes/read_only_views/average_book_
 app.use("/top_sellers", require('./routes/read_only_views/top_sellers/router.js'));
 app.use("/shopping_carts", require('./routes/read_only_views/shopping_carts/router.js'));
 
+app.use(function (error, req, res, next) {
+    console.error(error);
+    if (error.isCustomError) {
+        res.status(error.statusCode).json({  "response": error });
+    }
+    else {
+        res.status(500).json({ "response": "Internal Sever Error" });
+    }
+    next();
+});
+
 app.listen(PORT, () => console.log("app listening"));
 
 module.exports = app;

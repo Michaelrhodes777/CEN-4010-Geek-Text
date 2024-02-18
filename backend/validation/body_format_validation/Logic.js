@@ -2,7 +2,7 @@ const {
     ReqBodyDoesNotExistError,
     ReqBodyIsNotArrayError,
     ReqBodyLengthIsZeroError
-} = require('./Error.js');
+} = require('./Errors.js');
 
 class Logic {
     static validateReqBodyStructure(req, errorPayload) {

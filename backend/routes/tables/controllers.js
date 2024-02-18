@@ -1,17 +1,6 @@
 const { clientFactory } = require('../../database/setupFxns.js');
-const { SqlQueryFactory } = require('./SqlQueryFactory.js');
-const {
-    createControllerSynchronousValidation,
-    readControllerSynchronousValidation,
-    updateControllerSynchronousValidation,
-    deleteControllerSynchronousValidation 
-} = require('./SyncErrorHandling.js');
-const {
-    createControllerAsynchronousValidation,
-    readControllerAsynchronousValidation,
-    updateControllerAsynchronousValidation,
-    deleteControllerAsynchronousValidation
-} = require('./AsyncErrorHandling.js');;
+const { SqlQueryFactory } = require('../SqlQueryFactory.js');
+const { CONDITIONS } = SqlQueryFactory;
 
 function reqMapper(req) {
     return JSON.parse(JSON.stringify({
@@ -43,18 +32,16 @@ function createController(Model) {
         let results;
         let transactionHasBegun = false;
         try {
-            createControllerSynchronousValidation(Model, req);
 
             await client.connect();
-            await createControllerAsynchronousValidation(Model, null, req.body, client);
             transactionHasBegun = true;
 
             const dataArray = req.body;
             results = new Array(req.body.length);
             for (let i = 0; i < results.length; i++) {
                 const dataObject = dataArray[i];
-                const queryFactory = new SqlQueryFactory(Model, dataObject, "create");
-                const queryObject = queryFactory.getSqlObject();
+                const queryFactory = new SqlQueryFactory(Model, dataObject, null, CONDITIONS.create);
+                const queryObject = queryFactory.getSqlQueryObject();
                 const response = await client.query(queryObject);
                 results[i] = response.rows[0];
             }
@@ -80,26 +67,24 @@ function readController(Model) {
         let results;
         let transactionHasBegun = false;
         try {
-            readControllerSynchronousValidation(Model, req);
 
             await client.connect();
             await client.query("BEGIN");
             transactionHasBegun = true;
 
-            const parsedIdArray = JSON.parse(req.query.id);
+            const { keyArrays } = req;
 
-            if (parsedIdArray[0] === 0) {
-                const queryFactory = new SqlQueryFactory(Model, parsedIdArray[0], "read_all");    
-                const queryObject = queryFactory.getSqlObject();
+            if (keyArrays.length === 1 && keyArrays[0][0] === 0) {
+                const queryFactory = new SqlQueryFactory(Model, null, keyArrays[0], CONDITIONS.readAll);    
+                const queryObject = queryFactory.getSqlQueryObject();
                 results = (await client.query(queryObject)).rows;
             }
             else {
-                await readControllerAsynchronousValidation(Model, parsedIdArray, null, client);
-                results = new Array(parsedIdArray.length);
-                for (let i = 0; i < parsedIdArray.length; i++) {
-                    const id = parsedIdArray[i];
-                    const queryFactory = new SqlQueryFactory(Model, id, "read_by_id");
-                    const queryObject = queryFactory.getSqlObject();
+                results = new Array(keyArrays.length);
+                for (let i = 0; i < keyArrays.length; i++) {
+                    const keyArray = keyArrays[i];
+                    const queryFactory = new SqlQueryFactory(Model, null, keyArray, CONDITIONS.readById);
+                    const queryObject = queryFactory.getSqlQueryObject();
                     results[i] = (await client.query(queryObject)).rows[0];
                 }
             }
@@ -110,7 +95,7 @@ function readController(Model) {
         catch (error) {
             if (transactionHasBegun) await client.query("ROLLBACK");
             //error.req = reqMapper(req);
-            //console.error(error);
+            console.error(error);
             if (error.isCustomError) {
                 res.status(error.statusCode).json({ "response": error });
             }
@@ -130,22 +115,20 @@ function updateController(Model) {
         let results;
         let transactionHasBegun = false;
         try {
-            updateControllerSynchronousValidation(Model, req);
 
             await client.connect();
             await client.query("BEGIN");
             transactionHasBegun = true;
 
-            const parsedIdArray = JSON.parse(req.query.id);
-            await updateControllerAsynchronousValidation(Model, parsedIdArray, req.body, client);
-
+        
             const dataArray = req.body;
-            results = new Array(req.body.length);
+            const { keyArrays } = req;
+            results = new Array(dataArray.length);
             for (let i = 0; i < results.length; i++) {
                 const dataObject = dataArray[i];
-                dataObject[Model.idName] = parsedIdArray[i];
-                const queryFactory = new SqlQueryFactory(Model, dataObject, "put");
-                const queryObject = queryFactory.getSqlObject();
+                const queryFactory = new SqlQueryFactory(Model, dataObject, keyArrays[i], CONDITIONS.updateById);
+                const queryObject = queryFactory.getSqlQueryObject();
+                console.log(queryObject);
                 const response = await client.query(queryObject);
                 results[i] = response.rows[0];
             }
@@ -156,7 +139,7 @@ function updateController(Model) {
         catch (error) {
             if (transactionHasBegun) await client.query("ROLLBACK");
             //error.req = reqMapper(req);
-            //console.error(error);
+            console.error(error);
             res.status(500).json({ "response": error });
         }
         finally {
@@ -171,20 +154,16 @@ function deleteController(Model) {
         let results;
         let transactionHasBegun = false;
         try {
-            deleteControllerSynchronousValidation(Model, req);
-
             await client.connect();
             await client.query("BEGIN");
             transactionHasBegun = true;
 
-            const parsedIdArray = JSON.parse(req.query.id);
-            await deleteControllerAsynchronousValidation(Model, parsedIdArray, null, client);
-
-            results = new Array(parsedIdArray.length);
+            const { keyArrays } = req;
+            results = new Array(keyArrays.length);
             for (let i = 0; i < results.length; i++) {
-                const id = parsedIdArray[i];
-                const queryFactory = new SqlQueryFactory(Model, {[Model.idName]: id}, "delete");
-                const queryObject = queryFactory.getSqlObject();
+                const queryFactory = new SqlQueryFactory(Model, null, keyArrays[i], CONDITIONS.deleteById);
+                const queryObject = queryFactory.getSqlQueryObject();
+                console.log(queryObject);
                 const response = await client.query(queryObject);
                 results[i] = response.rows[0];
             }
@@ -195,7 +174,7 @@ function deleteController(Model) {
         catch (error) {
             if (transactionHasBegun) await client.query("ROLLBACK");
             //error.req = reqMapper(req);
-            //console.error(error);
+            console.error(error);
             res.status(500).json({ "response": error });
         }
         finally {
