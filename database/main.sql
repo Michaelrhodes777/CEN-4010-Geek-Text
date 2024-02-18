@@ -180,13 +180,13 @@ INSERT INTO books ( book_name, isbn, book_price, author_id_fkey, genre_id_fkey, 
 	( 'book 6', 1200, 300, null, 3, 6 )
 ;
 
-INSERT INTO shopping_carts_lt ( user_id_fkey, book_id_fkey ) VALUES
-	( 1, 1 ),
-	( 1, 2 ),
-	( 2, 3 ),
-	( 2, 4 ),
-	( 3, 5 ),
-	( 3, 6 )
+INSERT INTO shopping_carts_lt ( user_id_fkey, book_id_fkey, quantity ) VALUES
+	( 1, 1, 2 ),
+	( 1, 2, 3 ),
+	( 2, 3, 4 ),
+	( 2, 4, 5 ),
+	( 3, 5, 6 ),
+	( 3, 6, 7 )
 ;
 
 INSERT INTO reviews ( rating, comment, user_id_fkey, book_id_fkey ) VALUES
