@@ -1,218 +1,235 @@
 const { clientFactory } = require('../../database/setupFxns.js');
 const { SqlQueryFactory } = require('./SqlQueryFactory.js');
-const { SyncCompositions } = require('./SynchronousErrorHandling.js');
-const { 
-    createControllerSynchronousValidation,
-    readControllerSynchronousValidation,
-    updateControllerSynchronousValidation,
-    deleteControllerSynchronousValidation
-} = SyncCompositions;
-const { AsyncCompositions } = require('./AsynchronousErrorHandling.js');
 const {
     createControllerAsynchronousValidation,
-    readControllerAsynchronousValidation,
+    readCidControllerAsynchronousValidation,
+    readQidControllerAsynchronousValidation,
     updateControllerAsynchronousValidation,
-    deleteControllerAsynchronousValidation
-} = AsyncCompositions;
+    deleteCidControllerAsynchronousValidation,
+    deleteQidControllerAsynchronousValidation
+} = require('./AsyncErrorHandling.js');
 
-function reqMapper(req) {
-    return JSON.parse(JSON.stringify({
-        app: req.app,
-        body: req.body,
-        cookies: req.cookies,
-        fresh: req.fresh,
-        hostname: req.hostname,
-        ip: req.ip,
-        ips: req.ips,
-        method: req.method,
-        originalUrl: req.originalUrl,
-        params: req.params,
-        path: req.path,
-        protocol: req.protocol,
-        query: req.query,
-        route: req.route,
-        secure: req.secure,
-        signedCookies: req.signedCookies,
-        stale: req.stale,
-        subdomains: req.subdomains,
-        xhr: req.xhr
-    }));
+async function createControllerLogic(Model, req) {
+    const client = clientFactory();
+    let results;
+    let transactionHasBegun = false;
+    try {
+        await client.connect();
+        const { body } = req;
+        await createControllerAsynchronousValidation(Model, { body, "keyArrays": null }, client);
+        transactionHasBegun = true;
+
+        results = new Array(body.length);
+        for (let i = 0; i < results.length; i++) {
+            const dataObject = body[i];
+            const queryFactory = new SqlQueryFactory(Model, { "columnData": dataObject, "keyArray": null }, "create");
+            const queryObject = queryFactory.getSqlObject();
+            const response = await client.query(queryObject);
+            results[i] = response.rows[0];
+        }
+
+        await client.query("COMMIT");
+        res.json({ "response": results });
+    }
+    catch (error) {
+        if (transactionHasBegun) await client.query("ROLLBACK");
+        console.error(error);
+        res.status(500).json({ "response": error });
+    }
+    finally {
+        await client.end();
+    }
+}
+
+async function readCidControllerLogic(Model, req) {
+    const client = clientFactory();
+    let results;
+    let transactionHasBegun = false;
+    try {
+        await client.connect();
+        const { keyArrays } = req;
+        await readCidControllerAsynchronousValidation(Model, { "body": null, keyArrays }, client);
+        transactionHasBegun = true;
+
+        results = new Array(keyArrays.length);
+        for (let i = 0; i < results.length; i++) {
+            const keyArray = keyArrays[i];
+            const queryFactory = new SqlQueryFactory(Model, { "columnData": null, "keyArray": keyArray }, "readCid");
+            const queryObject = queryFactory.getSqlObject();
+            const response = await client.query(queryObject);
+            results[i] = response.rows[0];
+        }
+
+        await client.query("COMMIT");
+        res.json({ "response": results });
+    }
+    catch (error) {
+        if (transactionHasBegun) await client.query("ROLLBACK");
+        console.error(error);
+        res.status(500).json({ "response": error });
+    }
+    finally {
+        await client.end();
+    }
+}
+
+async function readQidControllerLogic(Model, req) {
+    const client = clientFactory();
+    let results;
+    let transactionHasBegun = false;
+    try {
+        await client.connect();
+        const { keyArrays } = req;
+        await readQidControllerAsynchronousValidation(Model, { "body": null, keyArrays }, client);
+        transactionHasBegun = true;
+
+        results = new Array(keyArrays.length);
+        for (let i = 0; i < results.length; i++) {
+            const keyArray = keyArrays[i];
+            const queryFactory = new SqlQueryFactory(Model, { "columnData": null, "keyArray": keyArray }, "readQid");
+            const queryObject = queryFactory.getSqlObject();
+            const response = await client.query(queryObject);
+            results[i] = response.rows[0];
+        }
+
+        await client.query("COMMIT");
+        res.json({ "response": results });
+    }
+    catch (error) {
+        if (transactionHasBegun) await client.query("ROLLBACK");
+        console.error(error);
+        res.status(500).json({ "response": error });
+    }
+    finally {
+        await client.end();
+    }
+}
+
+async function updateControllerLogic(Model, req) {
+    const client = clientFactory();
+    let results;
+    let transactionHasBegun = false;
+    try {
+        await client.connect();
+        const { body, keyArrays } = req;
+        await updateControllerAsynchronousValidation(Model, { body, keyArrays }, client);
+        transactionHasBegun = true;
+
+        results = new Array(body.length);
+        for (let i = 0; i < results.length; i++) {
+            const dataObject = body[i];
+            const keyArray = keyArrays[i];
+            const queryFactory = new SqlQueryFactory(Model, { "columnData": dataObject, "keyArray": keyArray }, "update");
+            const queryObject = queryFactory.getSqlObject();
+            const response = await client.query(queryObject);
+            results[i] = response.rows[0];
+        }
+
+        await client.query("COMMIT");
+        res.json({ "response": results });
+    }
+    catch (error) {
+        if (transactionHasBegun) await client.query("ROLLBACK");
+        console.error(error);
+        res.status(500).json({ "response": error });
+    }
+    finally {
+        await client.end();
+    }
+}
+
+async function deleteCidControllerLogic(Model, req) {
+    const client = clientFactory();
+    let results;
+    let transactionHasBegun = false;
+    try {
+        await client.connect();
+        const { keyArrays } = req;
+        await deleteCidControllerAsynchronousValidation(Model, { "body": null, keyArrays }, client);
+        transactionHasBegun = true;
+
+        results = new Array(keyArrays.length);
+        for (let i = 0; i < results.length; i++) {
+            const keyArray = keyArrays[i];
+            const queryFactory = new SqlQueryFactory(Model, { "columnData": null, "keyArray": keyArray }, "deleteCid");
+            const queryObject = queryFactory.getSqlObject();
+            const response = await client.query(queryObject);
+            results[i] = response.rows[0];
+        }
+
+        await client.query("COMMIT");
+        res.json({ "response": results });
+    }
+    catch (error) {
+        if (transactionHasBegun) await client.query("ROLLBACK");
+        console.error(error);
+        res.status(500).json({ "response": error });
+    }
+    finally {
+        await client.end();
+    }
+}
+
+async function deleteQidControllerLogic(Model, req) {
+    const client = clientFactory();
+    let results;
+    let transactionHasBegun = false;
+    try {
+        await client.connect();
+        const { keyArrays } = req;
+        await deleteQidControllerAsynchronousValidation(Model, { "body": null, keyArrays }, client);
+        transactionHasBegun = true;
+
+        results = new Array(keyArrays.length);
+        for (let i = 0; i < results.length; i++) {
+            const keyArray = keyArrays[i];
+            const queryFactory = new SqlQueryFactory(Model, { "columnData": null, "keyArray": keyArray }, "deleteQid");
+            const queryObject = queryFactory.getSqlObject();
+            const response = await client.query(queryObject);
+            results[i] = response.rows[0];
+        }
+
+        await client.query("COMMIT");
+        res.json({ "response": results });
+    }
+    catch (error) {
+        if (transactionHasBegun) await client.query("ROLLBACK");
+        console.error(error);
+        res.status(500).json({ "response": error });
+    }
+    finally {
+        await client.end();
+    }
 }
 
 function createController(Model) {
-    return async function(req, res) {
-        const client = clientFactory();
-        let results;
-        let transactionHasBegun = false;
-        try {
-            // Might Change
-            createControllerSynchronousValidation(Model, req);
-
-            await client.connect();
-            // Might Change
-            await createControllerAsynchronousValidation(Model, null, req.body, client);
-            transactionHasBegun = true;
-
-            const dataArray = req.body;
-            results = new Array(req.body.length);
-            for (let i = 0; i < results.length; i++) {
-                const dataObject = dataArray[i];
-                // Will Change
-                const queryFactory = new SqlQueryFactory(Model, dataObject, "create");
-                const queryObject = queryFactory.getSqlObject();
-                const response = await client.query(queryObject);
-                results[i] = response.rows[0];
-            }
-
-            await client.query("COMMIT");
-            res.json({ "response": results });
-        }
-        catch (error) {
-            if (transactionHasBegun) await client.query("ROLLBACK");
-            //error.req = reqMapper(req);
-            console.error(error);
-            res.status(500).json({ "response": error });
-        }
-        finally {
-            await client.end();
-        }
-    };
+    return async (req, res) => await createControllerLogic(Model, req);
 }
 
 function readController(Model) {
-    return async function(req, res) {
-        const client = clientFactory();
-        let results;
-        let transactionHasBegun = false;
-        try {
-            // Might Change
-            readControllerSynchronousValidation(Model, req);
-
-            await client.connect();
-            await client.query("BEGIN");
-            transactionHasBegun = true;
-
-            const parsedIdArray = JSON.parse(req.query.id);
-
-            if (parsedIdArray[0] === 0) {
-                // Will Change
-                const queryFactory = new SqlQueryFactory(Model, parsedIdArray[0], "read_all");    
-                const queryObject = queryFactory.getSqlObject();
-                results = (await client.query(queryObject)).rows;
-            }
-            else {
-                await readControllerAsynchronousValidation(Model, parsedIdArray, null, client);
-                results = new Array(parsedIdArray.length);
-                for (let i = 0; i < parsedIdArray.length; i++) {
-                    const id = parsedIdArray[i];
-                    const queryFactory = new SqlQueryFactory(Model, id, "read_by_id");
-                    const queryObject = queryFactory.getSqlObject();
-                    results[i] = (await client.query(queryObject)).rows[0];
-                }
-            }
-
-            await client.query("COMMIT");
-            res.json({ "response": results });
+    return async (req, res) => {
+        const { queryCondition } = req;
+        if (queryCondition === "cid") {
+            await readCidControllerLogic(Model, req);
         }
-        catch (error) {
-            if (transactionHasBegun) await client.query("ROLLBACK");
-            //error.req = reqMapper(req);
-            //console.error(error);
-            if (error.isCustomError) {
-                res.status(error.statusCode).json({ "response": error });
-            }
-            else {
-                res.status(500).json({ "response": error });
-            }
-        }
-        finally {
-            await client.end();
+        if (queryCondition === "qid") {
+            await readQidControllerLogic(Model, req);
         }
     };
 }
 
 function updateController(Model) {
-    return async function(req, res) {
-        const client = clientFactory();
-        let results;
-        let transactionHasBegun = false;
-        try {
-            // Might Change
-            updateControllerSynchronousValidation(Model, req);
-
-            await client.connect();
-            await client.query("BEGIN");
-            transactionHasBegun = true;
-
-            const parsedIdArray = JSON.parse(req.query.id);
-            // Might Change
-            await updateControllerAsynchronousValidation(Model, parsedIdArray, req.body, client);
-
-            const dataArray = req.body;
-            results = new Array(req.body.length);
-            for (let i = 0; i < results.length; i++) {
-                const dataObject = dataArray[i];
-                dataObject[Model.idName] = parsedIdArray[i];
-                // Will Change
-                const queryFactory = new SqlQueryFactory(Model, dataObject, "put");
-                const queryObject = queryFactory.getSqlObject();
-                const response = await client.query(queryObject);
-                results[i] = response.rows[0];
-            }
-
-            await client.query("COMMIT");
-            res.json({ "response": results });
-        }
-        catch (error) {
-            if (transactionHasBegun) await client.query("ROLLBACK");
-            //error.req = reqMapper(req);
-            //console.error(error);
-            res.status(500).json({ "response": error });
-        }
-        finally {
-            await client.end();
-        }
-    };
+    return async (req, res) => await updateControllerLogic(Model, req);
 }
 
-function deleteController(Model) {
-    return async function(req, res) {
-        const client = clientFactory();
-        let results;
-        let transactionHasBegun = false;
-        try {
-            // Might Change
-            deleteControllerSynchronousValidation(Model, req);
-
-            await client.connect();
-            await client.query("BEGIN");
-            transactionHasBegun = true;
-
-            const parsedIdArray = JSON.parse(req.query.id);
-            // Might Change
-            await deleteControllerAsynchronousValidation(Model, parsedIdArray, null, client);
-
-            results = new Array(parsedIdArray.length);
-            for (let i = 0; i < results.length; i++) {
-                const id = parsedIdArray[i];
-                // Will Change
-                const queryFactory = new SqlQueryFactory(Model, {[Model.idName]: id}, "delete");
-                const queryObject = queryFactory.getSqlObject();
-                const response = await client.query(queryObject);
-                results[i] = response.rows[0];
-            }
-
-            await client.query("COMMIT");
-            res.json({ "response": results });
+function deleteController() {
+    return async (req, res) => {
+        const { queryCondition } = req;
+        if (queryCondition === "cid") {
+            await deleteCidControllerLogic(Model, req);
         }
-        catch (error) {
-            if (transactionHasBegun) await client.query("ROLLBACK");
-            //error.req = reqMapper(req);
-            //console.error(error);
-            res.status(500).json({ "response": error });
-        }
-        finally {
-            await client.end();
+        if (queryCondition === "qid") {
+            await deleteQidControllerLogic(Model, req);
         }
     };
 }

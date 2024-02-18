@@ -34,6 +34,23 @@ const dbTypesMap = {
 
 class SyncValidationLogic {
 
+    static tablesQueryStringValidator(req, errorPayload) {
+        SyncBaseValidations.validateTablesReqQuery(req, errorPayload);
+        SyncBaseValidations.validateStandardQueryString(req.query, errorPayload);
+        SyncBaseValidations.validateNoDuplicateIds(req.query.id, errorPayload);
+    }
+
+    static linkingTablesQueryStringValidator(Model, req, errorPayload) {
+        SyncBaseValidations.validateLinkingTablesReqQuery(req, errorPayload);
+        SyncBaseValidations.validateStandardQueryString(req.query, errorPayload);
+        if (req.query.hasOwnProperty("cid")) {
+            SyncBaseValidations.validateCidQueryString(Model, req.query.cid, errorPayload);
+        }
+        else {
+            SyncBaseValidations.validateNoDuplicateIds(req.query.qid, errorPayload);
+        }
+    }
+
     // if idArray passed, assumes req.query.id conversion to typeof array
     static tablesDataIterator(Model, req, idArray = null, validateRequiredFields) {
         const hasBody = req.hasOwnProperty("body");
@@ -53,7 +70,7 @@ class SyncValidationLogic {
 
         let errorPayload = new ErrorPayload();
         for (let i = 0; i < iterationLength; i++) {
-            let dataObject = hasBody ? req.body[i] : {};
+            let dataObject = hasBody ? JSON.parse(JSON.stringify(req.body[i])) : {};
             if (idArray !== null) {
                 dataObject[Model.idName] = idArray[i]
             }
@@ -63,14 +80,77 @@ class SyncValidationLogic {
             }
             SyncValidationLogic.propValidation(Model, dataObject, errorPayload);
         }
-
-        Model = null;
-        req = null;
-        idArray = null;
-        errorPayload = null;
     }
 
-    static linkingTablesDataIterator(Model, req, idArray = null, validateRequiredFields) {}
+    static linkingTablesDataIterator(Model, req, idObjectPayload = null, validateRequiredFields) {
+        const hasBody = req.hasOwnProperty("body");
+        let propName;
+        if (idObjectPayload !== null) {
+            propName = Object.keys(idObjectPayload)[0];
+        }
+        if (idObjectPayload === null && !hasBody) {
+            throw new NoIterationArrayInDataIteratorError(new ErrorPayload());
+        }
+        if (hasBody && idObjectPayload !== null) {
+            switch (propName) {
+                case "qid":
+                    SyncBaseValidations.validateBodyQidMatchingLength(idObjectPayload.qid, req.body, new ErrorPayload());
+                    break;
+                case "cid":
+                    SyncBaseValidations.validateBodyCidMatchingLength(Model, idObjectPayload.cid, req.body, new ErrorPayload());
+                    break;
+                default:
+                    throw new SwitchFallThroughRuntimeError("linkingTablesDataIterator():: matchingidObjectPayloadToBody", { switchArg: propName, auxiliaryArgs: [ idObjectPayload, req.body ] });
+            }
+        }
+
+        let iterationLength;
+        if (hasBody) {
+            iterationLength = req.body.length
+        }
+        else if (propName === "qid") {
+            iterationLength = idObjectPayload.qid.length;
+        }
+        else if (propName === "cid") {
+            iterationLength = idObjectPayload.cid.length;
+        }
+        else {
+            throw new SwitchFallThroughRuntimeError("linkingTablesDataIterator():: unable to determine iteration length", { switchArg: propName + String(` hasBody ${hasBody}`), auxiliaryArgs: [ idObjectPayload, req.body ] });           
+        }
+
+        let alternateIncrementBoolean = idObjectPayload !== null && propName === "cid" && hasBody;
+        let increment = alternateIncrementBoolean ? Model.compositePkeys.length : 1;
+
+        let errorPayload = new ErrorPayload();
+        for (let i = 0; i < iterationLength; i += increment) {
+            errorPayload.auxiliaryArgs.indexOfIteration = i;
+
+            let dataObject = hasBody ? JSON.parse(JSON.stringify(req.body[i])) : {};
+            if (idObjectPayload !== null && propName === "qid") {
+                dataObject[Model.queryablePkey] = idObjectPayload.qid[i];
+            }
+            if (idObjectPayload !== null && propName === "cid" && hasBody) {
+                let currentCompositeKeyIndex = 0;
+                let numComposites = Model.compositePkeys.length;
+                for (let keyName of Model.compositePkeys) {
+                    dataObject[keyName] = idObjectPayload.cid[i * numComposites + currentCompositeKeyIndex];
+                    currentCompositeKeyIndex++;
+                }
+            }
+            if (alternateIncrementBoolean) {
+                let currentCompositeKeyIndex = 0;
+                for (let keyName of Model.compositePkeys) {
+                    dataObject[keyName] = idObjectPayload.cid[i + currentCompositeKeyIndex];
+                    currentCompositeKeyIndex++;
+                }
+            }
+            if (validateRequiredFields) {
+                SyncBaseValidations.validateRequiredReqBodyFields(Model.notNullArray, dataObject, errorPayload);
+            }
+            SyncValidationLogic.propValidation(Model, dataObject, errorPayload);
+        }
+
+    }
 
     static propValidation(Model, dataObject, errorPayload) {
         for (let columnName of Model.columnNamesArray) {
@@ -78,9 +158,6 @@ class SyncValidationLogic {
                 SyncValidationLogic.validationSwitches(Model.synchronousConstraintSchema[columnName], dataObject[columnName], errorPayload);
             }
         }
-        Model = null;
-        dataObject = null;
-        errorPayload = null;
     }
 
     static validationSwitches(synchronousConstraints, data, errorPayload) {
@@ -118,10 +195,6 @@ class SyncValidationLogic {
                 }
             }
         }
-
-        synchronousConstraints = null;
-        data = null;
-        errorPayload = null;
     }
 
     static customValidations(Model, req) {

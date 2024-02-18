@@ -129,6 +129,18 @@ class InvalidCompositeKeyError extends ControllerError {
     }
 }
 
+class CompositeKeyAlreadyExistsError extends ControllerError {
+
+    static runtimeDataProps = [ "compositeKeys", "currenIndex", "currentKeys", "queryText", "queryValues", "responseRows" ];
+
+    constructor(errorPayload) {
+        super("ASYNC: composite key already exists", errorPayload);
+        this.name = "CompositeKeyAlreadyExistsError";
+        this.statusCode = 409;
+        this.responseMessage = "Conflicting Resource";
+    }
+}
+
 class InvalidQueryableKeyError extends ControllerError {
 
     static runtimeDataProps = [ "queryablePkey", "currentIndex", "key", "queryText", "queryValues", "responseRows" ];
@@ -235,6 +247,56 @@ class MultipleAllQueriesError extends ControllerError {
     constructor(errorPayload) {
         super("SYNC: id has multiple zeros", errorPayload);
         this.name = "MultipleAllQueriesError";
+        this.response = "Malformed data";
+    }
+}
+
+class UnequalBodyQidLengthError extends ControllerError {
+    static runtimeDataProps = [ "qid", "body", "qidLength", "bodyLength" ];
+
+    constructor(errorPayload) {
+        super("SYNC: qid length does not equal body length", errorPayload);
+        this.name = "UnequalBodyQidLengthError";
+        this.response = "Malformed data";
+    }
+}
+
+class NonProportionalBodyCidLengthError extends ControllerError {
+    static runtimeDataProps = [ "cid", "body", "cidLength", "cidMulitplier", "bodyLength" ];
+
+    constructor(errorPayload) {
+        super("SYNC: cid length is not proportional to body length", errorPayload);
+        this.name = "NonProportionalBodyCidLengthError";
+        this.resonse = "Malformed data";
+    }
+}
+
+class DuplicateIdKeyError extends ControllerError {
+    static runtimeDataProps = [ "idArray", "queryStringIndex" ];
+
+    constructor(errorPayload) {
+        super("SYNC: idArray has duplicates", errorPayload);
+        this.name = "DuplicateIdKeyError";
+        this.response = "Malformed data";
+    }
+}
+
+class CidArrayModuloNotZeroError extends ControllerError {
+    static runtimeDataProps = [ "cidArray", "numComposites", "modulo" ];
+
+    constructor(errorPayload) {
+        super("SYNC: cid array length mod numComposites != 0", errorPayload);
+        this.name = "CidArrayModuloNotZeroError";
+        this.response = "Malformed data";    
+    }
+}
+
+class DuplicateCidKeyError extends ControllerError {
+    static runtimeDataProps = [ "parsedCidArray", "currentIndexOfFailure", "duplicateCid", "compositeKeySet" ];
+
+    constructor(errorPayload) {
+        super("SYNC: duplicate composite key", errorPayload);
+        this.name = "DuplicateCidKeyError";
         this.response = "Malformed data";
     }
 }
@@ -397,6 +459,11 @@ module.exports = {
     ReqQueryArrayElementNaNError,
     ReqQueryArrayElementIsNotIntegerError,
     MultipleAllQueriesError,
+    UnequalBodyQidLengthError,
+    NonProportionalBodyCidLengthError,
+    DuplicateIdKeyError,
+    CidArrayModuloNotZeroError,
+    DuplicateCidKeyError,
     ReqBodyDoesNotExistError,
     ReqBodyIsNotArrayError,
     NoIterationArrayInDataIteratorError,
@@ -413,6 +480,7 @@ module.exports = {
     AllQueryAndBodyError,
     InvalidPrimaryKeyError,
     InvalidCompositeKeyError,
+    CompositeKeyAlreadyExistsError,
     InvalidQueryableKeyError,
     InvalidForeignKeyError,
     RequiredListError,

@@ -10,20 +10,20 @@ class SyncErrorHandling {
     }
 
     static readControllerSynchronousValidation(Model, req) {
-        SyncBaseValidations.validateIdQueryString(req, new ErrorPayload());
+        SyncValidationLogic.tablesQueryStringValidator(req, new ErrorPayload());
         SyncValidationLogic.tablesDataIterator(Model, {}, JSON.parse(req.query.id), false);
         SyncValidationLogic.customValidations(Model, req);
     }
 
     static updateControllerSynchronousValidation(Model, req) {
-        SyncBaseValidations.validateIdQueryString(req, new ErrorPayload());
+        SyncValidationLogic.tablesQueryStringValidator(req, new ErrorPayload());
         SyncBaseValidations.validateReqBodyStructure(req, new ErrorPayload());
         SyncValidationLogic.tablesDataIterator(Model, req, JSON.parse(req.query.id), false);
         SyncValidationLogic.customValidations(Model, req);
     }
 
     static deleteControllerSynchronousValidation(Model, req) {
-        SyncBaseValidations.validateIdQueryString(req, new ErrorPayload());
+        SyncValidationLogic.tablesQueryStringValidator(req, new ErrorPayload());
         SyncValidationLogic.tablesDataIterator(Model, {}, JSON.parse(req.query.id), false);
         SyncValidationLogic.customValidations(Model, req);
     }

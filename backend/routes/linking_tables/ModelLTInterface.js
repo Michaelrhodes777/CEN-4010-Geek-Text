@@ -1,7 +1,6 @@
 class ModelLTInterface {
     static verifyCompositePrimaryKeyString(Model) {
-        let valueIdentifier = 1;
-        return `SELECT ( ${Model.compositePkeys.map((key) => (`"${key}"`)).join(", ")} ) FROM ${Model.tableName} WHERE ${Model.compositePkeys.map((key) => (`"${key}" = $${valueIdentifier++}`)).join(" AND ")}`;
+        return `SELECT * FROM "${Model.tableName}" WHERE ${Model.compositePkeys.map((key) => (`"${key}" = $${valueIdentifier++}`)).join(" AND ")}`;
     }
 
     static verifyForeignKeyString(idName, tableName) {

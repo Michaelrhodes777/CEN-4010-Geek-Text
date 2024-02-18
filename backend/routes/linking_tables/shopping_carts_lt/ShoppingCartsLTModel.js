@@ -73,24 +73,18 @@ class ShoppingCartsLTModel extends ModelLTInterface {
     static columnNamesMap = columnNames;
 
     static columnNamesArray = [
+        columnNames.user_id_fkey,
         columnNames.book_id_fkey,
-        columnNames.wishlist_id_fkey
+        columnNames.quantity
     ];
-
-    static queryStringRequirements = {
-        "c": null,
-        "r": [ "cid", "qid" ],
-        "u": [ "cid" ],
-        "d": [ "cid", "qid" ]
-    };
 
     static compositePkeys = [ columnNames.user_id_fkey, columnNames.book_id_fkey ];
 
     static queryablePkey = columnNames.user_id_fkey;
 
-    static notNullArray = [ columnNames.book_id_fkey, columnNames.wishlist_id_fkey, columnNames.quantity ];
+    static notNullArray = [ columnNames.user_id_fkey, columnNames.book_id_fkey, columnNames.quantity ];
 
-    static updateableColumns = [ columnNames.book_id_fkey, columnNames.wishlist_id_fkey, columnNames.quantity ];
+    static updateableColumns = [ columnNames.user_id_fkey, columnNames.book_id_fkey, columnNames.quantity ];
 
     static synchronousConstraintSchema = synchronousConstraintSchema;
 

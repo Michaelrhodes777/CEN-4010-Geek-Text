@@ -1,6 +1,7 @@
 const {
     InvalidPrimaryKeyError,
     InvalidCompositeKeyError,
+    CompositeKeyAlreadyExistsError,
     InvalidQueryableKeyError,
     InvalidForeignKeyError,
     UniquenessError
@@ -27,7 +28,37 @@ class AsyncBaseValidations {
     }
 
     static async validateCompositeKey(data, Model, client, errorPayload) {
-        const numKeys = Model.compositeKeys.length;
+        const numKeys = Model.compositePkeys.length;
+        console.log(Model.verifyCompositePrimaryKeyString(Model));
+        for (let i = 0; i < data.length; i += numKeys) {
+            const currentKeys = new Array(numKeys);
+            for (let j = 0; j < numKeys; j++) {
+                currentKeys[j] = Number.parseInt(data[i + j]);
+            }
+            const query = {
+                text: Model.verifyCompositePrimaryKeyString(Model),
+                values: currentKeys
+            };
+            console.log(query.values);
+            const response = await client.query(query);
+            const resultLength = response.rows.length;
+            console.log(response.rows);
+            if (resultLength !== 1) {
+                errorPayload.appendMainArgs({
+                    "compositeKeys": String(data),
+                    "currentIndex": String(i),
+                    "currentKeys": String(currentKeys),
+                    "queryText": String(query.text),
+                    "queryValues": String(query.values),
+                    "responseRows": String(response.rows)
+                });
+                throw new InvalidCompositeKeyError(errorPayload);
+            }
+        }
+    }
+
+    static async validateCompositeKeyUniqueness(data, Model, client, errorPayload) {
+        const numKeys = Model.compositePkeys.length;
         for (let i = 0; i < data.length; i += numKeys) {
             const currentKeys = new Array(numKeys);
             for (let j = 0; j < numKeys; j++) {
@@ -39,7 +70,7 @@ class AsyncBaseValidations {
             };
             const response = await client.query(query);
             const resultLength = response.rows.length;
-            if (resultLength !== 1) {
+            if (resultLength > 0) {
                 errorPayload.appendMainArgs({
                     "compositeKeys": String(data),
                     "currentIndex": String(i),
@@ -48,7 +79,7 @@ class AsyncBaseValidations {
                     "queryValues": String(query.values),
                     "responseRows": String(response.rows)
                 });
-                throw new InvalidCompositeKeyError(errorPayload);
+                throw new CompositeKeyAlreadyExistsError(errorPayload);
             }
         }
     }

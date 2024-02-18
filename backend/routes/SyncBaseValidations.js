@@ -7,6 +7,11 @@ const {
     ReqQueryArrayElementNaNError,
     ReqQueryArrayElementIsNotIntegerError,
     MultipleAllQueriesError,
+    UnequalBodyQidLengthError,
+    NonProportionalBodyCidLengthError,
+    DuplicateIdKeyError,
+    CidArrayModuloNotZeroError,
+    DuplicateCidKeyError,
     ReqBodyDoesNotExistError,
     ReqBodyIsNotArrayError,
     MissingQueryStringPropError,
@@ -21,30 +26,55 @@ const {
 } = require('./ValidationErrors.js');
 
 class SyncBaseValidations {
-    static validateIdQueryString(req, errorPayload) {
+
+    // not currently used in tables routes
+    static validateTablesReqQuery(req, errorPayload) {
         if (!req.hasOwnProperty("query")) {
             throw new ReqDoesNotHaveQueryPropError(errorPayload);
         }
         if (!req.query.hasOwnProperty("id")) {
-            errorPayload.appendMainArgs({ "query": JSON.stringify(req.query) });
+            errorPayload.appendMainArgs({ "query": String(req.query) });
             throw new ReqQueryDoesNotHaveIdPropError(errorPayload);
         }
-        const len = req.query.id.length;
-        if (len < 3 || req.query.id[0] !== "[" || req.query.id[len - 1] !== "]") {
-            errorPayload.appendMainArgs({ "id": req.query.id });
+        if (Object.keys(req.query).length != 1) {
+            errorPayload.appendMainArgs({ "query": String(req.query) });
+            throw new ReqQueryHasMoreThanOnePropError(errorPayload);
+        }
+    }
+
+    static validateLinkingTablesReqQuery(req, errorPayload) {
+        if (!req.hasOwnProperty("query")) {
+            throw new ReqDoesNotHaveQueryPropError(errorPayload);
+        }
+        if (!req.query.hasOwnProperty("cid") && !req.query.hasOwnProperty("qid")) {
+            errorPayload.appendMainArgs({ "query": String(req.query) });
+            throw new ReqQueryDoesNotHaveIdPropError(errorPayload);
+        }
+        if (Object.keys(req.query).length != 1) {
+            errorPayload.appendMainArgs({ "query": String(req.query) });
+            throw new ReqQueryHasMoreThanOnePropError(errorPayload);
+        }
+    }
+
+    static validateStandardQueryString(idObjectPayload, errorPayload) {
+        const propName = Object.keys(idObjectPayload)[0];
+        const idArray = idObjectPayload[propName];
+        const len = idArray.length;
+        if (len < 3 || idArray[0] !== "[" || idArray[len - 1] !== "]") {
+            errorPayload.appendMainArgs({ "id": String(idArray) });
             throw new ReqQueryIdIsNotArrayStringFormatError(errorPayload);
         }
 
         let parsedArray;
 
         try {
-            parsedArray = req.query.id.substring(1, req.query.id.length - 1).split(",");
+            parsedArray = idArray.substring(1, len - 1).split(",");
             if (!Array.isArray(parsedArray)) {
                 throw new Error();
             }
         }
         catch (error) {
-            errorPayload.appendMainArgs({ "id": JSON.stringify(req.query.id) });
+            errorPayload.appendMainArgs({ "id": String(idArray) });
             throw new ReqQueryIdIsNotArrayError(errorPayload);
         }
 
@@ -53,16 +83,16 @@ class SyncBaseValidations {
             const parsed = +entity;
             if (Number.isNaN(parsed)) {
                 errorPayload.appendMainArgs({
-                    "query": JSON.stringify(req.query),
-                    "id": JSON.stringify(req.query.id)
+                    "query": String(idObjectPayload),
+                    "id": String(idArray)
                 });
                 throw new ReqQueryArrayElementNaNError(errorPayload);
             }
             if (!Number.isInteger(parsed)) {
                 errorPayload.appendMainArgs({
-                    "query": JSON.stringify(req.query),
-                    "id": JSON.stringify(req.query.id),
-                    "parsed": JSON.stringify(parsed)
+                    "query": String(idObjectPayload),
+                    "id": String(idArray),
+                    "parsed": String(parsed)
                 });
                 throw new ReqQueryArrayElementIsNotIntegerError(errorPayload);
             }
@@ -74,63 +104,127 @@ class SyncBaseValidations {
         if (zeroCount > 1 || (zeroCount === 1 && parsedArray.length > 1)) {
             const errorPayload = new ErrorPayload();
             errorPayload.appendMainArgs({
-                "id": req.query.id
+                "id": String(idArray)
             });
             throw new MultipleAllQueriesError(errorPayload);
+        }
+    }
+
+    static validateNoDuplicateIds(idArray, errorPayload) {
+        const idSet = new Set();
+        for (let i = 0; i < idArray.length; i++) {
+            if (idSet.has(idArray[i])) {
+                errorPayload.appendMainArgs({
+                    "idArray": String(idArray),
+                    "queryStringIndex": String(i)
+                });
+                throw new DuplicateIdKeyError(errorPayload);
+            }
+            else {
+                idSet.add(idArray[i]);
+            }
+        }
+    }
+
+    static validateCidQueryString(Model, cidArray, errorPayload) {
+        const numComposites = Model.compositePkeys.length;
+        cidArray = cidArray.substring(1, cidArray.length - 1).split(",");
+        if (cidArray.length % numComposites !== 0) {
+            errorPayload.appendMainArgs({
+                "cidArray": String(cidArray),
+                "numComposites": String(numComposites),
+                "modulo": String(cidArray.length % numComposites)
+            });
+            throw new CidArrayModuloNotZeroError(errorPayload);
+        }
+        const buildArray = new Array(cidArray.length / numComposites);
+        for (let i = 0; i < cidArray.length; i += numComposites) {
+            const internalBuild = new Array(numComposites);
+            for (let j = 0; j < numComposites; j++) {
+                internalBuild[j] = cidArray[i + j];
+            }
+            buildArray[i / numComposites] = internalBuild;
+        }
+        const compositeKeySet = new Set();
+        for (let i = 0; i < buildArray.length; i++) {
+            const compositeKeyJoin = buildArray[i].join(",");
+            if (compositeKeySet.has(compositeKeyJoin)) {
+                errorPayload.appendMainArgs({
+                    "parsedCidArray": String(buildArray),
+                    "currentIndexOfFailure": String(i),
+                    "duplicateCid": String(buildArray[i]),
+                    "compositeKeySet": String(compositeKeySet)
+                });
+                throw new DuplicateCidKeyError(errorPayload);
+            }
+            else {
+                compositeKeySet.add(compositeKeyJoin);
+            }
         }
     }
 
     static validateReqBodyStructure(req, errorPayload) {
         if (!req.hasOwnProperty("body")) {
             errorPayload.appendMainArgs({});
-            req = null;
             throw new ReqBodyDoesNotExistError(errorPayload);
         }
         if (!Array.isArray(req.body)) {
             errorPayload.appendMainArgs({ 
-                "body": JSON.stringify(req.body)
+                "body": String(req.body)
             });
-            req = null;
             throw new ReqBodyIsNotArrayError(errorPayload);
         }
-
-        req = null;
-        errorPayload = null;
     }
-
-    static validateLinkingTableQueryString(req, errorPayload) {}
 
     static validateRequiredReqBodyFields(notNullArray, dataObject, errorPayload) {
         for (let requiredField of notNullArray) {
             if (!dataObject.hasOwnProperty(requiredField)) {
                 errorPayload.appendMainArgs({
-                    "notNullArray": JSON.stringify(notNullArray),
-                    "dataObject": JSON.stringify(dataObject),
+                    "notNullArray": String(notNullArray),
+                    "dataObject": String(dataObject),
                     requiredField
                 });
-                notNullArray = null;
-                dataObject = null;
                 throw new MissingRequiredFieldError(errorPayload);
             }
             else {
                 let current = dataObject[requiredField];
                 if (current === null || current === "") {
                     errorPayload.appendMainArgs({
-                        "notNullArray": JSON.stringify(notNullArray),
-                        "dataObject": JSON.stringify(dataObject),
+                        "notNullArray": String(notNullArray),
+                        "dataObject": String(dataObject),
                         requiredField,
                         current
                     });
-                    notNullArray = null;
-                    dataObject = null;
                     throw new InvalidRequiredFieldError(errorPayload);
                 }
             }
         }
+    }
 
-        notNullArray = null;
-        dataObject = null;
-        errorPayload = null;
+    static validateBodyQidMatchingLength(qid, body, errorPayload) {
+        if (qid.length !== body.length) {
+            errorPayload.appendMainArgs({
+                "qid": String(qid),
+                "body": String(body),
+                "qidLength": String(qid.length),
+                "bodyLength": String(body.length)
+            });
+            throw new UnequalBodyQidLengthError(errorPayload);
+        }
+    }
+
+    static validateBodyCidMatchingLength(Model, cid, body, errorPayload) {
+        const cidMultiplier = Model.compositePkeys.length;
+        if (body.length * cidMultiplier !== cid.length) {
+            errorPayload.appendMainArgs({
+                "cid": String(cid),
+                "body": String(body),
+                "cidLength": String(cid.length),
+                "cidMultiplier": String(cidMultiplier),
+                "bodyLength": String(body.length)
+            });
+            throw new NonProportionalBodyCidLengthError(errorPayload);
+        }
     }
 
     static jsTypeValidation(currentConstraint, data, errorPayload) {
@@ -139,14 +233,8 @@ class SyncBaseValidations {
                 "expectedType": currentConstraint,
                 "actualType": typeof data
             });
-            currentConstraint = null;
-            data = null;
             throw new InvalidJsTypeError(errorPayload);
         }
-
-        currentConstraint = null;
-        data = null;
-        errorPayload = null;
     }
 
     static validateIntDbType(bounds, data, errorPayload) {
@@ -176,17 +264,12 @@ class SyncBaseValidations {
 
         if (!buildBoolean) {
             errorPayload.appendMainArgs({
-                "bounds": JSON.stringify(bounds), 
+                "bounds": String(bounds),
                 "data": String(data)
             });
-            bounds = null;
-            data = null;
             throw new IntNumberBoundsError(errorPayload);
         }
 
-        bounds = null
-        data = null;
-        errorPayload = null;
     }
 
     static validateVarcharDbType(bounds, data, errorPayload) {
@@ -216,34 +299,22 @@ class SyncBaseValidations {
 
         if (!buildBoolean) {
             errorPayload.appendMainArgs({
-                "bounds": JSON.stringify(bounds),
+                "bounds": String(bounds),
                 "data": String(data)
             });
-            bounds = null;
-            data = null;
             throw new InvalidVarcharLengthError(errorPayload);
         }
-
-        bounds = null;
-        data = null;
-        errorPayload = null;
     }
 
     static blacklistValidation(currentConstraint, data, errorPayload) {
         const hasBlacklistedElement = currentConstraint.join("").includes(data);
         if (hasBlacklistedElement) {
             errorPayload.appendMainArgs({
-                "blacklist": JSON.stringify(currentConstraint),
+                "blacklist": String(currentConstraint),
                 "data": String(data)
             });
-            currentConstraint = null;
-            data = null;
             throw new BlacklistError(errorPayload);
         }
-
-        currentConstraint = null;
-        data = null;
-        errorPayload = null;
     }
 
     static whitelistValidation(currentConstraint, data, errorPayload) {
@@ -260,14 +331,8 @@ class SyncBaseValidations {
                 "data": data,
                 "constraintFailure": data[i]
             });
-            currentConstraint = null;
-            data = null;
             throw new WhitelistError(errorPayload);
         }
-
-        currentConstraint = null;
-        data = null;
-        errorPayload = null;
     }
 
     static requiredListValidation(currentConstraint, data, errorPayload) {
@@ -294,18 +359,12 @@ class SyncBaseValidations {
         for (let requiredProp of queryStringRequirements) {
             if (!queryStringObject.hasOwnProperty(requiredProp)) {
                 errorPayload({
-                    "queryStringRequirements": JSON.stringify(queryStringRequirements),
-                    "queryStringObject": JSON.stringify(queryStringObject) 
+                    "queryStringRequirements": String(queryStringRequirements),
+                    "queryStringObject": String(queryStringObject) 
                 });
-                queryStringRequirements = null;
-                queryStringObject = null;
                 throw new MissingQueryStringPropError(errorPayload);
             }
         }
-
-        queryStringRequirements = null;
-        queryStringObject = null;
-        errorPayload = null;
     }
 }
 

@@ -3,7 +3,8 @@ const AsyncValidationLogic = require('../AsyncValidationLogic.js');
 
 class AsyncErrorHandling {
     static async createControllerAsynchronousValidation(Model, req, client) {
-        await AsyncValidationLogic.linkingTablesDataIterator(Model, null, req.body, client);
+        await AsyncValidationLogic.createRouteBodyCompositeKeysValidator(Model, req, client, new ErrorPayload());
+        await AsyncValidationLogic.tablesDataIterator(Model, null, req.body, client);
     }
 
     static async readControllerAsynchronousValidation(Model, req, client) {

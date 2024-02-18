@@ -7,6 +7,7 @@ const {
     AllQueryAndBodyError,
     SwitchFallThroughRuntimeError
 } = ValidationErrors;
+const { parseStringifiedArray } = require('../util/utilFxns.js');
 
 // asynchronousConstraintIdentifiersMap
 const ACIM = {
@@ -32,7 +33,7 @@ class AsyncValidationLogic {
         if (queryProps.length !== 1) {
             errorPayload.appendMainArgs({
                 queryPropsLength: queryProps.length,
-                "reqQuery": JSON.stringify(req.query)
+                "reqQuery": String(req.query)
             });
             throw new InvalidLininkingTableReqQueryError(errorPayload);
         }
@@ -40,14 +41,26 @@ class AsyncValidationLogic {
         const queryProp = queryProps[0];
         switch (queryProp) {
             case "cid":
-                await validateCompositeKey(req.query.cid, Model, client, errorPayload);
+                await AsyncBaseValidations.validateCompositeKey(parseStringifiedArray(req.query.cid), Model, client, errorPayload);
                 break;
             case "qid":
-                await validateQueryableKey(req.query.qid, Model, client, errorPayload);
+                await AsyncBaseValidations.validateQueryableKey(parseStringifiedArray(req.query.qid), Model, client, errorPayload);
                 break;
             default:
                 throw new SwitchFallThroughRuntimeError("linkingTablesQueryStringValidator", { switchArg: queryProp, auxiliaryArgs: [ {"reqQuery": JSON.parse(JSON.stringify(req.query))} ] });
         }
+    }
+
+    static async createRouteBodyCompositeKeysValidator(Model, req, client, errorPayload) {
+        const composites = Model.compositePkeys;
+        const buildCompositeKeys = [];
+        for (let dataObject of req.body) {
+            console.log(JSON.stringify(dataObject));
+            for (let key of composites) {
+                buildCompositeKeys.push(dataObject[key]);
+            }
+        }
+        await AsyncBaseValidations.validateCompositeKeyUniqueness(buildCompositeKeys, Model, client, errorPayload);
     }
 
     static async tablesDataIterator(Model, idArray = null, body = null, client) {
@@ -58,15 +71,9 @@ class AsyncValidationLogic {
         const errorPayload = new ErrorPayload();
 
         if (!hasIdArray && body === null) {
-            Model = null;
-            idArray = null;
-            client = null;
             throw new NoIterationArrayInDataIteratorError(errorPayload);
         }
         if (hasIdArray && idArray.length === 0) {
-            Model = null;
-            idArray = null;
-            client = null;
             throw new IdArrayHasZeroLengthError(errorPayload);
         }
         if (queriesAll && body !== null) {
@@ -74,9 +81,6 @@ class AsyncValidationLogic {
                 "idArray": JSON.stringify(idArray),
                 "body": JSON.stringify(body)
             });
-            Model = null;
-            idArray = null;
-            client = null;
             throw new AllQueryAndBodyError(errorPayload);
         }
         if (hasBody && hasIdArray && idArray.length !== body.length) {
@@ -85,9 +89,6 @@ class AsyncValidationLogic {
                 "idArray": JSON.stringify(idArray),
                 "body": JSON.stringify(req.body)
             });
-            Model = null;
-            idArray = null;
-            client = null;
             throw new IterationArraysHaveUnequalLengthError(errorPayload);
         }
 
@@ -104,13 +105,11 @@ class AsyncValidationLogic {
             }
             await AsyncValidationLogic.propValidation(Model, dataObject, client, errorPayload);
         }
-
-        Model = null;
-        idArray = null;
-        client = null;
     }
 
-    static async linkingTablesDataIterator(Model, reqQuery, body, client) {}
+    static async linkingTablesDataIterator(Model, idArray = null, body = null, client) {
+
+    }
 
     static async propValidation(Model, dataObject, client, errorPayload) {
         for (let columnName of Model.columnNamesArray) {
@@ -118,9 +117,6 @@ class AsyncValidationLogic {
                 await AsyncValidationLogic.validationSwitches(columnName, Model.asynchronousConstraintSchema[columnName], dataObject[columnName], Model, client, errorPayload);
             }
         }
-        Model = null;
-        dataObject = null;
-        client = null;
     }
 
     static async validationSwitches(columnName, asynchronousConstraints, data, Model, client, errorPayload) {
@@ -144,11 +140,6 @@ class AsyncValidationLogic {
                 }
             }
         }
-
-        asynchronousConstraints = null;
-        data = null;
-        Model = null;
-        client = null;
     }
 }
 
