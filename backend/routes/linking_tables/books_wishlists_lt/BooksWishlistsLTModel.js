@@ -10,18 +10,18 @@ const synchronousConstraintSchema = {
         jsType: "number",
         dbType: {
             type: "int",
-            bounds: [ "[", 1, "i", "-" ],
+            bounds: [ "[", 0, "i", "-" ],
         },
         blacklist: null,
         whitelist: null,
         requiredList: null,
         custom: null
     },
-    [columnNames.user_id_fkey]: {
+    [columnNames.wishlist_id_fkey]: {
         jsType: "number",
         dbType: {
             type: "int",
-            bounds: [ "[", 1, "i", "-" ],
+            bounds: [ "[", 0, "i", "-" ],
         },
         blacklist: null,
         whitelist: null,
@@ -60,7 +60,9 @@ class BooksWishlistsLTModel extends ModelLTInterface {
         columnNames.wishlist_id_fkey
     ];
 
-    static idName = null
+    static compositePkeys = [ columnNames.book_id_fkey, columnNames.wishlist_id_fkey ];
+
+    static queryablePkey = columnNames.wishlist_id_fkey;
 
     static notNullArray = [ columnNames.book_id_fkey, columnNames.wishlist_id_fkey ];
 

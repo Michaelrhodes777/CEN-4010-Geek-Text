@@ -44,20 +44,25 @@ function tablesQueryStringValidationMiddleware(controllerType = null) {
     }
 }
 
-function linkingTablesQueryStringValidationMiddleware(Model) {
+function linkingTablesQueryStringValidationMiddleware(Model, controllerType = null) {
     return function(req, res, next) {
         const errorPayload = new ErrorPayload();
         validateLinkingTablesReqQuery(req, errorPayload);
         validateStandardQueryString(req.query, errorPayload);
         const queryCondition = determineQueryCondition(req.query);
+        console.log(queryCondition);
+        req.queryCondition = queryCondition;
         if (req.queryCondition === "cid") {
-            req.keyArrays = idArrayWrapper(req.query[queryCondition], Model.compositePkeys.lengthA);
+            req.keyArrays = idArrayWrapper(req.query[queryCondition], Model.compositePkeys.length);
+            console.log(Model.compositePkeys.length);
             validateCidKeyArray(Model, req.query.cid, errorPayload);
         }
         else {
             req.keyArrays = idArrayWrapper(req.query[queryCondition]);
         }
-        validateBodyKeyArraysMatchingLength(req.keyArrays, req.body, errorPayload);
+        if (controllerType === null) {
+            validateBodyKeyArraysMatchingLength(req.keyArrays, req.body, errorPayload);
+        }
         validateNoDuplicateIds(req.keyArrays, errorPayload);
         next();
     }

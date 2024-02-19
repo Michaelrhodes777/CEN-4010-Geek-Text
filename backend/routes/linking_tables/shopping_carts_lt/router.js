@@ -18,18 +18,18 @@ router.route("/")
         createController(ShoppingCartsLTModel)
     )
     .get(
-        queryStringValidation(),
+        queryStringValidation(ShoppingCartsLTModel, "GET"),
         schemaValidationMiddleware(ShoppingCartsLTModel),
         readController(ShoppingCartsLTModel)
     )
     .put(
         bodyFormatValidationMiddleware,
-        queryStringValidation(),
+        queryStringValidation(ShoppingCartsLTModel),
         schemaValidationMiddleware(ShoppingCartsLTModel),
         updateController(ShoppingCartsLTModel)
     )
     .delete(
-        queryStringValidation(),
+        queryStringValidation(ShoppingCartsLTModel, "DELETE"),
         schemaValidationMiddleware(ShoppingCartsLTModel), 
         deleteController(ShoppingCartsLTModel)
     );
