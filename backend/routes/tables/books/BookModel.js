@@ -1,4 +1,6 @@
 const ModelInterface = require('../ModelInterface.js');
+const StandardLists = require('../../StandardLists.js');
+const { numeric, stdBlacklist } = StandardLists;
 
 const columnNames = {
     "book_id": "book_id",
@@ -13,8 +15,6 @@ const columnNames = {
     "copies_sold": "copies_sold"
 };
 
-const STD_BLACKLIST = [ "\"", "'", "\\", "/" ];
-
 const synchronousConstraintSchema = {
     [columnNames.book_id]: {
         jsType: "number",
@@ -23,7 +23,9 @@ const synchronousConstraintSchema = {
             bounds: [ "[", 0, "i", "-" ],
         },
         blacklist: null,
-        whitelist: null
+        whitelist: null,
+        requiredList: null,
+        custom: null
     },
     [columnNames.isbn]: {
         jsType: "string",
@@ -32,7 +34,9 @@ const synchronousConstraintSchema = {
             bounds: [ "[", 10, 13, "]" ],
         },
         blacklist: null,
-        whitelist: null
+        whitelist: numeric,
+        requiredList: null,
+        custom: null
     },
     [columnNames.book_name]: {
         jsType: "string",
@@ -40,17 +44,21 @@ const synchronousConstraintSchema = {
             type: "varchar",
             bounds: [ "[", 1, 256, "]" ],
         },
-        blacklist: STD_BLACKLIST,
-        whitelist: null
+        blacklist: stdBlacklist,
+        whitelist: null,
+        requiredList: null,
+        custom: null
     },
     [columnNames.book_description]: {
         jsType: "string",
         dbType: {
             type: "varchar",
-            bounds: [ "[", 8, 4096, "]" ],
+            bounds: [ "[", 1, 4096, "]" ],
         },
-        blacklist: STD_BLACKLIST,
-        whitelist: null
+        blacklist: stdBlacklist,
+        whitelist: null,
+        requiredList: null,
+        custom: null
     },
     [columnNames.book_price]: {
         jsType: "number",
@@ -59,7 +67,9 @@ const synchronousConstraintSchema = {
             bounds: [ "[", 1, "i", "-" ],
         },
         blacklist: null,
-        whitelist: null
+        whitelist: null,
+        requiredList: null,
+        custom: null
     },
     [columnNames.author_id_fkey]: {
         jsType: "number",
@@ -68,7 +78,9 @@ const synchronousConstraintSchema = {
             bounds: [ "[", 1, "i", "-" ],
         },
         blacklist: null,
-        whitelist: null
+        whitelist: null,
+        requiredList: null,
+        custom: null
     },
     [columnNames.genre_id_fkey]: {
         jsType: "number",
@@ -77,7 +89,9 @@ const synchronousConstraintSchema = {
             bounds: [ "[", 1, "i", "-" ],
         },
         blacklist: null,
-        whitelist: null
+        whitelist: null,
+        requiredList: null,
+        custom: null
     },
     [columnNames.publisher_id_fkey]: {
         jsType: "number",
@@ -86,7 +100,9 @@ const synchronousConstraintSchema = {
             bounds: [ "[", 1, "i", "-" ],
         },
         blacklist: null,
-        whitelist: null
+        whitelist: null,
+        requiredList: null,
+        custom: null
     },
     [columnNames.year_published]: {
         jsType: "number",
@@ -95,7 +111,9 @@ const synchronousConstraintSchema = {
             bounds: [ "-", "i", "i", "-" ],
         },
         blacklist: null,
-        whitelist: null
+        whitelist: null,
+        requiredList: null,
+        custom: null
     },
     [columnNames.copies_sold]: {
         jsType: "number",
@@ -104,49 +122,70 @@ const synchronousConstraintSchema = {
             bounds: [ "[", 0, "i", "-" ],
         },
         blacklist: null,
-        whitelist: null
+        whitelist: null,
+        requiredList: null,
+        custom: null
     }
 };
 
 const asynchronousConstraintSchema = {
     [columnNames.book_id]: {
         primaryKey: true,
+        foreignKey: null,
         unique: false
     },
     [columnNames.isbn]: {
         primaryKey: false,
+        foreignKey: null,
         unique: true
     },
     [columnNames.book_name]: {
         primaryKey: false,
+        foreignKey: null,
         unique: false
     },
     [columnNames.book_description]: {
         primaryKey: false,
+        foreignKey: null,
         unique: false
     },
     [columnNames.book_price]: {
         primaryKey: false,
+        foreignKey: null,
         unique: false
     },
     [columnNames.author_id_fkey]: {
         primaryKey: false,
+        foreignKey: {
+            idName: "author_id",
+            tableName: "authors"
+        },
         unique: false
     },
     [columnNames.genre_id_fkey]: {
         primaryKey: false,
+        foreignKey: {
+            idName: "genre_id",
+            tableName: "genres"
+        },
         unique: false
     },
     [columnNames.publisher_id_fkey]: {
         primaryKey: false,
+        foreignKey: {
+            idName: "publisher_id",
+            tableName: "publishers"
+        },
         unique: false
     },
     [columnNames.year_published]: {
         primaryKey: false,
+        foreignKey: null,
         unique: false
     },
     [columnNames.copies_sold]: {
         primaryKey: false,
+        foreignKey: null,
         unique: false
     }
 };

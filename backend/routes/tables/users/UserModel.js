@@ -1,4 +1,6 @@
 const ModelInterface = require('../ModelInterface.js');
+const StandardLists = require('../../StandardLists.js');
+const { numeric, lowercase, uppercase, alphabetical, alphanumeric, specialCharacters, alphanumericSpecial, stdBlacklist } = StandardLists;
 
 const columnNames = {
     "user_id": "user_id",
@@ -10,8 +12,6 @@ const columnNames = {
     "address": "address"
 };
 
-const STD_BLACKLIST = [ "\"", "'", "\\", "/" ];
-
 const synchronousConstraintSchema = {
     [columnNames.user_id]: {
         jsType: "number",
@@ -20,7 +20,9 @@ const synchronousConstraintSchema = {
             bounds: [ "[", 0, "i", "-" ],
         },
         blacklist: null,
-        whitelist: null
+        whitelist: null,
+        requiredList: null,
+        custom: null
     },
     [columnNames.username]: {
         jsType: "string",
@@ -28,8 +30,10 @@ const synchronousConstraintSchema = {
             type: "varchar",
             bounds: [ "[", 8, 32, "]" ]
         },
-        blacklist: STD_BLACKLIST,
-        whitelist: null
+        blacklist: null,
+        whitelist: alphanumeric,
+        requiredList: null,
+        custom: null
     },
     [columnNames.password]: {
         jsType: "string",
@@ -38,7 +42,9 @@ const synchronousConstraintSchema = {
             bounds: [ "[", 1, 256, "]" ]
         },
         blacklist: null,
-        whitelist: null
+        whitelist: alphanumericSpecial,
+        requiredList: [ lowercase, uppercase, numeric, specialCharacters ],
+        custom: null
     },
     [columnNames.first_name]: {
         jsType: "string",
@@ -46,8 +52,10 @@ const synchronousConstraintSchema = {
             type: "varchar",
             bounds: [ "[", 2, 32, "]" ]
         },
-        blacklist: STD_BLACKLIST,
-        whitelist: null
+        blacklist: null,
+        whitelist: alphabetical,
+        requiredList: null,
+        custom: null
     },
     [columnNames.last_name]: {
         jsType: "string",
@@ -55,8 +63,10 @@ const synchronousConstraintSchema = {
             type: "varchar",
             bounds: [ "[", 2, 32, "]" ]
         },
-        blacklist: STD_BLACKLIST,
-        whitelist: null
+        blacklist: null,
+        whitelist: alphabetical,
+        requiredList: null,
+        custom: null
     },
     [columnNames.email_address]: {
         jsType: "string",
@@ -64,8 +74,10 @@ const synchronousConstraintSchema = {
             type: "varchar",
             bounds: [ "[", 1, 128, "]" ]
         },
-        blacklist: STD_BLACKLIST,
-        whitelist: null
+        blacklist: stdBlacklist,
+        whitelist: null,
+        requiredList: null,
+        custom: null
     },
     [columnNames.address]: {
         jsType: "string",
@@ -73,38 +85,47 @@ const synchronousConstraintSchema = {
             type: "varchar",
             bounds: [ "[", 1, 128, "]" ]
         },
-        blacklist: STD_BLACKLIST,
-        whitelist: null
+        blacklist: stdBlacklist,
+        whitelist: null,
+        requiredList: null,
+        custom: null
     }
 };
 
 const asynchronousConstraintSchema = {
     [columnNames.user_id]: {
         primaryKey: true,
+        foreignKey: null,
         unique: false
     },
     [columnNames.username]: {
         primaryKey: false,
+        foreignKey: null,
         unique: true
     },
     [columnNames.password]: {
         primaryKey: false,
+        foreignKey: null,
         unique: false
     },
     [columnNames.first_name]: {
         primaryKey: false,
+        foreignKey: null,
         unique: false
     },
     [columnNames.last_name]: {
         primaryKey: false,
+        foreignKey: null,
         unique: false
     },
     [columnNames.email_address]: {
         primaryKey: false,
+        foreignKey: null,
         unique: true
     },
     [columnNames.address]: {
         primaryKey: false,
+        foreignKey: null,
         unique: false
     }
 };

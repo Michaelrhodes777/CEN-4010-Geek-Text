@@ -20,7 +20,7 @@ DROP TABLE IF EXISTS authors;
 CREATE TABLE users (
 			user_id                 INT                 PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
 			username                VARCHAR(32)         UNIQUE NOT NULL,
-			password                VARCHAR(256)        NOT NULL,
+			password                VARCHAR(512)        NOT NULL,
 			first_name              VARCHAR(32),
 			last_name				VARCHAR(32),
 			email_address			VARCHAR(128)        UNIQUE,
@@ -29,9 +29,9 @@ CREATE TABLE users (
 
 CREATE TABLE credit_cards (
 			card_id                 INT 				PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-			credit_card_number      VARCHAR(256)        NOT NULL,
-			expiration_date         VARCHAR(256)        NOT NULL,
-			ccv                     VARCHAR(256)        NOT NULL,
+			credit_card_number      VARCHAR(512)        NOT NULL,
+			expiration         		VARCHAR(512)        NOT NULL,
+			ccv                     VARCHAR(512)        NOT NULL,
 			user_id_fkey            INT                 REFERENCES users(user_id) ON DELETE CASCADE
 );
 
@@ -144,65 +144,3 @@ CREATE VIEW books_by_authors AS
 		INNER JOIN books ON author_id = author_id_fkey
 		GROUP BY author_id
 ;
--- Populate Tables
-
-INSERT INTO users ( username, password, first_name, last_name ) VAlUES 
-	( 'user 1', 'password', 'bob', 'adams' ),
-	( 'user 2', 'password', 'bill', 'smalls' ),
-	( 'user 3', 'password', 'benjamin', 'smith' )
-;
-
-INSERT INTO publishers ( publisher_name, discount_percent ) VALUES
-	( 'publisher 1', 55 ),
-	( 'publisher 2', 23 ),
-	( 'publisher 3', 10 )
-;
-
-INSERT INTO genres ( genre_name ) VALUES
-	( 'genre 1' ),
-	( 'genre 2' ),
-	( 'genre 3' ),
-	( 'genre 4' )
-;
-
-INSERT INTO authors ( first_name, last_name ) VALUES
-	( 'john', 'smith' ),
-	( 'john', 'doe' ),
-	( 'jane', 'doe' )
-;
-
-INSERT INTO books ( book_name, isbn, book_price, author_id_fkey, genre_id_fkey, copies_sold ) VALUES
-	( 'book 1', 700, 100, 1, 1, 1 ),
-	( 'book 2', 800, 100, 1, 1, 2 ),
-	( 'book 3', 900, 200, 1, 2, 3 ),
-	( 'book 4', 1000, 200, 2, 2, 4 ),
-	( 'book 5', 1100, 300, 3, 3, 5 ),
-	( 'book 6', 1200, 300, null, 3, 6 )
-;
-
-INSERT INTO shopping_carts_lt ( user_id_fkey, book_id_fkey, quantity ) VALUES
-	( 1, 1, 2 ),
-	( 1, 2, 3 ),
-	( 2, 3, 4 ),
-	( 2, 4, 5 ),
-	( 3, 5, 6 ),
-	( 3, 6, 7 )
-;
-
-INSERT INTO reviews ( rating, comment, user_id_fkey, book_id_fkey ) VALUES
-	( 77, 'comment 1', 1, 1 ),
-	( 78, 'comment 2', 1, 2 ),
-	( 79, 'comment 3', 1, 3 ),
-	( 80, 'comment 4', 2, 1 ),
-	( 81, 'comment 5', 2, 4 ),
-	( 82, 'comment 6', 3, 4 )
-;
-
-SELECT * FROM users;
-SELECT * FROM books_by_genres;
---SELECT * FROM top_sellers;
---SELECT * FROM shopping_carts;
-SELECT * FROM average_book_ratings;
---SELECT * FROM books_by_authors;
-
-SELECT * FROM books;

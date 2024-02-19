@@ -16,6 +16,10 @@ app.use("/users", require('./routes/tables/users/router.js'));
 app.use("/reviews", require('./routes/tables/reviews/router.js'));
 app.use("/genres", require('./routes/tables/genres/router.js'));
 app.use("/wishlists", require('./routes/tables/wishlists/router.js'));
+app.use("/credit_cards", require('./routes/tables/credit_cards/router.js'));
+
+app.use("/shopping_carts_lt", require('./routes/linking_tables/shopping_carts_lt/router.js'));
+app.use("/books_wishlists_lt", require('./routes/linking_tables/books_wishlists_lt/router.js'));
 
 app.use("/books_by_genres", require('./routes/read_only_views/books_by_genres/router.js'));
 app.use("/books_by_authors", require('./routes/read_only_views/books_by_authors/router.js'));
@@ -23,4 +27,17 @@ app.use("/average_book_ratings", require('./routes/read_only_views/average_book_
 app.use("/top_sellers", require('./routes/read_only_views/top_sellers/router.js'));
 app.use("/shopping_carts", require('./routes/read_only_views/shopping_carts/router.js'));
 
+app.use(function (error, req, res, next) {
+    console.error(error);
+    if (error.isCustomError) {
+        res.status(error.statusCode).json({  "response": error });
+    }
+    else {
+        res.status(500).json({ "response": "Internal Sever Error" });
+    }
+    next();
+});
+
 app.listen(PORT, () => console.log("app listening"));
+
+module.exports = app;

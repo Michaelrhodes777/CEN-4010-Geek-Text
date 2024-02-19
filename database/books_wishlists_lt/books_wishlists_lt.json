@@ -1,0 +1,902 @@
+[
+  {
+    "wishlist_id_fkey": 1,
+    "book_id_fkey": 1
+  },
+  {
+    "wishlist_id_fkey": 1,
+    "book_id_fkey": 2
+  },
+  {
+    "wishlist_id_fkey": 1,
+    "book_id_fkey": 3
+  },
+  {
+    "wishlist_id_fkey": 2,
+    "book_id_fkey": 2
+  },
+  {
+    "wishlist_id_fkey": 2,
+    "book_id_fkey": 3
+  },
+  {
+    "wishlist_id_fkey": 2,
+    "book_id_fkey": 4
+  },
+  {
+    "wishlist_id_fkey": 3,
+    "book_id_fkey": 3
+  },
+  {
+    "wishlist_id_fkey": 3,
+    "book_id_fkey": 4
+  },
+  {
+    "wishlist_id_fkey": 3,
+    "book_id_fkey": 5
+  },
+  {
+    "wishlist_id_fkey": 4,
+    "book_id_fkey": 4
+  },
+  {
+    "wishlist_id_fkey": 4,
+    "book_id_fkey": 5
+  },
+  {
+    "wishlist_id_fkey": 4,
+    "book_id_fkey": 6
+  },
+  {
+    "wishlist_id_fkey": 5,
+    "book_id_fkey": 5
+  },
+  {
+    "wishlist_id_fkey": 5,
+    "book_id_fkey": 6
+  },
+  {
+    "wishlist_id_fkey": 5,
+    "book_id_fkey": 7
+  },
+  {
+    "wishlist_id_fkey": 6,
+    "book_id_fkey": 6
+  },
+  {
+    "wishlist_id_fkey": 6,
+    "book_id_fkey": 7
+  },
+  {
+    "wishlist_id_fkey": 6,
+    "book_id_fkey": 8
+  },
+  {
+    "wishlist_id_fkey": 7,
+    "book_id_fkey": 7
+  },
+  {
+    "wishlist_id_fkey": 7,
+    "book_id_fkey": 8
+  },
+  {
+    "wishlist_id_fkey": 7,
+    "book_id_fkey": 9
+  },
+  {
+    "wishlist_id_fkey": 8,
+    "book_id_fkey": 8
+  },
+  {
+    "wishlist_id_fkey": 8,
+    "book_id_fkey": 9
+  },
+  {
+    "wishlist_id_fkey": 8,
+    "book_id_fkey": 10
+  },
+  {
+    "wishlist_id_fkey": 9,
+    "book_id_fkey": 9
+  },
+  {
+    "wishlist_id_fkey": 9,
+    "book_id_fkey": 10
+  },
+  {
+    "wishlist_id_fkey": 9,
+    "book_id_fkey": 11
+  },
+  {
+    "wishlist_id_fkey": 10,
+    "book_id_fkey": 10
+  },
+  {
+    "wishlist_id_fkey": 10,
+    "book_id_fkey": 11
+  },
+  {
+    "wishlist_id_fkey": 10,
+    "book_id_fkey": 12
+  },
+  {
+    "wishlist_id_fkey": 11,
+    "book_id_fkey": 11
+  },
+  {
+    "wishlist_id_fkey": 11,
+    "book_id_fkey": 12
+  },
+  {
+    "wishlist_id_fkey": 11,
+    "book_id_fkey": 13
+  },
+  {
+    "wishlist_id_fkey": 12,
+    "book_id_fkey": 12
+  },
+  {
+    "wishlist_id_fkey": 12,
+    "book_id_fkey": 13
+  },
+  {
+    "wishlist_id_fkey": 12,
+    "book_id_fkey": 14
+  },
+  {
+    "wishlist_id_fkey": 13,
+    "book_id_fkey": 13
+  },
+  {
+    "wishlist_id_fkey": 13,
+    "book_id_fkey": 14
+  },
+  {
+    "wishlist_id_fkey": 13,
+    "book_id_fkey": 15
+  },
+  {
+    "wishlist_id_fkey": 14,
+    "book_id_fkey": 14
+  },
+  {
+    "wishlist_id_fkey": 14,
+    "book_id_fkey": 15
+  },
+  {
+    "wishlist_id_fkey": 14,
+    "book_id_fkey": 16
+  },
+  {
+    "wishlist_id_fkey": 15,
+    "book_id_fkey": 15
+  },
+  {
+    "wishlist_id_fkey": 15,
+    "book_id_fkey": 16
+  },
+  {
+    "wishlist_id_fkey": 15,
+    "book_id_fkey": 17
+  },
+  {
+    "wishlist_id_fkey": 16,
+    "book_id_fkey": 16
+  },
+  {
+    "wishlist_id_fkey": 16,
+    "book_id_fkey": 17
+  },
+  {
+    "wishlist_id_fkey": 16,
+    "book_id_fkey": 18
+  },
+  {
+    "wishlist_id_fkey": 17,
+    "book_id_fkey": 17
+  },
+  {
+    "wishlist_id_fkey": 17,
+    "book_id_fkey": 18
+  },
+  {
+    "wishlist_id_fkey": 17,
+    "book_id_fkey": 19
+  },
+  {
+    "wishlist_id_fkey": 18,
+    "book_id_fkey": 18
+  },
+  {
+    "wishlist_id_fkey": 18,
+    "book_id_fkey": 19
+  },
+  {
+    "wishlist_id_fkey": 18,
+    "book_id_fkey": 20
+  },
+  {
+    "wishlist_id_fkey": 19,
+    "book_id_fkey": 19
+  },
+  {
+    "wishlist_id_fkey": 19,
+    "book_id_fkey": 20
+  },
+  {
+    "wishlist_id_fkey": 19,
+    "book_id_fkey": 21
+  },
+  {
+    "wishlist_id_fkey": 20,
+    "book_id_fkey": 20
+  },
+  {
+    "wishlist_id_fkey": 20,
+    "book_id_fkey": 21
+  },
+  {
+    "wishlist_id_fkey": 20,
+    "book_id_fkey": 22
+  },
+  {
+    "wishlist_id_fkey": 21,
+    "book_id_fkey": 21
+  },
+  {
+    "wishlist_id_fkey": 21,
+    "book_id_fkey": 22
+  },
+  {
+    "wishlist_id_fkey": 21,
+    "book_id_fkey": 23
+  },
+  {
+    "wishlist_id_fkey": 22,
+    "book_id_fkey": 22
+  },
+  {
+    "wishlist_id_fkey": 22,
+    "book_id_fkey": 23
+  },
+  {
+    "wishlist_id_fkey": 22,
+    "book_id_fkey": 24
+  },
+  {
+    "wishlist_id_fkey": 23,
+    "book_id_fkey": 23
+  },
+  {
+    "wishlist_id_fkey": 23,
+    "book_id_fkey": 24
+  },
+  {
+    "wishlist_id_fkey": 23,
+    "book_id_fkey": 25
+  },
+  {
+    "wishlist_id_fkey": 24,
+    "book_id_fkey": 24
+  },
+  {
+    "wishlist_id_fkey": 24,
+    "book_id_fkey": 25
+  },
+  {
+    "wishlist_id_fkey": 24,
+    "book_id_fkey": 26
+  },
+  {
+    "wishlist_id_fkey": 25,
+    "book_id_fkey": 25
+  },
+  {
+    "wishlist_id_fkey": 25,
+    "book_id_fkey": 26
+  },
+  {
+    "wishlist_id_fkey": 25,
+    "book_id_fkey": 27
+  },
+  {
+    "wishlist_id_fkey": 26,
+    "book_id_fkey": 26
+  },
+  {
+    "wishlist_id_fkey": 26,
+    "book_id_fkey": 27
+  },
+  {
+    "wishlist_id_fkey": 26,
+    "book_id_fkey": 28
+  },
+  {
+    "wishlist_id_fkey": 27,
+    "book_id_fkey": 27
+  },
+  {
+    "wishlist_id_fkey": 27,
+    "book_id_fkey": 28
+  },
+  {
+    "wishlist_id_fkey": 27,
+    "book_id_fkey": 29
+  },
+  {
+    "wishlist_id_fkey": 28,
+    "book_id_fkey": 28
+  },
+  {
+    "wishlist_id_fkey": 28,
+    "book_id_fkey": 29
+  },
+  {
+    "wishlist_id_fkey": 28,
+    "book_id_fkey": 30
+  },
+  {
+    "wishlist_id_fkey": 29,
+    "book_id_fkey": 29
+  },
+  {
+    "wishlist_id_fkey": 29,
+    "book_id_fkey": 30
+  },
+  {
+    "wishlist_id_fkey": 29,
+    "book_id_fkey": 31
+  },
+  {
+    "wishlist_id_fkey": 30,
+    "book_id_fkey": 30
+  },
+  {
+    "wishlist_id_fkey": 30,
+    "book_id_fkey": 31
+  },
+  {
+    "wishlist_id_fkey": 30,
+    "book_id_fkey": 32
+  },
+  {
+    "wishlist_id_fkey": 31,
+    "book_id_fkey": 31
+  },
+  {
+    "wishlist_id_fkey": 31,
+    "book_id_fkey": 32
+  },
+  {
+    "wishlist_id_fkey": 31,
+    "book_id_fkey": 33
+  },
+  {
+    "wishlist_id_fkey": 32,
+    "book_id_fkey": 32
+  },
+  {
+    "wishlist_id_fkey": 32,
+    "book_id_fkey": 33
+  },
+  {
+    "wishlist_id_fkey": 32,
+    "book_id_fkey": 34
+  },
+  {
+    "wishlist_id_fkey": 33,
+    "book_id_fkey": 33
+  },
+  {
+    "wishlist_id_fkey": 33,
+    "book_id_fkey": 34
+  },
+  {
+    "wishlist_id_fkey": 33,
+    "book_id_fkey": 35
+  },
+  {
+    "wishlist_id_fkey": 34,
+    "book_id_fkey": 34
+  },
+  {
+    "wishlist_id_fkey": 34,
+    "book_id_fkey": 35
+  },
+  {
+    "wishlist_id_fkey": 34,
+    "book_id_fkey": 36
+  },
+  {
+    "wishlist_id_fkey": 35,
+    "book_id_fkey": 35
+  },
+  {
+    "wishlist_id_fkey": 35,
+    "book_id_fkey": 36
+  },
+  {
+    "wishlist_id_fkey": 35,
+    "book_id_fkey": 37
+  },
+  {
+    "wishlist_id_fkey": 36,
+    "book_id_fkey": 36
+  },
+  {
+    "wishlist_id_fkey": 36,
+    "book_id_fkey": 37
+  },
+  {
+    "wishlist_id_fkey": 36,
+    "book_id_fkey": 38
+  },
+  {
+    "wishlist_id_fkey": 37,
+    "book_id_fkey": 37
+  },
+  {
+    "wishlist_id_fkey": 37,
+    "book_id_fkey": 38
+  },
+  {
+    "wishlist_id_fkey": 37,
+    "book_id_fkey": 39
+  },
+  {
+    "wishlist_id_fkey": 38,
+    "book_id_fkey": 38
+  },
+  {
+    "wishlist_id_fkey": 38,
+    "book_id_fkey": 39
+  },
+  {
+    "wishlist_id_fkey": 38,
+    "book_id_fkey": 40
+  },
+  {
+    "wishlist_id_fkey": 39,
+    "book_id_fkey": 39
+  },
+  {
+    "wishlist_id_fkey": 39,
+    "book_id_fkey": 40
+  },
+  {
+    "wishlist_id_fkey": 39,
+    "book_id_fkey": 41
+  },
+  {
+    "wishlist_id_fkey": 40,
+    "book_id_fkey": 40
+  },
+  {
+    "wishlist_id_fkey": 40,
+    "book_id_fkey": 41
+  },
+  {
+    "wishlist_id_fkey": 40,
+    "book_id_fkey": 42
+  },
+  {
+    "wishlist_id_fkey": 41,
+    "book_id_fkey": 41
+  },
+  {
+    "wishlist_id_fkey": 41,
+    "book_id_fkey": 42
+  },
+  {
+    "wishlist_id_fkey": 41,
+    "book_id_fkey": 43
+  },
+  {
+    "wishlist_id_fkey": 42,
+    "book_id_fkey": 42
+  },
+  {
+    "wishlist_id_fkey": 42,
+    "book_id_fkey": 43
+  },
+  {
+    "wishlist_id_fkey": 42,
+    "book_id_fkey": 44
+  },
+  {
+    "wishlist_id_fkey": 43,
+    "book_id_fkey": 43
+  },
+  {
+    "wishlist_id_fkey": 43,
+    "book_id_fkey": 44
+  },
+  {
+    "wishlist_id_fkey": 43,
+    "book_id_fkey": 45
+  },
+  {
+    "wishlist_id_fkey": 44,
+    "book_id_fkey": 44
+  },
+  {
+    "wishlist_id_fkey": 44,
+    "book_id_fkey": 45
+  },
+  {
+    "wishlist_id_fkey": 44,
+    "book_id_fkey": 46
+  },
+  {
+    "wishlist_id_fkey": 45,
+    "book_id_fkey": 45
+  },
+  {
+    "wishlist_id_fkey": 45,
+    "book_id_fkey": 46
+  },
+  {
+    "wishlist_id_fkey": 45,
+    "book_id_fkey": 47
+  },
+  {
+    "wishlist_id_fkey": 46,
+    "book_id_fkey": 46
+  },
+  {
+    "wishlist_id_fkey": 46,
+    "book_id_fkey": 47
+  },
+  {
+    "wishlist_id_fkey": 46,
+    "book_id_fkey": 48
+  },
+  {
+    "wishlist_id_fkey": 47,
+    "book_id_fkey": 47
+  },
+  {
+    "wishlist_id_fkey": 47,
+    "book_id_fkey": 48
+  },
+  {
+    "wishlist_id_fkey": 47,
+    "book_id_fkey": 49
+  },
+  {
+    "wishlist_id_fkey": 48,
+    "book_id_fkey": 48
+  },
+  {
+    "wishlist_id_fkey": 48,
+    "book_id_fkey": 49
+  },
+  {
+    "wishlist_id_fkey": 48,
+    "book_id_fkey": 50
+  },
+  {
+    "wishlist_id_fkey": 49,
+    "book_id_fkey": 49
+  },
+  {
+    "wishlist_id_fkey": 49,
+    "book_id_fkey": 50
+  },
+  {
+    "wishlist_id_fkey": 49,
+    "book_id_fkey": 1
+  },
+  {
+    "wishlist_id_fkey": 50,
+    "book_id_fkey": 50
+  },
+  {
+    "wishlist_id_fkey": 50,
+    "book_id_fkey": 1
+  },
+  {
+    "wishlist_id_fkey": 50,
+    "book_id_fkey": 2
+  },
+  {
+    "wishlist_id_fkey": 51,
+    "book_id_fkey": 1
+  },
+  {
+    "wishlist_id_fkey": 51,
+    "book_id_fkey": 2
+  },
+  {
+    "wishlist_id_fkey": 51,
+    "book_id_fkey": 3
+  },
+  {
+    "wishlist_id_fkey": 52,
+    "book_id_fkey": 2
+  },
+  {
+    "wishlist_id_fkey": 52,
+    "book_id_fkey": 3
+  },
+  {
+    "wishlist_id_fkey": 52,
+    "book_id_fkey": 4
+  },
+  {
+    "wishlist_id_fkey": 53,
+    "book_id_fkey": 3
+  },
+  {
+    "wishlist_id_fkey": 53,
+    "book_id_fkey": 4
+  },
+  {
+    "wishlist_id_fkey": 53,
+    "book_id_fkey": 5
+  },
+  {
+    "wishlist_id_fkey": 54,
+    "book_id_fkey": 4
+  },
+  {
+    "wishlist_id_fkey": 54,
+    "book_id_fkey": 5
+  },
+  {
+    "wishlist_id_fkey": 54,
+    "book_id_fkey": 6
+  },
+  {
+    "wishlist_id_fkey": 55,
+    "book_id_fkey": 5
+  },
+  {
+    "wishlist_id_fkey": 55,
+    "book_id_fkey": 6
+  },
+  {
+    "wishlist_id_fkey": 55,
+    "book_id_fkey": 7
+  },
+  {
+    "wishlist_id_fkey": 56,
+    "book_id_fkey": 6
+  },
+  {
+    "wishlist_id_fkey": 56,
+    "book_id_fkey": 7
+  },
+  {
+    "wishlist_id_fkey": 56,
+    "book_id_fkey": 8
+  },
+  {
+    "wishlist_id_fkey": 57,
+    "book_id_fkey": 7
+  },
+  {
+    "wishlist_id_fkey": 57,
+    "book_id_fkey": 8
+  },
+  {
+    "wishlist_id_fkey": 57,
+    "book_id_fkey": 9
+  },
+  {
+    "wishlist_id_fkey": 58,
+    "book_id_fkey": 8
+  },
+  {
+    "wishlist_id_fkey": 58,
+    "book_id_fkey": 9
+  },
+  {
+    "wishlist_id_fkey": 58,
+    "book_id_fkey": 10
+  },
+  {
+    "wishlist_id_fkey": 59,
+    "book_id_fkey": 9
+  },
+  {
+    "wishlist_id_fkey": 59,
+    "book_id_fkey": 10
+  },
+  {
+    "wishlist_id_fkey": 59,
+    "book_id_fkey": 11
+  },
+  {
+    "wishlist_id_fkey": 60,
+    "book_id_fkey": 10
+  },
+  {
+    "wishlist_id_fkey": 60,
+    "book_id_fkey": 11
+  },
+  {
+    "wishlist_id_fkey": 60,
+    "book_id_fkey": 12
+  },
+  {
+    "wishlist_id_fkey": 61,
+    "book_id_fkey": 11
+  },
+  {
+    "wishlist_id_fkey": 61,
+    "book_id_fkey": 12
+  },
+  {
+    "wishlist_id_fkey": 61,
+    "book_id_fkey": 13
+  },
+  {
+    "wishlist_id_fkey": 62,
+    "book_id_fkey": 12
+  },
+  {
+    "wishlist_id_fkey": 62,
+    "book_id_fkey": 13
+  },
+  {
+    "wishlist_id_fkey": 62,
+    "book_id_fkey": 14
+  },
+  {
+    "wishlist_id_fkey": 63,
+    "book_id_fkey": 13
+  },
+  {
+    "wishlist_id_fkey": 63,
+    "book_id_fkey": 14
+  },
+  {
+    "wishlist_id_fkey": 63,
+    "book_id_fkey": 15
+  },
+  {
+    "wishlist_id_fkey": 64,
+    "book_id_fkey": 14
+  },
+  {
+    "wishlist_id_fkey": 64,
+    "book_id_fkey": 15
+  },
+  {
+    "wishlist_id_fkey": 64,
+    "book_id_fkey": 16
+  },
+  {
+    "wishlist_id_fkey": 65,
+    "book_id_fkey": 15
+  },
+  {
+    "wishlist_id_fkey": 65,
+    "book_id_fkey": 16
+  },
+  {
+    "wishlist_id_fkey": 65,
+    "book_id_fkey": 17
+  },
+  {
+    "wishlist_id_fkey": 66,
+    "book_id_fkey": 16
+  },
+  {
+    "wishlist_id_fkey": 66,
+    "book_id_fkey": 17
+  },
+  {
+    "wishlist_id_fkey": 66,
+    "book_id_fkey": 18
+  },
+  {
+    "wishlist_id_fkey": 67,
+    "book_id_fkey": 17
+  },
+  {
+    "wishlist_id_fkey": 67,
+    "book_id_fkey": 18
+  },
+  {
+    "wishlist_id_fkey": 67,
+    "book_id_fkey": 19
+  },
+  {
+    "wishlist_id_fkey": 68,
+    "book_id_fkey": 18
+  },
+  {
+    "wishlist_id_fkey": 68,
+    "book_id_fkey": 19
+  },
+  {
+    "wishlist_id_fkey": 68,
+    "book_id_fkey": 20
+  },
+  {
+    "wishlist_id_fkey": 69,
+    "book_id_fkey": 19
+  },
+  {
+    "wishlist_id_fkey": 69,
+    "book_id_fkey": 20
+  },
+  {
+    "wishlist_id_fkey": 69,
+    "book_id_fkey": 21
+  },
+  {
+    "wishlist_id_fkey": 70,
+    "book_id_fkey": 20
+  },
+  {
+    "wishlist_id_fkey": 70,
+    "book_id_fkey": 21
+  },
+  {
+    "wishlist_id_fkey": 70,
+    "book_id_fkey": 22
+  },
+  {
+    "wishlist_id_fkey": 71,
+    "book_id_fkey": 21
+  },
+  {
+    "wishlist_id_fkey": 71,
+    "book_id_fkey": 22
+  },
+  {
+    "wishlist_id_fkey": 71,
+    "book_id_fkey": 23
+  },
+  {
+    "wishlist_id_fkey": 72,
+    "book_id_fkey": 22
+  },
+  {
+    "wishlist_id_fkey": 72,
+    "book_id_fkey": 23
+  },
+  {
+    "wishlist_id_fkey": 72,
+    "book_id_fkey": 24
+  },
+  {
+    "wishlist_id_fkey": 73,
+    "book_id_fkey": 23
+  },
+  {
+    "wishlist_id_fkey": 73,
+    "book_id_fkey": 24
+  },
+  {
+    "wishlist_id_fkey": 73,
+    "book_id_fkey": 25
+  },
+  {
+    "wishlist_id_fkey": 74,
+    "book_id_fkey": 24
+  },
+  {
+    "wishlist_id_fkey": 74,
+    "book_id_fkey": 25
+  },
+  {
+    "wishlist_id_fkey": 74,
+    "book_id_fkey": 26
+  },
+  {
+    "wishlist_id_fkey": 75,
+    "book_id_fkey": 25
+  },
+  {
+    "wishlist_id_fkey": 75,
+    "book_id_fkey": 26
+  },
+  {
+    "wishlist_id_fkey": 75,
+    "book_id_fkey": 27
+  }
+]

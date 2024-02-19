@@ -1,0 +1,32 @@
+[
+  {
+    "genre_name": "documentary"
+  },
+  {
+    "genre_name": "comedy"
+  },
+  {
+    "genre_name": "war"
+  },
+  {
+    "genre_name": "animation"
+  },
+  {
+    "genre_name": "drama"
+  },
+  {
+    "genre_name": "action"
+  },
+  {
+    "genre_name": "fantasy"
+  },
+  {
+    "genre_name": "sci-fi"
+  },
+  {
+    "genre_name": "crime"
+  },
+  {
+    "genre_name": "horror"
+  }
+]

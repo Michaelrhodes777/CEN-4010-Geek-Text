@@ -1,0 +1,261 @@
+{
+	"info": {
+		"_postman_id": "82c5e115-89ed-4c32-86e0-76afae641b27",
+		"name": "Read All Tables",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25956619",
+		"_collection_link": "https://restless-crescent-707682.postman.co/workspace/Geek-Text-V2~f7a0454e-8014-42e6-b8ef-f95a590e429e/collection/25956619-82c5e115-89ed-4c32-86e0-76afae641b27?action=share&source=collection_link&creator=25956619"
+	},
+	"item": [
+		{
+			"name": "Read All users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3500/users?id=[0]",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3500",
+					"path": [
+						"users"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "[0]"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read All publishers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3500/publishers?id=[0]",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3500",
+					"path": [
+						"publishers"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "[0]"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read All genres",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3500/genres?id=[0]",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3500",
+					"path": [
+						"genres"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "[0]"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read All authors",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3500/authors?id=[0]",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3500",
+					"path": [
+						"authors"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "[0]"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read All books",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3500/books?id=[0]",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3500",
+					"path": [
+						"books"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "[0]"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read All reviews",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3500/reviews?id=[0]",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3500",
+					"path": [
+						"reviews"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "[0]"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read All credit_cards",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3500/credit_cards?id=[0]",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3500",
+					"path": [
+						"credit_cards"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "[0]"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read All wishlists",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3500/wishlists?id=[0]",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3500",
+					"path": [
+						"wishlists"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "[0]"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read All shopping_carts_lt",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3500/shopping_carts_lt?qid=[0]",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3500",
+					"path": [
+						"shopping_carts_lt"
+					],
+					"query": [
+						{
+							"key": "qid",
+							"value": "[0]"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read All books_wishlists_lt",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3500/books_wishlists_lt?qid=[0]",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3500",
+					"path": [
+						"books_wishlists_lt"
+					],
+					"query": [
+						{
+							"key": "qid",
+							"value": "[0]"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

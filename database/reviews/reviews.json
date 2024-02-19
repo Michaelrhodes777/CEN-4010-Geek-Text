@@ -1,0 +1,566 @@
+[
+  {
+    "rating": 5,
+    "comment": "A fascinating insight into the life of Philip Doddridge.",
+    "book_id_fkey": 1,
+    "user_id_fkey": 1
+  },
+  {
+    "rating": 4,
+    "comment": "Well-written biography with great historical context.",
+    "book_id_fkey": 1,
+    "user_id_fkey": 2
+  },
+  {
+    "rating": 4,
+    "comment": "Interesting travel memoir.",
+    "book_id_fkey": 2,
+    "user_id_fkey": 2
+  },
+  {
+    "rating": 4,
+    "comment": "Provides a unique perspective on Dahomey.",
+    "book_id_fkey": 2,
+    "user_id_fkey": 3
+  },
+  {
+    "rating": 5,
+    "comment": "An inspiring read about the fight for liberty.",
+    "book_id_fkey": 3,
+    "user_id_fkey": 3
+  },
+  {
+    "rating": 4,
+    "comment": "Detailed account of a pivotal historical figure.",
+    "book_id_fkey": 3,
+    "user_id_fkey": 4
+  },
+  {
+    "rating": 4,
+    "comment": "Fascinating exploration of linguistic connections.",
+    "book_id_fkey": 4,
+    "user_id_fkey": 4
+  },
+  {
+    "rating": 4,
+    "comment": "Insightful analysis of language and culture.",
+    "book_id_fkey": 4,
+    "user_id_fkey": 5
+  },
+  {
+    "rating": 5,
+    "comment": "Captivating journey through Eastern Europe.",
+    "book_id_fkey": 5,
+    "user_id_fkey": 5
+  },
+  {
+    "rating": 5,
+    "comment": "Interesting blend of travel and sports anecdotes.",
+    "book_id_fkey": 5,
+    "user_id_fkey": 6
+  },
+  {
+    "rating": 4,
+    "comment": "Engaging account of the theatrical world.",
+    "book_id_fkey": 6,
+    "user_id_fkey": 6
+  },
+  {
+    "rating": 5,
+    "comment": "A must-read for theater lovers.",
+    "book_id_fkey": 6,
+    "user_id_fkey": 7
+  },
+  {
+    "rating": 4,
+    "comment": "Insightful reflections on historical periods.",
+    "book_id_fkey": 7,
+    "user_id_fkey": 7
+  },
+  {
+    "rating": 5,
+    "comment": "A thought-provoking journey through time.",
+    "book_id_fkey": 7,
+    "user_id_fkey": 8
+  },
+  {
+    "rating": 4,
+    "comment": "Informative overview of medical principles.",
+    "book_id_fkey": 8,
+    "user_id_fkey": 8
+  },
+  {
+    "rating": 4,
+    "comment": "Useful reference for understanding medicine.",
+    "book_id_fkey": 8,
+    "user_id_fkey": 9
+  },
+  {
+    "rating": 5,
+    "comment": "A captivating love story that keeps you hooked.",
+    "book_id_fkey": 9,
+    "user_id_fkey": 9
+  },
+  {
+    "rating": 5,
+    "comment": "Heartwarming tale of romance and passion.",
+    "book_id_fkey": 9,
+    "user_id_fkey": 10
+  },
+  {
+    "rating": 5,
+    "comment": "Beautiful poetry collection with profound themes.",
+    "book_id_fkey": 10,
+    "user_id_fkey": 10
+  },
+  {
+    "rating": 4,
+    "comment": "A delightful read for poetry enthusiasts.",
+    "book_id_fkey": 10,
+    "user_id_fkey": 11
+  },
+  {
+    "rating": 4,
+    "comment": "Insightful examination of Bismarck's era.",
+    "book_id_fkey": 11,
+    "user_id_fkey": 11
+  },
+  {
+    "rating": 4,
+    "comment": "A comprehensive analysis of historical events.",
+    "book_id_fkey": 11,
+    "user_id_fkey": 12
+  },
+  {
+    "rating": 5,
+    "comment": "In-depth exploration of trade routes and their impact.",
+    "book_id_fkey": 12,
+    "user_id_fkey": 12
+  },
+  {
+    "rating": 5,
+    "comment": "Fascinating insights into the economic history of the region.",
+    "book_id_fkey": 12,
+    "user_id_fkey": 13
+  },
+  {
+    "rating": 5,
+    "comment": "Insightful report on deaf-mute instruction at the Vienna Exhibition.",
+    "book_id_fkey": 13,
+    "user_id_fkey": 13
+  },
+  {
+    "rating": 5,
+    "comment": "Important documentation of educational practices.",
+    "book_id_fkey": 13,
+    "user_id_fkey": 14
+  },
+  {
+    "rating": 4,
+    "comment": "Interesting insights into the character of Octavia.",
+    "book_id_fkey": 14,
+    "user_id_fkey": 14
+  },
+  {
+    "rating": 4,
+    "comment": "A valuable addition to Shakespearean studies.",
+    "book_id_fkey": 14,
+    "user_id_fkey": 15
+  },
+  {
+    "rating": 5,
+    "comment": "Empowering and motivating read.",
+    "book_id_fkey": 15,
+    "user_id_fkey": 15
+  },
+  {
+    "rating": 5,
+    "comment": "Practical advice for personal growth and development.",
+    "book_id_fkey": 15,
+    "user_id_fkey": 16
+  },
+  {
+    "rating": 5,
+    "comment": "Charming tale with a heartwarming message.",
+    "book_id_fkey": 16,
+    "user_id_fkey": 16
+  },
+  {
+    "rating": 5,
+    "comment": "A delightful story about the quest for a tortoise-shell.",
+    "book_id_fkey": 16,
+    "user_id_fkey": 17
+  },
+  {
+    "rating": 5,
+    "comment": "Moving collection of poems about war.",
+    "book_id_fkey": 17,
+    "user_id_fkey": 17
+  },
+  {
+    "rating": 4,
+    "comment": "Evocative and thought-provoking poetry.",
+    "book_id_fkey": 17,
+    "user_id_fkey": 18
+  },
+  {
+    "rating": 5,
+    "comment": "Beautiful tribute to Japanese culture.",
+    "book_id_fkey": 18,
+    "user_id_fkey": 18
+  },
+  {
+    "rating": 5,
+    "comment": "Wonderful collection of verse and song.",
+    "book_id_fkey": 18,
+    "user_id_fkey": 19
+  },
+  {
+    "rating": 5,
+    "comment": "Comprehensive and well-explained textbook.",
+    "book_id_fkey": 19,
+    "user_id_fkey": 19
+  },
+  {
+    "rating": 5,
+    "comment": "An essential resource for students of organic chemistry.",
+    "book_id_fkey": 19,
+    "user_id_fkey": 20
+  },
+  {
+    "rating": 4,
+    "comment": "Uplifting and inspirational read.",
+    "book_id_fkey": 20,
+    "user_id_fkey": 20
+  },
+  {
+    "rating": 5,
+    "comment": "Encouraging messages for young believers.",
+    "book_id_fkey": 20,
+    "user_id_fkey": 21
+  },
+  {
+    "rating": 5,
+    "comment": "Insightful glimpse into historical correspondence.",
+    "book_id_fkey": 21,
+    "user_id_fkey": 21
+  },
+  {
+    "rating": 5,
+    "comment": "Fascinating read for those interested in political history.",
+    "book_id_fkey": 21,
+    "user_id_fkey": 22
+  },
+  {
+    "rating": 5,
+    "comment": "In-depth analysis of English language formations.",
+    "book_id_fkey": 22,
+    "user_id_fkey": 22
+  },
+  {
+    "rating": 5,
+    "comment": "A valuable resource for understanding linguistic structures.",
+    "book_id_fkey": 22,
+    "user_id_fkey": 23
+  },
+  {
+    "rating": 5,
+    "comment": "Heartfelt poetry that resonates with the soul.",
+    "book_id_fkey": 23,
+    "user_id_fkey": 23
+  },
+  {
+    "rating": 5,
+    "comment": "Powerful collection of poems reflecting on social issues.",
+    "book_id_fkey": 23,
+    "user_id_fkey": 24
+  },
+  {
+    "rating": 5,
+    "comment": "Beautiful hymns that inspire worship and reflection.",
+    "book_id_fkey": 24,
+    "user_id_fkey": 24
+  },
+  {
+    "rating": 5,
+    "comment": "Sacred poetry that touches the heart.",
+    "book_id_fkey": 24,
+    "user_id_fkey": 25
+  },
+  {
+    "rating": 5,
+    "comment": "Engaging and imaginative tales for all ages.",
+    "book_id_fkey": 25,
+    "user_id_fkey": 25
+  },
+  {
+    "rating": 5,
+    "comment": "Entertaining collection of stories with intriguing plots.",
+    "book_id_fkey": 25,
+    "user_id_fkey": 26
+  },
+  {
+    "rating": 5,
+    "comment": "Thought-provoking verses that stir the imagination.",
+    "book_id_fkey": 26,
+    "user_id_fkey": 26
+  },
+  {
+    "rating": 4,
+    "comment": "A poetic journey through emotions and experiences.",
+    "book_id_fkey": 26,
+    "user_id_fkey": 27
+  },
+  {
+    "rating": 4,
+    "comment": "Insightful speech advocating for unity and peace.",
+    "book_id_fkey": 27,
+    "user_id_fkey": 27
+  },
+  {
+    "rating": 4,
+    "comment": "A historical perspective on the restoration of union and peace.",
+    "book_id_fkey": 27,
+    "user_id_fkey": 28
+  },
+  {
+    "rating": 5,
+    "comment": "Comprehensive study of the common sole and its significance.",
+    "book_id_fkey": 28,
+    "user_id_fkey": 28
+  },
+  {
+    "rating": 5,
+    "comment": "Informative treatise on the biology and economic importance of the common sole.",
+    "book_id_fkey": 28,
+    "user_id_fkey": 29
+  },
+  {
+    "rating": 5,
+    "comment": "Insightful exploration of rural development.",
+    "book_id_fkey": 29,
+    "user_id_fkey": 29
+  },
+  {
+    "rating": 4,
+    "comment": "A valuable resource for rural community planning.",
+    "book_id_fkey": 29,
+    "user_id_fkey": 30
+  },
+  {
+    "rating": 5,
+    "comment": "Critical examination of English influence in America.",
+    "book_id_fkey": 30,
+    "user_id_fkey": 30
+  },
+  {
+    "rating": 4,
+    "comment": "Insightful analysis of colonial history.",
+    "book_id_fkey": 30,
+    "user_id_fkey": 31
+  },
+  {
+    "rating": 5,
+    "comment": "Informative guide for understanding citizenship responsibilities.",
+    "book_id_fkey": 31,
+    "user_id_fkey": 31
+  },
+  {
+    "rating": 4,
+    "comment": "A useful resource for promoting civic participation.",
+    "book_id_fkey": 31,
+    "user_id_fkey": 32
+  },
+  {
+    "rating": 5,
+    "comment": "Comprehensive study guide for dam construction.",
+    "book_id_fkey": 32,
+    "user_id_fkey": 32
+  },
+  {
+    "rating": 5,
+    "comment": "A practical approach to understanding dam engineering.",
+    "book_id_fkey": 32,
+    "user_id_fkey": 33
+  },
+  {
+    "rating": 5,
+    "comment": "Insightful analysis of tariff and tax policies.",
+    "book_id_fkey": 33,
+    "user_id_fkey": 33
+  },
+  {
+    "rating": 4,
+    "comment": "A valuable resource for understanding economic regulations.",
+    "book_id_fkey": 33,
+    "user_id_fkey": 34
+  },
+  {
+    "rating": 5,
+    "comment": "Insightful examination of the intersection of politics and religion.",
+    "book_id_fkey": 34,
+    "user_id_fkey": 34
+  },
+  {
+    "rating": 4,
+    "comment": "A thought-provoking study of church politics in England.",
+    "book_id_fkey": 34,
+    "user_id_fkey": 35
+  },
+  {
+    "rating": 5,
+    "comment": "Compelling stories that capture the essence of the Mississippi Valley.",
+    "book_id_fkey": 35,
+    "user_id_fkey": 35
+  },
+  {
+    "rating": 4,
+    "comment": "An authentic portrayal of life in the Midwest.",
+    "book_id_fkey": 35,
+    "user_id_fkey": 36
+  },
+  {
+    "rating": 5,
+    "comment": "Engaging novel with well-developed characters.",
+    "book_id_fkey": 36,
+    "user_id_fkey": 36
+  },
+  {
+    "rating": 4,
+    "comment": "A captivating story set against the backdrop of political intrigue.",
+    "book_id_fkey": 36,
+    "user_id_fkey": 37
+  },
+  {
+    "rating": 5,
+    "comment": "Mary's journey through California was both exciting and enlightening.",
+    "book_id_fkey": 37,
+    "user_id_fkey": 37
+  },
+  {
+    "rating": 4,
+    "comment": "A delightful blend of adventure and romance. California comes alive in this book!",
+    "book_id_fkey": 37,
+    "user_id_fkey": 38
+  },
+  {
+    "rating": 5,
+    "comment": "The masquerade of identities kept me guessing until the very end. Brilliant!",
+    "book_id_fkey": 38,
+    "user_id_fkey": 38
+  },
+  {
+    "rating": 5,
+    "comment": "An enthralling read with twists and turns at every corner. Highly recommend!",
+    "book_id_fkey": 38,
+    "user_id_fkey": 39
+  },
+  {
+    "rating": 4,
+    "comment": "While lengthy, Masollam offers a rich tapestry of characters and settings.",
+    "book_id_fkey": 39,
+    "user_id_fkey": 39
+  },
+  {
+    "rating": 4,
+    "comment": "A classic work with deep philosophical undertones. Not for the faint-hearted.",
+    "book_id_fkey": 39,
+    "user_id_fkey": 40
+  },
+  {
+    "rating": 5,
+    "comment": "A poignant tale of love and freedom. The characters stayed with me long after I finished.",
+    "book_id_fkey": 40,
+    "user_id_fkey": 40
+  },
+  {
+    "rating": 4,
+    "comment": "An inspiring story that highlights the resilience of the human spirit. Loved it!",
+    "book_id_fkey": 40,
+    "user_id_fkey": 41
+  },
+  {
+    "rating": 5,
+    "comment": "A fascinating exploration of the human voice. Insightful and engaging!",
+    "book_id_fkey": 41,
+    "user_id_fkey": 41
+  },
+  {
+    "rating": 4,
+    "comment": "An essential read for anyone interested in understanding the voice's significance in human communication.",
+    "book_id_fkey": 41,
+    "user_id_fkey": 42
+  },
+  {
+    "rating": 5,
+    "comment": "An invaluable account of Pennsylvania's contributions to these pivotal battles. A masterpiece of historical scholarship!",
+    "book_id_fkey": 42,
+    "user_id_fkey": 42
+  },
+  {
+    "rating": 5,
+    "comment": "Skinner's thorough research and compelling narrative make this a must-read for Civil Waraficionados.",
+    "book_id_fkey": 42,
+    "user_id_fkey": 43
+  },
+  {
+    "rating": 4,
+    "comment": "An insightful exploration of societal norms and individual identity. Thought-provoking!",
+    "book_id_fkey": 43,
+    "user_id_fkey": 43
+  },
+  {
+    "rating": 4,
+    "comment": "While the premise was promising, the execution fell short for me. Still worth a read for its themes.",
+    "book_id_fkey": 43,
+    "user_id_fkey": 44
+  },
+  {
+    "rating": 5,
+    "comment": "An exhaustive study of motor vehicle transportation. Comprehensive and enlightening!",
+    "book_id_fkey": 44,
+    "user_id_fkey": 44
+  },
+  {
+    "rating": 5,
+    "comment": "This book is a treasure trove of information for anyone interested in the evolution of transportation systems.",
+    "book_id_fkey": 44,
+    "user_id_fkey": 45
+  },
+  {
+    "rating": 5,
+    "comment": "Insightful and informative. A must-read for anyone in the wholesale grocery industry!",
+    "book_id_fkey": 45,
+    "user_id_fkey": 45
+  },
+  {
+    "rating": 5,
+    "comment": "Provides valuable insights into the dynamics of the wholesale grocery business. Well-researched and engaging.",
+    "book_id_fkey": 45,
+    "user_id_fkey": 46
+  },
+  {
+    "rating": 5,
+    "comment": "A whimsical journey into the world of magic. Enchanting and delightful!",
+    "book_id_fkey": 46,
+    "user_id_fkey": 46
+  },
+  {
+    "rating": 5,
+    "comment": "Captivating storytelling with vivid imagery. Children will love this magical adventure!",
+    "book_id_fkey": 46,
+    "user_id_fkey": 47
+  },
+  {
+    "rating": 5,
+    "comment": "An insightful examination of the decline of rationalist thought. Thought-provoking and meticulously argued!",
+    "book_id_fkey": 47,
+    "user_id_fkey": 47
+  },
+  {
+    "rating": 4,
+    "comment": "Raises important questions about the limits of rationalism. A stimulating read for those interested in philosophy.",
+    "book_id_fkey": 47,
+    "user_id_fkey": 48
+  }
+]
