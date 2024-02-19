@@ -123,7 +123,7 @@ function updateController(Model) {
 
             await client.connect();
             await keyValidation(Model, req.keyArrays, req.queryCondition, client);
-            await tablesBodyValidation(Model, dataArray, client);
+            await tablesBodyValidation(Model, req.body, client);
             await client.query("BEGIN");
             transactionHasBegun = true;
 
