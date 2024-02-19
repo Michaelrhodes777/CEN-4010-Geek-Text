@@ -117,7 +117,7 @@ CREATE VIEW top_sellers AS
 CREATE VIEW shopping_carts AS
 	SELECT
 		user_id_fkey AS "user_id",
-		(SELECT sum(subquery) FROM unnest((SELECT ARRAY_AGG(books.book_price))) AS "subquery") AS "shopping_cart_value",
+		(SELECT sum(subquery) FROM unnest((SELECT ARRAY_AGG(books.book_price * quantity))) AS "subquery") AS "shopping_cart_value",
 		JSON_AGG(books.*) AS "shopping_cart"
 		FROM books
 		INNER JOIN shopping_carts_lt ON book_id_fkey = book_id
