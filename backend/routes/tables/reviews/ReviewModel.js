@@ -82,27 +82,22 @@ const synchronousConstraintSchema = {
 
 const asynchronousConstraintSchema = {
     [columnNames.review_id]: {
-        primaryKey: true,
         foreignKey: null,
         unique: false
     },
     [columnNames.rating]: {
-        primaryKey: false,
         foreignKey: null,
         unique: false
     },
     [columnNames.comment]: {
-        primaryKey: false,
         foreignKey: null,
         unique: false
     },
     [columnNames.datestamp]: {
-        primaryKey: false,
         foreignKey: null,
         unique: false
     },
     [columnNames.user_id_fkey]: {
-        primaryKey: false,
         foreignKey: {
             idName: "user_id",
             tableName: "users"
@@ -110,7 +105,6 @@ const asynchronousConstraintSchema = {
         unique: false
     },
     [columnNames.book_id_fkey]: {
-        primaryKey: false,
         foreignKey: {
             idName: "book_id",
             tableName: "books"

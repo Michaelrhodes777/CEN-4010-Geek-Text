@@ -70,28 +70,23 @@ const synchronousConstraintSchema = {
 
 const asynchronousConstraintSchema = {
     [columnNames.card_id]: {
-        primaryKey: true,
         foreignKey: null,
         unique: null,
     },
     // will never be unique due to security
     [columnNames.credit_card_number]: {
-        primaryKey: false,
         foreignKey: null,
         unique: null,
     },
     [columnNames.expiration]: {
-        primaryKey: false,
         foreignKey: null,
         unique: null,
     },
     [columnNames.ccv]: {
-        primaryKey: false,
         foreignKey: null,
         unique: null,
     },
     [columnNames.user_id_fkey]: {
-        primaryKey: false,
         foreignKey: {
             "idName": "user_id",
             "tableName": "users"

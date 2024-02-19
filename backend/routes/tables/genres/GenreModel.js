@@ -35,12 +35,10 @@ const synchronousConstraintSchema = {
 
 const asynchronousConstraintSchema = {
     [columnNames.genre_id]: {
-        primaryKey: true,
         foreignKey: null,
         unique: false
     },
     [columnNames.genre_name]: {
-        primaryKey: false,
         foreignKey: null,
         unique: true
     },

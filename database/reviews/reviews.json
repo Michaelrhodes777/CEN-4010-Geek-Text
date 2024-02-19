@@ -121,7 +121,7 @@
   },
   {
     "rating": 4,
-    "comment": "Insightful examination of Bismarck's era.",
+    "comment": "Insightful examination of Bismarcks era.",
     "book_id_fkey": 11,
     "user_id_fkey": 11
   },
@@ -433,7 +433,7 @@
   },
   {
     "rating": 5,
-    "comment": "Mary's journey through California was both exciting and enlightening.",
+    "comment": "Marys journey through California was both exciting and enlightening.",
     "book_id_fkey": 37,
     "user_id_fkey": 37
   },
@@ -487,19 +487,19 @@
   },
   {
     "rating": 4,
-    "comment": "An essential read for anyone interested in understanding the voice's significance in human communication.",
+    "comment": "An essential read for anyone interested in understanding the voices significance in human communication.",
     "book_id_fkey": 41,
     "user_id_fkey": 42
   },
   {
     "rating": 5,
-    "comment": "An invaluable account of Pennsylvania's contributions to these pivotal battles. A masterpiece of historical scholarship!",
+    "comment": "An invaluable account of Pennsylvanias contributions to these pivotal battles. A masterpiece of historical scholarship!",
     "book_id_fkey": 42,
     "user_id_fkey": 42
   },
   {
     "rating": 5,
-    "comment": "Skinner's thorough research and compelling narrative make this a must-read for Civil Waraficionados.",
+    "comment": "Skinners thorough research and compelling narrative make this a must-read for Civil Waraficionados.",
     "book_id_fkey": 42,
     "user_id_fkey": 43
   },

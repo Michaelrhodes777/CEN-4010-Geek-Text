@@ -46,17 +46,14 @@ const synchronousConstraintSchema = {
 
 const asynchronousConstraintSchema = {
     [columnNames.publisher_id]: {
-        primaryKey: true,
         foreignKey: null,
         unique: false
     },
     [columnNames.publisher_name]: {
-        primaryKey: false,
         foreignKey: null,
         unique: true
     },
     [columnNames.discount_percent]: {
-        primaryKey: false,
         foreignKey: null,
         unique: false
     },

@@ -6,7 +6,7 @@ const alphanumeric = [ ...numeric, ...lowercase, ...uppercase ];
 const specialCharacters = [ "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+", "\\", "-", "=", "[", "]", "{", "}", ";", ":", "|", ",", ".", "<", ">", "/", "?", "*" ];
 const alphanumericSpecial = [ ...alphanumeric, ...specialCharacters ];
 const datestampWhitelist = [ ":", "-", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" ];
-const stdBlacklist = [ "\"", "'", "\\", "/" ];
+const stdBlacklist = [ "\"", "\'", "'", "\\", "/" ];
 
 class StandardLists {
     static numeric = numeric;

@@ -1,6 +1,7 @@
 const { clientFactory } = require('../../database/setupFxns.js');
 const { SqlQueryFactory } = require('../SqlQueryFactory.js');
 const { CONDITIONS } = SqlQueryFactory;
+const { keyValidation, tablesBodyValidation } = require('../../validation/database_validation/Composition.js');
 
 function reqMapper(req) {
     return JSON.parse(JSON.stringify({
@@ -34,8 +35,9 @@ function createController(Model) {
         try {
 
             await client.connect();
+            await tablesBodyValidation(Model, req.body, client);
+            await client.query("BEGIN");
             transactionHasBegun = true;
-
             const dataArray = req.body;
             results = new Array(req.body.length);
             for (let i = 0; i < results.length; i++) {
@@ -69,12 +71,15 @@ function readController(Model) {
         try {
 
             await client.connect();
+            const { keyArrays } = req;
+            let allQueryCondition = keyArrays.length === 1 && keyArrays[0][0] === 0;
+            if (!allQueryCondition) {
+                await keyValidation(Model, keyArrays, req.queryCondition, client);
+            }
             await client.query("BEGIN");
             transactionHasBegun = true;
 
-            const { keyArrays } = req;
-
-            if (keyArrays.length === 1 && keyArrays[0][0] === 0) {
+            if (allQueryCondition) {
                 const queryFactory = new SqlQueryFactory(Model, null, keyArrays[0], CONDITIONS.readAll);    
                 const queryObject = queryFactory.getSqlQueryObject();
                 results = (await client.query(queryObject)).rows;
@@ -117,6 +122,8 @@ function updateController(Model) {
         try {
 
             await client.connect();
+            await keyValidation(Model, req.keyArrays, req.queryCondition, client);
+            await tablesBodyValidation(Model, dataArray, client);
             await client.query("BEGIN");
             transactionHasBegun = true;
 
@@ -155,6 +162,7 @@ function deleteController(Model) {
         let transactionHasBegun = false;
         try {
             await client.connect();
+            await keyValidation(Model, req.keyArrays, req.queryCondition, client);
             await client.query("BEGIN");
             transactionHasBegun = true;
 

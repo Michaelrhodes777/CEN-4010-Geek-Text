@@ -58,22 +58,18 @@ const synchronousConstraintSchema = {
 
 const asynchronousConstraintSchema = {
     [columnNames.author_id]: {
-        primaryKey: true,
         foreignKey: null,
         unique: false
     },
     [columnNames.first_name]: {
-        primaryKey: false,
         foreignKey: null,
         unique: false
     },
     [columnNames.last_name]: {
-        primaryKey: false,
         foreignKey: null,
         unique: false
     },
     [columnNames.biography]: {
-        primaryKey: false,
         foreignKey: null,
         unique: false
     }
