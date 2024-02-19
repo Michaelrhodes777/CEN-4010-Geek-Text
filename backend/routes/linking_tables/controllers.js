@@ -1,6 +1,7 @@
 const { clientFactory } = require('../../database/setupFxns.js');
 const { SqlQueryFactory } = require('../SqlQueryFactory.js');
 const { CONDITIONS } = SqlQueryFactory;
+const { keyValidation, linkingTablesBodyValidation } = require('../../validation/database_validation/Composition.js');
 
 function createController(Model) {
     return async function createControllerLogic(req, res) {
@@ -9,6 +10,7 @@ function createController(Model) {
         let transactionHasBegun = false;
         try {
             await client.connect();
+            await linkingTablesBodyValidation(Model, req.body, "GET", client);
             const { body } = req;
             transactionHasBegun = true;
 
@@ -44,9 +46,13 @@ function readController(Model) {
         try {
             await client.connect();
             const { keyArrays } = req;
+            let allQueryCondition = keyArrays.length === 1 && keyArrays[0][0] === 0;
+            if (!allQueryCondition) {
+                await keyValidation(Model, keyArrays, req.queryCondition, client);
+            }
             transactionHasBegun = true;
 
-            if (keyArrays.length === 1 && keyArrays[0][0] === 0) {
+            if (allQueryCondition) {
                 const queryFactory = new SqlQueryFactory(Model, null, null, CONDITIONS.readAll);
                 const queryObject = queryFactory.getSqlQueryObject();
                 const response = await client.query(queryObject);
@@ -93,6 +99,8 @@ function updateController(Model) {
         let transactionHasBegun = false;
         try {
             await client.connect();
+            await keyValidation(Model, req.keyArrays, req.queryCondition, client);
+            await linkingTablesBodyValidation(Model, req.body, null, client);
             const { body, keyArrays } = req;
             transactionHasBegun = true;
 
@@ -128,6 +136,7 @@ function deleteController(Model) {
         let transactionHasBegun = false;
         try {
             await client.connect();
+            await keyValidation(Model, req.keyArrays, req.queryCondition, client);
             const { keyArrays } = req;
             transactionHasBegun = true;
 

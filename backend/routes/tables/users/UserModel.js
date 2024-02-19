@@ -94,37 +94,30 @@ const synchronousConstraintSchema = {
 
 const asynchronousConstraintSchema = {
     [columnNames.user_id]: {
-        primaryKey: true,
         foreignKey: null,
         unique: false
     },
     [columnNames.username]: {
-        primaryKey: false,
         foreignKey: null,
         unique: true
     },
     [columnNames.password]: {
-        primaryKey: false,
         foreignKey: null,
         unique: false
     },
     [columnNames.first_name]: {
-        primaryKey: false,
         foreignKey: null,
         unique: false
     },
     [columnNames.last_name]: {
-        primaryKey: false,
         foreignKey: null,
         unique: false
     },
     [columnNames.email_address]: {
-        primaryKey: false,
         foreignKey: null,
         unique: true
     },
     [columnNames.address]: {
-        primaryKey: false,
         foreignKey: null,
         unique: false
     }

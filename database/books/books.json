@@ -1,6 +1,5 @@
 [
   {
-    "description": "249 p. : 19 cm",
     "copies_sold": 552,
     "isbn": "1048335068",
     "publisher_id_fkey": 1,
@@ -8,10 +7,10 @@
     "book_price": 1104,
     "genre_id_fkey": 1,
     "author_id_fkey": 1,
-    "year_published": 1869
+    "year_published": 1869,
+    "book_description": "249 p. : 19 cm"
   },
   {
-    "description": "239 p",
     "copies_sold": 479,
     "isbn": "1048209812",
     "publisher_id_fkey": 2,
@@ -19,10 +18,10 @@
     "book_price": 958,
     "genre_id_fkey": 2,
     "author_id_fkey": 2,
-    "year_published": 1880
+    "year_published": 1880,
+    "book_description": "239 p"
   },
   {
-    "description": "2 p. l., [9]-105 p., 3 l. 18 cm",
     "copies_sold": 337,
     "isbn": "1048316853",
     "publisher_id_fkey": 3,
@@ -30,10 +29,10 @@
     "book_price": 674,
     "genre_id_fkey": 3,
     "author_id_fkey": 3,
-    "year_published": 1915
+    "year_published": 1915,
+    "book_description": "2 p. l., [9]-105 p., 3 l. 18 cm"
   },
   {
-    "description": "19 p Reproduced from handwritten copy",
     "copies_sold": 361,
     "isbn": "1048299273",
     "publisher_id_fkey": 4,
@@ -41,10 +40,10 @@
     "book_price": 722,
     "genre_id_fkey": 4,
     "author_id_fkey": 4,
-    "year_published": 1911
+    "year_published": 1911,
+    "book_description": "19 p Reproduced from handwritten copy"
   },
   {
-    "description": "viii p., 2 l., 311 p. 21 cm",
     "copies_sold": 800,
     "isbn": "1157905345",
     "publisher_id_fkey": 5,
@@ -52,10 +51,10 @@
     "book_price": 1600,
     "genre_id_fkey": 5,
     "author_id_fkey": 5,
-    "year_published": 1887
+    "year_published": 1887,
+    "book_description": "viii p., 2 l., 311 p. 21 cm"
   },
   {
-    "description": "182 p. 20 cm",
     "copies_sold": 468,
     "isbn": "1085980142",
     "publisher_id_fkey": 6,
@@ -63,10 +62,10 @@
     "book_price": 936,
     "genre_id_fkey": 6,
     "author_id_fkey": 6,
-    "year_published": 1914
+    "year_published": 1914,
+    "book_description": "182 p. 20 cm"
   },
   {
-    "description": "338 p",
     "copies_sold": 348,
     "isbn": "1047522719",
     "publisher_id_fkey": 7,
@@ -74,10 +73,10 @@
     "book_price": 696,
     "genre_id_fkey": 7,
     "author_id_fkey": 7,
-    "year_published": 1916
+    "year_published": 1916,
+    "book_description": "338 p"
   },
   {
-    "description": "Includes index",
     "copies_sold": 321,
     "isbn": "9695157500",
     "publisher_id_fkey": 8,
@@ -85,10 +84,10 @@
     "book_price": 642,
     "genre_id_fkey": 8,
     "author_id_fkey": 8,
-    "year_published": 1870
+    "year_published": 1870,
+    "book_description": "Includes index"
   },
   {
-    "description": "380 p., [4] leaves of plates : 20 cm",
     "copies_sold": 594,
     "isbn": "1047428651",
     "publisher_id_fkey": 9,
@@ -96,14 +95,10 @@
     "book_price": 1188,
     "genre_id_fkey": 9,
     "author_id_fkey": 9,
-    "year_published": 1909
+    "year_published": 1909,
+    "book_description": "380 p., [4] leaves of plates : 20 cm"
   },
   {
-    "description": [
-      "186 p. 19 cm",
-      "Preface signed: Wm. Wilberforce Newton",
-      "Translations of ancient Christian hymns: p. [121]-186"
-    ],
     "copies_sold": 479,
     "isbn": "1102114055",
     "publisher_id_fkey": 10,
@@ -111,10 +106,10 @@
     "book_price": 958,
     "genre_id_fkey": 10,
     "author_id_fkey": 10,
-    "year_published": 1883
+    "year_published": 1883,
+    "book_description": "186 p. 19 cm Preface signed: Wm. Wilberforce Newton Translations of ancient Christian hymns: p. [121]-186"
   },
   {
-    "description": "iv, 121 p. 24 cm",
     "copies_sold": 389,
     "isbn": "1158277616",
     "publisher_id_fkey": 1,
@@ -122,10 +117,10 @@
     "book_price": 778,
     "genre_id_fkey": 1,
     "author_id_fkey": 11,
-    "year_published": 1920
+    "year_published": 1920,
+    "book_description": "iv, 121 p. 24 cm"
   },
   {
-    "description": "112 p. 25 cm",
     "copies_sold": 432,
     "isbn": "7617751830",
     "publisher_id_fkey": 2,
@@ -133,10 +128,10 @@
     "book_price": 864,
     "genre_id_fkey": 2,
     "author_id_fkey": 12,
-    "year_published": 1903
+    "year_published": 1903,
+    "book_description": "112 p. 25 cm"
   },
   {
-    "description": "9 p. ; 24 cmOn cover: Department of StateIncludes index",
     "copies_sold": 963,
     "isbn": "1102238531",
     "publisher_id_fkey": 3,
@@ -144,10 +139,10 @@
     "book_price": 1926,
     "genre_id_fkey": 3,
     "author_id_fkey": 13,
-    "year_published": 1875
+    "year_published": 1875,
+    "book_description": "9 p. ; 24 cmOn cover: Department of StateIncludes index"
   },
   {
-    "description": "ix, 126 p. 22 cm Original book_name: The tragi comoedi of the vertuous Octauia. Done by Samvel Brandon. 1598.. Followed by two letters (in verse) between Octavia and Antony, dedicated to Mistresse Mary Thinne. Prepared by Ronald B. McKerrow and ... the general editor W. W. Greg.",
     "copies_sold": 468,
     "isbn": "1158273407",
     "publisher_id_fkey": 4,
@@ -155,10 +150,10 @@
     "book_price": 936,
     "genre_id_fkey": 4,
     "author_id_fkey": 14,
-    "year_published": 1909
+    "year_published": 1909,
+    "book_description": "ix, 126 p. 22 cm Original book_name: The tragi comoedi of the vertuous Octauia. Done by Samvel Brandon. 1598.. Followed by two letters (in verse) between Octavia and Antony, dedicated to Mistresse Mary Thinne. Prepared by Ronald B. McKerrow and ... the general editor W. W. Greg."
   },
   {
-    "description": "vii, 447 p",
     "copies_sold": 573,
     "isbn": "1158272741",
     "publisher_id_fkey": 5,
@@ -166,10 +161,10 @@
     "book_price": 1146,
     "genre_id_fkey": 5,
     "author_id_fkey": 15,
-    "year_published": 1914
+    "year_published": 1914,
+    "book_description": "vii, 447 p"
   },
   {
-    "description": "312 p. ; 19 cm",
     "copies_sold": 482,
     "isbn": "1158274408",
     "publisher_id_fkey": 6,
@@ -177,10 +172,10 @@
     "book_price": 964,
     "genre_id_fkey": 6,
     "author_id_fkey": 16,
-    "year_published": 1917
+    "year_published": 1917,
+    "book_description": "312 p. ; 19 cm"
   },
   {
-    "description": "59 p. 18 cm",
     "copies_sold": 481,
     "isbn": "1158278730",
     "publisher_id_fkey": 7,
@@ -188,10 +183,10 @@
     "book_price": 962,
     "genre_id_fkey": 7,
     "author_id_fkey": 17,
-    "year_published": 1867
+    "year_published": 1867,
+    "book_description": "59 p. 18 cm"
   },
   {
-    "description": "1 p. l., 28 p. O On cover: illus",
     "copies_sold": 343,
     "isbn": "1102189976",
     "publisher_id_fkey": 8,
@@ -199,10 +194,10 @@
     "book_price": 686,
     "genre_id_fkey": 8,
     "author_id_fkey": 18,
-    "year_published": 2023
+    "year_published": 2023,
+    "book_description": "1 p. l., 28 p. O On cover: illus"
   },
   {
-    "description": "viii, 505 p. 24 cm",
     "copies_sold": 1495,
     "isbn": "1157930700",
     "publisher_id_fkey": 9,
@@ -210,10 +205,10 @@
     "book_price": 2990,
     "genre_id_fkey": 9,
     "author_id_fkey": 19,
-    "year_published": 1911
+    "year_published": 1911,
+    "book_description": "viii, 505 p. 24 cm"
   },
   {
-    "description": "Flake",
     "copies_sold": 491,
     "isbn": "1157459251",
     "publisher_id_fkey": 10,
@@ -221,10 +216,10 @@
     "book_price": 982,
     "genre_id_fkey": 10,
     "author_id_fkey": 20,
-    "year_published": 1882
+    "year_published": 1882,
+    "book_description": "Flake"
   },
   {
-    "description": "2 v. 23 cm",
     "copies_sold": 994,
     "isbn": "1157796010",
     "publisher_id_fkey": 1,
@@ -232,10 +227,10 @@
     "book_price": 1988,
     "genre_id_fkey": 1,
     "author_id_fkey": 21,
-    "year_published": 1887
+    "year_published": 1887,
+    "book_description": "2 v. 23 cm"
   },
   {
-    "description": "72 p. 24 cm",
     "copies_sold": 1924,
     "isbn": "1157672342",
     "publisher_id_fkey": 2,
@@ -243,10 +238,10 @@
     "book_price": 3848,
     "genre_id_fkey": 2,
     "author_id_fkey": 22,
-    "year_published": 1913
+    "year_published": 1913,
+    "book_description": "72 p. 24 cm"
   },
   {
-    "description": "vii, 9-241 p. 21 cm",
     "copies_sold": 539,
     "isbn": "4995733180",
     "publisher_id_fkey": 3,
@@ -254,10 +249,10 @@
     "book_price": 1078,
     "genre_id_fkey": 3,
     "author_id_fkey": 23,
-    "year_published": 1892
+    "year_published": 1892,
+    "book_description": "vii, 9-241 p. 21 cm"
   },
   {
-    "description": "285 p",
     "copies_sold": 1807,
     "isbn": "1157734060",
     "publisher_id_fkey": 4,
@@ -265,10 +260,10 @@
     "book_price": 3614,
     "genre_id_fkey": 4,
     "author_id_fkey": 24,
-    "year_published": 1891
+    "year_published": 1891,
+    "book_description": "285 p"
   },
   {
-    "description": "Vol. 4",
     "copies_sold": 430,
     "isbn": "1085612630",
     "publisher_id_fkey": 5,
@@ -276,10 +271,10 @@
     "book_price": 860,
     "genre_id_fkey": 5,
     "author_id_fkey": 25,
-    "year_published": 1910
+    "year_published": 1910,
+    "book_description": "Vol. 4"
   },
   {
-    "description": "vii, 125 p. ; 17 cm",
     "copies_sold": 327,
     "isbn": "1158189686",
     "publisher_id_fkey": 6,
@@ -287,10 +282,10 @@
     "book_price": 654,
     "genre_id_fkey": 6,
     "author_id_fkey": 26,
-    "year_published": 1890
+    "year_published": 1890,
+    "book_description": "vii, 125 p. ; 17 cm"
   },
   {
-    "description": "8 p. 25 cm Caption book_name Electronic reproduction",
     "copies_sold": 364,
     "isbn": "1158034304",
     "publisher_id_fkey": 7,
@@ -298,10 +293,10 @@
     "book_price": 728,
     "genre_id_fkey": 7,
     "author_id_fkey": 27,
-    "year_published": 1861
+    "year_published": 1861,
+    "book_description": "8 p. 25 cm Caption book_name Electronic reproduction"
   },
   {
-    "description": "viii, 147 p., 18 leaves of plates : 32 cm",
     "copies_sold": 558,
     "isbn": "9999999999",
     "publisher_id_fkey": 8,
@@ -309,10 +304,10 @@
     "book_price": 1116,
     "genre_id_fkey": 8,
     "author_id_fkey": 28,
-    "year_published": 1890
+    "year_published": 1890,
+    "book_description": "viii, 147 p., 18 leaves of plates : 32 cm"
   },
   {
-    "description": "250 p. 20 cm",
     "copies_sold": 296,
     "isbn": "1084569027",
     "publisher_id_fkey": 9,
@@ -320,21 +315,21 @@
     "book_price": 592,
     "genre_id_fkey": 9,
     "author_id_fkey": 29,
-    "year_published": 1921
+    "year_published": 1921,
+    "book_description": "250 p. 20 cm"
   },
   {
-    "description": "1 p. L., [xi]-xii, [13]-379p. 21 cm Also issued under book_name: The English in America",
     "copies_sold": 782,
     "isbn": "1084591975",
     "publisher_id_fkey": 10,
-    "book_name": "Rule and misrule of the English in America; by the author of \"Sam Slick the clock-maker\"",
+    "book_name": "Rule and misrule of the English in America; by the author of Sam Slick the clock-maker",
     "book_price": 1564,
     "genre_id_fkey": 10,
     "author_id_fkey": 30,
-    "year_published": 1851
+    "year_published": 1851,
+    "book_description": "1 p. L., [xi]-xii, [13]-379p. 21 cm Also issued under book_name: The English in America"
   },
   {
-    "description": "143 p. ; 23 cm",
     "copies_sold": 492,
     "isbn": "1157817890",
     "publisher_id_fkey": 1,
@@ -342,10 +337,10 @@
     "book_price": 984,
     "genre_id_fkey": 1,
     "author_id_fkey": 31,
-    "year_published": 1922
+    "year_published": 1922,
+    "book_description": "143 p. ; 23 cm"
   },
   {
-    "description": "43 p. 8vo",
     "copies_sold": 927,
     "isbn": "1157566517",
     "publisher_id_fkey": 2,
@@ -353,10 +348,10 @@
     "book_price": 1854,
     "genre_id_fkey": 2,
     "author_id_fkey": 32,
-    "year_published": 1919
+    "year_published": 1919,
+    "book_description": "43 p. 8vo"
   },
   {
-    "description": "24 p. ; 21 cm",
     "copies_sold": 620,
     "isbn": "1085625427",
     "publisher_id_fkey": 3,
@@ -364,10 +359,10 @@
     "book_price": 1240,
     "genre_id_fkey": 3,
     "author_id_fkey": 33,
-    "year_published": 1882
+    "year_published": 1882,
+    "book_description": "24 p. ; 21 cm"
   },
   {
-    "description": "237 p",
     "copies_sold": 472,
     "isbn": "1085669501",
     "publisher_id_fkey": 4,
@@ -375,7 +370,8 @@
     "book_price": 944,
     "genre_id_fkey": 4,
     "author_id_fkey": 34,
-    "year_published": 1874
+    "year_published": 1874,
+    "book_description": "237 p"
   },
   {
     "copies_sold": 504,
@@ -388,7 +384,6 @@
     "year_published": 1893
   },
   {
-    "description": "2 v. ; 19 cm",
     "copies_sold": 494,
     "isbn": "1049656828",
     "publisher_id_fkey": 6,
@@ -396,10 +391,10 @@
     "book_price": 988,
     "genre_id_fkey": 6,
     "author_id_fkey": 36,
-    "year_published": 1864
+    "year_published": 1864,
+    "book_description": "2 v. ; 19 cm"
   },
   {
-    "description": "viii p., 2 l., 242 p. 20 cm Plates printed on both sides",
     "copies_sold": 404,
     "isbn": "1048793049",
     "publisher_id_fkey": 7,
@@ -407,10 +402,10 @@
     "book_price": 808,
     "genre_id_fkey": 7,
     "author_id_fkey": 37,
-    "year_published": 1922
+    "year_published": 1922,
+    "book_description": "viii p., 2 l., 242 p. 20 cm Plates printed on both sides"
   },
   {
-    "description": "327 p. 20 cm",
     "copies_sold": 514,
     "isbn": "1049678497",
     "publisher_id_fkey": 8,
@@ -418,10 +413,10 @@
     "book_price": 1028,
     "genre_id_fkey": 8,
     "author_id_fkey": 37,
-    "year_published": 1904
+    "year_published": 1904,
+    "book_description": "327 p. 20 cm"
   },
   {
-    "description": "3 v. 20 cm",
     "copies_sold": 309,
     "isbn": "1049650320",
     "publisher_id_fkey": 9,
@@ -429,10 +424,10 @@
     "book_price": 618,
     "genre_id_fkey": 9,
     "author_id_fkey": 38,
-    "year_published": 1886
+    "year_published": 1886,
+    "book_description": "3 v. 20 cm"
   },
   {
-    "description": "[1] L., 5-487, [4] p. 20 cm Wright II, 1956 Pub. advts. (4 p.) at end",
     "copies_sold": 586,
     "isbn": "1049650808",
     "publisher_id_fkey": 10,
@@ -440,10 +435,10 @@
     "book_price": 1172,
     "genre_id_fkey": 10,
     "author_id_fkey": 38,
-    "year_published": 1859
+    "year_published": 1859,
+    "book_description": "[1] L., 5-487, [4] p. 20 cm Wright II, 1956 Pub. advts. (4 p.) at end"
   },
   {
-    "description": "xlviii, [49]-559 p. 23 cm",
     "copies_sold": 567,
     "isbn": "1050788164",
     "publisher_id_fkey": 1,
@@ -451,10 +446,10 @@
     "book_price": 1134,
     "genre_id_fkey": 1,
     "author_id_fkey": 39,
-    "year_published": 1855
+    "year_published": 1855,
+    "book_description": "xlviii, [49]-559 p. 23 cm"
   },
   {
-    "description": "George W. Skinner, secretary of the Executive committee of the Commission, editor and compiler",
     "copies_sold": 1228,
     "isbn": "1050761342",
     "publisher_id_fkey": 2,
@@ -462,7 +457,8 @@
     "book_price": 2456,
     "genre_id_fkey": 2,
     "author_id_fkey": 39,
-    "year_published": 1900
+    "year_published": 1900,
+    "book_description": "George W. Skinner, secretary of the Executive committee of the Commission, editor and compiler"
   },
   {
     "copies_sold": 319,
@@ -475,7 +471,6 @@
     "year_published": 1906
   },
   {
-    "description": "696 p",
     "copies_sold": 1287,
     "isbn": "1049673249",
     "publisher_id_fkey": 4,
@@ -483,10 +478,10 @@
     "book_price": 2574,
     "genre_id_fkey": 4,
     "author_id_fkey": 40,
-    "year_published": 1922
+    "year_published": 1922,
+    "book_description": "696 p"
   },
   {
-    "description": "12 p 19 cm",
     "copies_sold": 729,
     "isbn": "2597888810",
     "publisher_id_fkey": 5,
@@ -494,10 +489,10 @@
     "book_price": 1458,
     "genre_id_fkey": 5,
     "author_id_fkey": 41,
-    "year_published": 1921
+    "year_published": 1921,
+    "book_description": "12 p 19 cm"
   },
   {
-    "description": "32 p",
     "copies_sold": 527,
     "isbn": "1049681028",
     "publisher_id_fkey": 6,
@@ -505,10 +500,10 @@
     "book_price": 1054,
     "genre_id_fkey": 6,
     "author_id_fkey": 41,
-    "year_published": 1913
+    "year_published": 1913,
+    "book_description": "32 p"
   },
   {
-    "description": "Thesis (Ph.D.)--University of Pennsylvania, 1910",
     "copies_sold": 758,
     "isbn": "6977145820",
     "publisher_id_fkey": 7,
@@ -516,7 +511,8 @@
     "book_price": 1516,
     "genre_id_fkey": 7,
     "author_id_fkey": 41,
-    "year_published": 1910
+    "year_published": 1910,
+    "book_description": "Thesis (Ph.D.)--University of Pennsylvania, 1910"
   },
   {
     "copies_sold": 1022,
@@ -529,7 +525,6 @@
     "year_published": 1912
   },
   {
-    "description": "xv, 552 p",
     "copies_sold": 942,
     "isbn": "1048794371",
     "publisher_id_fkey": 9,
@@ -537,7 +532,8 @@
     "book_price": 1884,
     "genre_id_fkey": 9,
     "author_id_fkey": 42,
-    "year_published": 1895
+    "year_published": 1895,
+    "book_description": "xv, 552 p"
   },
   {
     "copies_sold": 637,

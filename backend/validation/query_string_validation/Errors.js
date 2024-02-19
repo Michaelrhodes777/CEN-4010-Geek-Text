@@ -66,7 +66,7 @@ class ReqDoesNotHaveQueryPropError extends QueryStringValidationError {
     ];
 
     constructor(errorPayload) {
-        super("SYNC: req does not have query property", errorPayload);
+        super("req does not have query property", errorPayload);
         this.name = "ReqDoesNotHaveQueryPropError";
     }
 }
@@ -83,7 +83,7 @@ class ReqQueryDoesNotHaveIdPropError extends QueryStringValidationError {
     ];
 
     constructor(errorPayload) {
-        super("SYNC: req.query does not have id property", errorPayload);
+        super("req.query does not have id property", errorPayload);
         this.name = "ReqQueryDoesNotHaveIdPropError";
     }
 }
@@ -105,9 +105,17 @@ class ReqQueryDoesNotHaveCidOrQidPropError extends QueryStringValidationError {
     ];
 
     constructor(errorPayload) {
-        super("SYNC: req.query does not have id property", errorPayload);
+        super("req.query does not have id property", errorPayload);
         this.name = "ReqQueryDoesNotHaveCidOrQidPropError";
     }
+}
+
+req = {
+    "query": {
+        "id": "",
+        "cid": ""
+    },
+    "body": {}
 }
 
 class ReqQueryHasMoreThanOnePropError extends QueryStringValidationError {
@@ -127,7 +135,7 @@ class ReqQueryHasMoreThanOnePropError extends QueryStringValidationError {
     ];
 
     constructor(errorPayload) {
-        super("SYNC: req.query has more than one prop", errorPayload);
+        super("req.query has more than one prop", errorPayload);
         this.name = "ReqQueryHasMoreThanOnePropError";
     }
 }
@@ -169,7 +177,7 @@ class ReqQueryIdIsNotArrayStringFormatError extends QueryStringValidationError {
     ];
     
     constructor(errorPayload) {
-        super("SYNC: req.query.id does not start and close with brackets or has no ids", errorPayload);
+        super("req.query.id does not start and close with brackets or has no ids", errorPayload);
         this.name = "ReqQueryIdIsNotArrayStringFormatError";
     }
 }
@@ -179,7 +187,7 @@ class ReqQueryIdIsNotArrayError extends QueryStringValidationError {
 
 
     constructor(errorPayload) {
-        super("SYNC: req.query.id/cid/qid is not an array", errorPayload);
+        super("req.query.id/cid/qid is not an array", errorPayload);
         this.name = "ReqQueryIdIsNotArrayError";
     }
 }
@@ -231,7 +239,7 @@ class ReqQueryArrayElementNaNError extends QueryStringValidationError {
     ];
 
     constructor(errorPayload) {
-        super("SYNC: req.query.id/cid/qid has elements which are NaN", errorPayload);
+        super("req.query.id/cid/qid has elements which are NaN", errorPayload);
         this.name = "ReqQueryArrayElementNaNError";
     }
 
@@ -254,7 +262,7 @@ class ReqQueryArrayElementIsNotIntegerError extends QueryStringValidationError {
     ];
 
     constructor(errorPayload) {
-        super("SYNC: req.query.id has element that is not an integer", errorPayload);
+        super("req.query.id has element that is not an integer", errorPayload);
         this.name = "ReqQueryArrayElementIsNotIntegerError";
     }
 
@@ -287,7 +295,7 @@ class MultipleAllQueriesError extends QueryStringValidationError {
     ];
     
     constructor(errorPayload) {
-        super("SYNC: id has multiple zeros", errorPayload);
+        super("id has multiple zeros", errorPayload);
         this.name = "MultipleAllQueriesError";
     }
 }
@@ -319,7 +327,7 @@ class CidArrayModuloNotZeroError extends QueryStringValidationError {
     ];
 
     constructor(errorPayload) {
-        super("SYNC: cid array length mod numComposites != 0", errorPayload);
+        super("cid array length mod numComposites != 0", errorPayload);
         this.name = "CidArrayModuloNotZeroError";    
     }
 }
@@ -346,7 +354,7 @@ class UnequalBodyKeyArraysLengthError extends QueryStringValidationError {
     ];
 
     constructor(errorPayload) {
-        super("SYNC: keyArrays.length !== body.length", errorPayload);
+        super("keyArrays.length !== body.length", errorPayload);
         this.name = "UnequalBodyKeyArraysLengthError";
     }
 }
@@ -383,7 +391,7 @@ class DuplicateIdKeyError extends QueryStringValidationError {
     ];
 
     constructor(errorPayload) {
-        super("SYNC: idArray has duplicates", errorPayload);
+        super("idArray has duplicates", errorPayload);
         this.name = "DuplicateIdKeyError";
     }
 }

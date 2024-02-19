@@ -40,6 +40,9 @@ function tablesQueryStringValidationMiddleware(controllerType = null) {
             validateBodyKeyArraysMatchingLength(req.keyArrays, req.body, errorPayload); 
         }
         validateNoDuplicateIds(req.keyArrays, errorPayload);
+        const queryCondition = determineQueryCondition(req.query);
+        console.log(queryCondition);
+        req.queryCondition = queryCondition;
         next();
     }
 }

@@ -32,7 +32,6 @@ const synchronousConstraintSchema = {
 
 const asynchronousConstraintSchema = {
     [columnNames.book_id_fkey]: {
-        primaryKey: false,
         foreignKey: {
             "idName": "book_id",
             "tableName": "books"
@@ -40,7 +39,6 @@ const asynchronousConstraintSchema = {
         unique: null,
     },
     [columnNames.wishlist_id_fkey]: {
-        primaryKey: false,
         foreignKey: {
             "idName": "wishlist_id",
             "tableName": "wishlists"
@@ -66,7 +64,7 @@ class BooksWishlistsLTModel extends ModelLTInterface {
 
     static notNullArray = [ columnNames.book_id_fkey, columnNames.wishlist_id_fkey ];
 
-    static updateableColumns = columnNames;
+    static updateableColumns = [];
 
     static synchronousConstraintSchema = synchronousConstraintSchema;
 
