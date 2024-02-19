@@ -1,4 +1,6 @@
 const ModelInterface = require('../ModelInterface.js');
+const StandardLists = require('../../StandardLists.js');
+const { stdBlacklist, datestampWhitelist } = StandardLists;
 
 const columnNames = {
     "review_id": "review_id",
@@ -9,8 +11,6 @@ const columnNames = {
     "book_id_fkey": "book_id_fkey"
 };
 
-const STD_BLACKLIST = [ "\"", "'", "\\", "/" ];
-
 const synchronousConstraintSchema = {
     [columnNames.review_id]: {
         jsType: "number",
@@ -19,7 +19,9 @@ const synchronousConstraintSchema = {
             bounds: [ "[", 0, "i", "-" ],
         },
         blacklist: null,
-        whitelist: null
+        whitelist: null,
+        requiredList: null,
+        custom: null
     },
     [columnNames.rating]: {
         jsType: "number",
@@ -28,7 +30,9 @@ const synchronousConstraintSchema = {
             bounds: [ "[", 1, 5, "]" ]
         },
         blacklist: null,
-        whitelist: null
+        whitelist: null,
+        requiredList: null,
+        custom: null
     },
     [columnNames.comment]: {
         jsType: "string",
@@ -36,8 +40,10 @@ const synchronousConstraintSchema = {
             type: "varchar",
             bounds: [ "[", 0, 4096, "]" ]
         },
-        blacklist: STD_BLACKLIST,
-        whitelist: null
+        blacklist: stdBlacklist,
+        whitelist: null,
+        requiredList: null,
+        custom: null
     },
     [columnNames.datestamp]: {
         jsType: "string",
@@ -46,7 +52,9 @@ const synchronousConstraintSchema = {
             bounds: [ "[", 0, 16, "]" ]
         },
         blacklist: null,
-        whitelist: [ "/", "-", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" ]
+        whitelist: datestampWhitelist,
+        requiredList: null,
+        custom: null
     },
     [columnNames.user_id_fkey]: {
         jsType: "number",
@@ -55,7 +63,9 @@ const synchronousConstraintSchema = {
             bounds: [ "[", 1, "i", "-" ],
         },
         blacklist: null,
-        whitelist: null
+        whitelist: null,
+        requiredList: null,
+        custom: null
     },
     [columnNames.book_id_fkey]: {
         jsType: "number",
@@ -64,33 +74,47 @@ const synchronousConstraintSchema = {
             bounds: [ "[", 1, "i", "-" ],
         },
         blacklist: null,
-        whitelist: null
+        whitelist: null,
+        requiredList: null,
+        custom: null
     },
 };
 
 const asynchronousConstraintSchema = {
     [columnNames.review_id]: {
         primaryKey: true,
+        foreignKey: null,
         unique: false
     },
     [columnNames.rating]: {
         primaryKey: false,
+        foreignKey: null,
         unique: false
     },
     [columnNames.comment]: {
         primaryKey: false,
+        foreignKey: null,
         unique: false
     },
     [columnNames.datestamp]: {
         primaryKey: false,
+        foreignKey: null,
         unique: false
     },
     [columnNames.user_id_fkey]: {
         primaryKey: false,
+        foreignKey: {
+            idName: "user_id",
+            tableName: "users"
+        },
         unique: false
     },
     [columnNames.book_id_fkey]: {
         primaryKey: false,
+        foreignKey: {
+            idName: "book_id",
+            tableName: "books"
+        },
         unique: false
     },
 };
@@ -113,7 +137,7 @@ class ReviewModel extends ModelInterface {
 
     static updateableColumns = ReviewModel.columnNamesArray.slice(1);
 
-    static notNullArray = [ columnNames.rating, columnNames.datestamp, columnNames.user_id_fkey, columnNames.book_id_fkey ];
+    static notNullArray = [ columnNames.rating, columnNames.user_id_fkey, columnNames.book_id_fkey ];
 
     static synchronousConstraintSchema = synchronousConstraintSchema;
 

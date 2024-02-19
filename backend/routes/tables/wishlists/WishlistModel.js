@@ -1,12 +1,12 @@
 const ModelInterface = require('../ModelInterface.js');
+const StandardLists = require('../../StandardLists.js');
+const { alphanumeric } = StandardLists;
 
 const columnNames = {
     "wishlist_id": "wishlist_id",
     "wishlist_name": "wishlist_name",
     "user_id_fkey": "user_id_fkey",
 };
-
-const STD_BLACKLIST = [ "\"", "'", "\\", "/" ];
 
 const synchronousConstraintSchema = {
     [columnNames.wishlist_id]: {
@@ -16,7 +16,9 @@ const synchronousConstraintSchema = {
             bounds: [ "[", 0, "i", "-" ],
         },
         blacklist: null,
-        whitelist: null
+        whitelist: null,
+        requiredList: null,
+        custom: null
     },
     [columnNames.wishlist_name]: {
         jsType: "string",
@@ -24,8 +26,10 @@ const synchronousConstraintSchema = {
             type: "varchar",
             bounds: [ "[", 1, 64, "]" ]
         },
-        blacklist: STD_BLACKLIST,
-        whitelist: null
+        blacklist: null,
+        whitelist: [...alphanumeric, " ", "-" ],
+        requiredList: null,
+        custom: null
     },
     [columnNames.user_id_fkey]: {
         jsType: "number",
@@ -34,21 +38,29 @@ const synchronousConstraintSchema = {
             bounds: [ "[", 1, "i", "-" ],
         },
         blacklist: null,
-        whitelist: null
+        whitelist: null,
+        requiredList: null,
+        custom: null
     },
 };
 
 const asynchronousConstraintSchema = {
     [columnNames.wishlist_id]: {
         primaryKey: true,
+        foreignKey: null,
         unique: false
     },
     [columnNames.wishlist_name]: {
         primaryKey: false,
+        foreignKey: null,
         unique: false
     },
     [columnNames.user_id_fkey]: {
         primaryKey: false,
+        foreignKey: {
+            idName: "user_id",
+            tableName: "users"
+        },
         unique: false
     }
 };

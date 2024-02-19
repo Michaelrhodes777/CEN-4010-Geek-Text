@@ -1,0 +1,302 @@
+[
+  {
+    "credit_card_number": "3555264663306251",
+    "ccv": "848",
+    "user_id_fkey": 1,
+    "expiration": "0723"
+  },
+  {
+    "credit_card_number": "5336010754365644",
+    "ccv": "948",
+    "user_id_fkey": 2,
+    "expiration": "0523"
+  },
+  {
+    "credit_card_number": "633394720384097726",
+    "ccv": "455",
+    "user_id_fkey": 3,
+    "expiration": "0323"
+  },
+  {
+    "credit_card_number": "3554120196532865",
+    "ccv": "319",
+    "user_id_fkey": 4,
+    "expiration": "0124"
+  },
+  {
+    "credit_card_number": "3587119383780940",
+    "ccv": "122",
+    "user_id_fkey": 5,
+    "expiration": "0523"
+  },
+  {
+    "credit_card_number": "3544950927775471",
+    "ccv": "736",
+    "user_id_fkey": 6,
+    "expiration": "0124"
+  },
+  {
+    "credit_card_number": "304539605976770",
+    "ccv": "307",
+    "user_id_fkey": 7,
+    "expiration": "0124"
+  },
+  {
+    "credit_card_number": "3531612933991766",
+    "ccv": "859",
+    "user_id_fkey": 8,
+    "expiration": "0523"
+  },
+  {
+    "credit_card_number": "3538578353838055",
+    "ccv": "975",
+    "user_id_fkey": 9,
+    "expiration": "0623"
+  },
+  {
+    "credit_card_number": "3571305637456878",
+    "ccv": "757",
+    "user_id_fkey": 10,
+    "expiration": "0523"
+  },
+  {
+    "credit_card_number": "3569442318000404",
+    "ccv": "404",
+    "user_id_fkey": 11,
+    "expiration": "0124"
+  },
+  {
+    "credit_card_number": "3546725127287362",
+    "ccv": "903",
+    "user_id_fkey": 12,
+    "expiration": "0723"
+  },
+  {
+    "credit_card_number": "5107174993914823",
+    "ccv": "860",
+    "user_id_fkey": 13,
+    "expiration": "1223"
+  },
+  {
+    "credit_card_number": "50380656791829116",
+    "ccv": "365",
+    "user_id_fkey": 14,
+    "expiration": "0124"
+  },
+  {
+    "credit_card_number": "3570113653306493",
+    "ccv": "639",
+    "user_id_fkey": 15,
+    "expiration": "0423"
+  },
+  {
+    "credit_card_number": "3548145005731688",
+    "ccv": "849",
+    "user_id_fkey": 16,
+    "expiration": "1123"
+  },
+  {
+    "credit_card_number": "5100141919859371",
+    "ccv": "449",
+    "user_id_fkey": 17,
+    "expiration": "0623"
+  },
+  {
+    "credit_card_number": "5602235519975463",
+    "ccv": "936",
+    "user_id_fkey": 18,
+    "expiration": "0323"
+  },
+  {
+    "credit_card_number": "3581232638630962",
+    "ccv": "941",
+    "user_id_fkey": 19,
+    "expiration": "0523"
+  },
+  {
+    "credit_card_number": "560224723738354414",
+    "ccv": "100",
+    "user_id_fkey": 20,
+    "expiration": "0323"
+  },
+  {
+    "credit_card_number": "345764223403515",
+    "ccv": "141",
+    "user_id_fkey": 21,
+    "expiration": "0323"
+  },
+  {
+    "credit_card_number": "374288945934460",
+    "ccv": "702",
+    "user_id_fkey": 22,
+    "expiration": "1023"
+  },
+  {
+    "credit_card_number": "372301419791522",
+    "ccv": "711",
+    "user_id_fkey": 23,
+    "expiration": "0423"
+  },
+  {
+    "credit_card_number": "3556762038982184",
+    "ccv": "142",
+    "user_id_fkey": 24,
+    "expiration": "0323"
+  },
+  {
+    "credit_card_number": "5610500251672242",
+    "ccv": "877",
+    "user_id_fkey": 25,
+    "expiration": "0523"
+  },
+  {
+    "credit_card_number": "3528500215723152",
+    "ccv": "822",
+    "user_id_fkey": 26,
+    "expiration": "0323"
+  },
+  {
+    "credit_card_number": "3571396795824320",
+    "ccv": "688",
+    "user_id_fkey": 27,
+    "expiration": "0323"
+  },
+  {
+    "credit_card_number": "3568511220314367",
+    "ccv": "714",
+    "user_id_fkey": 28,
+    "expiration": "1023"
+  },
+  {
+    "credit_card_number": "373190087882799",
+    "ccv": "801",
+    "user_id_fkey": 29,
+    "expiration": "1023"
+  },
+  {
+    "credit_card_number": "5610864177334661",
+    "ccv": "806",
+    "user_id_fkey": 30,
+    "expiration": "0523"
+  },
+  {
+    "credit_card_number": "360771855393310",
+    "ccv": "943",
+    "user_id_fkey": 31,
+    "expiration": "0124"
+  },
+  {
+    "credit_card_number": "6334489402659709",
+    "ccv": "677",
+    "user_id_fkey": 32,
+    "expiration": "0223"
+  },
+  {
+    "credit_card_number": "5020463219320624",
+    "ccv": "988",
+    "user_id_fkey": 33,
+    "expiration": "0923"
+  },
+  {
+    "credit_card_number": "3553758055378440",
+    "ccv": "997",
+    "user_id_fkey": 34,
+    "expiration": "0923"
+  },
+  {
+    "credit_card_number": "304958605096330",
+    "ccv": "639",
+    "user_id_fkey": 35,
+    "expiration": "0623"
+  },
+  {
+    "credit_card_number": "3579204921245034",
+    "ccv": "887",
+    "user_id_fkey": 36,
+    "expiration": "0323"
+  },
+  {
+    "credit_card_number": "3534725974658107",
+    "ccv": "220",
+    "user_id_fkey": 37,
+    "expiration": "0923"
+  },
+  {
+    "credit_card_number": "560224036245052110",
+    "ccv": "599",
+    "user_id_fkey": 38,
+    "expiration": "1223"
+  },
+  {
+    "credit_card_number": "3549584819431540",
+    "ccv": "995",
+    "user_id_fkey": 39,
+    "expiration": "1123"
+  },
+  {
+    "credit_card_number": "5374538211888439",
+    "ccv": "874",
+    "user_id_fkey": 40,
+    "expiration": "1223"
+  },
+  {
+    "credit_card_number": "304973951660200",
+    "ccv": "811",
+    "user_id_fkey": 41,
+    "expiration": "0723"
+  },
+  {
+    "credit_card_number": "6761988939349215",
+    "ccv": "587",
+    "user_id_fkey": 42,
+    "expiration": "0124"
+  },
+  {
+    "credit_card_number": "501832760555288307",
+    "ccv": "768",
+    "user_id_fkey": 43,
+    "expiration": "0323"
+  },
+  {
+    "credit_card_number": "401795029573300",
+    "ccv": "331",
+    "user_id_fkey": 44,
+    "expiration": "1023"
+  },
+  {
+    "credit_card_number": "303255067326480",
+    "ccv": "341",
+    "user_id_fkey": 45,
+    "expiration": "0323"
+  },
+  {
+    "credit_card_number": "3553757545790362",
+    "ccv": "327",
+    "user_id_fkey": 46,
+    "expiration": "0523"
+  },
+  {
+    "credit_card_number": "3557548652903971",
+    "ccv": "351",
+    "user_id_fkey": 47,
+    "expiration": "0124"
+  },
+  {
+    "credit_card_number": "3553563967382823",
+    "ccv": "731",
+    "user_id_fkey": 48,
+    "expiration": "1223"
+  },
+  {
+    "credit_card_number": "3571935232148080",
+    "ccv": "256",
+    "user_id_fkey": 49,
+    "expiration": "0623"
+  },
+  {
+    "credit_card_number": "4041598041321270",
+    "ccv": "844",
+    "user_id_fkey": 50,
+    "expiration": "0124"
+  }
+]
