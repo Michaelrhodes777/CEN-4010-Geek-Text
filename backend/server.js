@@ -1,9 +1,20 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const rateLimit = require('express-rate-limit');
+const rateLimitConfig = require('./middleware/rateLimiter.json');
 
 const app = express();
 const PORT = process.env.PORT || 3500;
+
+const limiter = rateLimit({
+  windowMs: rateLimitConfig.windowMs,
+  max: rateLimitConfig.max,
+  message: rateLimitConfig.message,
+  headers: rateLimitConfig.headers,
+});
+
+app.use(limiter);
 
 app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
 app.use(express.urlencoded({ extended: true }));
