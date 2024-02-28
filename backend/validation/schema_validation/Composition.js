@@ -1,4 +1,4 @@
-const { ErrorPayload } = require('./Errors.js');
+const { ErrorPayload } = require('../ErrorPayload.js');
 const { Logic } = require('./Logic.js');
 
 // synchronousConstraintIdentifiersMap

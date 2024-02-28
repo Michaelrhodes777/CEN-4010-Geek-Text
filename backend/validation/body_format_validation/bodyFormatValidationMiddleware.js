@@ -1,4 +1,4 @@
-const { ErrorPayload } = require('./Errors.js');
+const { ErrorPayload } = require('../ErrorPayload.js');
 const { Logic } = require('./Logic.js');
 const { validateReqBodyStructure } = Logic;
 
@@ -7,4 +7,4 @@ function bodyFormatValidationMiddleware(req, res, next) {
     next();
 }
 
-module.exports =  bodyFormatValidationMiddleware;
+module.exports = bodyFormatValidationMiddleware;

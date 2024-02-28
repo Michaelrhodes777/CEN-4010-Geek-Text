@@ -1,5 +1,5 @@
 const { ErrorPayload } = require('./Errors.js');
-const { bodyIterator, idArrayIterator } = require('./composition.js');
+const { bodyIterator, idArrayIterator } = require('./Composition.js');
 
 function schemaValidationMiddleware(Model) {
     return function (req, res, next) {

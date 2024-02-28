@@ -1,4 +1,17 @@
 class ModelLTInterface {
+    static staticProps = {
+        "modelName": "modelName",
+        "tableName": "tableName",
+        "columnNamesMap": "columnNamesMap",
+        "compositePkeys": "compositePkeys",
+        "columnNamesArray": "columnNamesArray",
+        "queryablePkey": "queryablePkey",
+        "notNullArray": "notNullArray",
+        "updateableColumns": "updateableColumns",
+        "synchronousConstraintSchema": "synchrounousConstraintSchema",
+        "asynchronousConstraintSchema": "asynchronousConstraintSchema"
+    };
+
     static verifyCompositePrimaryKeyString(Model) {
         let valueIdentifier = 1;
         const keys = Model.compositePkeys;

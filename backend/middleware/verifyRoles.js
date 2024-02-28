@@ -1,4 +1,3 @@
-
 const { InvalidAccessTokenError } = require('./util/custom-errors');
 
 const verifyRoles = (...allowedRoles) => {

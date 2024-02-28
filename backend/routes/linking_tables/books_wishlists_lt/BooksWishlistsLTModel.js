@@ -49,6 +49,8 @@ const asynchronousConstraintSchema = {
 
 class BooksWishlistsLTModel extends ModelLTInterface {
 
+    static modelName = "BooksWishlistsLTModel";
+
     static tableName = "books_wishlists_lt";
 
     static columnNamesMap = columnNames;
