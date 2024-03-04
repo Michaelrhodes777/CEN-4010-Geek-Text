@@ -1,5 +1,5 @@
+const ErrorPayload = require('../ErrorPayload.js');
 const {
-    ErrorPayload,
     InvalidPrimaryKeyError,
     InvalidCompositeKeyError,
     CompositeKeyAlreadyExistsError,
@@ -17,7 +17,6 @@ class Logic {
                 text: text,
                 values: keyArrays[i]
             };
-            console.log(query);
             const response = await client.query(query);
             const resultLength = response.rows.length;
             if (resultLength !== 1) {
@@ -141,7 +140,7 @@ class Logic {
                 "columnName": columnName,
                 "queryString": query.text,
                 "valuesArray": String(query.values), 
-                "responseRows": String(response.rows)
+                "responseRows": JSON.stringify(response.rows)
             });
             throw new UniquenessError(errorPayload);
         }

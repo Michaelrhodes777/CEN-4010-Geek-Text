@@ -25,7 +25,7 @@ class BodyFormatError extends Error {
             mainArgs: errorPayload.mainArgs,
         };
 
-        QueryStringValidationError.thisMapper(build, this);
+        BodyFormatError.thisMapper(build, this);
     }
 }
 

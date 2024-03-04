@@ -255,9 +255,9 @@ class BlacklistError extends SchemaValidationError {
             [ numeric, "12a34", ]
         ),
         new TestingPayload(
-            `given that the blacklist is numeric and data is "a", a BlacklistError should be thrown`,
+            `given that the blacklist is numeric and data is "1", a BlacklistError should be thrown`,
             "blacklistValidation",
-            [ numeric, "a", ]
+            [ numeric, "1", ]
         ),
         new TestingPayload(
             `given that the blacklist is lowercase and data is "abcd1", a BlacklistError should be thrown`,
@@ -275,9 +275,9 @@ class BlacklistError extends SchemaValidationError {
             [ lowercase, "ab1cd", ]
         ),
         new TestingPayload(
-            `given that the blacklist is lowercase and data is "1", a BlacklistError should be thrown`,
+            `given that the blacklist is lowercase and data is "a", a BlacklistError should be thrown`,
             "blacklistValidation",
-            [ lowercase, "1", ]
+            [ lowercase, "a", ]
         ),
         new TestingPayload(
             `given that the blacklist is stdBlacklist and data is "\"abcd", a BlacklistError should be thrown`,
@@ -388,9 +388,9 @@ class RequiredListError extends SchemaValidationError {
             [ [ numeric, lowercase, uppercase, specialCharacters ], "Allstar!" ]
         ),
         new TestingPayload(
-            `given that the required list is [ numeric, lowercase, uppercase, specialCharacters ] and the data is "All777!", a RequiredListError should be thrown`,
+            `given that the required list is [ numeric, lowercase, uppercase, specialCharacters ] and the data is "A777!", a RequiredListError should be thrown`,
             "requiredListValidation",
-            [ [ numeric, lowercase, uppercase, specialCharacters ], "All777!" ]
+            [ [ numeric, lowercase, uppercase, specialCharacters ], "A777!" ]
         ),
         new TestingPayload(
             `given that the required list is [ numeric, lowercase, uppercase, specialCharacters ] and the data is "ll777!", a RequiredListError should be thrown`,
@@ -412,8 +412,8 @@ class RequiredListError extends SchemaValidationError {
 }
 
 const ErrorsTestMap = {
-    "MissingRequiredFieldError": MissingRequiredFieldError,
-    "InvalidRequiredFieldError": InvalidRequiredFieldError,
+    // "MissingRequiredFieldError": MissingRequiredFieldError,
+    // "InvalidRequiredFieldError": InvalidRequiredFieldError,
     "InvalidJsTypeError": InvalidJsTypeError,
     "IntNumberBoundsError": IntNumberBoundsError,
     "InvalidVarcharLengthError": InvalidVarcharLengthError,

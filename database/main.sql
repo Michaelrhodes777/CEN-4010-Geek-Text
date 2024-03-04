@@ -73,8 +73,8 @@ CREATE TABLE wishlists (
 );
 
 CREATE TABLE books_wishlists_lt (
-			book_id_fkey			INT					REFERENCES books(book_id) ON DELETE CASCADE,
-			wishlist_id_fkey		INT					REFERENCES wishlists(wishlist_id) ON DELETE CASCADE,
+			book_id_fkey			INT					NOT NULL REFERENCES books(book_id) ON DELETE CASCADE,
+			wishlist_id_fkey		INT					NOT NULL REFERENCES wishlists(wishlist_id) ON DELETE CASCADE,
 			PRIMARY KEY				(book_id_fkey, wishlist_id_fkey)
 );
 
@@ -88,8 +88,8 @@ CREATE TABLE reviews (
 );
 
 CREATE TABLE shopping_carts_lt (
-			user_id_fkey			INT					REFERENCES users(user_id) ON DELETE CASCADE,
-			book_id_fkey			INT					REFERENCES books(book_id) ON DELETE CASCADE,
+			user_id_fkey			INT					NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
+			book_id_fkey			INT					NOT NULL REFERENCES books(book_id) ON DELETE CASCADE,
 			quantity				INT					DEFAULT 0 NOT NULL,
 			PRIMARY KEY				(user_id_fkey, book_id_fkey)
 );

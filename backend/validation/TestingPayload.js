@@ -13,6 +13,11 @@ class TestingPayload {
         const { fxnName, args, errorPayload } = this;
         LogicFunctionsMap[fxnName](...args, errorPayload);
     }
+
+    async runAsyncTest(LogicFunctionsMap) {
+        const { fxnName, args, errorPayload } = this;
+        await LogicFunctionsMap[fxnName](...args, errorPayload);
+    }
 }
 
 module.exports = TestingPayload;

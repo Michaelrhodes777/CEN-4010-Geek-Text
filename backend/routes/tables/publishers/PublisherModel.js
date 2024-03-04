@@ -60,6 +60,8 @@ const asynchronousConstraintSchema = {
 };
 
 class PublisherModel extends ModelInterface {
+    static modelName = "PublisherModel";
+
     static tableName = "publishers";
 
     static columnNamesMap = columnNames;

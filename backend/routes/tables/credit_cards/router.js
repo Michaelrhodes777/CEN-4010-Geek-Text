@@ -19,6 +19,7 @@ router.route("/")
     )
     .get(
         tablesQueryStringValidationMiddleware("GET"),
+        schemaValidationMiddleware(CreditCardModel),
         readController(CreditCardModel)
     )
     .put(
@@ -29,6 +30,7 @@ router.route("/")
     )
     .delete(
         tablesQueryStringValidationMiddleware("DELETE"),
+        schemaValidationMiddleware(CreditCardModel),
         deleteController(CreditCardModel)
     );
 module.exports = router;

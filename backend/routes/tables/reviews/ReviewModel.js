@@ -114,6 +114,8 @@ const asynchronousConstraintSchema = {
 };
 
 class ReviewModel extends ModelInterface {
+    static modelName = "ReviewModel";
+
     static tableName = "reviews";
 
     static columnNamesMap = columnNames;

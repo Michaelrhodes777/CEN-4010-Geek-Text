@@ -124,6 +124,8 @@ const asynchronousConstraintSchema = {
 };
 
 class UserModel extends ModelInterface {
+    static modelName = "UserModel";
+
     static tableName = "users";
 
     static columnNamesMap = columnNames;

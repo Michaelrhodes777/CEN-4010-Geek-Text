@@ -96,6 +96,7 @@ const asynchronousConstraintSchema = {
 };
 
 class CreditCardModel extends ModelInterface {
+    static modelName = "CreditCardModel";
 
     static tableName = "credit_cards";
 

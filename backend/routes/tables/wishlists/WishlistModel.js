@@ -63,6 +63,8 @@ const asynchronousConstraintSchema = {
 };
 
 class WishlistModel extends ModelInterface {
+    static modelName = "WishlistModel";
+
     static tableName = "wishlists";
 
     static columnNamesMap = columnNames;

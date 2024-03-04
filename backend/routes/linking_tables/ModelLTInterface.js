@@ -8,7 +8,7 @@ class ModelLTInterface {
         "queryablePkey": "queryablePkey",
         "notNullArray": "notNullArray",
         "updateableColumns": "updateableColumns",
-        "synchronousConstraintSchema": "synchrounousConstraintSchema",
+        "synchronousConstraintSchema": "synchronousConstraintSchema",
         "asynchronousConstraintSchema": "asynchronousConstraintSchema"
     };
 
