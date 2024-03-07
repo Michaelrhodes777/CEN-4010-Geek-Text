@@ -54,7 +54,12 @@ function createController(Model) {
             if (transactionHasBegun) await client.query("ROLLBACK");
             //error.req = reqMapper(req);
             console.error(error);
-            res.status(500).json({ "response": error });
+            if (error.isCustomError) {
+                res.status(error.statusCode).json({ "response": error });
+            }
+            else {
+                res.status(500).json({ "response": error });
+            }
         }
         finally {
             await client.end();

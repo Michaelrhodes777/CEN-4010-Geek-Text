@@ -33,4 +33,5 @@ router.route("/")
         schemaValidationMiddleware(UserModel),
         deleteController(UserModel)
     );
+
 module.exports = router;

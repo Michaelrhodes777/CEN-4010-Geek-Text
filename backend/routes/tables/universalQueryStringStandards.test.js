@@ -137,66 +137,66 @@ const testPayloadConstructor = (tableName, Model) => [
     )
 ];
 
-// describe("GET: All table routes throw errors on invalid req.params", () => {
-//     for(let Model of ModelIterable) {
-//         const { tableName } = Model;
-//         let testPayloads = testPayloadConstructor(tableName, Model);
-//         for (let testPayload of testPayloads) {
-//             const { testName, url, expectConsumables } = testPayload.getTestingConsumables();
-//             const { statusCode, errorName } = expectConsumables;
-//             it(`\n\t${testName}`, async () => {
-//                 const res = await supertest(createServer())
-//                     .get(url)
-//                     .expect(statusCode);
-//                 expect(res.body.hasOwnProperty("response")).toBe(true);
-//                 expect(res.body.response.hasOwnProperty("statusCode")).toBe(true);
-//                 expect(res.body.response.statusCode === statusCode).toBe(true);
-//                 expect(res.body.response.hasOwnProperty("name")).toBe(true);
-//                 expect(res.body.response.name === errorName).toBe(true);
-//             });
-//         }
-//     }
-// });
+describe("GET: All table routes throw errors on invalid req.params", () => {
+    for(let Model of ModelIterable) {
+        const { tableName } = Model;
+        let testPayloads = testPayloadConstructor(tableName, Model);
+        for (let testPayload of testPayloads) {
+            const { testName, url, expectConsumables } = testPayload.getTestingConsumables();
+            const { statusCode, errorName } = expectConsumables;
+            it(`\n\t${testName}`, async () => {
+                const res = await supertest(createServer())
+                    .get(url)
+                    .expect(statusCode);
+                expect(res.body.hasOwnProperty("response")).toBe(true);
+                expect(res.body.response.hasOwnProperty("statusCode")).toBe(true);
+                expect(res.body.response.statusCode === statusCode).toBe(true);
+                expect(res.body.response.hasOwnProperty("name")).toBe(true);
+                expect(res.body.response.name === errorName).toBe(true);
+            });
+        }
+    }
+});
 
-// describe("PUT: All table routes throw errors on invalid req.params", () => {
-//     for(let Model of ModelIterable) {
-//         const { tableName } = Model;
-//         let testPayloads = testPayloadConstructor(tableName, Model);
-//         for (let testPayload of testPayloads) {
-//             const { testName, url, body, expectConsumables } = testPayload.getTestingConsumables();
-//             const { statusCode, errorName } = expectConsumables;
-//             it(`\n\t${testName}`, async () => {
-//                 const res = await supertest(createServer())
-//                     .put(url)
-//                     .send(body === null ? [{ [Model.idName]: -1}] : body)
-//                     .expect(statusCode);
-//                 expect(res.body.hasOwnProperty("response")).toBe(true);
-//                 expect(res.body.response.hasOwnProperty("statusCode")).toBe(true);
-//                 expect(res.body.response.statusCode === statusCode).toBe(true);
-//                 expect(res.body.response.hasOwnProperty("name")).toBe(true);
-//                 expect(res.body.response.name === errorName).toBe(true);
-//             });
-//         }
-//     }
-// });
+describe("PUT: All table routes throw errors on invalid req.params", () => {
+    for(let Model of ModelIterable) {
+        const { tableName } = Model;
+        let testPayloads = testPayloadConstructor(tableName, Model);
+        for (let testPayload of testPayloads) {
+            const { testName, url, body, expectConsumables } = testPayload.getTestingConsumables();
+            const { statusCode, errorName } = expectConsumables;
+            it(`\n\t${testName}`, async () => {
+                const res = await supertest(createServer())
+                    .put(url)
+                    .send(body === null ? [{ [Model.idName]: -1}] : body)
+                    .expect(statusCode);
+                expect(res.body.hasOwnProperty("response")).toBe(true);
+                expect(res.body.response.hasOwnProperty("statusCode")).toBe(true);
+                expect(res.body.response.statusCode === statusCode).toBe(true);
+                expect(res.body.response.hasOwnProperty("name")).toBe(true);
+                expect(res.body.response.name === errorName).toBe(true);
+            });
+        }
+    }
+});
 
-// describe("DELETE: All table routes throw errors on invalid req.params", () => {
-//     for(let Model of ModelIterable) {
-//         const { tableName } = Model;
-//         let testPayloads = testPayloadConstructor(tableName, Model);
-//         for (let testPayload of testPayloads) {
-//             const { testName, url, expectConsumables } = testPayload.getTestingConsumables();
-//             const { statusCode, errorName } = expectConsumables;
-//             it(`\n\t${testName}`, async () => {
-//                 const res = await supertest(createServer())
-//                     .delete(url)
-//                     .expect(statusCode);
-//                 expect(res.body.hasOwnProperty("response")).toBe(true);
-//                 expect(res.body.response.hasOwnProperty("statusCode")).toBe(true);
-//                 expect(res.body.response.statusCode === statusCode).toBe(true);
-//                 expect(res.body.response.hasOwnProperty("name")).toBe(true);
-//                 expect(res.body.response.name === errorName).toBe(true);
-//             });
-//         }
-//     }
-// });
+describe("DELETE: All table routes throw errors on invalid req.params", () => {
+    for(let Model of ModelIterable) {
+        const { tableName } = Model;
+        let testPayloads = testPayloadConstructor(tableName, Model);
+        for (let testPayload of testPayloads) {
+            const { testName, url, expectConsumables } = testPayload.getTestingConsumables();
+            const { statusCode, errorName } = expectConsumables;
+            it(`\n\t${testName}`, async () => {
+                const res = await supertest(createServer())
+                    .delete(url)
+                    .expect(statusCode);
+                expect(res.body.hasOwnProperty("response")).toBe(true);
+                expect(res.body.response.hasOwnProperty("statusCode")).toBe(true);
+                expect(res.body.response.statusCode === statusCode).toBe(true);
+                expect(res.body.response.hasOwnProperty("name")).toBe(true);
+                expect(res.body.response.name === errorName).toBe(true);
+            });
+        }
+    }
+});

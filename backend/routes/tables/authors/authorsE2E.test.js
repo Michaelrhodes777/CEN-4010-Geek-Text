@@ -39,31 +39,6 @@ const databaseInstantiationPayload = {
 const DATA_REF = databaseInstantiationPayload.dataPayloads[0].data;
 const DATA_LENGTH = databaseInstantiationPayload.dataPayloads[0].data.length;
 
-const databaseControl = new DatabaseControl(databaseInstantiationPayload);
-beforeAll(async () => {
-    await databaseControl.setupDatabase();
-});
-
-afterAll(async () => {
-    await databaseControl.tearDownDatabase();
-});
-
-describe("Validate correct database instantiation and GET functionality", () => {
-    test("\n\tAll authors are present from payload", async () => {
-        let res = await supertest(createServer())
-            .get(`/authors?id=[${databaseControl.getKeyArraysFromMap("authors").map((array) => (array[0])).join(",")}]`)
-            .expect(200);
-        let responseLen = res.body.response.length;
-        expect(responseLen === DATA_LENGTH).toBe(true);
-        for (let i = 0; i < responseLen; i++) {
-            let dataObject = res.body.response[i];
-            delete dataObject.author_id;
-            dataObject[i] = JSON.stringify(dataObject);
-            expect(dataObject[i] === JSON.stringify(DATA_REF[i])).toBe(true);
-        }   
-    });
-});
-
 const data = [
     {
         first_name: "newauthorfirstname",
@@ -93,6 +68,33 @@ const data = [
 ];
 
 let primaryKeys = [];
+
+const databaseControl = new DatabaseControl(databaseInstantiationPayload);
+beforeAll(async () => {
+    await databaseControl.setupDatabase();
+});
+
+afterAll(async () => {
+    await databaseControl.tearDownDatabase();
+});
+
+describe("Validate correct database instantiation and GET functionality", () => {
+    test("\n\tAll authors are present from payload", async () => {
+        const keyArrays = databaseControl.getKeyArraysFromMap("authors");
+        expect(keyArrays.length > 0).toBe(true);
+        let res = await supertest(createServer())
+            .get(`/authors?id=[${keyArrays.map((array) => (array[0])).join(",")}]`)
+            .expect(200);
+        let responseLen = res.body.response.length;
+        expect(responseLen === DATA_LENGTH).toBe(true);
+        for (let i = 0; i < responseLen; i++) {
+            let dataObject = res.body.response[i];
+            delete dataObject.author_id;
+            dataObject[i] = JSON.stringify(dataObject);
+            expect(dataObject[i] === JSON.stringify(DATA_REF[i])).toBe(true);
+        }   
+    });
+});
 
 describe("Validate Single POST", () => {
     test("\n\tSingle POST works on authors table/route", async () => {

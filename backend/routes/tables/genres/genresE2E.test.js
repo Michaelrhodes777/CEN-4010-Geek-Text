@@ -33,6 +33,26 @@ const databaseInstantiationPayload = {
 const DATA_REF = databaseInstantiationPayload.dataPayloads[0].data;
 const DATA_LENGTH = databaseInstantiationPayload.dataPayloads[0].data.length;
 
+const data = [
+    {
+        genre_name: "firstnewgenrename",
+    },            
+    {
+        genre_name: "secondnewgenrename",
+    },
+    {
+        genre_name: "thirdnewgenrename",
+    },
+    {
+        genre_name: "fourthnewgenrename",
+    },
+    {
+        genre_name: "fifthnewgenrename",
+    }
+];
+
+let primaryKeys = [];
+
 const databaseControl = new DatabaseControl(databaseInstantiationPayload);
 beforeAll(async () => {
     await databaseControl.setupDatabase();
@@ -57,26 +77,6 @@ describe("Validate correct database instantiation and GET functionality", () => 
         }   
     });
 });
-
-const data = [
-    {
-        genre_name: "firstnewgenrename",
-    },            
-    {
-        genre_name: "secondnewgenrename",
-    },
-    {
-        genre_name: "thirdnewgenrename",
-    },
-    {
-        genre_name: "fourthnewgenrename",
-    },
-    {
-        genre_name: "fifthnewgenrename",
-    }
-];
-
-let primaryKeys = [];
 
 describe("Validate Single POST", () => {
     test("\n\tSingle POST works on genres table/route", async () => {

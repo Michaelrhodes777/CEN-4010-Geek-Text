@@ -3,27 +3,14 @@ const StandardLists = require('../../StandardLists.js');
 const { numeric, lowercase, uppercase, alphabetical, alphanumeric, specialCharacters, alphanumericSpecial, stdBlacklist } = StandardLists;
 
 const columnNames = {
-    "user_id": "user_id",
     "username": "username",
     "password": "password",
     "first_name": "first_name",
     "last_name": "last_name",
-    "email_address": "email_address",
     "address": "address"
 };
 
 const synchronousConstraintSchema = {
-    [columnNames.user_id]: {
-        jsType: "number",
-        dbType: {
-            type: "int",
-            bounds: [ "[", 0, "i", "-" ],
-        },
-        blacklist: null,
-        whitelist: null,
-        requiredList: null,
-        custom: null
-    },
     [columnNames.username]: {
         jsType: "string",
         dbType: {
@@ -68,17 +55,6 @@ const synchronousConstraintSchema = {
         requiredList: null,
         custom: null
     },
-    [columnNames.email_address]: {
-        jsType: "string",
-        dbType: {
-            type: "varchar",
-            bounds: [ "[", 1, 128, "]" ]
-        },
-        blacklist: stdBlacklist,
-        whitelist: null,
-        requiredList: null,
-        custom: null
-    },
     [columnNames.address]: {
         jsType: "string",
         dbType: {
@@ -93,10 +69,6 @@ const synchronousConstraintSchema = {
 };
 
 const asynchronousConstraintSchema = {
-    [columnNames.user_id]: {
-        foreignKey: null,
-        unique: false
-    },
     [columnNames.username]: {
         foreignKey: null,
         unique: true
@@ -113,42 +85,40 @@ const asynchronousConstraintSchema = {
         foreignKey: null,
         unique: false
     },
-    [columnNames.email_address]: {
-        foreignKey: null,
-        unique: true
-    },
     [columnNames.address]: {
         foreignKey: null,
         unique: false
     }
 };
 
-class UserModel extends ModelInterface {
-    static modelName = "UserModel";
+class EditUserDataModel {
+    static uniquenessStringConstructor(Model, columnName) {
+        return `SELECT ( "${columnName}" ) FROM ${Model.tableName} WHERE "${columnName}" = $1`;
+    }
 
-    static tableName = "users";
+    static modelName = "EditUserDataModel";
+
+    static tableName = "edit_user_data";
 
     static columnNamesMap = columnNames;
 
     static columnNamesArray = [
-        columnNames.user_id,
         columnNames.username,
         columnNames.password,
         columnNames.first_name,
         columnNames.last_name,
-        columnNames.email_address,
         columnNames.address
     ];
 
-    static idName = columnNames.user_id;
+    static keyName = columnNames.username;
 
-    static updateableColumns = UserModel.columnNamesArray.slice(1);
+    static updateableColumns = EditUserDataModel.columnNamesArray;
 
-    static notNullArray = [ columnNames.username, columnNames.password ];
+    static notNullArray = [ columnNames.username, columnNames.password, columnNames.email_address ];
 
     static synchronousConstraintSchema = synchronousConstraintSchema;
 
     static asynchronousConstraintSchema = asynchronousConstraintSchema;
 }
 
-module.exports = UserModel;
+module.exports = EditUserDataModel;

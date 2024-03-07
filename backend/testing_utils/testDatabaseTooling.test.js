@@ -49,55 +49,54 @@ const databaseInstantiationPayload = {
 
 const databaseControl = new DatabaseControl(databaseInstantiationPayload);
 
-// beforeAll(async () => {
-//     await databaseControl.setupDatabase();
-// });
+beforeAll(async () => {
+    await databaseControl.setupDatabase();
+});
 
-// test("Validate database was seeded", async () => {
-//     const client = clientFactory();
-//     try {
-//         await client.connect();
-//         let { identifiers } = databaseInstantiationPayload;
-//         for (let i = 0; i < identifiers.length; i++) {
-//             let identifier = identifiers[i];
-//             let currentLength = databaseInstantiationPayload.dataPayloads[i].data.length;
-//             const response = await client.query({ text: `SELECT * FROM ${identifier}`});
-//             expect(response.rows.length === currentLength).toBe(true);
-//             //console.log(`expectation: ${response.rows.length} ${currentLength}`);
-//         }
-//     }
-//     catch (error) {
-//         console.error(error);
-//     }
-//     finally {
-//         await client.end(); 
-//     }
-// });
+test("Validate database was seeded", async () => {
+    const client = clientFactory();
+    try {
+        await client.connect();
+        let { identifiers } = databaseInstantiationPayload;
+        for (let i = 0; i < identifiers.length; i++) {
+            let identifier = identifiers[i];
+            let currentLength = databaseInstantiationPayload.dataPayloads[i].data.length;
+            const response = await client.query({ text: `SELECT * FROM ${identifier}`});
+            expect(response.rows.length === currentLength).toBe(true);
+            //console.log(`expectation: ${response.rows.length} ${currentLength}`);
+        }
+    }
+    catch (error) {
+        console.error(error);
+    }
+    finally {
+        await client.end(); 
+    }
+});
 
-// test("Proper Database setup/teardown. Database's tables should all be empty", async () => {
-//     try {
-//         await databaseControl.tearDownDatabase();
-//     }
-//     catch (error) {
-//         console.log(error);
-//     }
+test("Proper Database setup/teardown. Database's tables should all be empty", async () => {
+    try {
+        await databaseControl.tearDownDatabase();
+    }
+    catch (error) {
+        console.log(error);
+    }
 
-//     const client = clientFactory();
-//     try {
-//         await client.connect();
-//         for (let identifier of databaseInstantiationPayload.identifiers) {
-//             let response = await client.query({ text: `SELECT * FROM ${identifier}` });
-//             //console.log(response.rows);
-//             //console.log(response.rows.length);
-//             let numRows = response.rows.length;
-//             expect(numRows === 0).toBe(true);
-//         }
-//     }
-//     catch (error) {
-//         console.error(error);
-//     }
-//     finally {
-//         await client.end(); 
-//     }
-//     expect(true).toBe(true);
-// });
+    const client = clientFactory();
+    try {
+        await client.connect();
+        for (let identifier of databaseInstantiationPayload.identifiers) {
+            let response = await client.query({ text: `SELECT * FROM ${identifier}` });
+            //console.log(response.rows);
+            //console.log(response.rows.length);
+            let numRows = response.rows.length;
+            expect(numRows === 0).toBe(true);
+        }
+    }
+    catch (error) {
+        console.error(error);
+    }
+    finally {
+        await client.end(); 
+    }
+});
