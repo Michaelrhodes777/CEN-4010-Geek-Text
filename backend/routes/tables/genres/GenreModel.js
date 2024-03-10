@@ -45,6 +45,8 @@ const asynchronousConstraintSchema = {
 };
 
 class GenreModel extends ModelInterface {
+    static modelName = "GenreModel";
+
     static tableName = "genres";
 
     static columnNamesMap = columnNames;
@@ -63,7 +65,6 @@ class GenreModel extends ModelInterface {
     static synchronousConstraintSchema = synchronousConstraintSchema;
 
     static asynchronousConstraintSchema = asynchronousConstraintSchema;
-
 }
 
 module.exports = GenreModel;

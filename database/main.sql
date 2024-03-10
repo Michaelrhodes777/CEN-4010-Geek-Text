@@ -4,6 +4,11 @@ DROP VIEW IF EXISTS shopping_carts;
 DROP VIEW IF EXISTS average_book_ratings;
 DROP VIEW IF EXISTS books_by_authors;
 
+DROP VIEW IF EXISTS login;
+DROP VIEW IF EXISTS logout;
+DROP VIEW IF EXISTS edit_user_data;
+DROP VIEW IF EXISTS user_data;
+
 DROP TABLE IF EXISTS books_wishlists_lt;
 DROP TABLE IF EXISTS shopping_carts_lt;
 
@@ -24,7 +29,9 @@ CREATE TABLE users (
 			first_name              VARCHAR(32),
 			last_name				VARCHAR(32),
 			email_address			VARCHAR(128)        UNIQUE,
-			address					VARCHAR(128)
+			address					VARCHAR(128),
+			refresh_token			VARCHAR(512)		DEFAULT NULL,
+			role					VARCHAR(12)			DEFAULT 'user' NOT NULL
 );
 
 CREATE TABLE credit_cards (
@@ -73,8 +80,8 @@ CREATE TABLE wishlists (
 );
 
 CREATE TABLE books_wishlists_lt (
-			book_id_fkey			INT					REFERENCES books(book_id) ON DELETE CASCADE,
-			wishlist_id_fkey		INT					REFERENCES wishlists(wishlist_id) ON DELETE CASCADE,
+			book_id_fkey			INT					NOT NULL REFERENCES books(book_id) ON DELETE CASCADE,
+			wishlist_id_fkey		INT					NOT NULL REFERENCES wishlists(wishlist_id) ON DELETE CASCADE,
 			PRIMARY KEY				(book_id_fkey, wishlist_id_fkey)
 );
 
@@ -88,13 +95,59 @@ CREATE TABLE reviews (
 );
 
 CREATE TABLE shopping_carts_lt (
-			user_id_fkey			INT					REFERENCES users(user_id) ON DELETE CASCADE,
-			book_id_fkey			INT					REFERENCES books(book_id) ON DELETE CASCADE,
+			user_id_fkey			INT					NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
+			book_id_fkey			INT					NOT NULL REFERENCES books(book_id) ON DELETE CASCADE,
 			quantity				INT					DEFAULT 0 NOT NULL,
 			PRIMARY KEY				(user_id_fkey, book_id_fkey)
 );
 
 -- Views
+
+CREATE VIEWS register AS
+	SELECT
+		username,
+		password,
+		email_adress
+		FROM users
+;
+
+CREATE VIEW login AS
+	SELECT
+		username,
+		password,
+		refresh_token,
+		role
+		FROM users
+;
+
+CREATE VIEW logout AS
+	SELECT
+		refresh_token
+		FROM users
+;	
+
+CREATE VIEW edit_user_data AS
+	SELECT
+		user_id,
+		username,
+		first_name,
+		last_name,
+		email_address,
+		address
+		FROM users
+;
+
+CREATE VIEW user_data AS
+	SELECT
+		user_id,
+		username,
+		first_name,
+		last_name,
+		email_address,
+		address,
+		refresh_token
+		FROM users
+;
 
 CREATE VIEW books_by_genres AS
 	SELECT

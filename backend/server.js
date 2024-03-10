@@ -2,19 +2,19 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const rateLimit = require('express-rate-limit');
-const rateLimitConfig = require('./middleware/rateLimiter.json');
+const rateLimiterConfig = require('./middleware/rateLimiterConfig.js');
 
 const app = express();
 const PORT = process.env.PORT || 3500;
 
-const limiter = rateLimit({
-  windowMs: rateLimitConfig.windowMs,
-  max: rateLimitConfig.max,
-  message: rateLimitConfig.message,
-  headers: rateLimitConfig.headers,
-});
+// const limiter = rateLimit({
+//   windowMs: rateLimiterConfig.windowMs,
+//   max: rateLimiterConfig.max,
+//   message: rateLimiterConfig.message,
+//   headers: rateLimiterConfig.headers,
+// });
 
-app.use(limiter);
+// app.use(limiter);
 
 app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
 app.use(express.urlencoded({ extended: true }));
@@ -34,6 +34,7 @@ app.use("/books_wishlists_lt", require('./routes/linking_tables/books_wishlists_
 
 app.use("/books_by_genres", require('./routes/read_only_views/books_by_genres/router.js'));
 app.use("/books_by_authors", require('./routes/read_only_views/books_by_authors/router.js'));
+app.use("/users_by_usernames", require('./routes/read_only_views/users_by_usernames/router.js'));
 app.use("/average_book_ratings", require('./routes/read_only_views/average_book_ratings/router.js'));
 app.use("/top_sellers", require('./routes/read_only_views/top_sellers/router.js'));
 app.use("/shopping_carts", require('./routes/read_only_views/shopping_carts/router.js'));

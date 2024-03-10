@@ -1,4 +1,4 @@
-const { ErrorPayload } = require('./Errors.js');
+const ErrorPayload = require('../ErrorPayload.js');
 const { Logic } = require('./Logic.js');
 const {
     validateTablesReqQuery,
@@ -41,7 +41,6 @@ function tablesQueryStringValidationMiddleware(controllerType = null) {
         }
         validateNoDuplicateIds(req.keyArrays, errorPayload);
         const queryCondition = determineQueryCondition(req.query);
-        console.log(queryCondition);
         req.queryCondition = queryCondition;
         next();
     }
@@ -53,7 +52,6 @@ function linkingTablesQueryStringValidationMiddleware(Model, controllerType = nu
         validateLinkingTablesReqQuery(req, errorPayload);
         validateStandardQueryString(req.query, errorPayload);
         const queryCondition = determineQueryCondition(req.query);
-        console.log(queryCondition);
         req.queryCondition = queryCondition;
         if (req.queryCondition === "cid") {
             req.keyArrays = idArrayWrapper(req.query[queryCondition], Model.compositePkeys.length);

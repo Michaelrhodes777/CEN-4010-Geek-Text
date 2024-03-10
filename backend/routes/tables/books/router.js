@@ -18,7 +18,8 @@ router.route("/")
         createController(BookModel)
     )
     .get(
-        tablesQueryStringValidationMiddleware("GET"), 
+        tablesQueryStringValidationMiddleware("GET"),
+        schemaValidationMiddleware(BookModel),
         readController(BookModel)
     )
     .put(
@@ -29,6 +30,7 @@ router.route("/")
     )
     .delete(
         tablesQueryStringValidationMiddleware("DELETE"),
+        schemaValidationMiddleware(BookModel),
         deleteController(BookModel)
     );
 

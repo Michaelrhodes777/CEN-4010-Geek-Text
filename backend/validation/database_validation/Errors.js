@@ -28,19 +28,6 @@ class DatabaseValidationError extends Error {
     }
 }
 
-class ErrorPayload {
-
-    constructor() {
-        this.mainArgs = null;
-        this.iterationIndex = null;
-    }
-
-    appendMainArgs(runtimeObject) {
-        this.mainArgs = runtimeObject;
-    }
-
-}
-
 class InvalidPrimaryKeyError extends DatabaseValidationError {
 
     static runtimeDataProps = [ "primaryKey", "queryText", "queryValues", "responseRows" ];
@@ -124,7 +111,6 @@ const ErrorsTestMap = {
 
 module.exports = {
     DatabaseValidationError,
-    ErrorPayload,
     InvalidPrimaryKeyError,
     InvalidCompositeKeyError,
     CompositeKeyAlreadyExistsError,

@@ -10,7 +10,7 @@ describe("Query String Errors have valid name Testing Suite", () => {
     }
 });
 
-describe("Automated Error test suite", () => {
+describe("Error test suite", () => {
     const errorPropNames = Object.keys(ErrorsTestMap);
     for (let errorPropName of errorPropNames) {
         describe(errorPropName + ": ", () => {

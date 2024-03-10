@@ -76,6 +76,7 @@ const asynchronousConstraintSchema = {
 };
 
 class AuthorModel extends ModelInterface {
+    static modelName = "AuthorModel";
 
     static tableName = "authors";
 

@@ -1,3 +1,5 @@
+const TestingPayload = require('../TestingPayload.js');
+
 class QueryStringValidationError extends Error {
     static thisMapper(build, thisInstantiation) {
         for (let key of Object.keys(build)) {
@@ -37,21 +39,6 @@ class ErrorPayload {
         this.mainArgs = runtimeObject;
     }
 
-}
-
-class TestingPayload {
-    
-    constructor(testName, fxnName, args) {
-        this.testName = testName;
-        this.fxnName = fxnName;
-        this.args = args;
-        this.errorPayload = new ErrorPayload();
-    }
-
-    runTest(LogicFunctionsMap) {
-        const { fxnName, args, errorPayload } = this;
-        LogicFunctionsMap[fxnName](...args, errorPayload);
-    }
 }
 
 class ReqDoesNotHaveQueryPropError extends QueryStringValidationError {
@@ -108,14 +95,6 @@ class ReqQueryDoesNotHaveCidOrQidPropError extends QueryStringValidationError {
         super("req.query does not have id property", errorPayload);
         this.name = "ReqQueryDoesNotHaveCidOrQidPropError";
     }
-}
-
-req = {
-    "query": {
-        "id": "",
-        "cid": ""
-    },
-    "body": {}
 }
 
 class ReqQueryHasMoreThanOnePropError extends QueryStringValidationError {

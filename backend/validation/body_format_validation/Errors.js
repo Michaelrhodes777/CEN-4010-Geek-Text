@@ -1,3 +1,5 @@
+const TestingPayload = require('../TestingPayload.js');
+
 class BodyFormatError extends Error {
     static thisMapper(build, thisInstantiation) {
         for (let key of Object.keys(build)) {
@@ -23,24 +25,20 @@ class BodyFormatError extends Error {
             mainArgs: errorPayload.mainArgs,
         };
 
-        QueryStringValidationError.thisMapper(build, this);
+        BodyFormatError.thisMapper(build, this);
     }
-}
-
-class ErrorPayload {
-
-    constructor() {
-        this.mainArgs = null;
-    }
-
-    appendMainArgs(runtimeObject) {
-        this.mainArgs = runtimeObject;
-    }
-
 }
 
 class ReqBodyDoesNotExistError extends BodyFormatError {
     static runtimeDataProps = [];
+
+    static testPointsOfFailure = [
+        new TestingPayload(
+            "given that req does not have body property, test should fail",
+            "validateReqBodyStructure",
+            [ {} ]
+        )
+    ];
 
     constructor(errorPayload) {
         super("req does not have the property body", errorPayload);
@@ -52,6 +50,24 @@ class ReqBodyIsNotArrayError extends BodyFormatError {
 
     static runtimeDataProps = [ "body" ];
 
+    static testPointsOfFailure = [
+        new TestingPayload(
+            "given that req.body is null, test should fail",
+            "validateReqBodyStructure",
+            [ { req: null } ]
+        ),
+        new TestingPayload(
+            "given that req.body is an object, test should fail",
+            "validateReqBodyStructure",
+            [ { req: {} } ]
+        ),
+        new TestingPayload(
+            "given that req.body is undefined, test should fail",
+            "validateReqBodyStructure",
+            [ { req: undefined } ]
+        )
+    ]
+
     constructor(errorPayload) {
         super("req.body is an array", errorPayload);
         this.name = "ReqBodyIsNotArrayError";
@@ -61,6 +77,14 @@ class ReqBodyIsNotArrayError extends BodyFormatError {
 
 class ReqBodyLengthIsZeroError extends BodyFormatError {
     static runtimeDataProps = [ "body" ];
+
+    static testPointsOfFailure = [
+        new TestingPayload(
+            "given that req.body is array of length zero, test should fail",
+            "validateReqBodyStructure",
+            [ { req: [] } ]
+        )
+    ]
 
     constructor(errorPayload) {
         super("req.body.length === 0", errorPayload);
@@ -76,7 +100,6 @@ const ErrorsTestMap = {
 
 module.exports = {
     BodyFormatError,
-    ErrorPayload,
     ReqBodyDoesNotExistError,
     ReqBodyIsNotArrayError,
     ReqBodyLengthIsZeroError,

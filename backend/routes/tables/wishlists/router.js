@@ -18,7 +18,8 @@ router.route("/")
         createController(WishlistModel)
     )
     .get(
-        tablesQueryStringValidationMiddleware("GET"), 
+        tablesQueryStringValidationMiddleware("GET"),
+        schemaValidationMiddleware(WishlistModel),
         readController(WishlistModel)
     )
     .put(
@@ -29,6 +30,7 @@ router.route("/")
     )
     .delete(
         tablesQueryStringValidationMiddleware("DELETE"),
+        schemaValidationMiddleware(WishlistModel),
         deleteController(WishlistModel)
     );
 

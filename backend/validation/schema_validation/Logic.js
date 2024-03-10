@@ -144,6 +144,16 @@ class Logic {
     }
 }
 
+const LogicTestMap = {
+    "jsTypeValidation": Logic.jsTypeValidation,
+    "validateIntDbType": Logic.validateIntDbType,
+    "validateVarcharDbType": Logic.validateVarcharDbType,
+    "blacklistValidation": Logic.blacklistValidation,
+    "whitelistValidation": Logic.whitelistValidation,
+    "requiredListValidation": Logic.requiredListValidation
+};
+
 module.exports = {
-    Logic
+    Logic,
+    LogicTestMap
 };
