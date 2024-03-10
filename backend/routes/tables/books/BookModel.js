@@ -130,22 +130,18 @@ const synchronousConstraintSchema = {
 
 const asynchronousConstraintSchema = {
     [columnNames.book_id]: {
-        primaryKey: true,
         foreignKey: null,
         unique: false
     },
     [columnNames.isbn]: {
-        primaryKey: false,
         foreignKey: null,
         unique: true
     },
     [columnNames.book_name]: {
-        primaryKey: false,
         foreignKey: null,
         unique: false
     },
     [columnNames.book_description]: {
-        primaryKey: false,
         foreignKey: null,
         unique: false
     },
@@ -155,7 +151,6 @@ const asynchronousConstraintSchema = {
         unique: false
     },
     [columnNames.author_id_fkey]: {
-        primaryKey: false,
         foreignKey: {
             idName: "author_id",
             tableName: "authors"
@@ -163,7 +158,6 @@ const asynchronousConstraintSchema = {
         unique: false
     },
     [columnNames.genre_id_fkey]: {
-        primaryKey: false,
         foreignKey: {
             idName: "genre_id",
             tableName: "genres"
@@ -171,7 +165,6 @@ const asynchronousConstraintSchema = {
         unique: false
     },
     [columnNames.publisher_id_fkey]: {
-        primaryKey: false,
         foreignKey: {
             idName: "publisher_id",
             tableName: "publishers"
@@ -179,12 +172,10 @@ const asynchronousConstraintSchema = {
         unique: false
     },
     [columnNames.year_published]: {
-        primaryKey: false,
         foreignKey: null,
         unique: false
     },
     [columnNames.copies_sold]: {
-        primaryKey: false,
         foreignKey: null,
         unique: false
     }

@@ -91,7 +91,11 @@ class Logic {
     }
 
     static blacklistValidation(currentConstraint, data, errorPayload) {
-        const hasBlacklistedElement = currentConstraint.join("").includes(data);
+        let hasBlacklistedElement = false;
+        let charArray = data.split("");
+        for (let i = 0; !hasBlacklistedElement && i < charArray.length; i++) {
+            hasBlacklistedElement = currentConstraint.includes(charArray[i]);
+        }
         if (hasBlacklistedElement) {
             errorPayload.appendMainArgs({
                 "blacklist": String(currentConstraint),

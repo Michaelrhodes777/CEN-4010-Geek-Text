@@ -46,17 +46,14 @@ const synchronousConstraintSchema = {
 
 const asynchronousConstraintSchema = {
     [columnNames.wishlist_id]: {
-        primaryKey: true,
         foreignKey: null,
         unique: false
     },
     [columnNames.wishlist_name]: {
-        primaryKey: false,
         foreignKey: null,
         unique: false
     },
     [columnNames.user_id_fkey]: {
-        primaryKey: false,
         foreignKey: {
             idName: "user_id",
             tableName: "users"

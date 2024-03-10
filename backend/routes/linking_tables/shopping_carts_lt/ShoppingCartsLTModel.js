@@ -44,7 +44,6 @@ const synchronousConstraintSchema = {
 
 const asynchronousConstraintSchema = {
     [columnNames.user_id_fkey]: {
-        primaryKey: false,
         foreignKey: {
             "idName": "user_id",
             "tableName": "users"
@@ -52,7 +51,6 @@ const asynchronousConstraintSchema = {
         unique: null,
     },
     [columnNames.book_id_fkey]: {
-        primaryKey: false,
         foreignKey: {
             "idName": "book_id",
             "tableName": "books"
@@ -60,7 +58,6 @@ const asynchronousConstraintSchema = {
         unique: null,
     },
     [columnNames.quantity]: {
-        primaryKey: false,
         foreignKey: null,
         unique: null,
     }
@@ -84,7 +81,7 @@ class ShoppingCartsLTModel extends ModelLTInterface {
 
     static notNullArray = [ columnNames.user_id_fkey, columnNames.book_id_fkey, columnNames.quantity ];
 
-    static updateableColumns = [ columnNames.user_id_fkey, columnNames.book_id_fkey, columnNames.quantity ];
+    static updateableColumns = [ columnNames.quantity ];
 
     static synchronousConstraintSchema = synchronousConstraintSchema;
 

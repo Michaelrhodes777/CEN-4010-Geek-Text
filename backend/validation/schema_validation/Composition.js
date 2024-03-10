@@ -41,6 +41,7 @@ class Composition {
 
     static idArrayIterator(Model, keyArrays, condition = "id", errorPayload) {
         for (let i = 0; i < keyArrays.length; i++) {
+            errorPayload.iterationIndex = i;
             let currentKeyArray = keyArrays[i];
             let dataObject = {};
             for (let j = 0; j < currentKeyArray.length; j++) {

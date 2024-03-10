@@ -21,6 +21,7 @@ class SchemaValidationError extends Error {
 
         const build = {
             mainArgs: errorPayload.mainArgs,
+            iterationIndex: errorPayload.iterationIndex
         };
 
         SchemaValidationError.thisMapper(build, this);
@@ -31,6 +32,7 @@ class ErrorPayload {
 
     constructor() {
         this.mainArgs = null;
+        this.iterationIndex = null;
     }
 
     appendMainArgs(runtimeObject) {
