@@ -46,7 +46,7 @@ class LoginModel {
     static idName = null;
     static keyName = null;
 
-    static updateableColumns = UserModel.columnNamesArray.slice(1);
+    static updateableColumns = [];
 
     static notNullArray = [ columnNames.username, columnNames.password ];
 

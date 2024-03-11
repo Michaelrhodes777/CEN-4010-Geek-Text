@@ -81,7 +81,8 @@ const usersBase = {
             "email_address": "jennifer_jenkins@hotmail.com",
             "address": "7301 Franklin Street"
         }
-    ]
+    ],
+    fkeyReferences: undefined
 };
 
 module.exports = usersBase;

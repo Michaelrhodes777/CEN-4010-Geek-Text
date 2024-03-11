@@ -21,7 +21,8 @@ const authorsE2EBase = {
             "last_name": "lewiston",
             "biography": "Nullam sollicitudin arcu eu dui facilisis, at tempor turpis scelerisque. Suspendisse faucibus volutpat lacus quis auctor. Praesent scelerisque nisl enim, a sodales elit aliquet ac. Sed viverra, eros quis varius cursus, sapien est aliquet metus, id malesuada orci felis vel risus. Praesent mattis, turpis et blandit sollicitudin, arcu nisl efficitur est, at imperdiet ante magna sit amet metus. Pellentesque faucibus quam fermentum, viverra est a, pellentesque tellus. Morbi sed mauris tellus. Suspendisse potenti. Nullam sit amet augue vitae orci tempus rhoncus."
         },
-    ]
+    ],
+    fkeyReferences: undefined
 };
 
 module.exports = authorsE2EBase;

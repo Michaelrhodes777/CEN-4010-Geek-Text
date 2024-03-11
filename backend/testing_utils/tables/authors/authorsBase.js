@@ -41,7 +41,8 @@ const authorsBase = {
             "last_name": "adams",
             "biography": "Vivamus eu lacus magna. Fusce sollicitudin maximus ante sed semper. Nulla facilisi. Suspendisse ultricies mi eget nisi vehicula, at aliquam nunc interdum. Nulla neque tellus, ultrices non consequat vitae, vehicula vulputate orci. Vivamus iaculis urna non enim maximus condimentum. Aliquam porttitor egestas viverra. Suspendisse elementum magna mauris, vitae vestibulum orci porttitor quis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque vehicula efficitur libero. In bibendum scelerisque lectus, sed vulputate diam gravida nec. Nulla congue bibendum velit dictum pulvinar. Cras pharetra libero a tempor tincidunt. Mauris eget ullamcorper nibh."
         }
-    ]
+    ],
+    fkeyReferences: undefined
 };
 
 module.exports = authorsBase;

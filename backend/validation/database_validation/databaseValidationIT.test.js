@@ -15,7 +15,6 @@ const { clientFactory } = require('../../database/setupFxns.js');
 const { Models, ModelIterable } = require('../../testing_utils/tables/Models.js');
 const TestingPayload = require('../TestingPayload.js');
 const { LogicTestMap } = require('./Logic.js');
-const { ErrorsTestMap } = require('./Errors.js');
 
 const databaseInstantiationPayload = {
     identifiers: [
@@ -110,18 +109,10 @@ const testSuiteTwo = {
 const databaseControl = new DatabaseControl(databaseInstantiationPayload);
 beforeAll(async () => {
     await databaseControl.setupDatabase();
-    for (let identifier of databaseInstantiationPayload.identifiers) {
-        //console.log(identifier);
-        //console.log(databaseControl.getKeyArraysFromMap(identifier));
-    }
 });
 
 afterAll(async () => {
     await databaseControl.tearDownDatabase();
-    for (let identifier of databaseInstantiationPayload.nonCascadeDeletions) {
-        //console.log(identifier);
-        //console.log(databaseControl.getDeletionResultsFromMap(identifier));
-    }
 });
 
 test("Test InvalidPrimaryKeyError Standard on All Tables", async () => {

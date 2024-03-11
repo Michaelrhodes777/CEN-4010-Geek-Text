@@ -1,4 +1,3 @@
-const ModelInterface = require('../ModelInterface.js');
 const StandardLists = require('../../StandardLists.js');
 const { numeric, lowercase, uppercase, alphabetical, alphanumeric, specialCharacters, alphanumericSpecial, stdBlacklist } = StandardLists;
 
@@ -114,7 +113,7 @@ class EditUserDataModel {
 
     static updateableColumns = EditUserDataModel.columnNamesArray;
 
-    static notNullArray = [ columnNames.username, columnNames.password, columnNames.email_address ];
+    static notNullArray = [];
 
     static synchronousConstraintSchema = synchronousConstraintSchema;
 

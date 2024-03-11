@@ -13,7 +13,8 @@ const publishersE2EBase = {
             "publisher_name": "Eastside, City art printing company",
             "discount_percent": 9
         }
-    ]
+    ],
+    fkeyReferences: undefined
 };
 
 module.exports = publishersE2EBase;

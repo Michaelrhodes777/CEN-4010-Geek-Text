@@ -126,7 +126,6 @@ describe("POST E2E books: single", () => {
 describe("POST E2E books: multiple", () => {
     test("\n\tValidate single POST request", async () => {
         let slice = data.slice(1, data.length - 1);
-        console.log(slice);
         let res = await supertest(createServer())
             .post("/books")
             .send(slice)
@@ -226,8 +225,6 @@ describe("DELETE E2E books: Multiple id",() => {
         for (let i = 0; i < slice.length; i++) {
             const actual = generateComparisonObject(response[i]);
             const expected = generateComparisonObject(data[i + 1]);
-            console.log(expected);
-            console.log(actual);
             for (let prop in expected) {
                 expect(expected[prop] === actual[prop]).toBe(true);
             }

@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const { RefreshTokenValidation } = require('../RefreshTokenValidation.js');
-const { validateDataIntegrityMiddleware } = RefreshTokenValidation;
+const { validateRefreshTokenIntregrityMiddleware } = RefreshTokenValidation;
 const { readController } = require('./controllers.js');
 
 router.route("")
-    .put(validateDataIntegrityMiddleware, readController);
+    .put(validateRefreshTokenIntregrityMiddleware, readController);
 
 module.exports = router;

@@ -1,4 +1,5 @@
 const fs = require('fs');
+const { hashPasswordSync } = require('../backend/util/hashing/Hashing.js');
 
 function typeWrapping(accessment) {
     return typeof accessment === "string" ? `'${accessment}'` : accessment;
@@ -27,6 +28,11 @@ function scriptGenerator() {
 
     for (let table of orderOfInsertion) {
         const json = require(`./${table}/${table}.json`);
+        if (table === "users") {
+            for (let dataObject of json) {
+                dataObject.password = hashPasswordSync(dataObject.password);    
+            }
+        }
         const columnNames = Object.keys(json[0]);
         build += insertionBase(table, columnNames, json);
     }

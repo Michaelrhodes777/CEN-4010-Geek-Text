@@ -5,7 +5,6 @@ async function readController(req, res) {
     let results;
     let transactionHasBegun = false;
     try {
-        console.log("hit");
         await client.connect();
         await client.query("BEGIN");
         transactionHasBegun = true;

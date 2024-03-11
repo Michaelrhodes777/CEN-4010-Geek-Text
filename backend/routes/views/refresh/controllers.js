@@ -1,11 +1,12 @@
 const { clientFactory } = require('../../../database/setupFxns.js');
-const jwt = require('jwt');
+const { CustomValidation } = require('./CustomValidation.js');
+const { validateDatabaseRefreshTokenQuery, validateJWTDecoding } = CustomValidation;
+const jsonwebtoken = require('jsonwebtoken');
 
 async function readController(req, res) {
     const client = clientFactory();
     let clientHasConnected = false;
     let transactionHasBegun = false;
-    let results;
     try {
         await client.connect();
         clientHasConnected = true;
@@ -13,27 +14,31 @@ async function readController(req, res) {
         transactionHasBegun = true;
 
         const { jwt } = req.cookies;
-        const databaseResponse = await client.query({
-            text: `SELECT ( "role", "refresh_token", "username" ) FROM login WHERE refresh_token = $1`,
-            values: [ jwt.substring(7) ]
-        });
-        if (!databaseResponse) {
-            throw Error();
+        const queryObject = {
+            text: `SELECT * FROM login WHERE refresh_token = $1`,
+            values: [ jwt ]
         }
+        const databaseResponse = await client.query(queryObject);
+        const databaseQueryPayload = {
+            jwt,
+            queryObject,
+            databaseResponse
+        };
+        validateDatabaseRefreshTokenQuery(databaseQueryPayload);
 
         let accessToken;
-        const { role, refresh_token, username } = databaseResponse.rows[0];
-        jwt.verify(
+        const { role, username, refresh_token } = databaseResponse.rows[0];
+        jsonwebtoken.verify(
             refresh_token,
             process.env.REFRESH_TOKEN_SECRET,
             (error, decoded) => {
-                if (error) {
-                    throw new Error();
-                }
-                if (username !== decoded.username) {
-                    throw new Error();
-                }
-                accessToken = jwt.sign(
+                const decodingPayload = {
+                    error,
+                    "username": username,
+                    "decodedUsername": decoded.username,
+                };
+                validateJWTDecoding(decodingPayload, databaseQueryPayload);
+                accessToken = jsonwebtoken.sign(
                     {
                         "username": decoded.username,
                         "role": role
@@ -48,6 +53,7 @@ async function readController(req, res) {
         res.json({ "response": { accessToken } });
     }
     catch (error) {
+        console.error(error);
         if (transactionHasBegun) {
             await client.query("ROLLBACK");
         }
