@@ -1,0 +1,89 @@
+{
+	"info": {
+		"_postman_id": "34ca4f22-d6ca-40ab-a573-6bae0bc3147f",
+		"name": "Validate authorization",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25956619",
+		"_collection_link": "https://restless-crescent-707682.postman.co/workspace/Geek-Text-views-routes~22a634d1-69c2-4658-9a70-aa4b6f6fafd6/collection/25956619-34ca4f22-d6ca-40ab-a573-6bae0bc3147f?action=share&source=collection_link&creator=25956619"
+	},
+	"item": [
+		{
+			"name": "http://localhost:3500/login",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"fiercetheory\",\r\n    \"password\": \"porttitorporttitorporttitor1A*\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3500/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3500",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "all books query with access token",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3500/books?id=[0]",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3500",
+					"path": [
+						"books"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "[0]"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "all books query without access token",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3500/books?id=[0]",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3500",
+					"path": [
+						"books"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "[0]"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -84,7 +84,7 @@ const ErrorsTestMap = {
 class Logic {
     static async validateUserExists(username, client) {
         const queryObject = {
-            text: `SELECT ( "password" ) FROM login WHERE username = $1`,
+            text: `SELECT * FROM login WHERE username = $1`,
             values: [ username ]
         };
         const response = await client.query(queryObject);

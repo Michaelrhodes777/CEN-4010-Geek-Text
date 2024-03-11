@@ -25,7 +25,6 @@ function createController(Model) {
                 text: `INSERT INTO ${Model.tableName} ( ${notNullArray.join(", ")} ) VALUES ( ${identifierArray.join(", ")} ) RETURNING *`,
                 values: values
             };
-            console.log(queryObject);
 
             let response = await client.query(queryObject);
             if (!response) {

@@ -1,20 +1,20 @@
-const { InvalidAccessTokenError } = require('./util/custom-errors');
+const { InvalidAccessTokenError } = require('../Errors.js');
 
 const verifyRoles = (...allowedRoles) => {
-  return (req, res, next) => {
-    if (!req.roles) {
-      throw new InvalidAccessTokenError('No roles provided');
+    return (req, res, next) => {
+        if (!req.role) {
+            throw new InvalidAccessTokenError('No roles provided');
+        }
+
+        const rolesArray = [...allowedRoles];
+        const hasRole = rolesArray.includes(req.role);
+
+        if (!hasRole) {
+            throw new InvalidAccessTokenError('User does not have the required roles');
+        }
+
+        next();
     }
-
-    const rolesArray = [...allowedRoles];
-    const hasRole = req.roles.some(role => rolesArray.includes(role));
-
-    if (!hasRole) {
-      throw new InvalidAccessTokenError('User does not have the required roles');
-    }
-
-    next();
-  }
 }
 
 module.exports = verifyRoles;

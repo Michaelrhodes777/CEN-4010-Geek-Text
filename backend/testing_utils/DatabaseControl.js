@@ -53,7 +53,6 @@ class DatabaseControl {
             await client.query("COMMIT");
         }
         catch (error) {
-            console.log(error);
             if (transactionBegun) {
                 await client.query("ROLLBACK");
             }
@@ -79,7 +78,6 @@ class DatabaseControl {
             await client.query("COMMIT");
         }
         catch (error) {
-            console.log(error);
             if (transactionBegun) {
                 await client.query("ROLLBACK");
             }
@@ -100,7 +98,6 @@ class DatabaseControl {
     }
 
     async compositeKeyDeletion(client, identifier, thisRef) {
-        console.log("called");
         this.deletionResultsMap[identifier] = [];
         let keyArrays = thisRef.keyArrays[identifier];
         for (let values of keyArrays) {

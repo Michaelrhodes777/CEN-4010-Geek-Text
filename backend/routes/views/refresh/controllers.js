@@ -28,6 +28,7 @@ async function readController(req, res) {
 
         let accessToken;
         const { role, username, refresh_token } = databaseResponse.rows[0];
+        console.log(role);
         jsonwebtoken.verify(
             refresh_token,
             process.env.REFRESH_TOKEN_SECRET,

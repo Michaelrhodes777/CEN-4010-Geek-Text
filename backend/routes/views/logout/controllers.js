@@ -18,7 +18,6 @@ async function updateController(req, res) {
         };
         const databaseResponse = await client.query(databaseQueryObject);
         const databaseQueryPayload = { databaseQueryObject, databaseResponse };
-        console.log(databaseQueryPayload);
         validateDatabaseResponse(req, databaseQueryPayload);
 
 

@@ -87,8 +87,6 @@ test("Proper Database setup/teardown. Database's tables should all be empty", as
         await client.connect();
         for (let identifier of databaseInstantiationPayload.identifiers) {
             let response = await client.query({ text: `SELECT * FROM ${identifier}` });
-            //console.log(response.rows);
-            //console.log(response.rows.length);
             let numRows = response.rows.length;
             expect(numRows === 0).toBe(true);
         }

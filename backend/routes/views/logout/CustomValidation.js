@@ -70,7 +70,6 @@ class Logic {
 
     static validateUserId(req, databaseQueryPayload) {
         const { databaseQueryObject, databaseResponse } = databaseQueryPayload;
-        console.log(databaseQueryPayload.databaseResponse);
         const user_id = databaseResponse?.rows[0]?.user_id;
         if (!user_id) {
             throw new InvalidUserIdError({
@@ -87,7 +86,6 @@ class Logic {
     static validateRefreshTokenUpdate(req, databaseQueryPayload, updateQueryPayload) {
         const { databaseQueryObject, databaseResponse } = databaseQueryPayload;
         const { updateQueryObject, updateResponse } = updateQueryPayload;
-        console.log(updateResponse.rows[0]);
         const refresh_token = updateResponse?.rows?.[0]?.refresh_token;
         if (refresh_token !== null) {
             throw new DatabaseFailedToSetRefreshTokenToNullError({

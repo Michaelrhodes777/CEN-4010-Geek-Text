@@ -1,0 +1,45 @@
+{
+	"info": {
+		"_postman_id": "8c523251-20bd-405d-b3af-c76defa29eec",
+		"name": "edit_user_data",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25956619",
+		"_collection_link": "https://restless-crescent-707682.postman.co/workspace/Geek-Text-views-routes~22a634d1-69c2-4658-9a70-aa4b6f6fafd6/collection/25956619-8c523251-20bd-405d-b3af-c76defa29eec?action=share&source=collection_link&creator=25956619"
+	},
+	"item": [
+		{
+			"name": "http://localhost:3500/edit_user_data?username=elasticsnow",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"elasticsnow\",\r\n    \"first_name\": \"roger\",\r\n    \"last_name\": \"rogers\",\r\n    \"address\": \"123 roger way\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3500/edit_user_data?username=elasticsnow",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3500",
+					"path": [
+						"edit_user_data"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "elasticsnow"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

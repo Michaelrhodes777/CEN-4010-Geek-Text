@@ -12,7 +12,6 @@ function updateController(Model) {
         try {
             await client.connect();
             clientHasConnected = true;
-            console.log(req.query);
             const { username } = req.query;
             await validateUsernameExistence(Model, username, client);
             await tablesBodyValidation(Model, [ req.body ], client);

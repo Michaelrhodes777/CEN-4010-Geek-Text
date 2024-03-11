@@ -125,8 +125,6 @@ describe("Validate Single UPDATE", () => {
         expect(responseRef.length === dataPayload.length).toBe(true);
         let dataObjectRef = responseRef[0];
         delete dataObjectRef.publisher_id;
-        console.log(dataPayload[0]);
-        console.log(dataObjectRef);
         expect(JSON.stringify(dataPayload[0]) === JSON.stringify(dataObjectRef)).toBe(true);
     });
 });

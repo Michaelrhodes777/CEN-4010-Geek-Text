@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
-const { InvalidAccessTokenError, ExpiredAccessTokenError } = require('./util/custom-errors');
+const { InvalidAccessTokenError, ExpiredAccessTokenError } = require('../Errors.js');
 
-const verifyJWT = (req, res, next) => {
+const verifyJWTMiddleware = (req, res, next) => {
     const authHeader = req.headers.authorization || req.headers.Authorization;
     if (!authHeader?.startsWith('Bearer ')) {
         // Here we throw a new InvalidAccessTokenError instead of returning a 401 status directly
@@ -22,12 +22,12 @@ const verifyJWT = (req, res, next) => {
                     return next(new InvalidAccessTokenError('Token is invalid.'));
                 }
             }
-            
-            req.user = decoded.UserInfo.username;
-            req.roles = decoded.UserInfo.roles;
+            console.log(decoded);
+            req.user = decoded.username;
+            req.role = decoded.role;
             next();
         }
     );
 };
 
-module.exports = verifyJWT;
+module.exports = verifyJWTMiddleware;

@@ -95,7 +95,6 @@ describe("POST E2E books_wishlists_lt: Single POST request", () => {
             .delete(`/books_wishlists_lt?cid=[${data.map((dataObject) => (`${dataObject.book_id_fkey},${dataObject.wishlist_id_fkey}`)).join(",")}]`)
             .expect(200);
         const { response: deletionResponse } = deletionRes.body;
-        console.log(deletionResponse);
         expect(Array.isArray(deletionResponse)).toBe(true);
         expect(data.length === deletionResponse.length).toBe(true);
         for (let i = 0; i < data.length; i++) {
