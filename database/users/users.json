@@ -5,7 +5,8 @@
     "first_name": "Mark",
     "last_name": "Rogers",
     "email_address": "m_rogers@hotmail.com",
-    "address": "329 Route 29"
+    "address": "329 Route 29",
+    "role": 12789
   },
   {
     "username": "fiercetheory",
@@ -13,7 +14,8 @@
     "first_name": "Amanda",
     "last_name": "Perry",
     "email_address": "aaperry@aol.com",
-    "address": "445 Colonial Drive"
+    "address": "445 Colonial Drive",
+    "role": 88123
   },
   {
     "username": "faintrecess",
@@ -21,7 +23,8 @@
     "first_name": "Joshua",
     "last_name": "Wright",
     "email_address": "joshua_wayne@aol.com",
-    "address": "470 Washington Avenue"
+    "address": "470 Washington Avenue",
+    "role": 12789
   },
   {
     "username": "stormyeye",
@@ -29,7 +32,8 @@
     "first_name": "Andrew",
     "last_name": "Simmons",
     "email_address": "a_simmons@ymail.com",
-    "address": "8523 Charles Street"
+    "address": "8523 Charles Street",
+    "role": 12789
   },
   {
     "username": "spikyvessel",
@@ -37,7 +41,8 @@
     "first_name": "Lillian",
     "last_name": "Adams",
     "email_address": "l_adams@yahoo.com",
-    "address": "85 Mulberry Street"
+    "address": "85 Mulberry Street",
+    "role": 12789
   },
   {
     "username": "spikyrainstorm",
@@ -45,7 +50,8 @@
     "first_name": "Nathan",
     "last_name": "Scott",
     "email_address": "nathan.alan.scott@rocketmail.com",
-    "address": "8897 Berkshire Drive"
+    "address": "8897 Berkshire Drive",
+    "role": 12789
   },
   {
     "username": "earthyframe",
@@ -53,7 +59,8 @@
     "first_name": "Jessica",
     "last_name": "Brooks",
     "email_address": "jessica.brooks@rocketmail.com",
-    "address": "96125 High Street"
+    "address": "96125 High Street",
+    "role": 12789
   },
   {
     "username": "tallnose",
@@ -61,7 +68,8 @@
     "first_name": "Sophia",
     "last_name": "Bell",
     "email_address": "s_bell11@live.com",
-    "address": "1805 Green Street"
+    "address": "1805 Green Street",
+    "role": 12789
   },
   {
     "username": "upsetcoat",
@@ -69,7 +77,8 @@
     "first_name": "Jose",
     "last_name": "Taylor",
     "email_address": "jtaylor@aol.com",
-    "address": "26 Court Street"
+    "address": "26 Court Street",
+    "role": 12789
   },
   {
     "username": "usedairplane",
@@ -77,7 +86,8 @@
     "first_name": "Jennifer",
     "last_name": "Jenkins",
     "email_address": "jennifer_jenkins@hotmail.com",
-    "address": "7301 Franklin Street"
+    "address": "7301 Franklin Street",
+    "role": 12789
   },
   {
     "username": "firstletter",
@@ -85,7 +95,8 @@
     "first_name": "Sean",
     "last_name": "Russell",
     "email_address": "seanrussell@rocketmail.com",
-    "address": "151 Sunset Drive"
+    "address": "151 Sunset Drive",
+    "role": 12789
   },
   {
     "username": "yellowrailway",
@@ -93,7 +104,8 @@
     "first_name": "Alyssa",
     "last_name": "Walker",
     "email_address": "alyssa.rose@yahoo.com",
-    "address": "30 Summit Avenue"
+    "address": "30 Summit Avenue",
+    "role": 12789
   },
   {
     "username": "wickedcard",
@@ -101,7 +113,8 @@
     "first_name": "Katherine",
     "last_name": "Rivera",
     "email_address": "katherine@rocketmail.com",
-    "address": "1241 Jefferson Avenue"
+    "address": "1241 Jefferson Avenue",
+    "role": 12789
   },
   {
     "username": "chemicalrange",
@@ -109,7 +122,8 @@
     "first_name": "Gabriel",
     "last_name": "Thomas",
     "email_address": "g.s.thomas@live.com",
-    "address": "8996 South Street"
+    "address": "8996 South Street",
+    "role": 12789
   },
   {
     "username": "productivewheel",
@@ -117,7 +131,8 @@
     "first_name": "Daniel",
     "last_name": "Brown",
     "email_address": "daniel_henry_brown@hotmail.com",
-    "address": "46 Liberty Street"
+    "address": "46 Liberty Street",
+    "role": 12789
   },
   {
     "username": "jollyticket",
@@ -125,7 +140,8 @@
     "first_name": "Alexandra",
     "last_name": "Johnson",
     "email_address": "alexandra_m_johnson48@outlook.com",
-    "address": "40429 Clark Street"
+    "address": "40429 Clark Street",
+    "role": 12789
   },
   {
     "username": "highfalutineye",
@@ -133,7 +149,8 @@
     "first_name": "Daniel",
     "last_name": "Flores",
     "email_address": "d_flores@gmail.com",
-    "address": "81 Lincoln Street"
+    "address": "81 Lincoln Street",
+    "role": 12789
   },
   {
     "username": "mightykey",
@@ -141,7 +158,8 @@
     "first_name": "Jose",
     "last_name": "Hughes",
     "email_address": "j_d_hughes@ymail.com",
-    "address": "97302 Summit Street"
+    "address": "97302 Summit Street",
+    "role": 12789
   },
   {
     "username": "squealingwren",
@@ -149,7 +167,8 @@
     "first_name": "Taylor",
     "last_name": "Lee",
     "email_address": "taylorllee@rocketmail.com",
-    "address": "70132 Route 32"
+    "address": "70132 Route 32",
+    "role": 12789
   },
   {
     "username": "openbulb",
@@ -157,7 +176,8 @@
     "first_name": "Olivia",
     "last_name": "Flores",
     "email_address": "o_flores@live.com",
-    "address": "477 Charles Street"
+    "address": "477 Charles Street",
+    "role": 12789
   },
   {
     "username": "quietsound",
@@ -165,7 +185,8 @@
     "first_name": "Brittany",
     "last_name": "White",
     "email_address": "brittany@outlook.com",
-    "address": "302 Hilltop Road"
+    "address": "302 Hilltop Road",
+    "role": 12789
   },
   {
     "username": "realsweater",
@@ -173,7 +194,8 @@
     "first_name": "Michelle",
     "last_name": "Miller",
     "email_address": "m_miller@outlook.com",
-    "address": "89183 Mulberry Street"
+    "address": "89183 Mulberry Street",
+    "role": 12789
   },
   {
     "username": "animatedticket",
@@ -181,7 +203,8 @@
     "first_name": "Brian",
     "last_name": "Cook",
     "email_address": "brcook60@aol.com",
-    "address": "748 Chestnut Street"
+    "address": "748 Chestnut Street",
+    "role": 12789
   },
   {
     "username": "gulliblepin",
@@ -189,7 +212,8 @@
     "first_name": "Megan",
     "last_name": "Cook",
     "email_address": "m.m.cook@ymail.com",
-    "address": "46 Maple Avenue"
+    "address": "46 Maple Avenue",
+    "role": 12789
   },
   {
     "username": "clutteredsmile",
@@ -197,7 +221,8 @@
     "first_name": "Aubrey",
     "last_name": "Brown",
     "email_address": "aubreybrown24@ymail.com",
-    "address": "63273 Laurel Street"
+    "address": "63273 Laurel Street",
+    "role": 12789
   },
   {
     "username": "simplisticearth",
@@ -205,7 +230,8 @@
     "first_name": "Benjamin",
     "last_name": "Murphy",
     "email_address": "b.l.murphy@yahoo.com",
-    "address": "9537 11th Street"
+    "address": "9537 11th Street",
+    "role": 12789
   },
   {
     "username": "outgoingtrain",
@@ -213,7 +239,8 @@
     "first_name": "Maria",
     "last_name": "Price",
     "email_address": "m_g_price@ymail.com",
-    "address": "5220 Dogwood Lane"
+    "address": "5220 Dogwood Lane",
+    "role": 12789
   },
   {
     "username": "mightybridge",
@@ -221,7 +248,8 @@
     "first_name": "Julian",
     "last_name": "Kelly",
     "email_address": "julian_george55@live.com",
-    "address": "276 2nd Street"
+    "address": "276 2nd Street",
+    "role": 12789
   },
   {
     "username": "briefocean",
@@ -229,7 +257,8 @@
     "first_name": "Ryan",
     "last_name": "Turner",
     "email_address": "ryan.g.turner@outlook.com",
-    "address": "5647 Pine Street"
+    "address": "5647 Pine Street",
+    "role": 12789
   },
   {
     "username": "unknowncamera",
@@ -237,7 +266,8 @@
     "first_name": "Courtney",
     "last_name": "Russell",
     "email_address": "courtney.russell96@yahoo.com",
-    "address": "8 Charles Street"
+    "address": "8 Charles Street",
+    "role": 12789
   },
   {
     "username": "crazymarket",
@@ -245,7 +275,8 @@
     "first_name": "Thomas",
     "last_name": "Hayes",
     "email_address": "t_hayes@gmail.com",
-    "address": "9331 4th Street North"
+    "address": "9331 4th Street North",
+    "role": 12789
   },
   {
     "username": "damagingstory",
@@ -253,7 +284,8 @@
     "first_name": "Charlotte",
     "last_name": "Rivera",
     "email_address": "charlotte.m.rivera55@rocketmail.com",
-    "address": "30 1st Street"
+    "address": "30 1st Street",
+    "role": 12789
   },
   {
     "username": "realspring",
@@ -261,7 +293,8 @@
     "first_name": "Abigail",
     "last_name": "Collins",
     "email_address": "acollins@rocketmail.com",
-    "address": "51 Bridge Street"
+    "address": "51 Bridge Street",
+    "role": 12789
   },
   {
     "username": "damagingshelf",
@@ -269,7 +302,8 @@
     "first_name": "Henry",
     "last_name": "Cox",
     "email_address": "h_cox@gmail.com",
-    "address": "46 Hickory Lane"
+    "address": "46 Hickory Lane",
+    "role": 12789
   },
   {
     "username": "tenderticket",
@@ -277,7 +311,8 @@
     "first_name": "Victoria",
     "last_name": "Parker",
     "email_address": "victoria_parker@aol.com",
-    "address": "909 6th Avenue"
+    "address": "909 6th Avenue",
+    "role": 12789
   },
   {
     "username": "equablehope",
@@ -285,7 +320,8 @@
     "first_name": "Maria",
     "last_name": "Green",
     "email_address": "maria_green15@ymail.com",
-    "address": "56 2nd Street"
+    "address": "56 2nd Street",
+    "role": 12789
   },
   {
     "username": "knowledgeablestart",
@@ -293,7 +329,8 @@
     "first_name": "Isabella",
     "last_name": "Rivera",
     "email_address": "isabellarivera@ymail.com",
-    "address": "376 Laurel Lane"
+    "address": "376 Laurel Lane",
+    "role": 12789
   },
   {
     "username": "elasticsteam",
@@ -301,7 +338,8 @@
     "first_name": "Austin",
     "last_name": "Wood",
     "email_address": "awood@yahoo.com",
-    "address": "378 Laurel Street"
+    "address": "378 Laurel Street",
+    "role": 12789
   },
   {
     "username": "standinghoney",
@@ -309,7 +347,8 @@
     "first_name": "Rachel",
     "last_name": "Johnson",
     "email_address": "r_i_johnson@yahoo.com",
-    "address": "8932 Heather Lane"
+    "address": "8932 Heather Lane",
+    "role": 12789
   },
   {
     "username": "outgoingshade",
@@ -317,7 +356,8 @@
     "first_name": "Sophia",
     "last_name": "Hernandez",
     "email_address": "s.hernandez@rocketmail.com",
-    "address": "8809 11th Street"
+    "address": "8809 11th Street",
+    "role": 12789
   },
   {
     "username": "elasticbulb",
@@ -325,7 +365,8 @@
     "first_name": "Matthew",
     "last_name": "Smith",
     "email_address": "matthew67@ymail.com",
-    "address": "854 School Street"
+    "address": "854 School Street",
+    "role": 12789
   },
   {
     "username": "irateharbor",
@@ -333,7 +374,8 @@
     "first_name": "Daniel",
     "last_name": "Ramirez",
     "email_address": "d_ramirez@yahoo.com",
-    "address": "225 Main Street South"
+    "address": "225 Main Street South",
+    "role": 12789
   },
   {
     "username": "shytrip1234",
@@ -341,7 +383,8 @@
     "first_name": "Mateo",
     "last_name": "Hughes",
     "email_address": "mhughes@aol.com",
-    "address": "7532 13th Street"
+    "address": "7532 13th Street",
+    "role": 12789
   },
   {
     "username": "colossalchicken",
@@ -349,7 +392,8 @@
     "first_name": "Heather",
     "last_name": "Rivera",
     "email_address": "heather.m.rivera7@gmail.com",
-    "address": "71921 Hillside Drive"
+    "address": "71921 Hillside Drive",
+    "role": 12789
   },
   {
     "username": "shydegree",
@@ -357,7 +401,8 @@
     "first_name": "Zachary",
     "last_name": "Gray",
     "email_address": "z_gray@live.com",
-    "address": "2919 College Avenue"
+    "address": "2919 College Avenue",
+    "role": 12789
   },
   {
     "username": "wanderingcard",
@@ -365,7 +410,8 @@
     "first_name": "Maria",
     "last_name": "White",
     "email_address": "maria_white@hotmail.com",
-    "address": "8591 2nd Street East"
+    "address": "8591 2nd Street East",
+    "role": 12789
   },
   {
     "username": "simplisticactivity",
@@ -373,7 +419,8 @@
     "first_name": "Abigail",
     "last_name": "Powell",
     "email_address": "abigail_lynn_powell@outlook.com",
-    "address": "75510 Charles Street"
+    "address": "75510 Charles Street",
+    "role": 12789
   },
   {
     "username": "elasticstem",
@@ -381,7 +428,8 @@
     "first_name": "Laura",
     "last_name": "Taylor",
     "email_address": "lntaylor@yahoo.com",
-    "address": "516 Valley Road"
+    "address": "516 Valley Road",
+    "role": 12789
   },
   {
     "username": "simplistictendency",
@@ -389,7 +437,8 @@
     "first_name": "David",
     "last_name": "Peterson",
     "email_address": "d_peterson@aol.com",
-    "address": "82966 1st Avenue"
+    "address": "82966 1st Avenue",
+    "role": 12789
   },
   {
     "username": "mysterioussuit",
@@ -397,6 +446,7 @@
     "first_name": "Stephanie",
     "last_name": "Simmons",
     "email_address": "s.k@aol.com",
-    "address": "40503 2nd Avenue"
+    "address": "40503 2nd Avenue",
+    "role": 12789
   }
 ]

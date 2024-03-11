@@ -18,7 +18,8 @@ router.route("/")
         createController(PublisherModel)
     )
     .get(
-        tablesQueryStringValidationMiddleware("GET"), 
+        tablesQueryStringValidationMiddleware("GET"),
+        schemaValidationMiddleware(PublisherModel),
         readController(PublisherModel)
     )
     .put(
@@ -29,6 +30,7 @@ router.route("/")
     )
     .delete(
         tablesQueryStringValidationMiddleware("DELETE"),
+        schemaValidationMiddleware(PublisherModel),
         deleteController(PublisherModel)
     );
 module.exports = router;

@@ -35,7 +35,6 @@ function createController(Model) {
         let results;
         let transactionHasBegun = false;
         try {
-
             await client.connect();
             await tablesBodyValidation(Model, req.body, client);
             await client.query("BEGIN");
@@ -60,7 +59,12 @@ function createController(Model) {
             if (transactionHasBegun) await client.query("ROLLBACK");
             //error.req = reqMapper(req);
             console.error(error);
-            res.status(500).json({ "response": error });
+            if (error.isCustomError) {
+                res.status(error.statusCode).json({ "response": error });
+            }
+            else {
+                res.status(500).json({ "response": error });
+            }
         }
         finally {
             await client.end();
@@ -74,7 +78,6 @@ function readController(Model) {
         let results;
         let transactionHasBegun = false;
         try {
-
             await client.connect();
             const { keyArrays } = req;
             let allQueryCondition = keyArrays.length === 1 && keyArrays[0][0] === 0;
@@ -125,13 +128,11 @@ function updateController(Model) {
         let results;
         let transactionHasBegun = false;
         try {
-
             await client.connect();
             await keyValidation(Model, req.keyArrays, req.queryCondition, client);
             await tablesBodyValidation(Model, req.body, client);
             await client.query("BEGIN");
             transactionHasBegun = true;
-
         
             const dataArray = req.body;
             const { keyArrays } = req;
@@ -145,7 +146,6 @@ function updateController(Model) {
                 }
                 const queryFactory = new SqlQueryFactory(Model, dataObject, keyArrays[i], CONDITIONS.updateById);
                 const queryObject = queryFactory.getSqlQueryObject();
-                console.log(queryObject);
                 const response = await client.query(queryObject);
                 results[i] = response.rows[0];
             }
@@ -157,7 +157,12 @@ function updateController(Model) {
             if (transactionHasBegun) await client.query("ROLLBACK");
             //error.req = reqMapper(req);
             console.error(error);
-            res.status(500).json({ "response": error });
+            if (error.isCustomError) {
+                res.status(error.statusCode).json({ "response": error });
+            }
+            else {
+                res.status(500).json({ "response": error });
+            }
         }
         finally {
             await client.end();
@@ -181,7 +186,6 @@ function deleteController(Model) {
             for (let i = 0; i < results.length; i++) {
                 const queryFactory = new SqlQueryFactory(Model, null, keyArrays[i], CONDITIONS.deleteById);
                 const queryObject = queryFactory.getSqlQueryObject();
-                console.log(queryObject);
                 const response = await client.query(queryObject);
                 results[i] = response.rows[0];
             }
@@ -193,7 +197,12 @@ function deleteController(Model) {
             if (transactionHasBegun) await client.query("ROLLBACK");
             //error.req = reqMapper(req);
             console.error(error);
-            res.status(500).json({ "response": error });
+            if (error.isCustomError) {
+                res.status(error.statusCode).json({ "response": error });
+            }
+            else {
+                res.status(500).json({ "response": error });
+            }
         }
         finally {
             await client.end();

@@ -65,6 +65,8 @@ const asynchronousConstraintSchema = {
 
 class ShoppingCartsLTModel extends ModelLTInterface {
 
+    static modelName = "ShoppingCartsLTModel";
+
     static tableName = "shopping_carts_lt";
 
     static columnNamesMap = columnNames;

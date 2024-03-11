@@ -1,4 +1,16 @@
 class ModelInterface {
+    static staticProps = {
+        "modelName": "modelName",
+        "tableName": "tableName",
+        "columnNamesMap": "columnNamesMap",
+        "columnNamesArray": "columnNamesArray",
+        "idName": "idName",
+        "notNullArray": "notNullArray",
+        "updateableColumns": "updateableColumns",
+        "synchronousConstraintSchema": "synchronousConstraintSchema",
+        "asynchronousConstraintSchema": "asynchronousConstraintSchema"
+    };
+
     static queryStringRequirements = {
         "c": null,
         "r": [ "id" ],

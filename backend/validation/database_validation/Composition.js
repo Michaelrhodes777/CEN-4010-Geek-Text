@@ -7,7 +7,7 @@ const {
     validateForeignKeyExists,
     validateUniqueness
 } = Logic;
-const { ErrorPayload } = require('./Errors.js');
+const ErrorPayload = require('../ErrorPayload.js');
 
 // asynchronousConstraintIdentifiersMap
 const ACIM = {
