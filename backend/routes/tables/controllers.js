@@ -43,9 +43,6 @@ function createController(Model) {
             results = new Array(req.body.length);
             for (let i = 0; i < results.length; i++) {
                 const dataObject = dataArray[i];
-                // Hash the password before saving to the database
-                const hashedPassword = await bcrypt.hash(dataObject.password, 10);
-                dataObject.password = hashedPassword;
                 const queryFactory = new SqlQueryFactory(Model, dataObject, null, CONDITIONS.create);
                 const queryObject = queryFactory.getSqlQueryObject();
                 const response = await client.query(queryObject);
@@ -139,11 +136,6 @@ function updateController(Model) {
             results = new Array(dataArray.length);
             for (let i = 0; i < results.length; i++) {
                 const dataObject = dataArray[i];
-                // Hash the password before updating in the database
-                if (dataObject.password) {
-                    const hashedPassword = await bcrypt.hash(dataObject.password, 10);
-                    dataObject.password = hashedPassword;
-                }
                 const queryFactory = new SqlQueryFactory(Model, dataObject, keyArrays[i], CONDITIONS.updateById);
                 const queryObject = queryFactory.getSqlQueryObject();
                 const response = await client.query(queryObject);
