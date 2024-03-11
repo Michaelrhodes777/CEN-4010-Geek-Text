@@ -1,4 +1,4 @@
-const StandardsLists = require('../../StandardsLists.js');
+const StandardsLists = require('../../StandardLists.js');
 const { numeric, lowercase, uppercase, alphanumeric, specialCharacters, alphanumericSpecial, stdBlacklist } = StandardsLists;
 
 const columnNames = {
@@ -83,7 +83,7 @@ class RegisterModel {
 
     static notNullArray = RegisterModel.columnNamesArray;
 
-    static syncrhonousConstraintSchema = synchronousConstraintSchema;
+    static synchronousConstraintSchema = synchronousConstraintSchema;
 
     static asynchronousConstraintSchema = asynchronousConstraintSchema;
 }

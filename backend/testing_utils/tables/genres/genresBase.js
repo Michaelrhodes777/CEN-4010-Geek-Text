@@ -16,7 +16,8 @@ const genres = {
         {
             "genre_name": "drama"
         }
-    ]
+    ],
+    fkeyReferences: undefined
 };
 
 module.exports = genres;

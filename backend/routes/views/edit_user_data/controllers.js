@@ -1,4 +1,6 @@
 const { clientFactory } = require('../../../database/setupFxns.js');
+const { CustomValidation } = require('./CustomValidation.js');
+const { validateUsernameExistence } = CustomValidation;
 const { tablesBodyValidation } = require('../../../validation/database_validation/Composition.js');
 
 function updateController(Model) {
@@ -11,22 +13,15 @@ function updateController(Model) {
             await client.connect();
             clientHasConnected = true;
             const { username } = req.query;
-            const usernameResponse = await client.query({
-                text: `SELECT ( "username" ) FROM ${Model.tableName} WHERE ${Model.keyName} = $1`,
-                values: [ username ]
-            });
-            if (!usernameResponse?.rows?.[0]?.length !== 1) {
-                throw new Error("No username");
-            }
-
-            await tablesBodyValidation(Model, req.body, client);
+            await validateUsernameExistence(Model, username, client);
+            await tablesBodyValidation(Model, [ req.body ], client);
             await client.query("BEGIN");
             transactionHasBegun = true;
 
             let setStringBuild = [];
             let values = [];
             let index = 1;
-            for (let columnName of Model.columnNamesArray) {
+            for (let columnName of Model.updateableColumns) {
                 if (req.body.hasOwnProperty(columnName)) {
                     setStringBuild.push(`${columnName} = $${index++}`);
                     values.push(req.body[columnName]);
@@ -35,10 +30,9 @@ function updateController(Model) {
 
             values.push(username);
             let queryObject = {
-                text: `UPDATE ${Model.tablename} SET ${setStringBuild.join(", ")} WHERE ${Model.keyName} = ${index} RETURNING *`,
+                text: `UPDATE ${Model.tableName} SET ${setStringBuild.join(", ")} WHERE ${Model.keyName} = $${index} RETURNING *`,
                 values: values
             };
-
             let response = await client.query(queryObject);
             results = response.rows[0];
 
@@ -46,6 +40,7 @@ function updateController(Model) {
             res.json({ "response": results });
         }
         catch (error) {
+            console.error(error);
             if (transactionHasBegun) {
                 await client.query("ROLLBACK");
             }

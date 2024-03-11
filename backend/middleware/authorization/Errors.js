@@ -12,9 +12,9 @@ class CustomError extends Error {
 class InvalidAccessTokenError extends CustomError {
     constructor(message) {
         super(message, {
-        statusCode: 401,
-        responseMessage: "Invalid access token.",
-        serverErrorMessage: "The access token provided is invalid."
+            statusCode: 401,
+            responseMessage: "Invalid access token.",
+            serverErrorMessage: "The access token provided is invalid."
         });
     }
 }
@@ -22,9 +22,9 @@ class InvalidAccessTokenError extends CustomError {
 class ExpiredAccessTokenError extends CustomError {
     constructor(message) {
         super(message, {
-        statusCode: 401,
-        responseMessage: "Expired access token.",
-        serverErrorMessage: "The access token provided has expired."
+            statusCode: 401,
+            responseMessage: "Expired access token.",
+            serverErrorMessage: "The access token provided has expired."
         });
     }
 }

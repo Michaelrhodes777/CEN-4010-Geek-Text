@@ -13,7 +13,8 @@ const publishersBase = {
             "publisher_name": "Oakland, City art printing company",
             "discount_percent": 9
         }
-    ]
+    ],
+    fkeyReferences: undefined
 };
 
 module.exports = publishersBase;

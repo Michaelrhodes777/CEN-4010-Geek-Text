@@ -1,6 +1,6 @@
 const rateLimiterConfig = {
-    "windowMs": 900000, // 15 minutes
-    "max": 100, // limit each IP to 100 requests per windowMs
+    "windowMs": 10 * 1000, // 10 seconds
+    "max": 5, // limit each IP to 5 requests per 10 seconds
     "message": "Too many requests from this IP, please try again after a delay",
     "headers": true
 };

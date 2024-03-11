@@ -5,13 +5,11 @@ async function readController(req, res) {
     let results;
     let transactionHasBegun = false;
     try {
-        console.log("hit");
         await client.connect();
         await client.query("BEGIN");
         transactionHasBegun = true;
         const { usernames: usernamesQueryPayload } = req.query;
         const usernames = usernamesQueryPayload.substring(1, usernamesQueryPayload.length - 1).split(",");
-        console.log(usernames);
         results = new Array(usernames.length);
         for (let i = 0; i < usernames.length; i++) {
             let response = await client.query({

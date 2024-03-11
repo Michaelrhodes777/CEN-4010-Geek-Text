@@ -10,7 +10,7 @@ function createController(Model) {
         try {
             await client.connect();
             clientHasConnected = true;
-            await tablesBodyValidation(Model, req.body, client);
+            await tablesBodyValidation(Model, [ req.body ], client);
             await client.query("BEGIN");
             transactionHasBegun = true;
 
@@ -22,17 +22,21 @@ function createController(Model) {
                 identifierArray[i] = `$${i + 1}`;
             }
             let queryObject = {
-                text: `INSERT ${notNullArray.join(", ")} INTO ${Model.tableName} VALUES ( ${identifierArray.join(", ")} ) RETURNING *`,
+                text: `INSERT INTO ${Model.tableName} ( ${notNullArray.join(", ")} ) VALUES ( ${identifierArray.join(", ")} ) RETURNING *`,
                 values: values
             };
 
             let response = await client.query(queryObject);
+            if (!response) {
+                throw new Error("response failed");
+            }
             results = response.rows[0];
 
             await client.query("COMMIT");
             res.json({ "response": results });
         }
         catch (error) {
+            console.error(error);
             if (transactionHasBegun) {
                 await client.query("ROLLBACK");
             }

@@ -16,7 +16,8 @@ const genresE2EBase = {
         {
             "genre_name": "drama genre"
         }
-    ]
+    ],
+    fkeyReferences: undefined
 };
 
 module.exports = genresE2EBase;

@@ -88,7 +88,7 @@ class Logic {
         }
         const { jwt } = cookies;
         if (!jwt) {
-            throw new CookiesDoesNotContainJWTFieldError({ "cookies": JSON.stringifiy(req.cookies) });
+            throw new CookiesDoesNotContainJWTFieldError({ "cookies": JSON.stringify(req.cookies) });
         }
     }
 
@@ -107,9 +107,9 @@ class Logic {
 }
 
 class RefreshTokenValidation {
-    static validateDataIntegrityMiddleware(req, res, next) {
+    static validateRefreshTokenIntregrityMiddleware(req, res, next) {
         Logic.validateReq(req);
-        Logic.validateJWT(req);
+        //Logic.validateJWT(req);
         next();
     }
 }

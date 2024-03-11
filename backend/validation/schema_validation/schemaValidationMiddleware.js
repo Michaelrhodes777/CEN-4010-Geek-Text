@@ -6,7 +6,8 @@ function schemaValidationMiddleware(Model) {
         const errorPayload = new ErrorPayload();
         const { body, keyArrays, queryCondition } = req;
         if (body !== undefined) {
-            bodyIterator(Model, body, errorPayload);
+            const wrapCondition = typeof body === "object" && !Array.isArray();
+            bodyIterator(Model, wrapCondition ? [ body ] : body, errorPayload);
         }
         if (keyArrays !== undefined) {
             idArrayIterator(Model, keyArrays, queryCondition, errorPayload);

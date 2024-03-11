@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt');
+const { comparePasswords } = require('../../../util/hashing/Hashing.js');
 
 class ErrorInterface extends Error {
     static thisProps = [
@@ -58,20 +59,32 @@ class HashedPasswordDoesNotMatchProvidedPasswordError extends ErrorInterface {
         super(`Hashed password does not match the provided password`, errorPayload);
         this.name = "HashedPasswordDoesNotMatchProvidedPasswordError";
         this.statusCode = 403;
-        this.resposneMessage = "Access forbidden";
+        this.responseMessage = "Access forbidden";
+    }
+}
+
+class RefreshTokenPersistenceFailureError extends ErrorInterface {
+    static runtimeDataProps = [ "databaseResponse", "queryObject", "username" ];
+
+    constructor(errorPayload) {
+        super(`Database failed to persist refresh_token to user "${errorPayload.username}"`, errorPayload);
+        this.name = "RefreshTokenPersistenceFailureError";
+        this.statusCode = 500;
+        this.responseMessage = "Internal server error";
     }
 }
 
 const ErrorsTestMap = {
     "DatabaseUsernameCheckFailureError": DatabaseUsernameCheckFailureError,
     "UsernameDoesNotExistError": UsernameDoesNotExistError,
-    "HashedPasswordDoesNotMatchProvidedPasswordError": HashedPasswordDoesNotMatchProvidedPasswordError
+    "HashedPasswordDoesNotMatchProvidedPasswordError": HashedPasswordDoesNotMatchProvidedPasswordError,
+    "RefreshTokenPersistenceFailureError": RefreshTokenPersistenceFailureError
 };
 
-class ValidationLogic {
+class Logic {
     static async validateUserExists(username, client) {
         const queryObject = {
-            text: `SELECT ( "password" ) FROM login WHERE username = $1`,
+            text: `SELECT * FROM login WHERE username = $1`,
             values: [ username ]
         };
         const response = await client.query(queryObject);
@@ -96,24 +109,36 @@ class ValidationLogic {
     }
 
     static async validateHashedPassword(password, hashedPassword) {
-        const comparison = await bcrypt(password, hashedPassword);
+        const comparison = await comparePasswords(password, hashedPassword);
         if (!comparison) {
             throw new HashedPasswordDoesNotMatchProvidedPasswordError({ "hashedPassword": hashedPassword});
+        }
+    }
+
+    static validateRefreshTokenPersistence(databaseResponse, queryObject, username) {
+        if (!databaseResponse || databaseResponse.rows.length === 0) {
+            throw new RefreshTokenPersistenceFailureError({
+                "databaseResponse": JSON.stringify(databaseResponse),
+                "queryObject": JSON.stringify(queryObject),
+                "username": username
+            });
         }
     }
 }
 
 class CustomValidation {
     static async validateUserRequestAndGetRole(body, client) {
-        const databasePayload = await ValidationLogic.validateUserExists(body.username, client);
-        await ValidationLogic.validateHashedPassword(body.password, hashedPassword);
+        const databasePayload = await Logic.validateUserExists(body.username, client);
+        await Logic.validateHashedPassword(body.password, databasePayload.hashedPassword);
         return databasePayload.role;
     }
+
+    static validateRefreshTokenPersistence = Logic.validateRefreshTokenPersistence;
 }
 
 module.exports = {
     ErrorInterface,
     ErrorsTestMap,
-    ValidationLogic,
+    Logic,
     CustomValidation
 };

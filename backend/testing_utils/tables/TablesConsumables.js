@@ -16,7 +16,6 @@ const reviewsE2EBase = require('./reviews/reviewsE2EBase.js');
 const usersE2EBase = require('./users/usersE2EBase.js');
 const wishlistsE2EBase = require('./wishlists/wishlistsE2EBase.js');
 
-
 const tableNamesMap = {
     "authors": "authors",
     "books": "books",

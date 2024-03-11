@@ -4,6 +4,7 @@ DROP VIEW IF EXISTS shopping_carts;
 DROP VIEW IF EXISTS average_book_ratings;
 DROP VIEW IF EXISTS books_by_authors;
 
+DROP VIEW IF EXISTS register;
 DROP VIEW IF EXISTS login;
 DROP VIEW IF EXISTS logout;
 DROP VIEW IF EXISTS edit_user_data;
@@ -31,7 +32,7 @@ CREATE TABLE users (
 			email_address			VARCHAR(128)        UNIQUE,
 			address					VARCHAR(128),
 			refresh_token			VARCHAR(512)		DEFAULT NULL,
-			role					VARCHAR(12)			DEFAULT 'user' NOT NULL
+			role					INT					DEFAULT 12789 NOT NULL
 );
 
 CREATE TABLE credit_cards (
@@ -103,11 +104,11 @@ CREATE TABLE shopping_carts_lt (
 
 -- Views
 
-CREATE VIEWS register AS
+CREATE VIEW register AS
 	SELECT
 		username,
 		password,
-		email_adress
+		email_address
 		FROM users
 ;
 
@@ -122,17 +123,16 @@ CREATE VIEW login AS
 
 CREATE VIEW logout AS
 	SELECT
+		user_id,
 		refresh_token
 		FROM users
 ;	
 
 CREATE VIEW edit_user_data AS
 	SELECT
-		user_id,
 		username,
 		first_name,
 		last_name,
-		email_address,
 		address
 		FROM users
 ;
