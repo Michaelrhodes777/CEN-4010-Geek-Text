@@ -10,11 +10,13 @@ const {
 const bodyFormatValidationMiddleware = require('../../../validation/body_format_validation/bodyFormatValidationMiddleware.js');
 const { tablesQueryStringValidationMiddleware } = require('../../../validation/query_string_validation/queryStringValidationMiddleware.js');
 const schemaValidationMiddleware = require('../../../validation/schema_validation/schemaValidationMiddleware.js');
+const { validateNumberOfWishlists } = require('./CustomValidation.js');
 
 router.route("/")
     .post(
         bodyFormatValidationMiddleware, 
-        schemaValidationMiddleware(WishlistModel), 
+        schemaValidationMiddleware(WishlistModel),
+        validateNumberOfWishlists,
         createController(WishlistModel)
     )
     .get(

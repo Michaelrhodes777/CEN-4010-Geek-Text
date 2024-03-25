@@ -1,3 +1,5 @@
+DROP VIEW IF EXISTS users_quantity_of_wishlists;
+
 DROP VIEW IF EXISTS books_by_genres;
 DROP VIEW IF EXISTS top_sellers;
 DROP VIEW IF EXISTS shopping_carts;
@@ -104,6 +106,15 @@ CREATE TABLE shopping_carts_lt (
 
 -- Views
 
+CREATE VIEW users_quantity_of_wishlists AS
+	SELECT 
+		user_id_fkey,
+		count(*) AS "number_of_wishlists"
+		FROM wishlists
+		GROUP BY user_id_fkey
+;
+
+
 CREATE VIEW register AS
 	SELECT
 		username,
@@ -170,13 +181,11 @@ CREATE VIEW top_sellers AS
 CREATE VIEW shopping_carts AS
 	SELECT
 		user_id_fkey AS "user_id",
-		(SELECT sum(subquery) FROM unnest((SELECT ARRAY_AGG(books.book_price * quantity))) AS "subquery") AS "shopping_cart_value",
-		JSON_AGG(books.*) AS "shopping_cart"
-		 JSON_AGG(
+		JSON_AGG(
         	json_build_object(
 			'quantity', shopping_carts_lt.quantity,
             'book_data', books.*)
-    		) AS "shopping_cart"
+		) AS "shopping_cart"
 		FROM books
 		INNER JOIN shopping_carts_lt ON book_id_fkey = book_id
 		GROUP BY user_id_fkey
