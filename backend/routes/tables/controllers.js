@@ -3,8 +3,6 @@ const { SqlQueryFactory } = require('../SqlQueryFactory.js');
 const { CONDITIONS } = SqlQueryFactory;
 const { keyValidation, tablesBodyValidation } = require('../../validation/database_validation/Composition.js');
 
-const bcrypt = require('bcrypt');
-
 function reqMapper(req) {
     return JSON.parse(JSON.stringify({
         app: req.app,

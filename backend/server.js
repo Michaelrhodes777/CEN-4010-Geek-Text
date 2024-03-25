@@ -37,8 +37,8 @@ app.use("/logout", require('./routes/views/logout/router.js'));
 app.use("/refresh", require('./routes/views/refresh/router.js'));
 app.use("/register", require('./routes/views/register/router.js'));
 
-app.use(verifyJWTMiddleware);
-app.use(verifyRolesMiddleware(roles.admin));
+//app.use(verifyJWTMiddleware);
+//app.use(verifyRolesMiddleware(roles.admin));
 app.use("/books", require('./routes/tables/books/router.js'));
 app.use("/authors", require('./routes/tables/authors/router.js'));
 app.use("/publishers", require('./routes/tables/publishers/router.js'));
@@ -50,6 +50,8 @@ app.use("/credit_cards", require('./routes/tables/credit_cards/router.js'));
 
 app.use("/shopping_carts_lt", require('./routes/linking_tables/shopping_carts_lt/router.js'));
 app.use("/books_wishlists_lt", require('./routes/linking_tables/books_wishlists_lt/router.js'));
+
+app.use("/wishlist_to_cart", require('./routes/special_use_case/wishlist_to_cart/router.js'));
 
 app.use(function (error, req, res, next) {
     console.error(error);
