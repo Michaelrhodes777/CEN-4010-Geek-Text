@@ -2,6 +2,8 @@ const supertest = require('supertest');
 const createServer = require('../../../util/createServer.js');
 const DatabaseControl = require('../../../testing_utils/DatabaseControl.js');
 const ReviewModel = require('./ReviewModel.js');
+const TablesConsumables = require('../../../testing_utils/tables/TablesConsumables.js');
+const { tableNamesMap, idMap, tablesE2EBaseMap } = TablesConsumables;
 
 // Mock database setup for testing
 const databaseInstantiationPayload = {
