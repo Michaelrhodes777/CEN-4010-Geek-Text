@@ -4,12 +4,12 @@ const DatabaseControl = require('../../../testing_utils/DatabaseControl.js');
 const ReviewModel = require('./ReviewModel.js');
 const TablesConsumables = require('../../../testing_utils/tables/TablesConsumables.js');
 const { tableNamesMap, idMap, tablesE2EBaseMap } = TablesConsumables;
-const identifiers = [ tableNamesMap.authors, tableNamesMap.publishers, tableNamesMap.genres, tableNamesMap.books ];
+const identifiers = [ tableNamesMap.users, tableNamesMap.books, tableNamesMap.reviews ];
 
 // Mock database setup for testing
 const databaseInstantiationPayload = {
-    identifiers: ["users", "books", "reviews"], // Dependencies, assuming reviews depend on users and books
-    nonCascadeDeletions: ["reviews", "books", "users"],
+    identifiers, 
+    nonCascadeDeletions: [tableNamesMap.users, tableNamesMap.books],
     dataPayloads: identifiers.map(identifier => tablesE2EBaseMap[identifier])
 };
 
