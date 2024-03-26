@@ -4,6 +4,7 @@ const DatabaseControl = require('../../../testing_utils/DatabaseControl.js');
 const ReviewModel = require('./ReviewModel.js');
 const TablesConsumables = require('../../../testing_utils/tables/TablesConsumables.js');
 const { tableNamesMap, idMap, tablesE2EBaseMap } = TablesConsumables;
+const identifiers = [ tableNamesMap.authors, tableNamesMap.publishers, tableNamesMap.genres, tableNamesMap.books ];
 
 // Mock database setup for testing
 const databaseInstantiationPayload = {
