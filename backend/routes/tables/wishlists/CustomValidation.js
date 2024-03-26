@@ -20,7 +20,6 @@ async function validateNumberOfWishlists(req, res, next) {
             };
     
             const result = await client.query(queryObject);
-            console.log(result);
     
             if (result.rows.length !== 0) {
                 const { number_of_wishlists } = result?.rows?.[0];
