@@ -7,7 +7,7 @@ const ReviewModel = require('./ReviewModel.js');
 const databaseInstantiationPayload = {
     identifiers: ["users", "books", "reviews"], // Dependencies, assuming reviews depend on users and books
     nonCascadeDeletions: ["reviews", "books", "users"],
-    dataPayloads: [ /* predefined data arrays for users, books, and reviews */ ]
+    dataPayloads: identifiers.map(identifier => tablesE2EBaseMap[identifier])
 };
 
 const databaseControl = new DatabaseControl(databaseInstantiationPayload);
