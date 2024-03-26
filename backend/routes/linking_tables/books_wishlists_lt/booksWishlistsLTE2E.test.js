@@ -108,7 +108,7 @@ describe("POST E2E books_wishlists_lt: Single POST request", () => {
 describe("POST E2E books_wishlists_lt: Multiple POST request", () => {
     test(`\t\tValidate multiple POST request`, async () => {
         const bookKeys = databaseControl.getKeyArraysFromMap("books").map((array) => (array[0]));
-        const wishlistKeys = databaseControl.getKeyArraysFromMap("wishlists").map((array) => (array[0]))
+        const wishlistKeys = databaseControl.getKeyArraysFromMap("wishlists").map((array) => (array[0]));
         const data = [
             {
                 "book_id_fkey": bookKeys[5],

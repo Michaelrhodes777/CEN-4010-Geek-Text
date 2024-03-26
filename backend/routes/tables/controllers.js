@@ -52,8 +52,7 @@ function createController(Model) {
         }
         catch (error) {
             if (transactionHasBegun) await client.query("ROLLBACK");
-            //error.req = reqMapper(req);
-            console.error(error);
+            //console.error(error);
             if (error.isCustomError) {
                 res.status(error.statusCode).json({ "response": error });
             }
@@ -102,8 +101,7 @@ function readController(Model) {
         }
         catch (error) {
             if (transactionHasBegun) await client.query("ROLLBACK");
-            //error.req = reqMapper(req);
-            console.error(error);
+            //console.error(error);
             if (error.isCustomError) {
                 res.status(error.statusCode).json({ "response": error });
             }
@@ -145,8 +143,7 @@ function updateController(Model) {
         }
         catch (error) {
             if (transactionHasBegun) await client.query("ROLLBACK");
-            //error.req = reqMapper(req);
-            console.error(error);
+            //console.error(error);
             if (error.isCustomError) {
                 res.status(error.statusCode).json({ "response": error });
             }
@@ -185,8 +182,7 @@ function deleteController(Model) {
         }
         catch (error) {
             if (transactionHasBegun) await client.query("ROLLBACK");
-            //error.req = reqMapper(req);
-            console.error(error);
+            //console.error(error);
             if (error.isCustomError) {
                 res.status(error.statusCode).json({ "response": error });
             }

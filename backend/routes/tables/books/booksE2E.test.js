@@ -83,6 +83,7 @@ afterAll(async () => {
 describe("GET books: Validate correct database instantiation and GET functionality", () => {
     test(`\n\tValidate books has been seeded`, async () => {
         const arrayOfKeys = databaseControl.getKeyArraysFromMap("books").map((array) => (array[0]));
+        console.log(arrayOfKeys);
         const res = await supertest(createServer())
             .get(`/books?id=[${arrayOfKeys.join(",")}]`)
             .expect(200);
@@ -124,7 +125,7 @@ describe("POST E2E books: single", () => {
 });
 
 describe("POST E2E books: multiple", () => {
-    test("\n\tValidate single POST request", async () => {
+    test("\n\tValidate multiple POST request", async () => {
         let slice = data.slice(1, data.length - 1);
         let res = await supertest(createServer())
             .post("/books")
