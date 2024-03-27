@@ -4,9 +4,6 @@ const DatabaseControl = require('../../../testing_utils/DatabaseControl.js');
 const TablesConsumables = require('../../../testing_utils/tables/TablesConsumables.js');
 const { tableNamesMap, tablesE2EBaseMap } = TablesConsumables;
 
-// Define identifiers used for setting up the mock database
-const identifiers = [tableNamesMap.users, tableNamesMap.books, tableNamesMap.reviews];
-
 // Assuming ReviewModel is correctly defined in the provided path
 const ReviewModel = require('./ReviewModel.js');
 
