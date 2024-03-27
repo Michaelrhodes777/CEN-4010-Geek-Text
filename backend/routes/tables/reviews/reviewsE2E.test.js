@@ -1,12 +1,14 @@
 const supertest = require('supertest');
 const createServer = require('../../../util/createServer.js');
 const DatabaseControl = require('../../../testing_utils/DatabaseControl.js');
-const ReviewModel = require('./ReviewModel.js');
 const TablesConsumables = require('../../../testing_utils/tables/TablesConsumables.js');
-const { tableNamesMap, idMap, tablesE2EBaseMap } = TablesConsumables;
-const identifiers = [ tableNamesMap.users, tableNamesMap.books, tableNamesMap.reviews ];
+const { tableNamesMap, tablesE2EBaseMap } = TablesConsumables;
 
-// Mock database setup for testing
+// Assuming ReviewModel is correctly defined in the provided path
+const ReviewModel = require('./ReviewModel.js');
+
+// Setup identifiers and database instantiation payload
+const identifiers = [tableNamesMap.users, tableNamesMap.books, tableNamesMap.reviews];
 const databaseInstantiationPayload = {
     identifiers, 
     nonCascadeDeletions: [tableNamesMap.users, tableNamesMap.books],
@@ -15,14 +17,16 @@ const databaseInstantiationPayload = {
 
 const databaseControl = new DatabaseControl(databaseInstantiationPayload);
 
+// Increase the timeout for beforeAll and afterAll
+const setupTimeout = 30000; // 30 seconds, adjust as needed
+
 beforeAll(async () => {
     await databaseControl.setupDatabase();
-    // Here you might want to insert initial data for users and books to reference in reviews
-});
+}, setupTimeout);
 
 afterAll(async () => {
     await databaseControl.tearDownDatabase();
-});
+}, setupTimeout);
 
 // Test data for reviews
 const reviewData = {
@@ -45,7 +49,6 @@ describe("E2E Testing for Reviews Route", () => {
         expect(createdReview.comment).toEqual(reviewData.comment);
         expect(createdReview.rating).toEqual(reviewData.rating);
 
-        // Assuming the review ID is returned upon creation for reference in further tests
         reviewId = createdReview.review_id;
     });
 
@@ -55,7 +58,6 @@ describe("E2E Testing for Reviews Route", () => {
             .expect(200)
             .then(response => {
                 expect(Array.isArray(response.body.response)).toBeTruthy();
-                // More detailed checks can be performed based on expected output
             });
     });
 
@@ -79,7 +81,6 @@ describe("E2E Testing for Reviews Route", () => {
             .expect(200)
             .then(response => {
                 expect(response.body.response[0]).toBeTruthy();
-                // More detailed checks can be performed based on expected output
             });
     });
 });
