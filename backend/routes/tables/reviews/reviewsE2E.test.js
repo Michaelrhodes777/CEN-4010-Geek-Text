@@ -4,6 +4,9 @@ const DatabaseControl = require('../../../testing_utils/DatabaseControl.js');
 const TablesConsumables = require('../../../testing_utils/tables/TablesConsumables.js');
 const { tableNamesMap, tablesE2EBaseMap } = TablesConsumables;
 
+// Define identifiers used for setting up the mock database
+const identifiers = [tableNamesMap.users, tableNamesMap.books, tableNamesMap.reviews];
+
 // Assuming ReviewModel is correctly defined in the provided path
 const ReviewModel = require('./ReviewModel.js');
 
@@ -11,7 +14,7 @@ const ReviewModel = require('./ReviewModel.js');
 const identifiers = [tableNamesMap.users, tableNamesMap.books, tableNamesMap.reviews];
 const databaseInstantiationPayload = {
     identifiers, 
-    nonCascadeDeletions: [tableNamesMap.users, tableNamesMap.books],
+    nonCascadeDeletions: [tableNamesMap.reviews],  // Adjust based on actual dependency management
     dataPayloads: identifiers.map(identifier => tablesE2EBaseMap[identifier])
 };
 
@@ -21,19 +24,21 @@ const databaseControl = new DatabaseControl(databaseInstantiationPayload);
 const setupTimeout = 30000; // 30 seconds, adjust as needed
 
 beforeAll(async () => {
+    jest.setTimeout(10000);  // Increase timeout for setup if needed
     await databaseControl.setupDatabase();
-}, setupTimeout);
+    // Insert initial data for users and books to reference in reviews, if necessary
+}, 10000);
 
 afterAll(async () => {
     await databaseControl.tearDownDatabase();
-}, setupTimeout);
+}, 10000);
 
 // Test data for reviews
 const reviewData = {
     rating: 5,
     comment: "This is a test review.",
-    user_id_fkey: 1, // Assume this is a valid user ID
-    book_id_fkey: 1  // Assume this is a valid book ID
+    user_id_fkey: 1,  // Adjust these IDs based on the actual seeded data in your test setup
+    book_id_fkey: 1
 };
 
 describe("E2E Testing for Reviews Route", () => {
@@ -42,9 +47,9 @@ describe("E2E Testing for Reviews Route", () => {
     test("Create a new review (POST)", async () => {
         const response = await supertest(createServer())
             .post('/reviews')
-            .send([reviewData])
-            .expect(200);
+            .send([reviewData]);
         
+        expect(response.statusCode).toBe(200);
         const createdReview = response.body.response[0];
         expect(createdReview.comment).toEqual(reviewData.comment);
         expect(createdReview.rating).toEqual(reviewData.rating);
@@ -53,34 +58,33 @@ describe("E2E Testing for Reviews Route", () => {
     });
 
     test("Retrieve reviews (GET)", async () => {
-        await supertest(createServer())
-            .get('/reviews')
-            .expect(200)
-            .then(response => {
-                expect(Array.isArray(response.body.response)).toBeTruthy();
-            });
+        const response = await supertest(createServer())
+            .get('/reviews');
+        
+        expect(response.statusCode).toBe(200);
+        expect(Array.isArray(response.body.response)).toBeTruthy();
+        // More detailed checks can be performed based on expected output
     });
 
     test("Update a review (PUT)", async () => {
         const updatedComment = "Updated comment";
         const updatedReviewData = { ...reviewData, comment: updatedComment };
 
-        await supertest(createServer())
+        const response = await supertest(createServer())
             .put(`/reviews?id=[${reviewId}]`)
-            .send([updatedReviewData])
-            .expect(200)
-            .then(response => {
-                const updatedReview = response.body.response[0];
-                expect(updatedReview.comment).toEqual(updatedComment);
-            });
+            .send([updatedReviewData]);
+
+        expect(response.statusCode).toBe(200);
+        const updatedReview = response.body.response[0];
+        expect(updatedReview.comment).toEqual(updatedComment);
     });
 
     test("Delete a review (DELETE)", async () => {
-        await supertest(createServer())
-            .delete(`/reviews?id=[${reviewId}]`)
-            .expect(200)
-            .then(response => {
-                expect(response.body.response[0]).toBeTruthy();
-            });
+        const response = await supertest(createServer())
+            .delete(`/reviews?id=[${reviewId}]`);
+
+        expect(response.statusCode).toBe(200);
+        expect(response.body.response[0]).toBeTruthy();
+        // More detailed checks can be performed based on expected output
     });
 });
