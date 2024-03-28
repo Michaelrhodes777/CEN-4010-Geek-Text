@@ -10,9 +10,14 @@ const {
 const bodyFormatValidationMiddleware = require('../../../validation/body_format_validation/bodyFormatValidationMiddleware.js');
 const { tablesQueryStringValidationMiddleware } = require('../../../validation/query_string_validation/queryStringValidationMiddleware.js');
 const schemaValidationMiddleware = require('../../../validation/schema_validation/schemaValidationMiddleware.js');
+const verifyJWTMiddleware = require('../../../middleware/authorization/verify_jwt/verifyJWTMiddleware');
+const verifyRolesMiddleware = require('../../../middleware/authorization/verify_roles/verifyRolesMiddleware');
+
 
 router.route("/")
     .post(
+        verifyJWTMiddleware, // JWT token validation
+        verifyRolesMiddleware('ADMIN'), // Role verification for 'ADMIN'
         bodyFormatValidationMiddleware, 
         schemaValidationMiddleware(BookModel), 
         createController(BookModel)
