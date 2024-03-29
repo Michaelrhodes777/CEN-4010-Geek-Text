@@ -14,6 +14,7 @@ function createServer() {
     app.use(express.urlencoded({ extended: true }));
     app.use(express.json({ extended: true }));
     
+    app.use("/books_by_isbn", require('../routes/read_only_views/books_by_isbn/router.js'));
     app.use("/books_by_genres", require('../routes/read_only_views/books_by_genres/router.js'));
     app.use("/books_by_authors", require('../routes/read_only_views/books_by_authors/router.js'));
     app.use("/users_by_usernames", require('../routes/read_only_views/users_by_usernames/router.js'));
