@@ -1,8 +1,6 @@
 const supertest = require('supertest');
 const DatabaseControl = require('../../../testing_utils/DatabaseControl.js');
-const { clientFactory } = require('../../../database/setupFxns.js');
 const createServer = require('../../../util/createServer.js');
-const AuthorModel = require('./AuthorModel.js');
 
 const databaseInstantiationPayload = {
     identifiers:  [ "authors" ],

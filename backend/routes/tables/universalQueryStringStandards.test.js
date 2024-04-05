@@ -1,6 +1,6 @@
 const supertest = require('supertest');
 const createServer = require('../../util/createServer.js');
-const { Models, ModelIterable, tableNames } = require('../../testing_utils/tables/Models.js');
+const { ModelIterable } = require('../../testing_utils/tables/Models.js');
 const SchemaValidationErrors = require('../../validation/schema_validation/Errors.js');
 const QueryStringValidationErrors = require('../../validation/query_string_validation/Errors.js');
 

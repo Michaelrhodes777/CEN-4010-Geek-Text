@@ -22,7 +22,6 @@ const verifyJWTMiddleware = (req, res, next) => {
                     return next(new InvalidAccessTokenError('Token is invalid.'));
                 }
             }
-            console.log(decoded);
             req.user = decoded.username;
             req.role = decoded.role;
             next();
