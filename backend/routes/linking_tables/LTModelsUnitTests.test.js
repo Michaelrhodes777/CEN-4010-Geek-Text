@@ -1,7 +1,5 @@
 const ModelLTInterface = require('./ModelLTInterface.js');
 const { Models, ModelIterable } = require('../../testing_utils/linking_tables/Models.js');
-const SchemaValidation = require('../../validation/schema_validation/SchemaValidation.js');
-const DatabaseValidation = require('../../validation/database_validation/DatabaseValidation.js');
 
 const propsCheck = [
     "modelName",
@@ -16,14 +14,6 @@ const propsCheck = [
     "asynchronousConstraintSchema"
 ];
 const { staticProps: PROPS } = ModelLTInterface;
-
-// function stringConstructor(Model, message) {
-//     return ` ${message}`;
-// }
-
-// test(`${Model.modelName} should`, () => {
-//     expect(true).tobe(true);
-// });
 
 test(`ModelLTInterface should have all correct props`, () => {
     expect(propsCheck.length === Object.keys(PROPS).length).toBe(true);
@@ -175,23 +165,3 @@ describe(`Check LT Models has valid static ${PROPS.updateableColumns} prop`, () 
         });        
     }
 });
-
-// // Add tests to verify the state of the synchronousConstraintSchema props
-// describe(`Check LT Models has valid static ${PROPS.synchronousConstraintSchema} prop`, () => {
-//     const { propsArray } = SchemaValidation;
-//     for (let Model of ModelIterable) {
-//         test(`${Model.modelName} should have a static ${PROPS.synchronousConstraintSchema} prop`, () => {});
-//         test(`${Model.modelName} should have ${PROPS.synchronousConstraintSchema} prop that has same number of elements as ${PROPS.columnNamesArray} prop`, () => {});
-//         test(`${Model.modelName} should have ${PROPS.synchronousConstraintSchema} prop that has objects with all elements present in "propsArray"`, () => {}); 
-//     }
-// });
-
-// // Add tests to verify the state of the asynchronousConstraintSchema props
-// describe(`Check LT Models has valid static ${PROPS.asynchronousConstraintSchema} prop`, () => {
-//     const { propsArray } = DatabaseValidation;
-//     for (let Model of ModelIterable) {
-//         test(`${Model.modelName} should have a static ${PROPS.asynchronousConstraintSchema} prop`, () => {});
-//         test(`${Model.modelName} should have ${PROPS.asynchronousConstraintSchema} prop that has same number of elements as ${PROPS.columnNamesArray} prop`, () => {});
-//         test(`${Model.modelName} should have ${PROPS.asynchronousConstraintSchema} prop that has objects with all elements present in "propsArray"`, () => {}); 
-//     }
-// });

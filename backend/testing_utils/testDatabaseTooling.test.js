@@ -63,7 +63,6 @@ test("Validate database was seeded", async () => {
             let currentLength = databaseInstantiationPayload.dataPayloads[i].data.length;
             const response = await client.query({ text: `SELECT * FROM ${identifier}`});
             expect(response.rows.length === currentLength).toBe(true);
-            //console.log(`expectation: ${identifier} ${response.rows.length} ${currentLength}`);
         }
     }
     catch (error) {

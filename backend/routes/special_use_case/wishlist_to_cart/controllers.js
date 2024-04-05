@@ -38,7 +38,6 @@ async function updateController(req, res) {
         
         const deletionResult = await client.query(deletionQueryObject);
         let { rows: deletionRows } = deletionResult;
-        console.log(deletionRows);
         if (!deletionRows) {
             throw new RowsDNEError({ "deletionRows": JSON.stringify(deletionRows) });
         }

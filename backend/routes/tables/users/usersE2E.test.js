@@ -1,6 +1,5 @@
 const supertest = require('supertest');
 const DatabaseControl = require('../../../testing_utils/DatabaseControl.js');
-const { clientFactory } = require('../../../database/setupFxns.js');
 const createServer = require('../../../util/createServer.js');
 const TablesConsumables = require('../../../testing_utils/tables/TablesConsumables.js');
 const { tableNamesMap, idMap, tablesE2EBaseMap } = TablesConsumables;
@@ -12,8 +11,6 @@ const databaseInstantiationPayload = {
     nonCascadeDeletions: identifiers,
     dataPayloads: identifiers.map((identifier) => tablesE2EBaseMap[identifier])
 };
-
-console.log(databaseInstantiationPayload);
 
 const databaseControl = new DatabaseControl(databaseInstantiationPayload);
 beforeAll(async () => {
@@ -116,7 +113,6 @@ let updateData = [
 describe("PUT E2E users: Multiple id", () => {
     test("\n\tValidate multiple PUT request", async () => {
         const slice = updateData.slice(1);
-        console.log(slice.length);
         const res = await supertest(createServer())
             .put(`/users?id=[${ids.slice(1).join(",")}]`)
             .send(slice)

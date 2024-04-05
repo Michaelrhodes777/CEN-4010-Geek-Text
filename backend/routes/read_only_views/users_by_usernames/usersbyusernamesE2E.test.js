@@ -22,21 +22,14 @@ afterAll(async () => {
 
 describe("GET users by usernames: Validate correct database instantiation and GET functionality", () => {
     test("GET request with multiple usernames", async () => {
-        
-        const usernames = ["user1", "user2"];
-        
-        const usernamesQueryParam = encodeURIComponent(`[${usernames.join(",")}]`);
-        
+        const usernames = ["user1", "user2"];     
+        const usernamesQueryParam = encodeURIComponent(`[${usernames.join(",")}]`);      
         const res = await supertest(createServer())
             .get(`/users_by_usernames?usernames=${usernamesQueryParam}`) 
             .expect(200);
-
-        console.log(res.body);
-
         
         expect(res.body).toHaveProperty('response');
         expect(Array.isArray(res.body.response)).toBe(true);
         expect(res.body.response.length).toBe(usernames.length);
-        
     });
 });

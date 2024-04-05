@@ -1,9 +1,8 @@
 const supertest = require('supertest');
 const DatabaseControl = require('../../../testing_utils/DatabaseControl.js');
-const { clientFactory } = require('../../../database/setupFxns.js');
 const createServer = require('../../../util/createServer.js');
 const TablesConsumables = require('../../../testing_utils/tables/TablesConsumables.js');
-const { tableNamesMap, idMap, tablesE2EBaseMap } = TablesConsumables;
+const { tableNamesMap, tablesE2EBaseMap } = TablesConsumables;
 
 const identifiers = [
     tableNamesMap.authors,
@@ -19,9 +18,6 @@ const databaseInstantiationPayload = {
     nonCascadeDeletions: identifiers.slice(0, identifiers.length - 1),
     dataPayloads: identifiers.map((identifier) => tablesE2EBaseMap[identifier])
 };
-
-console.log(databaseInstantiationPayload);
-console.log(databaseInstantiationPayload.dataPayloads);
 
 const databaseControl = new DatabaseControl(databaseInstantiationPayload);
 beforeAll(async () => {
@@ -40,7 +36,6 @@ function generateComparisonObject(dataObject) {
 
 describe("GET reviews: Validate correct database instantiation and GET functionality", () => {
     test(`\n\tValidate reviews has been seeded`, async () => {
-        console.log(databaseControl.dataPackages.reviews.rows);
         const arrayOfKeys = databaseControl.getKeyArraysFromMap("reviews").map((array) => (array[0]));
         const res = await supertest(createServer())
             .get(`/reviews?id=[${arrayOfKeys.join(",")}]`)

@@ -23,7 +23,6 @@ afterAll(async () => {
 describe("GET books_by_genres: Validate correct database instantiation and GET functionality", () => {
     test(`\n\tGET request: genre_name`, async () => {
         const { genre_name } = databaseControl.dataPackages.genres.rows[0];
-        console.log(genre_name);
         const res = await supertest(createServer())
             .get(`/books_by_genres/by_genre_name/${genre_name}`)
             .expect(200);
@@ -31,7 +30,6 @@ describe("GET books_by_genres: Validate correct database instantiation and GET f
 
     test(`\n\tGET request: genre_name`, async () => {
         const { genre_id } = databaseControl.dataPackages.genres.rows[0];
-        console.log(genre_id);
         const res = await supertest(createServer())
             .get(`/books_by_genres/by_genre_id/${genre_id}`)
             .expect(200);

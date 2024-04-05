@@ -22,14 +22,8 @@ afterAll(async () => {
 
 describe("GET top_sellers: Validate correct database instantiation and GET functionality", () => {
     test("GET request for top sellers", async () => {
-        
         const res = await supertest(createServer())
             .get("/top_sellers")
             .expect(200);
-        
-        
-        console.log(res.body);
-
-        
     });
 });

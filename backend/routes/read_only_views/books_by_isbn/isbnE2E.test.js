@@ -1,9 +1,8 @@
 const supertest = require('supertest');
 const DatabaseControl = require('../../../testing_utils/DatabaseControl.js');
-const { clientFactory } = require('../../../database/setupFxns.js');
 const createServer = require('../../../util/createServer.js');
 const TablesConsumables = require('../../../testing_utils/tables/TablesConsumables.js');
-const { tableNamesMap, idMap, tablesE2EBaseMap } = TablesConsumables;
+const { tableNamesMap, tablesE2EBaseMap } = TablesConsumables;
 
 const identifiers = [ tableNamesMap.authors, tableNamesMap.publishers, tableNamesMap.genres, tableNamesMap.books ];
 

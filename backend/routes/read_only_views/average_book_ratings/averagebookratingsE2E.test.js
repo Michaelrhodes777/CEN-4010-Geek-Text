@@ -23,26 +23,21 @@ afterAll(async () => {
 describe("GET average_book_ratings: Validate correct database instantiation and GET functionality", () => {
     test(`\n\tGET request: by_book_id`, async () => {
         const { book_id } = databaseControl.dataPackages.books.rows[0];
-        console.log(book_id);
         const res = await supertest(createServer())
             .get(`/average_book_ratings/by_book_id/${book_id}`)
             .expect(200);
-        console.log(res.body);
-        
     });
 
     test(`\n\tGET request: by_average_rating`, async () => {
         const average_rating = 4; 
-        console.log(average_rating);
         const res = await supertest(createServer())
             .get(`/average_book_ratings/by_average_rating/${average_rating}`)
             .expect(200);
-        console.log(res.body);
         
         expect(Array.isArray(res.body.response)).toBe(true);
         if (res.body.response.length > 0) {
             expect(res.body.response[0]).toHaveProperty('average_rating');
-            expect(res.body.response[0].average_rating).toBeGreaterThanOrEqual(average_rating);
+            expect(Number(res.body.response[0].average_rating)).toBeGreaterThanOrEqual(average_rating);
         }
     });
 });

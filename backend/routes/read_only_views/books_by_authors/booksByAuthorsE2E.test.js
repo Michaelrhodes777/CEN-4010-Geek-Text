@@ -23,7 +23,6 @@ afterAll(async () => {
 describe("GET books_by_authors: Validate correct database instantiation and GET functionality", () => {
      test(`\n\tGET request: author_id`, async () => {
         const { author_id } = databaseControl.dataPackages.authors.rows[0];
-        console.log(author_id);
         const res = await supertest(createServer())
             .get(`/books_by_authors/by_author_id/${author_id}`)
             .expect(200);

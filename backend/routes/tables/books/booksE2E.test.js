@@ -1,9 +1,8 @@
 const supertest = require('supertest');
 const DatabaseControl = require('../../../testing_utils/DatabaseControl.js');
-const { clientFactory } = require('../../../database/setupFxns.js');
 const createServer = require('../../../util/createServer.js');
 const TablesConsumables = require('../../../testing_utils/tables/TablesConsumables.js');
-const { tableNamesMap, idMap, tablesE2EBaseMap } = TablesConsumables;
+const { tableNamesMap, tablesE2EBaseMap } = TablesConsumables;
 
 const identifiers = [ tableNamesMap.authors, tableNamesMap.publishers, tableNamesMap.genres, tableNamesMap.books ];
 
@@ -12,9 +11,6 @@ const databaseInstantiationPayload = {
     nonCascadeDeletions: identifiers,
     dataPayloads: identifiers.map((identifier) => tablesE2EBaseMap[identifier])
 };
-
-const DEL_REF = databaseInstantiationPayload.nonCascadeDeletions;
-const PAYLOADS_REF = databaseInstantiationPayload.dataPayloads;
 
 function generateComparisonObject(dataObject) {
     const build = JSON.parse(JSON.stringify(dataObject));
@@ -83,7 +79,6 @@ afterAll(async () => {
 describe("GET books: Validate correct database instantiation and GET functionality", () => {
     test(`\n\tValidate books has been seeded`, async () => {
         const arrayOfKeys = databaseControl.getKeyArraysFromMap("books").map((array) => (array[0]));
-        console.log(arrayOfKeys);
         const res = await supertest(createServer())
             .get(`/books?id=[${arrayOfKeys.join(",")}]`)
             .expect(200);
