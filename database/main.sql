@@ -1,3 +1,4 @@
+DROP VIEW IF EXISTS books_by_wishlists;
 DROP VIEW IF EXISTS users_quantity_of_wishlists;
 
 DROP VIEW IF EXISTS books_by_genres;
@@ -211,4 +212,13 @@ CREATE VIEW books_by_authors AS
 		FROM authors
 		INNER JOIN books ON author_id = author_id_fkey
 		GROUP BY author_id
+;
+
+CREATE VIEW books_by_wishlists AS
+	SELECT
+	wishlist_id_fkey AS "wishlist_id",
+	JSON_AGG(books.*) AS "books"
+	FROM books_wishlists_lt
+	INNER JOIN books ON book_id = book_id_fkey
+	GROUP BY wishlist_id_fkey
 ;
