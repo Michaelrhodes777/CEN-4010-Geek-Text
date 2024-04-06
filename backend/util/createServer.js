@@ -21,6 +21,7 @@ function createServer() {
     app.use("/average_book_ratings", require('../routes/read_only_views/average_book_ratings/router.js'));
     app.use("/top_sellers", require('../routes/read_only_views/top_sellers/router.js'));
     app.use("/shopping_carts", require('../routes/read_only_views/shopping_carts/router.js'));
+    app.use("/books_by_wishlists", require('../routes/read_only_views/books_by_wishlists/router.js'));
     
     app.use("/edit_user_data", require('../routes/views/edit_user_data/router.js'));
     app.use("/login", require('../routes/views/login/router.js'));
