@@ -38,8 +38,7 @@ async function updateController(req, res) {
         if (transactionHasBegun) {
             await client.query("ROLLBACK");
         }
-        console.error(error);
-        res.status(500).json({ "response": error });
+        throw error;
     }
     finally {
         if (clientHasConnected) {

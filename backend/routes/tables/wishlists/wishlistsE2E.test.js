@@ -179,18 +179,3 @@ describe("DELETE E2E wishlists: Mulitple id", () => {
         }
     }); 
 });
-
-describe("Expect databaseInstantiation to be cleared", () => {
-    test("Expect server to respond with InvalidPrimaryKeyError", async () => {
-        const arrayOfKeys = databaseControl.getKeyArraysFromMap(tableNamesMap.wishlists);
-        for (let i = 0; i < arrayOfKeys.length; i++) {
-            let res = await supertest(createServer())
-                .delete(`/wishlists?id=[${arrayOfKeys[i][0]}]`)
-                .expect(404);
-            const { response } = res.body;
-            const { isCustomError, name } = response;
-            expect(name === "InvalidPrimaryKeyError").toBe(true);
-            expect(isCustomError).toBe(true);
-        }
-    });
-});

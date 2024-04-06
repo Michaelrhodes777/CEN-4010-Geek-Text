@@ -43,16 +43,10 @@ async function updateController(req, res) {
         res.json({ "response": { accessToken } });
     }
     catch (error) {
-        console.error(error);
         if (transactionHasBegun) {
             await client.query("ROLLBACK");
         }
-        if (error.isCustomError) {
-            res.status(error.statusCode).json({ "response": error });
-        }
-        else {
-            res.status(500).json({ "response": error });
-        }
+        throw error;
     }
     finally {
         if (clientHasConnected) {

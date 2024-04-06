@@ -23,14 +23,7 @@ async function readController(req, res) {
     }
     catch (error) {
         if (transactionHasBegun) await client.query("ROLLBACK");
-        //error.req = reqMapper(req);
-        console.error(error);
-        if (error.isCustomError) {
-            res.status(error.statusCode).json({ "response": error });
-        }
-        else {
-            res.status(500).json({ "response": error });
-        }
+        throw error;
     }
     finally {
         await client.end();

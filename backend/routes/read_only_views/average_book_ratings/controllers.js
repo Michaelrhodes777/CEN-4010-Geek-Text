@@ -22,8 +22,7 @@ async function getByMinRating(req, res) {
     }
     catch (error) {
         if (transactionHasBegun) await client.query("ROLLBACK");
-        console.error(error);
-        res.status(500).json({ "response": error });
+        throw error;
     }
     finally {
         await client.end();

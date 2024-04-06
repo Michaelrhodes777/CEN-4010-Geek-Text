@@ -47,12 +47,12 @@ function createServer() {
     app.use(function (error, req, res, next) {
         //console.error(error);
         if (error.isCustomError) {
-            res.status(error.statusCode).json({  "response": error });
+            error.injectionCheck = "error is processed by error handler";
+            return res.status(error.statusCode).json({  "response": error });
         }
         else {
-            res.status(500).json({ "response": "Internal Sever Error" });
+            return res.status(500).json({ "response": error });
         }
-        next();
     });
 
     return app;

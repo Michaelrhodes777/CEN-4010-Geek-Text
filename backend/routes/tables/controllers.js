@@ -2,30 +2,7 @@ const { clientFactory } = require('../../database/setupFxns.js');
 const { SqlQueryFactory } = require('../SqlQueryFactory.js');
 const { CONDITIONS } = SqlQueryFactory;
 const { keyValidation, tablesBodyValidation } = require('../../validation/database_validation/Composition.js');
-
-function reqMapper(req) {
-    return JSON.parse(JSON.stringify({
-        app: req.app,
-        body: req.body,
-        cookies: req.cookies,
-        fresh: req.fresh,
-        hostname: req.hostname,
-        ip: req.ip,
-        ips: req.ips,
-        method: req.method,
-        originalUrl: req.originalUrl,
-        params: req.params,
-        path: req.path,
-        protocol: req.protocol,
-        query: req.query,
-        route: req.route,
-        secure: req.secure,
-        signedCookies: req.signedCookies,
-        stale: req.stale,
-        subdomains: req.subdomains,
-        xhr: req.xhr
-    }));
-}
+const { DEV } = require('../../config/serverConfig.js');
 
 function createController(Model) {
     return async function(req, res) {
@@ -48,17 +25,16 @@ function createController(Model) {
             }
 
             await client.query("COMMIT");
-            res.json({ "response": results });
+            if (DEV) {
+                res.json({ "response": results });
+            }
+            else {
+                res.status(200);
+            }
         }
         catch (error) {
             if (transactionHasBegun) await client.query("ROLLBACK");
-            //console.error(error);
-            if (error.isCustomError) {
-                res.status(error.statusCode).json({ "response": error });
-            }
-            else {
-                res.status(500).json({ "response": error });
-            }
+            throw error;
         }
         finally {
             await client.end();
@@ -101,13 +77,7 @@ function readController(Model) {
         }
         catch (error) {
             if (transactionHasBegun) await client.query("ROLLBACK");
-            //console.error(error);
-            if (error.isCustomError) {
-                res.status(error.statusCode).json({ "response": error });
-            }
-            else {
-                res.status(500).json({ "response": error });
-            }
+            throw error;
         }
         finally {
             await client.end();
@@ -139,17 +109,16 @@ function updateController(Model) {
             }
 
             await client.query("COMMIT");
-            res.json({ "response": results });
+            if (DEV) {
+                res.json({ "response": results });
+            }
+            else {
+                res.status(200);
+            }
         }
         catch (error) {
             if (transactionHasBegun) await client.query("ROLLBACK");
-            //console.error(error);
-            if (error.isCustomError) {
-                res.status(error.statusCode).json({ "response": error });
-            }
-            else {
-                res.status(500).json({ "response": error });
-            }
+            throw error;
         }
         finally {
             await client.end();
@@ -178,17 +147,16 @@ function deleteController(Model) {
             }
 
             await client.query("COMMIT");
-            res.json({ "response": results });
+            if (DEV) {
+                res.json({ "response": results });
+            }
+            else {
+                res.status(200);
+            }
         }
         catch (error) {
             if (transactionHasBegun) await client.query("ROLLBACK");
-            //console.error(error);
-            if (error.isCustomError) {
-                res.status(error.statusCode).json({ "response": error });
-            }
-            else {
-                res.status(500).json({ "response": error });
-            }
+            throw error;
         }
         finally {
             await client.end();

@@ -2,6 +2,7 @@ const { clientFactory } = require('../../database/setupFxns.js');
 const { SqlQueryFactory } = require('../SqlQueryFactory.js');
 const { CONDITIONS } = SqlQueryFactory;
 const { keyValidation, linkingTablesBodyValidation } = require('../../validation/database_validation/Composition.js');
+const { DEV } = require('../../config/serverConfig.js');
 
 function createController(Model) {
     return async function createControllerLogic(req, res) {
@@ -24,12 +25,16 @@ function createController(Model) {
             }
 
             await client.query("COMMIT");
-            res.json({ "response": results });
+            if (DEV) {
+                res.json({ "response": results });
+            }
+            else {
+                res.status(200);
+            }
         }
         catch (error) {
             if (transactionHasBegun) await client.query("ROLLBACK");
-            console.error(error);
-            res.status(500).json({ "response": error });
+            throw error;
         }
         finally {
             await client.end();
@@ -83,8 +88,7 @@ function readController(Model) {
         }
         catch (error) {
             if (transactionHasBegun) await client.query("ROLLBACK");
-            console.error(error);
-            res.status(500).json({ "response": error });
+            throw error;
         }
         finally {
             await client.end();
@@ -115,12 +119,16 @@ function updateController(Model) {
             }
 
             await client.query("COMMIT");
-            res.json({ "response": results });
+            if (DEV) {
+                res.json({ "response": results });
+            }
+            else {
+                res.status(200);
+            }
         }
         catch (error) {
             if (transactionHasBegun) await client.query("ROLLBACK");
-            console.error(error);
-            res.status(500).json({ "response": error });
+            throw error;
         }
         finally {
             await client.end();
@@ -157,12 +165,16 @@ function deleteController(Model) {
             }
 
             await client.query("COMMIT");
-            res.json({ "response": results });
+            if (DEV) {
+                res.json({ "response": results });
+            }
+            else {
+                res.status(200);
+            }
         }
         catch (error) {
             if (transactionHasBegun) await client.query("ROLLBACK");
-            console.error(error);
-            res.status(500).json({ "response": error });
+            throw error;
         }
         finally {
             await client.end();

@@ -1,5 +1,6 @@
 const { clientFactory } = require('../../../database/setupFxns.js');
 const { tablesBodyValidation } = require('../../../validation/database_validation/Composition.js');
+const { DEV } = require('../../../config/serverConfig.js');
 
 function createController(Model) {
     return async function(req, res) {
@@ -33,19 +34,18 @@ function createController(Model) {
             results = response.rows[0];
 
             await client.query("COMMIT");
-            res.json({ "response": results });
+            if (DEV) {
+                res.json({ "response": results });
+            }
+            else {
+                res.status(200).json({ "response": "Registration Successful" });
+            }
         }
         catch (error) {
-            console.error(error);
             if (transactionHasBegun) {
                 await client.query("ROLLBACK");
             }
-            if (error.isCustomError) {
-                res.status(error.statusCode).json({ "response": error });
-            }
-            else {
-                res.status(500).json({ "response": error });
-            }
+            throw error;
         }
         finally {
             if (clientHasConnected) {
