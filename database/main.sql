@@ -1,3 +1,5 @@
+DROP VIEW IF EXISTS books_by_wishlists;
+DROP VIEW IF EXISTS books_proper;
 DROP VIEW IF EXISTS users_quantity_of_wishlists;
 
 DROP VIEW IF EXISTS books_by_genres;
@@ -211,4 +213,45 @@ CREATE VIEW books_by_authors AS
 		FROM authors
 		INNER JOIN books ON author_id = author_id_fkey
 		GROUP BY author_id
+;
+
+-- CREATE TABLE books (
+-- 			book_id					INT					PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+-- 			book_name				VARCHAR(256)		NOT NULL,
+-- 			isbn					VARCHAR(16)			UNIQUE NOT NULL,
+-- 			book_description		VARCHAR(4096),
+-- 			book_price				INT					NOT NULL,
+-- 			author_id_fkey			INT					REFERENCES authors(author_id) ON DELETE SET NULL,
+-- 			genre_id_fkey			INT 				REFERENCES genres(genre_id) ON DELETE SET NULL,
+-- 			publisher_id_fkey		INT					REFERENCES publishers(publisher_id) ON DELETE SET NULL,
+-- 			year_published			INT,
+-- 			copies_sold				INT					DEFAULT 0 NOT NULL
+-- );
+
+CREATE VIEW books_proper AS
+	SELECT
+		book_id,
+		JSON_BUILD_OBJECT(
+			'book_id', books.book_id,
+			'book_name', books.book_name,
+			'isbn', books.isbn,
+			'book_description', books.book_description,
+			'book_price', books.book_price,
+			'author', (SELECT first_name || ' ' || last_name FROM authors WHERE author_id = books.author_id_fkey),
+			'genre', (SELECT genre_name FROM genres WHERE genre_id = genre_id_fkey),
+			'pusblisher', (SELECT publisher_name FROM publishers WHERE publisher_id = publisher_id_fkey),
+			'year_published', books.year_published,
+			'copies_sold', books.copies_sold
+		) AS "book_data"
+		FROM books
+		GROUP BY book_id
+;
+
+CREATE VIEW books_by_wishlists AS
+	SELECT
+	wishlist_id_fkey AS "wishlist_id",
+	JSON_AGG(books_proper.book_data) AS "books"
+	FROM books_wishlists_lt
+	INNER JOIN books_proper ON book_id = book_id_fkey
+	GROUP BY wishlist_id_fkey
 ;
