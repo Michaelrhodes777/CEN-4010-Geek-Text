@@ -3,7 +3,7 @@ const { tablesBodyValidation } = require('../../../validation/database_validatio
 const { DEV } = require('../../../config/serverConfig.js');
 
 function createController(Model) {
-    return async function(req, res) {
+    return async function(req, res, next) {
         const client = clientFactory();
         let clientHasConnected = false;
         let transactionHasBegun = false;
@@ -45,7 +45,7 @@ function createController(Model) {
             if (transactionHasBegun) {
                 await client.query("ROLLBACK");
             }
-            throw error;
+            next(error);
         }
         finally {
             if (clientHasConnected) {

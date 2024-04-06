@@ -2,9 +2,8 @@ const { clientFactory } = require('../../../database/setupFxns.js');
 const jwt = require('jsonwebtoken');
 const { CustomValidation } = require('./CustomValidation.js')
 const { validateUserRequestAndGetRole, validateRefreshTokenPersistence } = CustomValidation;
-const roles = require('../../../config/roles.js');
 
-async function updateController(req, res) {
+async function updateController(req, res, next) {
     const client = clientFactory();
     let clientHasConnected = false;
     let transactionHasBegun = false;
@@ -46,7 +45,7 @@ async function updateController(req, res) {
         if (transactionHasBegun) {
             await client.query("ROLLBACK");
         }
-        throw error;
+        next(error);
     }
     finally {
         if (clientHasConnected) {

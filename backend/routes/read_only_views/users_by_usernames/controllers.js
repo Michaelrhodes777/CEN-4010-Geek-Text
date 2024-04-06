@@ -1,6 +1,6 @@
 const { clientFactory } = require('../../../database/setupFxns.js');
 
-async function readController(req, res) {
+async function readController(req, res, next) {
     const client = clientFactory();
     let results;
     let transactionHasBegun = false;
@@ -23,7 +23,7 @@ async function readController(req, res) {
     }
     catch (error) {
         if (transactionHasBegun) await client.query("ROLLBACK");
-        throw error;
+        next(error);
     }
     finally {
         await client.end();

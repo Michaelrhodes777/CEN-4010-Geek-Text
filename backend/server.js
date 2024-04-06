@@ -58,8 +58,7 @@ const { DEV } = require('./config/serverConfig.js');
 app.use(function (error, req, res, next) {
     console.error(error);
     if (error.isCustomError) {
-        error.injectionCheck = "error is processed by error handler";
-        return res.status(error.statusCode).json({  "response": DEV ? error : "Internal Server Error" });
+        return res.status(error.statusCode).json({  "response": DEV ? error : error.responseMessage });
     }
     else {
         return res.status(500).json({ "response": DEV ? error : "Internal Server Error" });

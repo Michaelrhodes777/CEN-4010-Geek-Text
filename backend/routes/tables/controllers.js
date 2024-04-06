@@ -5,7 +5,7 @@ const { keyValidation, tablesBodyValidation } = require('../../validation/databa
 const { DEV } = require('../../config/serverConfig.js');
 
 function createController(Model) {
-    return async function(req, res) {
+    return async function(req, res, next) {
         const client = clientFactory();
         let results;
         let transactionHasBegun = false;
@@ -34,7 +34,7 @@ function createController(Model) {
         }
         catch (error) {
             if (transactionHasBegun) await client.query("ROLLBACK");
-            throw error;
+            next(error);
         }
         finally {
             await client.end();
@@ -43,7 +43,7 @@ function createController(Model) {
 }
 
 function readController(Model) {
-    return async function(req, res) {
+    return async function(req, res, next) {
         const client = clientFactory();
         let results;
         let transactionHasBegun = false;
@@ -77,7 +77,7 @@ function readController(Model) {
         }
         catch (error) {
             if (transactionHasBegun) await client.query("ROLLBACK");
-            throw error;
+            next(error);
         }
         finally {
             await client.end();
@@ -86,7 +86,7 @@ function readController(Model) {
 }
 
 function updateController(Model) {
-    return async function(req, res) {
+    return async function(req, res, next) {
         const client = clientFactory();
         let results;
         let transactionHasBegun = false;
@@ -118,7 +118,7 @@ function updateController(Model) {
         }
         catch (error) {
             if (transactionHasBegun) await client.query("ROLLBACK");
-            throw error;
+            next(error);
         }
         finally {
             await client.end();
@@ -127,7 +127,7 @@ function updateController(Model) {
 }
 
 function deleteController(Model) {
-    return async function(req, res) {
+    return async function(req, res, next) {
         const client = clientFactory();
         let results;
         let transactionHasBegun = false;
@@ -156,7 +156,7 @@ function deleteController(Model) {
         }
         catch (error) {
             if (transactionHasBegun) await client.query("ROLLBACK");
-            throw error;
+            next(error);
         }
         finally {
             await client.end();

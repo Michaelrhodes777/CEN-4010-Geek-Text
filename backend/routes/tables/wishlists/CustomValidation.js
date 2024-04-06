@@ -1,6 +1,13 @@
 const { clientFactory } = require('../../../database/setupFxns.js');
 const MAX_WISHLISTS = 3;
-class MaxNumberOfWishlistsError extends Error {}
+class MaxNumberOfWishlistsError extends Error {
+    constructor(number, user_id_fkey) {
+        super(`Max wishlists ${number} exists under user ${user_id_fkey}`);
+        this.isCustomError = true;
+        this.statusCode = 409;
+        this.responseMessage = "Max wishlists";
+    }
+}
 
 async function validateNumberOfWishlists(req, res, next) {
     const client = clientFactory();
@@ -23,8 +30,8 @@ async function validateNumberOfWishlists(req, res, next) {
     
             if (result.rows.length !== 0) {
                 const { number_of_wishlists } = result?.rows?.[0];
-                if (number_of_wishlists > MAX_WISHLISTS) {
-                    throw new MaxNumberOfWishlistsError();
+                if (number_of_wishlists >= MAX_WISHLISTS) {
+                    throw new MaxNumberOfWishlistsError(number_of_wishlists, user_id_fkey);
                 }
             }
         }
@@ -35,8 +42,7 @@ async function validateNumberOfWishlists(req, res, next) {
         if (transactionHasBegun) {
             await client.query("ROLLBACK");
         }
-        console.error(error);
-        return res.status(409).json({ "response": "Max wishlists" });
+        next(error);
     }
     finally {
         if (clientHasConnected) {

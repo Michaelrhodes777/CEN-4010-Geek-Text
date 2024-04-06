@@ -52,10 +52,10 @@ describe("GET E2E wishlists: Validate correct database instantiation and GET fun
 
 describe("POST E2E wishlists: Single id", () => {
     test("\n\tValidate single POST request", async () => {
-        const userKey = databaseControl.getKeyArraysFromMap("users")[0];
+        const userKey = databaseControl.getKeyArraysFromMap("users")[1]; // must be 1 because zeroth index has max number of wishlists
         let data = [
             {
-                "user_id_fkey": userKey[0],
+                "user_id_fkey": userKey[0], 
                 "wishlist_name": "created wishlist"
             }
         ];
