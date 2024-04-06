@@ -1,12 +1,75 @@
 const { clientFactory } = require('../../../database/setupFxns.js');
+const { DEV } = require('../../../config/serverConfig.js');
 
-class ErrorInterface extends Error {}
+class ErrorInterface extends Error {
+    static thisProps = [
+        "isCustomError",
+        "statusCode",
+        "responseMessage",
+        "mainArgs",
+        "auxArgs",
+        "iterationIndex",
+        "controllerType",
+        "loggingPayload",
+        "name"
+    ];
 
-class MissingFieldsError extends ErrorInterface {}
-class InvalidJSTypeError extends ErrorInterface {}
-class RowsDNEError extends ErrorInterface {}
-class RowsIsNotLengthOneError extends ErrorInterface {}
-class BookIsAlreadyInShoppingCartError extends ErrorInterface {}
+    constructor(messageExtension = "", errorPayload) {
+        super(`LoginError: ${messageExtension}`);
+        this.isCustomError = true;
+        this.customErrorType = "WishlistToCartController";
+        this.statusCode = 400;
+        this.responseMessage = "Malformed Data";
+        this.mainArgs = errorPayload;
+        this.auxArgs = null;
+        this.name = null;
+        this.iterationIndex = null;
+        this.controllerType = "PUT";
+        this.loggingPayload = null;
+        this.name = null;
+    }
+}
+
+class MissingFieldsError extends ErrorInterface {
+    static runtimeDataProps = [ "book_id", "wishlist_id" ];
+
+    constructor(errorPayload) {
+        super(`Required data missing from body`, errorPayload);
+        this.name = "MissingFieldsErrors";
+    }
+}
+class InvalidJSTypeError extends ErrorInterface {
+    static runtimeDataProps = [ "book_id", "wishlist_id" ];
+
+    constructor(errorPayload) {
+        super(`Required data is not correct type`, errorPayload);
+        this.name = "InvalidJSTypeError";
+    }
+}
+class RowsDNEError extends ErrorInterface {
+    static runtimeDataProps = [];
+
+    constructor(errorPayload) {
+        super(`Failed to retrieve rows from database`, errorPayload);
+        this.name = "RowsDNEError";
+    }
+}
+class RowsIsNotLengthOneError extends ErrorInterface {
+    static runtimeDataProps = [];
+
+    constructor(errorPayload) {
+        super(`Rows does not contain only one element`, errorPayload);
+        this.name = "RowsIsNotLengthOneError";
+    }
+}
+class BookIsAlreadyInShoppingCartError extends ErrorInterface {
+    static runtimeDataProps = [];
+
+    constructor(errorPayload) {
+        super(`Books is already in the shopping cart`, errorPayload);
+        this.name = "BookIsAlreadyInShoppingCartError";
+    }
+}
 
 async function updateController(req, res) {
     const client = clientFactory();
@@ -77,14 +140,18 @@ async function updateController(req, res) {
         const shoppingCartResult = await client.query(shoppingCartQuery);
 
         await client.query("COMMIT");
-        res.json({ "response": shoppingCartResult.rows[0] });
+        if (DEV) {
+            res.json({ "response": shoppingCartResult.rows[0] });
+        }
+        else {
+            res.status(200);
+        }
     }
     catch (error) {
         if (transactionHasBegun) {
             await client.query("ROLLBACK");
         }
-        console.error(error);
-        res.status(500).json({ "response": error });
+        throw error;
     }
     finally {
         if (clientHasConnected) {

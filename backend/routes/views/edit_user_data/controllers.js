@@ -2,6 +2,7 @@ const { clientFactory } = require('../../../database/setupFxns.js');
 const { CustomValidation } = require('./CustomValidation.js');
 const { validateUsernameExistence } = CustomValidation;
 const { tablesBodyValidation } = require('../../../validation/database_validation/Composition.js');
+const { DEV } = require('../../../config/serverConfig.js');
 
 function updateController(Model) {
     return async function(req, res) {
@@ -37,19 +38,18 @@ function updateController(Model) {
             results = response.rows[0];
 
             await client.query("COMMIT");
-            res.json({ "response": results });
+            if (DEV) {
+                res.json({ "response": results });
+            }
+            else {
+                res.status(200);
+            }
         }
         catch (error) {
-            console.error(error);
             if (transactionHasBegun) {
                 await client.query("ROLLBACK");
             }
-            if (error.isCustomError) {
-                res.status(error.statusCode).json({ "response": error });
-            }
-            else {
-                res.status(500).json({ "response": error });
-            }
+            throw error;
         }
         finally {
             if (clientHasConnected) {

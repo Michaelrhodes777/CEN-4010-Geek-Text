@@ -54,15 +54,16 @@ app.use("/books_wishlists_lt", require('./routes/linking_tables/books_wishlists_
 
 app.use("/wishlist_to_cart", require('./routes/special_use_case/wishlist_to_cart/router.js'));
 
+const { DEV } = require('./config/serverConfig.js');
 app.use(function (error, req, res, next) {
     console.error(error);
     if (error.isCustomError) {
-        res.status(error.statusCode).json({  "response": error });
+        error.injectionCheck = "error is processed by error handler";
+        return res.status(error.statusCode).json({  "response": DEV ? error : "Internal Server Error" });
     }
     else {
-        res.status(500).json({ "response": "Internal Sever Error" });
+        return res.status(500).json({ "response": DEV ? error : "Internal Server Error" });
     }
-    next();
 });
 
 app.listen(PORT, () => console.log("app listening"));
