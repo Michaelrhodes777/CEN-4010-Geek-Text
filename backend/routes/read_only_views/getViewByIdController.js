@@ -10,7 +10,7 @@ function cleanRowData(databaseResponse, isSingleRow) {
 }
 
 function getViewByIdController(tableName, options = { "hasParams": true, "isSingleRow": true}) {
-    return async function(req, res) {
+    return async function(req, res, next) {
         const client = clientFactory();
         let results = [];
         let transactionHasBegun = false;
@@ -38,8 +38,7 @@ function getViewByIdController(tableName, options = { "hasParams": true, "isSing
         }
         catch (error) {
             if (transactionHasBegun) await client.query("ROLLBACK");
-            console.error(error);
-            res.status(500).json({ "response": error });
+            next(error);
         }
         finally {
             await client.end();

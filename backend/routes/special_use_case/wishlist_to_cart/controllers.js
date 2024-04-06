@@ -71,7 +71,7 @@ class BookIsAlreadyInShoppingCartError extends ErrorInterface {
     }
 }
 
-async function updateController(req, res) {
+async function updateController(req, res, next) {
     const client = clientFactory();
     let clientHasConnected = false;
     let transactionHasBegun = false;
@@ -151,7 +151,7 @@ async function updateController(req, res) {
         if (transactionHasBegun) {
             await client.query("ROLLBACK");
         }
-        throw error;
+        next(error);
     }
     finally {
         if (clientHasConnected) {

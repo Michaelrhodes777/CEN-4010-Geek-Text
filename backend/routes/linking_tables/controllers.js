@@ -5,7 +5,7 @@ const { keyValidation, linkingTablesBodyValidation } = require('../../validation
 const { DEV } = require('../../config/serverConfig.js');
 
 function createController(Model) {
-    return async function createControllerLogic(req, res) {
+    return async function createControllerLogic(req, res, next) {
         const client = clientFactory();
         let results;
         let transactionHasBegun = false;
@@ -34,7 +34,7 @@ function createController(Model) {
         }
         catch (error) {
             if (transactionHasBegun) await client.query("ROLLBACK");
-            throw error;
+            next(error);
         }
         finally {
             await client.end();
@@ -44,7 +44,7 @@ function createController(Model) {
 
 
 function readController(Model) {
-    return async function readControllerLogic(req,res) {
+    return async function readControllerLogic(req, res, next) {
         const client = clientFactory();
         let results;
         let transactionHasBegun = false;
@@ -88,7 +88,7 @@ function readController(Model) {
         }
         catch (error) {
             if (transactionHasBegun) await client.query("ROLLBACK");
-            throw error;
+            next(error);
         }
         finally {
             await client.end();
@@ -97,7 +97,7 @@ function readController(Model) {
 }
 
 function updateController(Model) {
-    return async function updateControllerLogic(req, res) {
+    return async function updateControllerLogic(req, res, next) {
         const client = clientFactory();
         let results;
         let transactionHasBegun = false;
@@ -128,7 +128,7 @@ function updateController(Model) {
         }
         catch (error) {
             if (transactionHasBegun) await client.query("ROLLBACK");
-            throw error;
+            next(error);
         }
         finally {
             await client.end();
@@ -138,7 +138,7 @@ function updateController(Model) {
 
 
 function deleteController(Model) {
-    return async function deleteControllerLogic(req, res) {
+    return async function deleteControllerLogic(req, res, next) {
         const client = clientFactory();
         let results;
         let transactionHasBegun = false;
@@ -174,7 +174,7 @@ function deleteController(Model) {
         }
         catch (error) {
             if (transactionHasBegun) await client.query("ROLLBACK");
-            throw error;
+            next(error);
         }
         finally {
             await client.end();
