@@ -48,7 +48,6 @@ function createServer() {
     app.use(function (error, req, res, next) {
         //console.error(error);
         if (error.isCustomError) {
-            error.injectionCheck = "error is processed by error handler";
             return res.status(error.statusCode).json({  "response": error });
         }
         else {
