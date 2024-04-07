@@ -95,7 +95,7 @@ CREATE TABLE reviews (
 			rating					INT					DEFAULT 5 NOT NULL,
 			comment					VARCHAR(4096),
 			datestamp				VARCHAR(16),
-			timestamp      				 				TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+			timestamp      			TIMESTAMP			DEFAULT CURRENT_TIMESTAMP,
 			user_id_fkey			INT					REFERENCES users(user_id) ON DELETE CASCADE,
 			book_id_fkey			INT					REFERENCES books(book_id) ON DELETE CASCADE
 );

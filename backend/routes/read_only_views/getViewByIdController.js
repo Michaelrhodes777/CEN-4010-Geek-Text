@@ -9,7 +9,7 @@ function cleanRowData(databaseResponse, isSingleRow) {
     }
 }
 
-function getViewByIdController(tableName, options = { "hasParams": true, "isSingleRow": true}) {
+function getViewByIdController(tableName, options = { "hasParams": true, "isSingleRow": true, "postPros": undefined }) {
     return async function(req, res, next) {
         const client = clientFactory();
         let results = [];
@@ -33,6 +33,9 @@ function getViewByIdController(tableName, options = { "hasParams": true, "isSing
             const response = await client.query(queryObject);
             results = cleanRowData(response, options.isSingleRow);
 
+            if (options.postPros) {
+                options.postPros(results);
+            }
             await client.query("COMMIT");
             res.json({ "response": results });
         }
