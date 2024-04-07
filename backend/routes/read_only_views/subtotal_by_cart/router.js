@@ -2,14 +2,22 @@ const express = require('express');
 const router = express.Router();
 const getViewByIdController = require('../getViewByIdController.js');
 
-function calculateTotal(results) {
-    let sum = 0;
+function subtotal(results) {
+    delete results.user_id;
+    let build = [];
+    let total = 0;
     for (let dataObject of results.shopping_cart) {
         let subTotal = dataObject.quantity * dataObject.book_data.book_price;
-        dataObject.sub_total = subTotal;
-        sum += subTotal;
+        total += subTotal;
+        build.push({
+            sub_total: subTotal,
+            book_id: dataObject.book_data.book_id
+        });
     }
-    results.total = sum;
+    build.total = total;
+    delete results.shopping_cart;
+    results.subtotal = build;
+    results.total = total;
 }
 
 router.route("/:user_id")
@@ -18,7 +26,7 @@ router.route("/:user_id")
         {
             "hasParams": true,
             "isSingleRow": true,
-            "postPros": calculateTotal 
+            "postPros": subtotal 
         }
     ));
 

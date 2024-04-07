@@ -95,7 +95,7 @@ CREATE TABLE reviews (
 			rating					INT					DEFAULT 5 NOT NULL,
 			comment					VARCHAR(4096),
 			datestamp				VARCHAR(16),
-			timestamp      				 				TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+			timestamp      			TIMESTAMP			DEFAULT CURRENT_TIMESTAMP,
 			user_id_fkey			INT					REFERENCES users(user_id) ON DELETE CASCADE,
 			book_id_fkey			INT					REFERENCES books(book_id) ON DELETE CASCADE
 );
@@ -214,19 +214,6 @@ CREATE VIEW books_by_authors AS
 		INNER JOIN books ON author_id = author_id_fkey
 		GROUP BY author_id
 ;
-
--- CREATE TABLE books (
--- 			book_id					INT					PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
--- 			book_name				VARCHAR(256)		NOT NULL,
--- 			isbn					VARCHAR(16)			UNIQUE NOT NULL,
--- 			book_description		VARCHAR(4096),
--- 			book_price				INT					NOT NULL,
--- 			author_id_fkey			INT					REFERENCES authors(author_id) ON DELETE SET NULL,
--- 			genre_id_fkey			INT 				REFERENCES genres(genre_id) ON DELETE SET NULL,
--- 			publisher_id_fkey		INT					REFERENCES publishers(publisher_id) ON DELETE SET NULL,
--- 			year_published			INT,
--- 			copies_sold				INT					DEFAULT 0 NOT NULL
--- );
 
 CREATE VIEW books_proper AS
 	SELECT
