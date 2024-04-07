@@ -1,11 +1,13 @@
 DROP VIEW IF EXISTS books_by_wishlists;
+DROP VIEW IF EXISTS shopping_carts;
+DROP VIEW IF EXISTS average_book_ratings;
+DROP VIEW IF EXISTS average_book_ratings_sub;
+DROP VIEW IF EXISTS books_proper_alt;
 DROP VIEW IF EXISTS books_proper;
 DROP VIEW IF EXISTS users_quantity_of_wishlists;
 
 DROP VIEW IF EXISTS books_by_genres;
 DROP VIEW IF EXISTS top_sellers;
-DROP VIEW IF EXISTS shopping_carts;
-DROP VIEW IF EXISTS average_book_ratings;
 DROP VIEW IF EXISTS books_by_authors;
 
 DROP VIEW IF EXISTS register;
@@ -109,6 +111,40 @@ CREATE TABLE shopping_carts_lt (
 
 -- Views
 
+CREATE VIEW books_proper_alt AS
+	SELECT
+		book_id,
+		book_name,
+		isbn,
+		book_description,
+		(SELECT books.book_price - (books.book_price * publishers.discount_percent / 100) FROM publishers WHERE publisher_id = (SELECT books.publisher_id_fkey AS "publisher_id" WHERE "book_id" = book_id)) AS "book_price",
+		(SELECT first_name || ' ' || last_name FROM authors WHERE author_id = books.author_id_fkey) AS "author",
+		(SELECT genre_name FROM genres WHERE genre_id = genre_id_fkey) AS "genre",
+		(SELECT publisher_name FROM publishers WHERE publisher_id = publisher_id_fkey) AS "publisher",
+		year_published,
+		books.copies_sold
+		FROM books
+;
+
+CREATE VIEW books_proper AS
+	SELECT
+		book_id,
+		JSON_BUILD_OBJECT(
+			'book_id', books.book_id,
+			'book_name', books.book_name,
+			'isbn', books.isbn,
+			'book_description', books.book_description,
+			'book_price', (SELECT books.book_price - (books.book_price * publishers.discount_percent / 100) FROM publishers WHERE publisher_id = (SELECT books.publisher_id_fkey AS "publisher_id" WHERE "book_id" = book_id)),
+			'author', (SELECT first_name || ' ' || last_name FROM authors WHERE author_id = books.author_id_fkey),
+			'genre', (SELECT genre_name FROM genres WHERE genre_id = genre_id_fkey),
+			'pusblisher', (SELECT publisher_name FROM publishers WHERE publisher_id = publisher_id_fkey),
+			'year_published', books.year_published,
+			'copies_sold', books.copies_sold
+		) AS "book_data"
+		FROM books
+		GROUP BY book_id
+;
+
 CREATE VIEW users_quantity_of_wishlists AS
 	SELECT 
 		user_id_fkey,
@@ -187,20 +223,29 @@ CREATE VIEW shopping_carts AS
 		JSON_AGG(
         	json_build_object(
 			'quantity', shopping_carts_lt.quantity,
-            'book_data', books.*)
+            'book_data', books_proper_alt.*)
 		) AS "shopping_cart"
-		FROM books
+		FROM books_proper_alt
 		INNER JOIN shopping_carts_lt ON book_id_fkey = book_id
 		GROUP BY user_id_fkey
+;
+
+CREATE VIEW average_book_ratings_sub AS
+	SELECT
+		book_id_fkey,
+		(SELECT avg(subquery) FROM unnest((SELECT ARRAY_AGG(reviews.rating))) AS "subquery") AS "average_rating"
+		FROM reviews
+		INNER JOIN books ON book_id = book_id_fkey
+		GROUP BY book_id_fkey
 ;
 
 CREATE VIEW average_book_ratings AS
 	SELECT
 		book_id_fkey AS "book_id",
-		(SELECT avg(subquery) FROM unnest((SELECT ARRAY_AGG(reviews.rating))) AS "subquery") AS "average_rating"
-		FROM reviews
-		INNER JOIN books ON book_id = book_id_fkey
-		GROUP BY book_id_fkey
+		average_rating,
+		JSON_AGG((SELECT x FROM (SELECT * FROM books_proper_alt WHERE books_proper_alt.book_id = book_id_fkey) AS x)) AS "book"
+		FROM average_book_ratings_sub
+		GROUP BY book_id_fkey, average_rating
 ;
 
 CREATE VIEW books_by_authors AS
@@ -213,25 +258,6 @@ CREATE VIEW books_by_authors AS
 		FROM authors
 		INNER JOIN books ON author_id = author_id_fkey
 		GROUP BY author_id
-;
-
-CREATE VIEW books_proper AS
-	SELECT
-		book_id,
-		JSON_BUILD_OBJECT(
-			'book_id', books.book_id,
-			'book_name', books.book_name,
-			'isbn', books.isbn,
-			'book_description', books.book_description,
-			'book_price', books.book_price,
-			'author', (SELECT first_name || ' ' || last_name FROM authors WHERE author_id = books.author_id_fkey),
-			'genre', (SELECT genre_name FROM genres WHERE genre_id = genre_id_fkey),
-			'pusblisher', (SELECT publisher_name FROM publishers WHERE publisher_id = publisher_id_fkey),
-			'year_published', books.year_published,
-			'copies_sold', books.copies_sold
-		) AS "book_data"
-		FROM books
-		GROUP BY book_id
 ;
 
 CREATE VIEW books_by_wishlists AS

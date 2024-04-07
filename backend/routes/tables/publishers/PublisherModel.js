@@ -35,7 +35,7 @@ const synchronousConstraintSchema = {
         jsType: "number",
         dbType: { 
             type: "int",
-            bounds: [ "[", 1, 99, "]" ]
+            bounds: [ "[", 0, 99, "]" ]
         },
         blacklist: null,
         whitelist: null,
