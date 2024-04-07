@@ -29,10 +29,9 @@ function getViewByIdController(tableName, options = { "hasParams": true, "isSing
                 queryObject.text = queryObject.text + ` WHERE ${param_name} = $1`,
                 queryObject.values = [ data ];
             }
-
+            
             const response = await client.query(queryObject);
             results = cleanRowData(response, options.isSingleRow);
-            
             if (options.postPros) {
                 options.postPros(results);
             }
