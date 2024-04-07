@@ -30,5 +30,6 @@ describe("GET shopping_carts: Validate correct database instantiation and GET fu
         const res = await supertest(createServer())
             .get(`/shopping_carts/${user_id}`)
             .expect(200);
+        console.log(res);
     });
 });

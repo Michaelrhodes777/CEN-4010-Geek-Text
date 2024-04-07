@@ -49,7 +49,6 @@ afterAll(async () => {
 describe("PUT E2E wishlistToCart: Validate correct database instantiation and PUT functionality", () => {
     test(`\n\tDELETE composite key from shopping cart`, async () => {
         const slt = databaseControl.dataPackages.shopping_carts_lt;
-        console.log(slt.rows);
         const { user_id_fkey, book_id_fkey } = slt.rows[0];
         const resGet = await supertest(createServer())
             .get(`/shopping_carts_lt?cid=[${user_id_fkey},${book_id_fkey}]`)
@@ -57,7 +56,6 @@ describe("PUT E2E wishlistToCart: Validate correct database instantiation and PU
         const resDelete = await supertest(createServer())
             .delete(`/shopping_carts_lt?cid=[${user_id_fkey},${book_id_fkey}]`)
             .expect(200);
-        console.log(resDelete);
     });
     test(`\n\tValidate PUT Request`, async () => {
         const arrayOfKeys = databaseControl.getKeyArraysFromMap("books_wishlists_lt");
@@ -69,6 +67,5 @@ describe("PUT E2E wishlistToCart: Validate correct database instantiation and PU
             .put(`/wishlist_to_cart`)
             .send(dataObject)
             .expect(200);
-        console.log(res.body);
     });
 });

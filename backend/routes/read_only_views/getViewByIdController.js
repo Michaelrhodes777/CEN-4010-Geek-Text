@@ -32,7 +32,7 @@ function getViewByIdController(tableName, options = { "hasParams": true, "isSing
 
             const response = await client.query(queryObject);
             results = cleanRowData(response, options.isSingleRow);
-
+            
             if (options.postPros) {
                 options.postPros(results);
             }

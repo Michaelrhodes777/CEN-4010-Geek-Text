@@ -3,7 +3,6 @@ const router = express.Router();
 const getViewByIdController = require('../getViewByIdController.js');
 
 function calculateTotal(results) {
-    console.log(results);
     let sum = 0;
     for (let dataObject of results.shopping_cart) {
         let subTotal = dataObject.quantity * dataObject.book_data.book_price
@@ -11,7 +10,6 @@ function calculateTotal(results) {
         sum += subTotal;
     }
     results.total = sum;
-    console.log(sum);
 }
 
 router.route("/:user_id")
