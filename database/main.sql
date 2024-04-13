@@ -1,3 +1,4 @@
+DROP VIEW IF EXISTS comments_view;
 DROP VIEW IF EXISTS books_by_wishlists;
 DROP VIEW IF EXISTS shopping_carts;
 DROP VIEW IF EXISTS average_book_ratings;
@@ -110,6 +111,14 @@ CREATE TABLE shopping_carts_lt (
 );
 
 -- Views
+
+CREATE VIEW comments_view AS
+	SELECT
+		book_id_fkey,
+		JSON_AGG(reviews.comment) AS "comments"
+		FROM reviews WHERE comment IS NOT null
+		GROUP BY book_id_fkey
+;
 
 CREATE VIEW books_proper_alt AS
 	SELECT

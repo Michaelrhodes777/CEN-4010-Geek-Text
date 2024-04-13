@@ -144,7 +144,7 @@ async function updateController(req, res, next) {
             res.json({ "response": shoppingCartResult.rows[0] });
         }
         else {
-            res.status(200);
+            res.sendStatus(200);
         }
     }
     catch (error) {

@@ -13,6 +13,7 @@ async function validateNumberOfWishlists(req, res, next) {
     const client = clientFactory();
     let clientHasConnected = false;
     let transactionHasBegun = false;
+    let errorRef;
     try {
         await client.connect();
         clientHasConnected = true;
@@ -42,15 +43,26 @@ async function validateNumberOfWishlists(req, res, next) {
         if (transactionHasBegun) {
             await client.query("ROLLBACK");
         }
-        next(error);
+        errorRef = error;
     }
     finally {
         if (clientHasConnected) {
             await client.end();
         }
+        if (errorRef) {
+            if (errorRef.statusCode) {
+                console.log("git");
+                return res.status(errorRef.statusCode).json({ "response": errorRef.responseMessage });
+            }
+            else {
+                console.log("hit");
+                next(errorRef);
+            }
+        }
+        else {
+            next();
+        }
     }
-
-    next();
 }
 
 module.exports = {

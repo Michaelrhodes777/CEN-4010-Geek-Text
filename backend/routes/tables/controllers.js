@@ -29,7 +29,7 @@ function createController(Model) {
                 res.json({ "response": results });
             }
             else {
-                res.status(200);
+                res.sendStatus(200);
             }
         }
         catch (error) {
@@ -113,7 +113,7 @@ function updateController(Model) {
                 res.json({ "response": results });
             }
             else {
-                res.status(200);
+                res.sendStatus(200);
             }
         }
         catch (error) {
@@ -151,7 +151,7 @@ function deleteController(Model) {
                 res.json({ "response": results });
             }
             else {
-                res.status(200);
+                res.sendStatus(200);
             }
         }
         catch (error) {

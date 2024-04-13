@@ -51,7 +51,7 @@ const asynchronousConstraintSchema = {
     },
     [columnNames.wishlist_name]: {
         foreignKey: null,
-        unique: false
+        unique: true
     },
     [columnNames.user_id_fkey]: {
         foreignKey: {
